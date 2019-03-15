@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/test")
 public class TestContoller {
+    private String prifix = "test";
 
-
-    @RequestMapping()
+    @RequestMapping("")
     public String test(){
-        return "index";
+        return prifix + "/index";
     }
 }
