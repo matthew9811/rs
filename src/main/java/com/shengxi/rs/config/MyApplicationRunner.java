@@ -1,0 +1,29 @@
+package com.shengxi.rs.config;
+
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+
+import java.util.Date;
+
+/**
+ * @Auther: Matthew
+ * @Date: 2019/3/16 00:59
+ * @Description:
+ */
+@Component
+@Order(1)
+public class MyApplicationRunner implements CommandLineRunner {
+//    @Override
+//    public void run(ApplicationArguments args) throws Exception {
+//        System.out.println("-------------->" + "项目启动，now=" + new Date());
+//        System.out.println();
+//    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        System.out.println("-------------->" + "项目启动，now=" + new Date());
+    }
+}
