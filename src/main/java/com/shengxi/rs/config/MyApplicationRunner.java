@@ -1,7 +1,5 @@
 package com.shengxi.rs.config;
 
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -9,7 +7,9 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 /**
- * @Auther: Matthew
+ * 修改对应的启动提示
+ *
+ * @author : Matthew
  * @Date: 2019/3/16 00:59
  * @Description:
  */
