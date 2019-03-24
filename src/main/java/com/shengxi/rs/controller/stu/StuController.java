@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 学生申请表接受跳转
@@ -21,15 +20,19 @@ public class StuController {
     private String prifix = "stu";
 
     @PostMapping("/stuAccept")
-    @ResponseBody
     public String studentAccept(StuRehabilitation stuRehabilitationEntity) {
         System.out.println(stuRehabilitationEntity.toString());
-        return stuRehabilitationEntity.toString();
+        return "redirect:/stu/stu/news";
     }
 
     @GetMapping("/stuAccept")
     public String studentAccept() {
         return prifix + "/course";
+    }
+
+    @GetMapping("/news")
+    public String news() {
+        return prifix + "/news";
     }
 
     @RequestMapping("")
