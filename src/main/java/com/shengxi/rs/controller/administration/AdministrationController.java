@@ -20,4 +20,9 @@ public class AdministrationController {
     public String approval() {
         return prifix + "/approval";
     }
+    @GetMapping("/upload")
+    public String upload() {
+        return prifix + "/upload";
+
+    }
 }
