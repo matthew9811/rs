@@ -3,11 +3,29 @@
 <head>
     <meta charset="utf-8">
     <title>教务部审批页</title>
+    <script>
+        function checkall(){
+            var flag=document.getElementById("ckall").checked;
+            var ho=document.getElementsByName("box");
+            for(var i=0;i<ho.length;i++){
+                ho[i].checked=flag;
+            }
+        }
+        function reverse(){
+            var ho=document.getElementsByName("box");
+            for(var i=0;i<ho.length;i++){
+                ho[i].checked=!ho[i].checked;
+            }
+        }
+    </script>
+    <meta charset="UTF-8">
 </head>
 <body>
-<table width="100%" border="1" align="center" cellpadding="0" cellspacing="0">
+<table border="1" align="center" cellpadding="0" cellspacing="0">
     <tr>
-        <th width="70">学号</th>
+        <th width="35"><input type="checkbox" id="ckall" onclick="checkall()"  /></th>
+        <th width="100">学期</th>
+        <th width="35">学号</th>
         <th width="50">姓名</th>
         <th width="60">班级</th>
         <th width="70">专业</th>
@@ -21,9 +39,17 @@
         <th width="39">现学分</th>
         <th width="73">开课编号</th>
         <th width="97">教学班级</th>
+        <th width="50">是否审批</th>
         <th width="56">审批</th>
     </tr>
     <tr>
+        <td><form name="form1" method="post" action="">
+            <div align="center">
+                <input type="checkbox" name="box" />
+            </div>
+        </form>
+        </td>
+        <td>2018—2019—1</td>
         <td>1234567890</td>
         <td>张三三</td>
         <td>软工一班</td>
@@ -38,11 +64,18 @@
         <td>3</td>
         <td>1243</td>
         <td>网工三班</td>
-        <td><input name="Input2" type="button" value="通  过"/>
-            <input name="Input" type="button" value="不通过"/></td>
+        <td>已审批</td>
+        <td><select>  <option value="1">
+            通过</option>   </option>   <option value="1">
+            不通过</option>  </select>
+            </select></td>
     </tr>
     <tr>
-        <td>1234567891</td>
+        <td height="22"><div align="center">
+            <input type="checkbox" name="box" />
+        </div></td>
+        <td>2018—2019—2</td>
+        <td>134567891</td>
         <td>张四</td>
         <td>软工二班</td>
         <td>软件工程</td>
@@ -56,9 +89,18 @@
         <td>6</td>
         <td>1243</td>
         <td>网工三班</td>
-        <td><input name="Input2" type="button" value="通  过"/>
-            <input name="Input" type="button" value="不通过"/></td>
+        <td>未审批</td>
+        <td><select>  <option value="1">
+            通过</option>   </option>   <option value="1">
+            不通过</option>  </select>
+            </select></td>
+    </tr>
+    <tr>
+        <td height="27" colspan="18"><div align="center">
+            <input type="submit" name="Submit" value="同意">
+        </div></td>
     </tr>
 </table>
+<div align="center"></div>
 </body>
 </html>
