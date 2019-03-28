@@ -1,56 +1,70 @@
 <!DOCTYPE HTML>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-<meta charset="utf-8">
+    <meta charset="utf-8">
     <title>广东东软学院学生申请重修表</title>
     <script>
         function check(){
-                alert("提交成功");
+            alert("提交成功");
         }
     </script>
 </head>
 <body>
 <form action="/stu/stu/stuAccept" method="post">
+    <p align="center">学年学期：2018-2019-2</p>
     <table border="1" cellspacing="0" cellpadding="0" align="center">
         <tr>
             <th width="111"><p align="center">申请人 </p></th>
-            <td colspan="2"><input id="name" name="name" type="text"  style="width:100%;padding:17px"/></td>
+            <td colspan="2">张四</td>
             <th width="157"><p align="center">学号 </p></th>
-            <td colspan="2"><input id="studentID" name="studentID" type="text"  style="width:100%;padding:17px"/></td>
+            <td colspan="2">134567891</td>
         </tr>
         <tr>
             <td width="111"><p align="center">所在院系 </p></td>
-            <td colspan="2"><input id="facultyAndDepartments" name="facultyAndDepartments" type="text"  style="width:100%;padding:17px"/></td>
+            <td colspan="2">计算机科学与技术院</td>
             <td width="157"><p align="center">专业 </p></td>
-            <td colspan="2"><input id="major" name="major" type="text"  style="width:100%;padding:17px"/></td>
+            <td colspan="2">软件工程</td>
+        </tr>
+        <tr>
+            <td width="111"><p align="center">手机号 </p></td>
+            <td colspan="2">12345678900</td>
+            <td width="157"><p align="center">班级 </p></td>
+            <td colspan="2">软工二班</td>
         </tr>
         <tr>
             <td width="111"><p align="center">原课程代码 </p></td>
-            <td width="79"><input id="originalCourseCode" name="originalCourseCode" type="text" style="padding:17px"/></td>
+            <td width="79">GE0021</td>
             <td width="92"><p align="center">原课程名称 </p></td>
-            <td width="157"><input id="ofTheOriginalCourse" name="ofTheOriginalCourse" type="text" style="padding:17px"/></td>
+            <td width="157">高数Ⅰ</td>
             <td width="76"><p align="center">原学分 </p></td>
-            <td width="105"><input id="originalCredits" name="originalCredits" type="text" style="padding:17px"/></td>
+            <td width="105">6</td>
+        </tr>
+        <tr>
+            <th colspan="6">重修课程信息</th>
         </tr>
         <tr>
             <td width="111"><p align="center">现课程代码 </p></td>
-            <td width="79"><input id="currentCourseCode" name="currentCourseCode" type="text" style="padding:17px"/></td>
+            <td width="79">GE002</td>
             <td width="92"><p align="center">现课程名称 </p></td>
-            <td width="157"><input id="currentCourseName" name="currentCourseName" type="text" style="padding:17px"/></td>
+            <td width="157">高数Ⅰ</td>
             <td width="76"><p align="center">现学分 </p></td>
-            <td width="105"><input id="presentCreditHour" name="presentCreditHour" type="text" style="padding:17px"/></td>
-        </tr>
-        <tr>
-            <td width="111"><p align="center">开课学院 </p></td>
-            <td colspan="2"><input id="schoolOfCommencement" name="schoolOfCommencement" type="text"  style="width:100%;padding:17px"/></td>
-            <td width="157"><p align="center">手机号 </p></td>
-            <td colspan="2"><input id="cellPhoneNumber" name="cellPhoneNumber" type="text"  style="width:100%;padding:17px"/></td>
+            <td width="105">6</td>
         </tr>
         <tr>
             <td width="111"><p align="center">开课编号 </p></td>
-            <td colspan="2"><input id="openingNumbe" name="openingNumbe" type="text"  style="width:100%;padding:17px"/></td>
-            <td width="157"><p align="center">教学班级 </p></td>
-            <td colspan="2"><input id="teachingClass" name="teachingClass" type="text"  style="width:100%;padding:17px"/></td>
+            <td colspan="2">1243</td>
+            <td width="111"><p align="center">开课学院 </p></td>
+            <td colspan="2">基础教育院</td>
+        </tr>
+        <tr>
+            <td width="111"><p align="center">授课教师 </p></td>
+            <td colspan="2">王五</td>
+            <td width="111"><p align="center">上课班级 </p></td>
+            <td colspan="2">网工三班</td>
+        </tr>
+        <tr>
+            <td width="111" colspan="3"><p align="center">教学场地 </p></td>
+            <td colspan="3">F308</td>
         </tr>
         <tr>
             <td colspan="6" align="center" width="268"><input type="submit" value="提交" onclick="check()"/>&nbsp;
