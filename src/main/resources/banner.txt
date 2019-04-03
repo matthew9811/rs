@@ -44,3 +44,5 @@ fffjttttjLLffffffjfffttt;,,,,,,,,,f,,,,:,,,,,,,,,,,:,tLLfffff;,jffjjjjjjfjjLf
 fjttttjffffffffffffffjttt,,,,,,,:,,,,,,,,,,,,,,,,,,;iiGGGffffjjifffjjjtjjffjf
 jtittjffffffffffffftLjttt,,,,,,:,,;iitiiii;;,,,,;,iiijfLGDffffjjffffjjjttjffj
 皮卡丘保佑     今晚通宵
+
+${spring-boot.version}
