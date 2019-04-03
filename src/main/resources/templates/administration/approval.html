@@ -21,10 +21,55 @@
     <meta charset="UTF-8">
 </head>
 <body>
-<table border="1" align="center" cellpadding="0" cellspacing="0">
+<table>
+    <tr>
+        <th>学年学期</th>
+        <td><select style="width:173px;">
+            <option value="1">全部</option>
+            <option value="1">2015-2016-1</option>
+            <option value="1">2015-2016-2</option>
+            <option value="1">2016-2017-1</option>
+            <option value="1">2016-2017-2</option>
+            <option value="1">2017-2018-1</option>
+            <option value="1">2017-2018-2</option>
+            <option value="1">2018-2019-1</option>
+            <option value="1">2018-2019-2</option>
+            <option value="1">2019-2020-1</option>
+            <option value="1">2019-2020-2</option>
+        </select></td>
+        <th>专业</th>
+        <td><select style="width:173px;">  <option value="1">全部</option>
+            <option value="1">软件工程</option>
+            <option value="1">网络工程</option>
+            <option value="1">电子信息工程</option>
+            <option value="1">数字媒体技术</option>
+            <option value="1">电子商务</option>
+            <option value="1">财务管理</option>
+            <option value="1">物流管理</option>
+            <option value="1">市场营销</option>
+            <option value="1">工商管理</option>
+            <option value="1">视觉传达设计</option>
+        </select></td>
+        <th>学号</th>
+        <td><input type="text" name="" id="" />
+        </td>
+        <th>姓名</th>
+        <td><input type="text" name="" id="" />
+        </td>
+        <th>教学班级</th>
+        <td><input type="text" name="" id="" />
+        </td>
+        <td height="27"><div align="center">
+            <input type="submit" name="Submit" value="查询">
+        </div></td>
+    </tr>
+</table>
+<th>学期</th>
+<td>2018—2019—1</td>
+<table border="1" align="center" cellpadding="0" cellspacing="0" width="100%">
     <tr>
         <th width="35"><input type="checkbox" id="ckall" onclick="checkall()"  /></th>
-        <th width="100">学期</th>
+
         <th width="35">学号</th>
         <th width="50">姓名</th>
         <th width="60">班级</th>
@@ -49,7 +94,6 @@
             </div>
         </form>
         </td>
-        <td>2018—2019—1</td>
         <td>1234567890</td>
         <td>张三三</td>
         <td>软工一班</td>
@@ -65,16 +109,15 @@
         <td>1243</td>
         <td>网工三班</td>
         <td>已审批</td>
-        <td><select>  <option value="1">
-            通过</option>   </option>   <option value="1">
-            不通过</option>  </select>
-            </select></td>
+        <td><select>
+            <option value="1">通过</option>
+            <option value="1">不通过</option>
+        </select></td>
     </tr>
     <tr>
         <td height="22"><div align="center">
             <input type="checkbox" name="box" />
         </div></td>
-        <td>2018—2019—2</td>
         <td>134567891</td>
         <td>张四</td>
         <td>软工二班</td>
@@ -90,10 +133,91 @@
         <td>1243</td>
         <td>网工三班</td>
         <td>未审批</td>
-        <td><select>  <option value="1">
-            通过</option>   </option>   <option value="1">
-            不通过</option>  </select>
-            </select></td>
+        <td><select>
+            <option value="1">通过</option>
+            <option value="1">不通过</option>
+        </select></td>
+    </tr>
+    <tr>
+        <td height="27" colspan="18"><div align="center">
+            <input type="submit" name="Submit" value="同意">
+        </div></td>
+    </tr>
+</table>
+</br>
+<th>学期</th>
+<td>2018—2019—2</td>
+<table border="1" align="center" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <th width="35"><input type="checkbox" id="ckall" onclick="checkall()"  /></th>
+
+        <th width="35">学号</th>
+        <th width="50">姓名</th>
+        <th width="60">班级</th>
+        <th width="70">专业</th>
+        <th width="150">所属学院</th>
+        <th width="78">开课院系</th>
+        <th width="66">原课程代码</th>
+        <th width="100">原课程名称</th>
+        <th width="38">原学分</th>
+        <th width="77">现课程代码</th>
+        <th width="106">现课程名称</th>
+        <th width="39">现学分</th>
+        <th width="73">开课编号</th>
+        <th width="97">教学班级</th>
+        <th width="50">是否审批</th>
+        <th width="56">审批</th>
+    </tr>
+    <tr>
+        <td><form name="form1" method="post" action="">
+            <div align="center">
+                <input type="checkbox" name="box" />
+            </div>
+        </form>
+        </td>
+        <td>1234567890</td>
+        <td>张三三</td>
+        <td>软工一班</td>
+        <td>软件工程</td>
+        <td>计算机科学与技术院</td>
+        <td>基础教育院</td>
+        <td>GE001</td>
+        <td>线性代数</td>
+        <td>3</td>
+        <td>GE001</td>
+        <td>线性代数</td>
+        <td>3</td>
+        <td>1243</td>
+        <td>网工三班</td>
+        <td>已审批</td>
+        <td><select>
+            <option value="1">通过</option>
+            <option value="1">不通过</option>
+        </select></td>
+    </tr>
+    <tr>
+        <td height="22"><div align="center">
+            <input type="checkbox" name="box" />
+        </div></td>
+        <td>134567891</td>
+        <td>张四</td>
+        <td>软工二班</td>
+        <td>软件工程</td>
+        <td>计算机科学与技术院</td>
+        <td>基础教育院</td>
+        <td>GE002</td>
+        <td>高数Ⅰ</td>
+        <td>6</td>
+        <td>GE002</td>
+        <td>高数Ⅰ</td>
+        <td>6</td>
+        <td>1243</td>
+        <td>网工三班</td>
+        <td>未审批</td>
+        <td><select>
+            <option value="1">通过</option>
+            <option value="1">不通过</option>
+        </select></td>
     </tr>
     <tr>
         <td height="27" colspan="18"><div align="center">
