@@ -4,14 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 /**
  * @author matthew
  * @date 2019.03.17
  */
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
+@SpringBootApplication(exclude={DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class,})
 public class RsApplication {
 
 	public static void main(String[] args) {
@@ -37,5 +35,4 @@ public class RsApplication {
 				" Y88b  d88P Y88b  d88P 888        Y88b  d88P Y88b  d88P Y88b. .d88P Y88b  d88P \n" +
 				"  \"Y8888P\"   \"Y8888P\"  8888888888  \"Y8888P\"   \"Y8888P\"   \"Y88888P\"   \"Y8888P\" ");
 	}
-
 }

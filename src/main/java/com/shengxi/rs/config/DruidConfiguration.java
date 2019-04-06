@@ -1,7 +1,7 @@
 package com.shengxi.rs.config;
 
-import javax.sql.DataSource;
-
+import com.alibaba.druid.support.http.StatViewServlet;
+import com.alibaba.druid.support.http.WebStatFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -12,10 +12,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
-import com.alibaba.druid.support.http.StatViewServlet;
-import com.alibaba.druid.support.http.WebStatFilter;
+import javax.sql.DataSource;
 /**
- * @Auther: Matthew
+ * @author: Matthew
  * @Date: 2019/3/14 19:11
  * @Description:
  */
