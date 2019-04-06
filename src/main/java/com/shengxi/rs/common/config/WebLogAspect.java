@@ -1,4 +1,4 @@
-package com.shengxi.rs.config;
+package com.shengxi.rs.common.config;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -17,7 +17,7 @@ import java.util.Arrays;
 /**
  * @author : Matthew
  * @Date: 2019/3/28 16:28
- * @Description:
+ * @Description: url访问日志打印,格式化打印日志
  */
 @Aspect
 @Component

@@ -1,4 +1,4 @@
-package com.shengxi.rs.util;
+package com.shengxi.rs.common.util;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;

@@ -1,4 +1,4 @@
-//package com.shengxi.rs.config;
+//package com.shengxi.rs.common.config;
 //
 //import com.fasterxml.jackson.annotation.JsonAutoDetect;
 //import com.fasterxml.jackson.annotation.PropertyAccessor;

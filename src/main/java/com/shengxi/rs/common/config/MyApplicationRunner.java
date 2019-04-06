@@ -1,4 +1,4 @@
-package com.shengxi.rs.config;
+package com.shengxi.rs.common.config;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;

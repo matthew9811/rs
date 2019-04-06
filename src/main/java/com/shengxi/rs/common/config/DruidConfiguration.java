@@ -1,4 +1,4 @@
-package com.shengxi.rs.config;
+package com.shengxi.rs.common.config;
 
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
