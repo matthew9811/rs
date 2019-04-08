@@ -1,13 +1,10 @@
 package com.shengxi.system.entites.stuEntity;
 
-import javax.persistence.Entity;
-
 /**
  * @author : 郑杰
  * @Date: 2019/3/23 14:25
  * @Description: 学生申请表实体类
  */
-@Entity
 public class StuRehabilitation {
     /**
      * 学号

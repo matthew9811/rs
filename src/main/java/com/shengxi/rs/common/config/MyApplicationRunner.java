@@ -1,4 +1,4 @@
-package com.shengxi.rs.config;
+package com.shengxi.rs.common.config;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
@@ -16,12 +16,6 @@ import java.util.Date;
 @Component
 @Order(1)
 public class MyApplicationRunner implements CommandLineRunner {
-//    @Override
-//    public void run(ApplicationArguments args) throws Exception {
-//        System.out.println("-------------->" + "项目启动，now=" + new Date());
-//        System.out.println();
-//    }
-
     @Override
     public void run(String... args) throws Exception {
         System.out.println("-------------->" + "项目启动，now=" + new Date());

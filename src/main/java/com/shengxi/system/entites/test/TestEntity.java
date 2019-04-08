@@ -1,13 +1,10 @@
 package com.shengxi.system.entites.test;
 
-import javax.persistence.Entity;
-
 /**
  * @author : Matthew
  * @Date: 2019/3/23 14:25
  * @Description: 测试实体类
  */
-@Entity
 public class TestEntity {
     /**姓名*/
     private String name;

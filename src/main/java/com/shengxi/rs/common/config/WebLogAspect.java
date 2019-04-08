@@ -1,15 +1,15 @@
-package com.shengxi.rs.config;
+package com.shengxi.rs.common.config;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.slf4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
@@ -17,7 +17,7 @@ import java.util.Arrays;
 /**
  * @author : Matthew
  * @Date: 2019/3/28 16:28
- * @Description:
+ * @Description: url访问日志打印,格式化打印日志
  */
 @Aspect
 @Component
