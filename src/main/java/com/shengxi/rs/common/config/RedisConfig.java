@@ -1,28 +1,28 @@
-//package com.shengxi.rs.common.config;
-//
-//import com.fasterxml.jackson.annotation.JsonAutoDetect;
-//import com.fasterxml.jackson.annotation.PropertyAccessor;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import org.springframework.cache.CacheManager;
-//import org.springframework.cache.annotation.CachingConfigurerSupport;
-//import org.springframework.cache.annotation.EnableCaching;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.data.redis.cache.RedisCacheManager;
-//import org.springframework.data.redis.core.RedisTemplate;
-//import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
-//import org.springframework.data.redis.serializer.RedisSerializer;
-//import org.springframework.data.redis.serializer.StringRedisSerializer;
-//
-///**
-// * @author: Matthew
-// * @Date: 2019/4/6 16:47
-// * @Description: Redis 缓存配置类
-// */
-//@Configuration
-//@EnableCaching
-//public class RedisConfig extends CachingConfigurerSupport {
-//
+package com.shengxi.rs.common.config;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CachingConfigurerSupport;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+/**
+ * @author: Matthew
+ * @Date: 2019/4/6 16:47
+ * @Description: Redis 缓存配置类
+ */
+@Configuration
+@EnableCaching
+public class RedisConfig extends CachingConfigurerSupport {
+
 //    @Bean
 //    public CacheManager cacheManager(RedisTemplate<?, ?> redisTemplate) {
 //        RedisSerializer stringSerializer = new StringRedisSerializer();
@@ -40,5 +40,5 @@
 //        return cacheManager;
 //
 //    }
-//}
-//
+}
+
