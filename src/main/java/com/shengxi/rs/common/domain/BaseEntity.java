@@ -2,6 +2,7 @@ package com.shengxi.rs.common.domain;
 
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Date;
  * @Description: 实体集常用信息
  */
 @Component
-public class BaseEntity {
+public class BaseEntity implements Serializable {
     /**
      * id
      */

@@ -1,5 +1,7 @@
 package com.shengxi.system.model.test;
 
+import com.shengxi.rs.common.domain.BaseEntity;
+
 import java.io.Serializable;
 
 /**
@@ -7,7 +9,7 @@ import java.io.Serializable;
  * @Date: 2019/4/6 01:46
  * @Description:
  */
-public class RdEntity implements Serializable {
+public class RdEntity extends BaseEntity implements Serializable {
     private String id;
     private String name;
     private Integer age;
@@ -19,14 +21,6 @@ public class RdEntity implements Serializable {
         this.id = id;
         this.name = name;
         this.age = age;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {

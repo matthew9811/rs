@@ -1,6 +1,7 @@
 package com.shengxi.rs.controller.test;
 
 import com.shengxi.system.entites.test.TestEntity;
+import org.junit.Test;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
