@@ -11,9 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class IdUtil {
 
     public static String uuid(){
-        IdCommon idCommon = new IdCommon(0,0);
+        IdCommon idCommon = new IdCommon(System.currentTimeMillis(),System.currentTimeMillis());
         //避免事件冲突
-        Thread.sleep(Thread.MIN_PRIORITY);
+        try {
+            Thread.sleep(Thread.MIN_PRIORITY);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return String.valueOf(idCommon.nextId());
     }
 }

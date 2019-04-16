@@ -1,12 +1,15 @@
 package com.shengxi.rs.controller.test;
 
 import com.shengxi.system.entites.test.TestEntity;
-import org.junit.Test;
+import com.shengxi.system.model.service.test.TestServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * @author: Matthew
@@ -17,6 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/test")
 public class TestContoller {
     private String prifix = "test";
+
+    @Autowired
+    private TestServices testServices;
 
     @RequestMapping("")
     public String test() {
@@ -30,9 +36,11 @@ public class TestContoller {
 
     @PostMapping("/input")
     @ResponseBody
-    public String input(TestEntity entity) {
+    public List<TestEntity> input(TestEntity entity) {
         System.out.println(entity.toString());
-        return entity.toString();
+        System.out.println("---------------------");
+        List<TestEntity> list = testServices.selectList();
+        return list;
     }
 
 }

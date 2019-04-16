@@ -12,6 +12,9 @@ public class TestEntity extends BaseEntity {
     private String name;
     /**年龄*/
     private Integer age;
+    /**删除标识*/
+    private String delFlag;
+
 
     public String getName() {
         return name;
