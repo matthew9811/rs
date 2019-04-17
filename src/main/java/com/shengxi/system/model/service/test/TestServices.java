@@ -29,4 +29,9 @@ public class TestServices {
     public List<TestEntity> selectList() {
         return testMapper.selectTestEntityList();
     }
+
+    @Transactional(readOnly = false, rollbackFor = SQLException.class)
+    public Integer updateTest(TestEntity testEntity){
+        return testMapper.updateByTestEntityList(testEntity);
+    }
 }

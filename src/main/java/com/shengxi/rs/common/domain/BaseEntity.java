@@ -33,6 +33,10 @@ public class BaseEntity implements Serializable {
      */
     private String udpateBy;
     /**
+     * 备注
+     */
+    private String remark;
+    /**
      * 删除标识
      */
     private String delFlag;
@@ -75,5 +79,35 @@ public class BaseEntity implements Serializable {
 
     public void setUdpateBy(String udpateBy) {
         this.udpateBy = udpateBy;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(String delFlag) {
+        this.delFlag = delFlag;
+    }
+
+
+    @Override
+    public String toString() {
+        return "BaseEntity{" +
+                "id='" + id + '\'' +
+                ", createTime=" + createTime +
+                ", createBy='" + createBy + '\'' +
+                ", udpateTime=" + udpateTime +
+                ", udpateBy='" + udpateBy + '\'' +
+                ", remark='" + remark + '\'' +
+                ", delFlag='" + delFlag + '\'' +
+                '}';
     }
 }

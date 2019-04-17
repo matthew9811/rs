@@ -20,4 +20,12 @@ public interface TestMapper {
      * @return list
      */
     List<TestEntity> selectTestEntityList();
+
+
+    /**
+     * update对应行
+     * @param entity 实体
+     * @return Integer
+     */
+    Integer updateByTestEntityList(TestEntity entity);
 }

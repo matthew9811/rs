@@ -2,15 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shengxi.system.model.mapper.test.TestMapper">
     <!--<resultMap id="BaseResultMap" -->
-               <!--type="com.shengxi.system.entites.test.TestEntity">-->
-        <!--&lt;!&ndash;字段为id&ndash;&gt;-->
-        <!--<id property="id" column="id" jdbcType="String"></id>-->
-        <!--<result property="name" column="name" jdbcType="String"></result>-->
-        <!--<result property="age" column="age" jdbcType="Integer"></result>-->
-        <!--&lt;!&ndash;删除标识， 对应字段&ndash;&gt;-->
-        <!--<result property="delFlag" column="del_flag" jdbcType="String"></result>-->
+    <!--type="com.shengxi.system.entites.test.TestEntity">-->
+    <!--&lt;!&ndash;字段为id&ndash;&gt;-->
+    <!--<id property="id" column="id" jdbcType="String"></id>-->
+    <!--<result property="name" column="name" jdbcType="String"></result>-->
+    <!--<result property="age" column="age" jdbcType="Integer"></result>-->
+    <!--&lt;!&ndash;删除标识， 对应字段&ndash;&gt;-->
+    <!--<result property="delFlag" column="del_flag" jdbcType="String"></result>-->
     <!--</resultMap>-->
 
+    <!--查询操作-->
     <select id="selectTestEntityList"
             resultType="com.shengxi.system.entites.test.TestEntity">
         select a.id, a.name, a.age, a.del_flag
@@ -20,4 +21,16 @@
         </where>
     </select>
     <!--使用另外一种方式-->
+    <!--使用resultMap返回获取的数据-->
+
+    <update id="updateByTestEntityList">
+        update test set
+        name = #{name},
+        age = #{age}
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+
 </mapper>
