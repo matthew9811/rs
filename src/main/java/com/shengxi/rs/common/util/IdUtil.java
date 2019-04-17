@@ -4,6 +4,7 @@ import com.shengxi.system.common.util.IdCommon;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
+ * 通过雪花算法生成不重复id
  * @author: Matthew
  * @Date: 2019/4/9 17:12
  * @Description: 生成id
