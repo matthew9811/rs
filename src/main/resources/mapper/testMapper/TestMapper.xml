@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shengxi.system.model.mapper.test.TestMapper">
-    <resultMap id="BaseResultMap" type="com.shengxi.system.entites.test.TestEntity">
-        <!--字段为id-->
-        <id property="id" column="id" jdbcType="String"></id>
-        <result property="name" column="name" jdbcType="String"></result>
-        <result property="age" column="age" jdbcType="Integer"></result>
-        <!--删除标识， 对应字段-->
-        <result property="delFlag" column="del_flag" jdbcType="String"></result>
-    </resultMap>
+    <!--<resultMap id="BaseResultMap" -->
+               <!--type="com.shengxi.system.entites.test.TestEntity">-->
+        <!--&lt;!&ndash;字段为id&ndash;&gt;-->
+        <!--<id property="id" column="id" jdbcType="String"></id>-->
+        <!--<result property="name" column="name" jdbcType="String"></result>-->
+        <!--<result property="age" column="age" jdbcType="Integer"></result>-->
+        <!--&lt;!&ndash;删除标识， 对应字段&ndash;&gt;-->
+        <!--<result property="delFlag" column="del_flag" jdbcType="String"></result>-->
+    <!--</resultMap>-->
 
-    <select id="selectTestEntityList" resultType="com.shengxi.system.entites.test.TestEntity">
+    <select id="selectTestEntityList"
+            resultType="com.shengxi.system.entites.test.TestEntity">
         select a.id, a.name, a.age, a.del_flag
         from test As a
         <where>
