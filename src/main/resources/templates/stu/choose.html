@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="utf-8">
+    <title>选择课程页</title>
+</head>
+
+<body>
+<form action="/stu/stu/course" method="post">
+<table width="21%" border="1" align="center">
+    <tr>
+        <td height="24"><div align="left">
+            <form id="form1" name="form1" method="post" action="">
+                <input name="textfield" type="text" value="线性代数" />
+                <input type="submit" name="Submit" value="搜索" />
+            </form>
+        </div></td>
+    </tr>
+</table>
+<table width="100%" border="1" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td width="7%">开课编号</td>
+        <td width="6%">课程编号</td>
+        <td width="7%">课程名称</td>
+        <td width="7%">开课院系</td>
+        <td width="8%">计划类型</td>
+        <td width="6%">总学时</td>
+        <td width="6%">理论学时</td>
+        <td width="7%">实践学时</td>
+        <td width="5%">学分</td>
+        <td width="8%">教学班名称</td>
+        <td width="6%">排课人数</td>
+        <td width="6%">上课人数</td>
+        <td width="4%">录成绩</td>
+        <td width="6%">地点</td>
+        <td width="6%">星期</td>
+        <td width="5%">节次</td>
+        <td width="5%">操作</td>
+    </tr>
+    <tr>
+        <td>1067667</td>
+        <td>CS1789</td>
+        <td>高数Ⅰ</td>
+        <td>基础教育部</td>
+        <td>培养方案</td>
+        <td>64</td>
+        <td>64</td>
+        <td>0</td>
+        <td>6</td>
+        <td>18软工三班</td>
+        <td>66</td>
+        <td>66</td>
+        <td>李六</td>
+        <td>F103</td>
+        <td>1，4</td>
+        <td>0102，0304</td>
+        <td><input type="submit" name="Submit" value="申请重修"></td>
+    </tr>
+    <tr>
+        <td>1067668</td>
+        <td>CS1789</td>
+        <td>高数Ⅰ</td>
+        <td>基础教育部</td>
+        <td>培养方案</td>
+        <td>64</td>
+        <td>64</td>
+        <td>0</td>
+        <td>6</td>
+        <td>18网工三班</td>
+        <td>66</td>
+        <td>66</td>
+        <td>王五</td>
+        <td>F308</td>
+        <td>2，3</td>
+        <td>0102，0304</td>
+        <td><input type="submit" name="Submit" value="申请重修"></td>
+    </tr>
+</table>
+    </form>
+</body>
+</html>
