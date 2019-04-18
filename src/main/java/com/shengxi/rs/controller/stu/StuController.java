@@ -19,20 +19,35 @@ public class StuController {
 
     private String prifix = "stu";
 
-    @PostMapping("/stuAccept")
-    public String studentAccept(StuRehabilitation stuRehabilitationEntity) {
-        System.out.println(stuRehabilitationEntity.toString());
+    @PostMapping("/news")
+    public String pnews() {
         return "redirect:/stu/stu/news";
     }
+    @PostMapping("/course")
+    public String pcourse() {
+        return "redirect:/stu/stu/course";
+    }
+    @PostMapping("/choose")
+    public String pchoose() {
+        return "redirect:/stu/stu/choose";
+    }
 
-    @GetMapping("/stuAccept")
-    public String studentAccept() {
+    @GetMapping("/course")
+    public String course() {
         return prifix + "/course";
     }
 
     @GetMapping("/news")
     public String news() {
         return prifix + "/news";
+    }
+    @GetMapping("/search")
+    public String search() {
+        return prifix + "/search";
+    }
+    @GetMapping("/choose")
+    public String choose() {
+        return prifix + "/choose";
     }
 
     @RequestMapping("")
