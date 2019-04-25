@@ -4,5 +4,8 @@
     <select id="selectSubjectEntityList"
             resultType="com.shengxi.system.entites.subEntity.SubjectEntity">
         select * from subject
+        <where>
+
+        </where>
     </select>
 </mapper>
