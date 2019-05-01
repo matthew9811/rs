@@ -28,4 +28,5 @@ public interface TestMapper {
      * @return Integer
      */
     Integer updateByTestEntityList(TestEntity entity);
+
 }

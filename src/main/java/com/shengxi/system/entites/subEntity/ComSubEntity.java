@@ -9,7 +9,7 @@ import java.util.Date;
  * @Date: 2019/4/23 17:20
  * @Description: 已修课程实体类
  */
-public class ComsubEntity extends BaseEntity {
+public class ComSubEntity extends BaseEntity {
     /**
      * 学号
      */
@@ -53,7 +53,6 @@ public class ComsubEntity extends BaseEntity {
     /**
      * 删除标识
      */
-
     private String delFlag;
 
     public String getStuNo() {
@@ -98,7 +97,7 @@ public class ComsubEntity extends BaseEntity {
 
     @Override
     public String toString() {
-        return "ComsubEntity{" +
+        return "ComSubEntity{" +
                 "stuNo='" + stuNo + '\'' +
                 ", subNo='" + subNo + '\'' +
                 ", subName='" + subName + '\'' +

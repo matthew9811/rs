@@ -9,6 +9,7 @@ import java.util.Date;
  * @Description: 课程实体类
  */
 public class SubjectEntity extends BaseEntity {
+    private String id;
     /**
      * 开课编号
      */
@@ -28,7 +29,7 @@ public class SubjectEntity extends BaseEntity {
     /**
      * 学分
      */
-    private String subredit;
+    private String subCredit;
     /**
      * 教学班名称
      */
@@ -102,6 +103,16 @@ public class SubjectEntity extends BaseEntity {
      */
     private String delFlag;
 
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getSubCarryNo() {
         return subCarryNo;
     }
@@ -134,12 +145,12 @@ public class SubjectEntity extends BaseEntity {
         this.subInstitute = subInstitute;
     }
 
-    public String getSubredit() {
-        return subredit;
+    public String getSubCredit() {
+        return subCredit;
     }
 
-    public void setSubredit(String subredit) {
-        this.subredit = subredit;
+    public void setSubCredit(String subredit) {
+        this.subCredit = subredit;
     }
 
     public String getSubClassName() {
@@ -245,7 +256,7 @@ public class SubjectEntity extends BaseEntity {
                 ", subNo='" + subNo + '\'' +
                 ", subName='" + subName + '\'' +
                 ", subInstitute='" + subInstitute + '\'' +
-                ", subredit='" + subredit + '\'' +
+                ", subCredit='" + subCredit + '\'' +
                 ", subClassName='" + subClassName + '\'' +
                 ", subMenCount=" + subMenCount +
                 ", subMenTotalCount=" + subMenTotalCount +

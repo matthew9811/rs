@@ -1,6 +1,158 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shengxi.system.model.mapper.sub.SubjectMapper">
+    <sql id="key">
+        <trim suffixOverrides=",">
+
+            <if test="subCarryNo!=null">
+                id,
+            </if>
+
+            <if test="subCarryNo!=null">
+                sub_carry_no,
+            </if>
+
+            <if test="subNo!=null">
+                sub_no,
+            </if>
+
+            <if test="subName!=null">
+                sub_name,
+            </if>
+
+            <if test="subInstitute!=null">
+                sub_institute,
+            </if>
+
+            <if test="subCredit!=null">
+                sub_credit,
+            </if>
+
+            <if test="subClassName!=null">
+                sub_class_name,
+            </if>
+
+            <if test="subMenCount!=null">
+                sub_men_count,
+            </if>
+
+            <if test="subMenTotalCount!=null">
+                sub_men_total_count,
+            </if>
+
+            <if test="subPlanType!=null">
+                sub_plan_type,
+            </if>
+
+            <if test="subTotalPeriod!=null">
+                sub_total_period,
+            </if>
+
+            <if test="subTheoryPeriod!=null">
+                sub_theory_period,
+            </if>
+
+            <if test="subPracticePeriod!=null">
+                sub_practice_period,
+            </if>
+
+            <if test="subTeacherId!=null">
+                sub_teacher_id,
+            </if>
+
+            <if test="subCourseType!=null">
+                sub_course_type,
+            </if>
+
+            <if test="subCourseGenre!=null">
+                sub_course_genre,
+            </if>
+
+            <if test="replace!=null">
+                replace,
+            </if>
+
+            <if test="subStatus!=null">
+                sub_status,
+            </if>
+        </trim>
+    </sql>
+
+    <sql id="value">
+        <trim suffixOverrides=",">
+            <if test="subCarryNo!=null">
+                #{id},
+            </if>
+
+            <if test="subCarryNo!=null">
+                #{subCarryNo},
+            </if>
+
+            <if test="subNo!=null">
+                #{subNo},
+            </if>
+
+            <if test="subName!=null">
+                #{subName},
+            </if>
+
+            <if test="subInstitute!=null">
+                #{subInstitute},
+            </if>
+
+            <if test="subCredit!=null">
+                #{subCredit},
+            </if>
+
+            <if test="subClassName!=null">
+                #{subClassName},
+            </if>
+
+            <if test="subMenCount!=null">
+                #{subMenCount},
+            </if>
+
+            <if test="subMenTotalCount!=null">
+                #{subMenTotalCount},
+            </if>
+
+            <if test="subPlanType!=null">
+                #{subPlanType},
+            </if>
+
+            <if test="subTotalPeriod!=null">
+                #{subTotalPeriod},
+            </if>
+
+            <if test="subTheoryPeriod!=null">
+                #{subTheoryPeriod},
+            </if>
+
+            <if test="subPracticePeriod!=null">
+                #{subPracticePeriod},
+            </if>
+
+            <if test="subTeacherId!=null">
+                #{subTeacherId},
+            </if>
+
+            <if test="subCourseType!=null">
+                #{subCourseType},
+            </if>
+
+            <if test="subCourseGenre!=null">
+                #{subCourseGenre},
+            </if>
+
+            <if test="replace!=null">
+                #{replace},
+            </if>
+
+            <if test="subStatus!=null">
+                #{subStatus},
+            </if>
+        </trim>
+    </sql>
     <select id="selectSubjectEntityList"
             resultType="com.shengxi.system.entites.subEntity.SubjectEntity">
         select * from subject
@@ -8,4 +160,8 @@
 
         </where>
     </select>
+
+    <insert id="addSubject" parameterType="com.shengxi.system.entites.subEntity.SubjectEntity">
+        insert into subject(<include refid="key"/>) values(<include refid="value"/>);
+    </insert>
 </mapper>
