@@ -36,7 +36,15 @@ public class SubjectServices {
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
     public Integer addList(SubjectEntity subjectEntity){
-        System.out.println("addList到");
         return subjectMapper.addSubject(subjectEntity);
+    }
+
+    /**
+     * 搜索课程代码或课程名
+     * @return list
+     */
+    @Transactional(readOnly = false, rollbackFor = SQLException.class)
+    public List<SubjectEntity> souSubjectEntityList(String sou){
+        return subjectMapper.souSubjectEntityList(sou);
     }
 }

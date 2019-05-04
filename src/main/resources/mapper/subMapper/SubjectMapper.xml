@@ -4,7 +4,7 @@
     <sql id="key">
         <trim suffixOverrides=",">
 
-            <if test="subCarryNo!=null">
+            <if test="id!=null">
                 id,
             </if>
 
@@ -68,9 +68,7 @@
                 sub_course_genre,
             </if>
 
-            <if test="replace!=null">
-                replace,
-            </if>
+
 
             <if test="subStatus!=null">
                 sub_status,
@@ -80,7 +78,7 @@
 
     <sql id="value">
         <trim suffixOverrides=",">
-            <if test="subCarryNo!=null">
+            <if test="id!=null">
                 #{id},
             </if>
 
@@ -144,15 +142,18 @@
                 #{subCourseGenre},
             </if>
 
-            <if test="replace!=null">
-                #{replace},
-            </if>
+            
 
             <if test="subStatus!=null">
                 #{subStatus},
             </if>
         </trim>
     </sql>
+
+    <insert id="addSubject" parameterType="com.shengxi.system.entites.subEntity.SubjectEntity">
+        insert into subject(<include refid="key"/>) values(<include refid="value"/>);
+    </insert>
+
     <select id="selectSubjectEntityList"
             resultType="com.shengxi.system.entites.subEntity.SubjectEntity">
         select * from subject
@@ -161,7 +162,15 @@
         </where>
     </select>
 
-    <insert id="addSubject" parameterType="com.shengxi.system.entites.subEntity.SubjectEntity">
-        insert into subject(<include refid="key"/>) values(<include refid="value"/>);
-    </insert>
+    <select id="souSubjectEntityList"
+            resultType="com.shengxi.system.entites.subEntity.SubjectEntity">
+        select * from subject
+        <where>
+            sub_no = #{sou}
+            or
+            sub_name = #{sou}
+        </where>
+    </select>
+
+
 </mapper>

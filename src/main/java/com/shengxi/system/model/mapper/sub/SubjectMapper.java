@@ -16,27 +16,27 @@ import java.util.List;
 @Mapper
 public interface SubjectMapper {
     /**
-     * 获取课程信息
+     * 获取有效课程信息
      * @return list
      */
     List<SubjectEntity> selectSubjectEntityList();
 
     /**
-     * update对应行
+     * 修改课程信息
      * @param subjectEntity 实体
      * @return Integer
      */
     Integer updateSubject(SubjectEntity subjectEntity);
 
     /**
-     *update对应行
+     *插入课程信息
      *@param subjectEntity 实体
      * @return Integer
      */
     Integer insereSubject(SubjectEntity subjectEntity);
 
     /**
-     * delete对应行
+     * 删除课程信息
      * @return list
      */
     Integer deleteSubject();
@@ -46,4 +46,10 @@ public interface SubjectMapper {
      * @return list
      */
     Integer addSubject(@Param("subjectEntity") SubjectEntity subjectEntity);
+
+    /**
+     * 搜索课程代码或课程名
+     * @return list
+     */
+    List<SubjectEntity> souSubjectEntityList(String sou);
 }

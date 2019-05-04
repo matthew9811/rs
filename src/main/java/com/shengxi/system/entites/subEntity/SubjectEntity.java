@@ -67,11 +67,11 @@ public class SubjectEntity extends BaseEntity {
      */
     private String subCourseType;
     /**
-     * 是否为替代课程
+     * 课程类别
      */
     private String subCourseGenre;
     /**
-     * 课程类别
+     * 是否为替代课程
      */
     private String replace;
     /**
@@ -149,8 +149,8 @@ public class SubjectEntity extends BaseEntity {
         return subCredit;
     }
 
-    public void setSubCredit(String subredit) {
-        this.subCredit = subredit;
+    public void setSubCredit(String subCredit) {
+        this.subCredit = subCredit;
     }
 
     public String getSubClassName() {
@@ -252,7 +252,8 @@ public class SubjectEntity extends BaseEntity {
     @Override
     public String toString() {
         return "SubjectEntity{" +
-                "subCarryNo='" + subCarryNo + '\'' +
+                "id='" + id + '\'' +
+                ", subCarryNo='" + subCarryNo + '\'' +
                 ", subNo='" + subNo + '\'' +
                 ", subName='" + subName + '\'' +
                 ", subInstitute='" + subInstitute + '\'' +

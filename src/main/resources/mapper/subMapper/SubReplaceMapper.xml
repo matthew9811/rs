@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shengxi.system.model.mapper.sub.SubReplaceMapper">
+
+    <sql id="key">
+        <trim suffixOverrides=",">
+
+            <if test="id!=null">
+                id,
+            </if>
+
+            <if test="subNo!=null">
+                sub_no,
+            </if>
+
+            <if test="subReplaceNo!=null">
+                sub_replace_no,
+            </if>
+
+
+
+        </trim>
+    </sql>
+
+    <sql id="value">
+        <trim suffixOverrides=",">
+
+            <if test="id!=null">
+                #{id},
+            </if>
+
+            <if test="subNo!=null">
+                #{subNo},
+            </if>
+
+            <if test="subReplaceNo!=null">
+                #{subReplaceNo},
+            </if>
+
+
+
+        </trim>
+    </sql>
+
+    <insert id="insereSubReplaceEntity" parameterType="com.shengxi.system.entites.subEntity.SubReplaceEntity">
+        insert into sub_replace(<include refid="key"/>) values(<include refid="value"/>);
+    </insert>
+
+    <select id="selectSubReplaceEntityList"
+            resultType="com.shengxi.system.entites.subEntity.SubReplaceEntity">
+        select * from sub_replace
+        <where>
+
+        </where>
+    </select>
+
+</mapper>

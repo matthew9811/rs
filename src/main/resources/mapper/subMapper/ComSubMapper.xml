@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shengxi.system.model.mapper.sub.ComSubMapper">
+
+    <sql id="key">
+        <trim suffixOverrides=",">
+
+            <if test="id!=null">
+                id,
+            </if>
+
+            <if test="stuNo!=null">
+                stu_no,
+            </if>
+
+            <if test="subNo!=null">
+                sub_no,
+            </if>
+
+            <if test="subName!=null">
+                sub_name,
+            </if>
+
+            <if test="score!=null">
+                score,
+            </if>
+
+            <if test="subredit!=null">
+                sub_redit,
+            </if>
+
+        </trim>
+    </sql>
+
+    <sql id="value">
+        <trim suffixOverrides=",">
+
+            <if test="id!=null">
+                #{id},
+            </if>
+
+            <if test="stuNo!=null">
+                #{stuNo},
+            </if>
+
+            <if test="subNo!=null">
+                #{subNo},
+            </if>
+
+            <if test="subName!=null">
+                #{subName},
+            </if>
+
+            <if test="score!=null">
+                #{score},
+            </if>
+
+            <if test="subredit!=null">
+                #{subredit},
+            </if>
+
+        </trim>
+    </sql>
+
+    <insert id="insereComSubEntity" parameterType="com.shengxi.system.entites.subEntity.ComSubEntity">
+        insert into com_sub(<include refid="key"/>) values(<include refid="value"/>);
+    </insert>
+
+    <select id="selectComSubEntityList"
+            resultType="com.shengxi.system.entites.subEntity.ComSubEntity">
+        select * from com_sub
+        <where>
+
+        </where>
+    </select>
+
+</mapper>

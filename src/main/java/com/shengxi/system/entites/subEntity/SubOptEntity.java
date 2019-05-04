@@ -8,7 +8,7 @@ import java.util.Date;
  * @Date: 2019/4/26 15:08
  * @Description: 学生-已选重修实体类
  */
-public class StuOptEntity extends BaseEntity {
+public class SubOptEntity extends BaseEntity {
     /**
      * 学号
      */
@@ -108,7 +108,7 @@ public class StuOptEntity extends BaseEntity {
 
     @Override
     public String toString() {
-        return "StuOptEntity{" +
+        return "SubOptEntity{" +
                 "stuNo='" + stuNo + '\'' +
                 ", subId='" + subId + '\'' +
                 ", subName='" + subName + '\'' +
