@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/college/college")
 public class CollegeController {
-    private String prifix = "college";
+    private String prefix = "college";
 
     @GetMapping("/classbegins")
     public String classbegins() {
-        return prifix + "/classbegins";
+        return prefix + "/classbegins";
     }
 
     @GetMapping("/subordinate")
     public String subordinate() {
-        return prifix + "/subordinate";
+        return prefix + "/subordinate";
     }
 }

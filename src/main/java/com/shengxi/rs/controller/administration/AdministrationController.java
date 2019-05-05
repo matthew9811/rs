@@ -14,20 +14,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/administration/administration")
 public class AdministrationController {
-    private  String prifix = "administration";
+    private  String prefix = "administration";
 
     @GetMapping("/approval")
     public String approval() {
-        return prifix + "/approval";
+        return prefix + "/approval";
     }
 
     @GetMapping("/replace")
     public String replace() {
-        return prifix + "/replace";
+        return prefix + "/replace";
     }
     @GetMapping("/upload")
     public String upload() {
-        return prifix + "/upload";
+        return prefix + "/upload";
 
 
     }

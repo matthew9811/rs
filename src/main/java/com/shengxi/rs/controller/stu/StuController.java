@@ -24,7 +24,7 @@ import java.util.List;
 @RequestMapping("/stu/stu")
 public class StuController {
 
-    private String prifix = "stu";
+    private String prefix = "stu";
 
     @Autowired
     private SubjectServices subjectServices;
@@ -44,20 +44,20 @@ public class StuController {
 
     @GetMapping("/course")
     public String course() {
-        return prifix + "/course";
+        return prefix + "/course";
     }
 
     @GetMapping("/news")
     public String news() {
-        return prifix + "/news";
+        return prefix + "/news";
     }
     @GetMapping("/search")
     public String search() {
-        return prifix + "/search";
+        return prefix + "/search";
     }
     @GetMapping("/choose")
     public String choose() {
-        return prifix + "/choose";
+        return prefix + "/choose";
     }
 
     @RequestMapping("")

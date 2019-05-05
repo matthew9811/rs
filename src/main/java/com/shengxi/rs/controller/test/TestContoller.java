@@ -19,19 +19,19 @@ import java.util.List;
 @Controller
 @RequestMapping("/test")
 public class TestContoller {
-    private String prifix = "test";
+    private String prefix = "test";
 
     @Autowired
     private TestServices testServices;
 
     @RequestMapping("")
     public String test() {
-        return prifix + "/index";
+        return prefix + "/index";
     }
 
     @GetMapping("/input")
     public String input() {
-        return prifix + "/inputTest";
+        return prefix + "/inputTest";
     }
 
     @PostMapping("/input")
