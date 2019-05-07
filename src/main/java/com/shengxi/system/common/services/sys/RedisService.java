@@ -1,4 +1,4 @@
-package com.shengxi.system.common.services;
+package com.shengxi.system.common.services.sys;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

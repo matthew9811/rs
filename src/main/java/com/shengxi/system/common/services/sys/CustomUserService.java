@@ -1,4 +1,4 @@
-package com.shengxi.system.common.services;
+package com.shengxi.system.common.services.sys;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.rs.common.config.SysUser;
