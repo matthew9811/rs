@@ -36,11 +36,19 @@ public class RedisTest {
     private TestServices testServices;
 
     @Test
+    @Rollback
     public void stringTest() {
         ValueOperations<String, String> opsValStr = stringObjectStringRedisTemplate.opsForValue();
         opsValStr.set("焰皓", "焰豪");
         System.out.println("=================================");
         System.out.println(opsValStr.get("焰皓"));
+    }
+
+    @Test
+    @Rollback
+    public void setTest(){
+        Boolean delete = stringObjectStringRedisTemplate.delete("焰皓");
+        System.out.println(delete);
     }
 
     @Test

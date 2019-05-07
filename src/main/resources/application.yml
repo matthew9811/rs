@@ -3,6 +3,13 @@ server:
   tomcat:
     uri-encoding: utf-8
 spring:
+  security:
+
+    user:
+      name: admin
+      password: shengxi
+      roles:
+        - user
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     sql-script-encoding: utf-8
@@ -18,8 +25,8 @@ spring:
         # 从数据源开关/默认关闭
         enabled: true
         url: jdbc:mysql://47.106.188.177:3306/rs?useUnicode=true&characterEncoding=utf8&useServerPstmts=true&cachePrepStmts=true&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&cacheCallableStmts=true&connectTimeout=1000&maxReconnects=5&zeroDateTimeBehavior=convertToNull&useSSL=true
-        username: root
-        password: 1234567
+        username: reader
+        password: reader
       connect-properties:
         druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       # 初始连接数
@@ -69,7 +76,7 @@ spring:
     # Redis服务器连接端口
     port: 6379
     # Redis 密码
-    password: 1234567
+    #password: "1234567"
     jedis:
       pool:
         # 连接池中的最小空闲连接
@@ -129,23 +136,6 @@ rs:
   timeFormat: yyyy-MM-dd HH:mm:ss
   # 是否开启 AOP 日志，默认开启
   openAopLog: true
-#  shiro:
-#    # shiro redis缓存时长，默认1800秒
-#    expireIn: 1800
-#    # session 超时时间，默认1800000毫秒
-#    sessionTimeout: 1800000
-#    # rememberMe cookie有效时长，默认86400秒，即一天
-#    cookieTimeout: 86400
-#    # 免认证的路径配置，如静态资源，druid监控页面，注册页面，验证码请求等
-#    anonUrl: /css/**,/js/**,/fonts/**,/img/**,/druid/**,/user/regist,/gifCode,/,/actuator/**,/test/**
-#    # 登录 url
-#    loginUrl: /login
-#    # 登录成功后跳转的 url
-#    successUrl: /index
-#    # 登出 url
-#    logoutUrl: /logout
-#    # 未授权跳转 url
-#    unauthorizedUrl: /403
   # 验证码
 #  validateCode:
 #    # 宽度，默认 146px

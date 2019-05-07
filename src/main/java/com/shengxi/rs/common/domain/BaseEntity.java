@@ -27,11 +27,11 @@ public class BaseEntity implements Serializable {
     /**
      * 更新时间
      */
-    private Date udpateTime;
+    private Date updateTime;
     /**
      * 更新人
      */
-    private String udpateBy;
+    private String updateBy;
     /**
      * 备注
      */
@@ -65,20 +65,20 @@ public class BaseEntity implements Serializable {
         this.createBy = createBy;
     }
 
-    public Date getUdpateTime() {
-        return udpateTime;
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
-    public void setUdpateTime(Date udpateTime) {
-        this.udpateTime = udpateTime;
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
-    public String getUdpateBy() {
-        return udpateBy;
+    public String getUpdateBy() {
+        return updateBy;
     }
 
-    public void setUdpateBy(String udpateBy) {
-        this.udpateBy = udpateBy;
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
     }
 
     public String getRemark() {
@@ -95,19 +95,5 @@ public class BaseEntity implements Serializable {
 
     public void setDelFlag(String delFlag) {
         this.delFlag = delFlag;
-    }
-
-
-    @Override
-    public String toString() {
-        return "BaseEntity{" +
-                "id='" + id + '\'' +
-                ", createTime=" + createTime +
-                ", createBy='" + createBy + '\'' +
-                ", udpateTime=" + udpateTime +
-                ", udpateBy='" + udpateBy + '\'' +
-                ", remark='" + remark + '\'' +
-                ", delFlag='" + delFlag + '\'' +
-                '}';
     }
 }
