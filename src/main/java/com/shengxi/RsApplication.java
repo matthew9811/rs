@@ -1,23 +1,21 @@
 package com.shengxi;
 
+
 import com.shengxi.rs.common.config.RsProperties;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @author matthew
  * @date 2019.03.17
  */
+@EnableWebSecurity
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableTransactionManagement
 //@MapperScan("com.shengxi.system.model.mapper")

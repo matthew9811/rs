@@ -1,5 +1,6 @@
 package com.shengxi.rs.controller.test;
 
+import com.shengxi.rs.controller.sys.BaseController;
 import com.shengxi.system.entites.test.TestEntity;
 import com.shengxi.system.model.service.test.TestServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/test")
-public class TestContoller {
+public class TestContoller extends BaseController {
     private String prefix = "test";
 
     @Autowired

@@ -1,7 +1,9 @@
 package com.shengxi.rs.common.domain;
 
+import com.shengxi.rs.common.util.StringUtils;
+import org.springframework.util.ObjectUtils;
+
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author: Matthew
@@ -10,93 +12,63 @@ import java.util.List;
  */
 public class PageResult<T> implements Serializable {
     /**
-     * home page
+     * 当前记录起始索引
      */
-    int page;
+    private Integer pageNum;
 
     /**
-     * size of each page
+     * 每页显示记录数
      */
-    int limit;
+    private Integer pageSize;
 
     /**
-     * total data quantity
+     * 排序列
      */
-    long count;
-
+    private String orderByColumn;
     /**
-     * status code
+     * 排序的方向 "desc" 或者 "asc".
      */
-    String code;
 
-    /**
-     * describe message
-     */
-    String msg;
+    private String isAsc;
 
-    /**
-     * returned data
-     */
-    List<T> data;
 
-    /**
-     * any condition type
-     */
-    T example;
-
-    public int getPage() {
-        return page;
+    public String getOrderBy() {
+        if (ObjectUtils.isEmpty(orderByColumn)) {
+            return "";
+        }
+        return StringUtils.toUnderScoreCase(orderByColumn) + " " + isAsc;
     }
 
-    public void setPage(int page) {
-        this.page = page;
+
+    public Integer getPageNum() {
+        return pageNum;
     }
 
-    public int getLimit() {
-        return limit;
+    public void setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
     }
 
-    public void setLimit(int limit) {
-        this.limit = limit;
+    public Integer getPageSize() {
+        return pageSize;
     }
 
-    public long getCount() {
-        return count;
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
 
-    public void setCount(long count) {
-        this.count = count;
+    public String getOrderByColumn() {
+        return orderByColumn;
     }
 
-    public String getCode() {
-        return code;
+    public void setOrderByColumn(String orderByColumn) {
+        this.orderByColumn = orderByColumn;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public String getIsAsc() {
+        return isAsc;
     }
 
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public List<T> getData() {
-        return data;
-    }
-
-    public void setData(List<T> data) {
-        this.data = data;
-    }
-
-    public T getExample() {
-        return example;
-    }
-
-    public void setExample(T example) {
-        this.example = example;
+    public void setIsAsc(String isAsc) {
+        this.isAsc = isAsc;
     }
 }
