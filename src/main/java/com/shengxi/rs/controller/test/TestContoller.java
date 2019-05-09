@@ -44,6 +44,10 @@ public class TestContoller extends BaseController {
         return list;
     }
 
+    @GetMapping("/main")
+    public String main(){
+        return "main";
+    }
 
 
 }

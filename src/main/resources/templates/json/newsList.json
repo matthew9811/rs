@@ -1,0 +1,42 @@
+{
+	"code": 0,
+	"msg": "",
+	"count": 5,
+	"data": [
+		{
+			"subNo": "CS1007",
+			"subName": "线性代数",
+			"term": "2017-2018-1",
+			"grade": "50",
+			"choiceStatus": "0"
+		},
+		{
+			"subNo": "CS1007",
+			"subName": "线性代数",
+			"term": "2017-2018-1",
+			"grade": "50",
+			"choiceStatus": "0"
+		},
+		{
+			"subNo": "CS1007",
+			"subName": "线性代数",
+			"term": "2017-2018-1",
+			"grade": "50",
+			"choiceStatus": "0"
+		},
+		{
+			"subNo": "CS1007",
+			"subName": "线性代数",
+			"term": "2017-2018-1",
+			"grade": "50",
+			"choiceStatus": "0"
+		},
+		{
+			"subNo": "CS1007",
+			"subName": "线性代数",
+			"term": "2017-2018-1",
+			"grade": "50",
+			"choiceStatus": "0"
+		}
+	]
+}
