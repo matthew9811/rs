@@ -1,12 +1,10 @@
 package com.shengxi.rs.controller.sys;
 
-import afu.org.checkerframework.checker.oigj.qual.O;
+
 import cn.hutool.core.util.ObjectUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.shengxi.rs.common.config.SysUser;
 import com.shengxi.rs.common.domain.PageResult;
-import com.shengxi.rs.common.domain.SecurityUser;
 import com.shengxi.rs.common.domain.TableDataInfo;
 import com.shengxi.rs.common.util.AjaxResult;
 import com.shengxi.rs.common.util.TableSupport;
