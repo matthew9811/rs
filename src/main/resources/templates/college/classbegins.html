@@ -22,8 +22,7 @@
 </head>
 <body>
 <a href="/college/college/subordinate">所属学院—网络工程系</a>
-
-<a href="/college/college/classbegins">开课学院—网络工程系</a>
+<a href="/college/college/classBegins">开课学院—网络工程系</a>
 <table>
     <tr>
         <th>学年学期</th>
@@ -91,7 +90,7 @@
         <th width="50">是否审批</th>
         <th width="56">审批</th>
     </tr>
-    <tr>
+    <tr  th:each="subOptEntity : ${list}">
         <td><form name="form1" method="post" action="">
             <div align="center">
                 <input type="checkbox" name="box" />
@@ -99,54 +98,34 @@
         </form>
         </td>
         <td>2018—2019—1</td>
-        <td>1234567890</td>
-        <td>张三三</td>
-        <td>软工一班</td>
-        <td>软件工程</td>
-        <td>计算机科学与技术院</td>
-        <td>GE001</td>
-        <td>线性代数</td>
-        <td>3</td>
-        <td>GE001</td>
-        <td>线性代数</td>
-        <td>3</td>
-        <td>1243</td>
-        <td>18网工三班</td>
-        <td>已审批</td>
-        <td><select>
-            <option value="1">通过</option>
-            <option value="1">不通过</option>
-        </select></td>
+        <td th:text="${subOptEntity.subId}">1234567890</td>
+        <td th:text="${subOptEntity.sysUser.userName}">张三三</td>
+        <td th:text="${subOptEntity.sysUser.deptId}">软工一班</td>
+        <td th:text="${subOptEntity.sysUser.deptId}">软件工程</td>
+        <td th:text="${subOptEntity.sysUser.deptId}">计算机科学与技术院</td>
+        <td th:text="${subOptEntity.subjectEntity.subNo}">GE001</td>
+        <td th:text="${subOptEntity.subName}">线性代数</td>
+        <td th:text="${subOptEntity.subjectEntity.subCredit}">3</td>
+        <td th:text="${subOptEntity.subjectEntity.subNo}">GE001</td>
+        <td th:text="${subOptEntity.subName}">线性代数</td>
+        <td th:text="${subOptEntity.subjectEntity.subCredit}">3</td>
+        <td th:text="${subOptEntity.subId}">1243</td>
+        <td th:text="${subOptEntity.subjectEntity.subClassName}">18网工三班</td>
+        <td th:if="${subOptEntity.status=='0'}">未审核</td>
+        <td th:if="${subOptEntity.status=='1'}">开课系部审核通过</td>
+        <td th:if="${subOptEntity.status=='2'}">开课系部审核未通过</td>
+        <td th:if="${subOptEntity.status=='3'}">审核通过</td>
+        <td th:if="${subOptEntity.status=='4'}">教务审核未通过</td>
+        <td>
+            <a href="classBegins.html" th:href="@{/college/college/classBegins(id=${subOptEntity.id},status=1)}">同意</a>
+            <a href="classBegins.html" th:href="@{/college/college/classBegins(id=${subOptEntity.id},status=2)}">驳回</a>
+        </td>
     </tr>
-    <tr>
-        <td height="22"><div align="center">
-            <input type="checkbox" name="box" />
-        </div></td>
-        <td>2018—2019—1</td>
-        <td>134567891</td>
-        <td>张四</td>
-        <td>软工二班</td>
-        <td>软件工程</td>
-        <td>计算机科学与技术院</td>
-        <td>GE003</td>
-        <td>高数Ⅰ</td>
-        <td>6</td>
-        <td>CS1789</td>
-        <td>高数Ⅰ</td>
-        <td>6</td>
-        <td>1243</td>
-        <td>18网工三班</td>
-        <td>未审批</td>
-        <td><select>
-            <option value="1">通过</option>
-            <option value="1">不通过</option>
-        </select></td>
-    </tr>
-    <tr>
+    <!--<tr>
         <td height="27" colspan="17"><div align="center">
             <input type="submit" name="Submit" value="同意">
         </div></td>
-    </tr>
+    </tr>-->
 </table>
 <div align="center"></div>
 </body>
