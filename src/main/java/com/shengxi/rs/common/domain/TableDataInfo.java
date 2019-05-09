@@ -13,11 +13,11 @@ public class TableDataInfo implements Serializable {
     /**
      * 总记录数
      */
-    private long total;
+    private long count;
     /**
      * 列表数据
      */
-    private List<?> rows;
+    private List<?> data;
     /**
      * 消息状态码
      */
@@ -33,27 +33,27 @@ public class TableDataInfo implements Serializable {
      * 分页
      *
      * @param list  列表数据
-     * @param total 总记录数
+     * @param count 总记录数
      */
-    public TableDataInfo(List<?> list, int total) {
-        this.rows = list;
-        this.total = total;
+    public TableDataInfo(List<?> list, int count) {
+        this.data = list;
+        this.count = count;
     }
 
-    public long getTotal() {
-        return total;
+    public long getcount() {
+        return count;
     }
 
-    public void setTotal(long total) {
-        this.total = total;
+    public void setcount(long count) {
+        this.count = count;
     }
 
-    public List<?> getRows() {
-        return rows;
+    public List<?> getdata() {
+        return data;
     }
 
-    public void setRows(List<?> rows) {
-        this.rows = rows;
+    public void setdata(List<?> data) {
+        this.data = data;
     }
 
     public int getCode() {
