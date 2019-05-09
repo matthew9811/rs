@@ -4,73 +4,73 @@
     <sql id="key">
         <trim suffixOverrides=",">
 
-            <if test="id!=null">
+            <if test="id!=null and id!=''">
                 id,
             </if>
 
-            <if test="subCarryNo!=null">
+            <if test="subCarryNo!=null and subCarryNo!=''">
                 sub_carry_no,
             </if>
 
-            <if test="subNo!=null">
+            <if test="subNo!=null and subNo!=''">
                 sub_no,
             </if>
 
-            <if test="subName!=null">
+            <if test="subName!=null and subName!=''">
                 sub_name,
             </if>
 
-            <if test="subInstitute!=null">
+            <if test="subInstitute!=null and subInstitute!=''">
                 sub_institute,
             </if>
 
-            <if test="subCredit!=null">
+            <if test="subCredit!=null and subCredit!=''">
                 sub_credit,
             </if>
 
-            <if test="subClassName!=null">
+            <if test="subClassName!=null and subClassName!=''">
                 sub_class_name,
             </if>
 
-            <if test="subMenCount!=null">
+            <if test="subMenCount!=null and subMenCount!=''">
                 sub_men_count,
             </if>
 
-            <if test="subMenTotalCount!=null">
+            <if test="subMenTotalCount!=null and subMenTotalCount!=''">
                 sub_men_total_count,
             </if>
 
-            <if test="subPlanType!=null">
+            <if test="subPlanType!=null and subPlanType!=''">
                 sub_plan_type,
             </if>
 
-            <if test="subTotalPeriod!=null">
+            <if test="subTotalPeriod!=null and subTotalPeriod!=''">
                 sub_total_period,
             </if>
 
-            <if test="subTheoryPeriod!=null">
+            <if test="subTheoryPeriod!=null and subTheoryPeriod!=''">
                 sub_theory_period,
             </if>
 
-            <if test="subPracticePeriod!=null">
+            <if test="subPracticePeriod!=null and subPracticePeriod!=''">
                 sub_practice_period,
             </if>
 
-            <if test="subTeacherId!=null">
+            <if test="subTeacherId!=null and subTeacherId!=''">
                 sub_teacher_id,
             </if>
 
-            <if test="subCourseType!=null">
+            <if test="subCourseType!=null and subCourseType!=''">
                 sub_course_type,
             </if>
 
-            <if test="subCourseGenre!=null">
+            <if test="subCourseGenre!=null and subCourseGenre!=''">
                 sub_course_genre,
             </if>
 
 
 
-            <if test="subStatus!=null">
+            <if test="subStatus!=null and subStatus!=''">
                 sub_status,
             </if>
         </trim>
@@ -78,73 +78,73 @@
 
     <sql id="value">
         <trim suffixOverrides=",">
-            <if test="id!=null">
+            <if test="id!=null and id!=''">
                 #{id},
             </if>
 
-            <if test="subCarryNo!=null">
+            <if test="subCarryNo!=null and subCarryNo!=''">
                 #{subCarryNo},
             </if>
 
-            <if test="subNo!=null">
+            <if test="subNo!=null and subNo!=''">
                 #{subNo},
             </if>
 
-            <if test="subName!=null">
+            <if test="subName!=null and subName!=''">
                 #{subName},
             </if>
 
-            <if test="subInstitute!=null">
+            <if test="subInstitute!=null and subInstitute!=''">
                 #{subInstitute},
             </if>
 
-            <if test="subCredit!=null">
+            <if test="subCredit!=null and subCredit!=''">
                 #{subCredit},
             </if>
 
-            <if test="subClassName!=null">
+            <if test="subClassName!=null and subClassName!=''">
                 #{subClassName},
             </if>
 
-            <if test="subMenCount!=null">
+            <if test="subMenCount!=null and subMenCount!=''">
                 #{subMenCount},
             </if>
 
-            <if test="subMenTotalCount!=null">
+            <if test="subMenTotalCount!=null and subMenTotalCount!=''">
                 #{subMenTotalCount},
             </if>
 
-            <if test="subPlanType!=null">
+            <if test="subPlanType!=null and subPlanType!=''">
                 #{subPlanType},
             </if>
 
-            <if test="subTotalPeriod!=null">
+            <if test="subTotalPeriod!=null and subTotalPeriod!=''">
                 #{subTotalPeriod},
             </if>
 
-            <if test="subTheoryPeriod!=null">
+            <if test="subTheoryPeriod!=null and subTheoryPeriod!=''">
                 #{subTheoryPeriod},
             </if>
 
-            <if test="subPracticePeriod!=null">
+            <if test="subPracticePeriod!=null and subPracticePeriod!=''">
                 #{subPracticePeriod},
             </if>
 
-            <if test="subTeacherId!=null">
+            <if test="subTeacherId!=null and subTeacherId!=''">
                 #{subTeacherId},
             </if>
 
-            <if test="subCourseType!=null">
+            <if test="subCourseType!=null and subCourseType!=''">
                 #{subCourseType},
             </if>
 
-            <if test="subCourseGenre!=null">
+            <if test="subCourseGenre!=null and subCourseGenre!=''">
                 #{subCourseGenre},
             </if>
 
-            
 
-            <if test="subStatus!=null">
+
+            <if test="subStatus!=null and subStatus!=''">
                 #{subStatus},
             </if>
         </trim>
@@ -156,19 +156,44 @@
 
     <select id="selectSubjectEntityList"
             resultType="com.shengxi.system.entites.subEntity.SubjectEntity">
-        select * from subject
-        <where>
+        select j.sub_carry_no,j.sub_no,j.sub_name,j.sub_institute,j.sub_plan_type,j.sub_total_period,j.sub_theory_period,j.sub_practice_period,j.sub_credit,j.sub_class_name,j.sub_men_count,j.sub_men_total_count,j.sub_address,j.sub_week,j.sub_week_day,j.sub_period,j.replace
+        from subject as j
 
-        </where>
     </select>
 
+    <resultMap id="souSubjectEntityListMap" type="com.shengxi.system.entites.subEntity.SubjectEntity">
+        <id column="sub_carry_no" property="subCarryNo"/>
+        <result column="sub_no" property="subNo"/>
+        <result column="sub_name" property="subName"/>
+        <result column="sub_institute" property="subInstitute"/>
+        <result column="sub_plan_type" property="subPlanType"/>
+        <result column="sub_total_period" property="subTotalPeriod"/>
+        <result column="sub_theory_period" property="subTheoryPeriod"/>
+        <result column="sub_practice_period" property="subPracticePeriod"/>
+        <result column="sub_credit" property="subCredit"/>
+        <result column="sub_class_name" property="subClassName"/>
+        <result column="sub_men_count" property="subMenCount"/>
+        <result column="sub_men_total_count" property="subMenTotalCount"/>
+        <result column="sub_address" property="subAddress"/>
+        <result column="sub_week" property="subWeek"/>
+        <result column="sub_weekDay" property="subPeriod"/>
+        <association property="sysUser" javaType="com.shengxi.rs.common.config.SysUser">
+            <result column="user_name" property="userName"/>
+        </association>
+    </resultMap>
+
     <select id="souSubjectEntityList"
-            resultType="com.shengxi.system.entites.subEntity.SubjectEntity">
-        select * from subject
+            resultMap="souSubjectEntityListMap">
+         select j.sub_carry_no,j.sub_no,j.sub_name,j.sub_institute,j.sub_plan_type,j.sub_total_period,j.sub_theory_period,j.sub_practice_period,j.sub_credit,j.sub_class_name,j.sub_men_count,j.sub_men_total_count,j.sub_address,j.sub_week,j.sub_week_day,j.sub_period,u.user_name
+         from subject j,sys_user u
         <where>
+            sub_name = #{sou}
+            or
             sub_no = #{sou}
             or
-            sub_name = #{sou}
+            sub_carry_no = #{sou}
+            AND
+            j.sub_teacher_id = CONVERT(u.user_no USING utf8) COLLATE utf8_general_ci
         </where>
     </select>
 

@@ -1,11 +1,19 @@
 package com.shengxi.rs.controller.stu;
 
+import cn.hutool.core.util.ObjectUtil;
+import com.shengxi.rs.common.config.SysUser;
 import com.shengxi.rs.common.util.IdUtil;
-import com.shengxi.system.entites.stuEntity.StuRehabilitation;
+import com.shengxi.system.common.services.sys.UserService;
+import com.shengxi.system.entites.subEntity.ComSubEntity;
+import com.shengxi.system.entites.subEntity.SubOptEntity;
 import com.shengxi.system.entites.subEntity.SubjectEntity;
+import com.shengxi.system.model.mapper.sys.SysUserMapper;
+import com.shengxi.system.model.service.sub.ComSubServices;
+import com.shengxi.system.model.service.sub.SubOptServices;
 import com.shengxi.system.model.service.sub.SubjectServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
- * 学生申请表接受跳转
- *
  * @author 郑杰
  * @date 2019/3/24 16:17
  * 学生申请表接受跳转
@@ -29,8 +35,18 @@ public class StuController {
     @Autowired
     private SubjectServices subjectServices;
 
+    @Autowired
+    private ComSubServices comSubServices;
+
+    @Autowired
+    private SubOptServices subOptServices;
+
+    @Autowired
+    private UserService userService;
+
     @PostMapping("/news")
     public String pnews() {
+
         return "redirect:/stu/stu/news";
     }
     @PostMapping("/course")
@@ -43,20 +59,43 @@ public class StuController {
     }
 
     @GetMapping("/course")
-    public String course() {
+    public String course(Model model,String subCarryNo) {
+        List<SubjectEntity> list = subjectServices.souSubjectEntityList(subCarryNo);
+        SysUser sysUser = userService.selectUserNo("17210210613");
+
+        for(SubjectEntity subjectEntity : list){
+            model.addAttribute("subjectEntity",subjectEntity);
+        }
+        model.addAttribute("sysUser",sysUser);
         return prefix + "/course";
     }
 
     @GetMapping("/news")
-    public String news() {
+    public String news(Model model,String subCarryNo,String subName) {
+        SubOptEntity subOptEntity = new SubOptEntity();
+        subOptEntity.setId(IdUtil.uuid());
+        subOptEntity.setStuNo("17210210613");
+        subOptEntity.setSubId(subCarryNo);
+        subOptEntity.setSubName(subName);
+        subOptEntity.setStatus("0");
+        if(ObjectUtil.isNotNull(subCarryNo)) {
+            subOptServices.addList(subOptEntity);
+        }
+        List<SubOptEntity> list = subOptServices.selectList();
+        model.addAttribute("list",list);
         return prefix + "/news";
     }
     @GetMapping("/search")
-    public String search() {
+    public String search(Model model) {
+        List<ComSubEntity> list = comSubServices.selectList();
+        model.addAttribute("list",list);
         return prefix + "/search";
     }
+
     @GetMapping("/choose")
-    public String choose() {
+    public String choose(Model model,String subNo) {
+        List<SubjectEntity> list = subjectServices.souSubjectEntityList(subNo);
+        model.addAttribute("list",list);
         return prefix + "/choose";
     }
 
@@ -67,8 +106,8 @@ public class StuController {
 
     @PostMapping("/sou")
     @ResponseBody
-    public List<SubjectEntity> souSubject(String sou) {
+    public String souSubject(String sou,Model model) {
         List<SubjectEntity> list = subjectServices.souSubjectEntityList(sou);
-        return list;
+        return "redirect:/stu/stu/choose";
     }
 }

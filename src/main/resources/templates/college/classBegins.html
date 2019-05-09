@@ -2,7 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="utf-8">
-    <title>教务部审批页</title>
+    <title>开课学院审批页</title>
     <script>
         function checkall(){
             var flag=document.getElementById("ckall").checked;
@@ -79,7 +79,6 @@
         <th width="60">班级</th>
         <th width="70">专业</th>
         <th width="150">所属学院</th>
-        <th width="150">开课学院</th>
         <th width="66">原课程代码</th>
         <th width="100">原课程名称</th>
         <th width="38">原学分</th>
@@ -104,7 +103,6 @@
         <td th:text="${subOptEntity.sysUser.deptId}">软工一班</td>
         <td th:text="${subOptEntity.sysUser.deptId}">软件工程</td>
         <td th:text="${subOptEntity.sysUser.deptId}">计算机科学与技术院</td>
-        <td th:text="${subOptEntity.subjectEntity.subInstitute}">计算机科学与技术院</td>
         <td th:text="${subOptEntity.subjectEntity.subNo}">GE001</td>
         <td th:text="${subOptEntity.subName}">线性代数</td>
         <td th:text="${subOptEntity.subjectEntity.subCredit}">3</td>
@@ -119,10 +117,15 @@
         <td th:if="${subOptEntity.status=='3'}">审核通过</td>
         <td th:if="${subOptEntity.status=='4'}">教务审核未通过</td>
         <td>
-            <a href="approval.html" th:href="@{/administration/administration/approval(id=${subOptEntity.id},status=3)}">同意</a>
-            <a href="approval.html" th:href="@{/administration/administration/approval(id=${subOptEntity.id},status=4)}">驳回</a>
+            <a href="classBegins.html" th:href="@{/college/college/classBegins(id=${subOptEntity.id},status=1)}">同意</a>
+            <a href="classBegins.html" th:href="@{/college/college/classBegins(id=${subOptEntity.id},status=2)}">驳回</a>
         </td>
     </tr>
+    <!--<tr>
+        <td height="27" colspan="17"><div align="center">
+            <input type="submit" name="Submit" value="同意">
+        </div></td>
+    </tr>-->
 </table>
 <div align="center"></div>
 </body>

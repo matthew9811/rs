@@ -7,12 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.regex.Pattern;
 
 
 /**
- * 登录表接受数据跳转
- *
  * @author 郑杰
  * @date 2019/3/27 16:37
  * 登录表接受数据跳转
@@ -30,8 +29,8 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/judge", method = RequestMethod.POST)
-    public String judge(@RequestParam("id") String id) {
-
+    public String judge(String id, String password, HttpSession session) {
+        session.setAttribute("id", id);
         if (id.startsWith("neusoft", 0)) {
             return "redirect:/administration/administration/approval";
         }

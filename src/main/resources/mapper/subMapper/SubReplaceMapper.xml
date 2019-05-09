@@ -48,10 +48,9 @@
 
     <select id="selectSubReplaceEntityList"
             resultType="com.shengxi.system.entites.subEntity.SubReplaceEntity">
-        select * from sub_replace
-        <where>
+        select r.sub_no,r.sub_replace_no
+        from sub_replace as r
 
-        </where>
     </select>
 
 </mapper>

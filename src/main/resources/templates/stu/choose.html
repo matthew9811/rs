@@ -6,17 +6,13 @@
 </head>
 
 <body>
-<form action="/stu/stu/course" method="post">
-<table width="21%" border="1" align="center">
-    <tr>
-        <td height="24"><div align="left">
-            <form id="form1" name="form1" method="post" action="">
-                <input name="textfield" type="text" value="线性代数" />
-                <input type="submit" name="Submit" value="搜索" />
+            <form action="/stu/stu/sou" method="post">
+                <table align="center">
+                    <tr>
+                        <td><input name="sou" type="text" id="sou" /><input type="submit" value="搜索"></td>
+                    </tr>
+                </table>
             </form>
-        </div></td>
-    </tr>
-</table>
 <table width="100%" border="1" align="center" cellpadding="0" cellspacing="0">
     <tr>
         <td width="7%">开课编号</td>
@@ -29,53 +25,35 @@
         <td width="7%">实践学时</td>
         <td width="5%">学分</td>
         <td width="8%">教学班名称</td>
-        <td width="6%">课室容纳人数</td>
-        <td width="6%">上课人数</td>
-        <td width="4%">录成绩</td>
+        <td width="6%">已有人数</td>
+        <td width="6%">总人数</td>
+        <td width="4%">老师</td>
         <td width="6%">地点</td>
+        <td width="6%">周次</td>
         <td width="6%">星期</td>
         <td width="5%">节次</td>
         <td width="5%">操作</td>
     </tr>
-    <tr>
-        <td>1067667</td>
-        <td>CS1789</td>
-        <td>高数Ⅰ</td>
-        <td>基础教育部</td>
-        <td>培养方案</td>
-        <td>64</td>
-        <td>64</td>
-        <td>0</td>
-        <td>6</td>
-        <td>18软工三班</td>
-        <td>66</td>
-        <td>66</td>
-        <td>李六</td>
-        <td>F103</td>
-        <td>1，4</td>
-        <td>0102，0304</td>
-        <td><input type="submit" name="Submit" value="申请重修"></td>
-    </tr>
-    <tr>
-        <td>1067668</td>
-        <td>CS1789</td>
-        <td>高数Ⅰ</td>
-        <td>基础教育部</td>
-        <td>培养方案</td>
-        <td>64</td>
-        <td>64</td>
-        <td>0</td>
-        <td>6</td>
-        <td>18网工三班</td>
-        <td>66</td>
-        <td>66</td>
-        <td>王五</td>
-        <td>F308</td>
-        <td>2，3</td>
-        <td>0102，0304</td>
-        <td><input type="submit" name="Submit" value="申请重修"></td>
+    <tr th:each="subjectEntity : ${list}">
+        <td th:text="${subjectEntity.subCarryNo}">1067667</td>
+        <td th:text="${subjectEntity.subNo}">CS1789</td>
+        <td th:text="${subjectEntity.subName}">高数Ⅰ</td>
+        <td th:text="${subjectEntity.subInstitute}">基础教育部</td>
+        <td th:text="${subjectEntity.subPlanType}">培养方案</td>
+        <td th:text="${subjectEntity.subTotalPeriod}">64</td>
+        <td th:text="${subjectEntity.subTheoryPeriod}">64</td>
+        <td th:text="${subjectEntity.subPracticePeriod}">0</td>
+        <td th:text="${subjectEntity.subCredit}">6</td>
+        <td th:text="${subjectEntity.subClassName}">18软工三班</td>
+        <td th:text="${subjectEntity.subMenCount}">66</td>
+        <td th:text="${subjectEntity.subMenTotalCount}">66</td>
+        <td th:text="${subjectEntity.sysUser.userName}">李六</td>
+        <td th:text="${subjectEntity.subAddress}">F103</td>
+        <td th:text="${subjectEntity.subWeek}">1，4</td>
+        <td th:text="${subjectEntity.subWeekDay}">1，4</td>
+        <td th:text="${subjectEntity.subPeriod}">0102，0304</td>
+        <td><a href="course.html" th:href="@{/stu/stu/course(subCarryNo=${subjectEntity.subCarryNo})}">申请重修</a></td>
     </tr>
 </table>
-    </form>
 </body>
 </html>

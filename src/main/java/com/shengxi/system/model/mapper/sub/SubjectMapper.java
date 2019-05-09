@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author : 郑杰
  * @Date: 2019/4/24 15:08
- * @deprecated 课程信息数据接口
+ * 课程信息数据接口
  */
 @Component
 @Mapper
@@ -45,7 +45,7 @@ public interface SubjectMapper {
      * add对应行
      * @return list
      */
-    Integer addSubject(@Param("subjectEntity") SubjectEntity subjectEntity);
+    Integer addSubject(@Param("subjectEntity")SubjectEntity subjectEntity);
 
     /**
      * 搜索课程代码或课程名

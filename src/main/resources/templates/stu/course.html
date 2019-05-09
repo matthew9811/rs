@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>广东东软学院学生申请重修表</title>
+
     <script>
         function check(){
             alert("提交成功");
@@ -10,14 +11,13 @@
     </script>
 </head>
 <body>
-<form action="/stu/stu/news" method="post">
     <p align="center">学年学期：2018-2019-2</p>
     <table border="1" cellspacing="0" cellpadding="0" align="center">
         <tr>
             <th width="111"><p align="center">申请人 </p></th>
-            <td colspan="2">张四</td>
+            <td colspan="2" th:text="${sysUser.userName}">张三</td>
             <th width="157"><p align="center">学号 </p></th>
-            <td colspan="2">134567891</td>
+            <td colspan="2" th:text="${sysUser.userNo}">17210210613</td>
         </tr>
         <tr>
             <td width="111"><p align="center">所在院系 </p></td>
@@ -26,10 +26,9 @@
             <td colspan="2">软件工程</td>
         </tr>
         <tr>
-            <td width="111"><p align="center">手机号 </p></td>
-            <td colspan="2">12345678900</td>
+
             <td width="157"><p align="center">班级 </p></td>
-            <td colspan="2">软工二班</td>
+            <td colspan="5">软工二班</td>
         </tr>
         <tr>
             <td width="111"><p align="center">原课程代码 </p></td>
@@ -44,33 +43,31 @@
         </tr>
         <tr>
             <td width="111"><p align="center">现课程代码 </p></td>
-            <td width="79">CS1789</td>
+            <td width="79" th:text="${subjectEntity.subNo}">CS1789</td>
             <td width="92"><p align="center">现课程名称 </p></td>
-            <td width="157">高数Ⅰ</td>
+            <td width="157" th:text="${subjectEntity.subName}">高数Ⅰ</td>
             <td width="76"><p align="center">现学分 </p></td>
-            <td width="105">6</td>
+            <td width="105" th:text="${subjectEntity.subCredit}">6</td>
         </tr>
         <tr>
             <td width="111"><p align="center">开课编号 </p></td>
-            <td colspan="2">1067668</td>
+            <td colspan="2" th:text="${subjectEntity.subCarryNo}">1067668</td>
             <td width="111"><p align="center">开课学院 </p></td>
-            <td colspan="2">基础教育院</td>
+            <td colspan="2" th:text="${subjectEntity.subInstitute}">基础教育院</td>
         </tr>
         <tr>
             <td width="111"><p align="center">授课教师 </p></td>
-            <td colspan="2">王五</td>
+            <td colspan="2" th:text="${subjectEntity.sysUser.userName}">王五</td>
             <td width="111"><p align="center">上课班级 </p></td>
-            <td colspan="2">18网工三班</td>
+            <td colspan="2" th:text="${subjectEntity.subClassName}">18网工三班</td>
         </tr>
         <tr>
             <td width="111" colspan="3"><p align="center">教学场地 </p></td>
-            <td colspan="3">F308</td>
+            <td colspan="3" th:text="${subjectEntity.subAddress}">F308</td>
         </tr>
         <tr>
-            <td colspan="6" align="center" width="268"><input type="submit" value="提交" onclick="check()"/>&nbsp;
-                <input type="reset" value="重置"/></td>
+            <td colspan="12" align="center" width="268"><a href="news.html" th:href="@{/stu/stu/news(subCarryNo=${subjectEntity.subCarryNo},subName=${subjectEntity.subName})}">申请重修</a></td>
         </tr>
     </table>
-</form>
 </body>
 </html>

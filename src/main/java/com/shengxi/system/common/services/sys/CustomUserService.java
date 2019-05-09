@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  * @author : Matthew
  * @date : 2019/5/5 11:25
  * @description: 用户服务层
- */
+
 public class CustomUserService implements UserDetailsService {
 
     @Autowired
@@ -27,4 +27,6 @@ public class CustomUserService implements UserDetailsService {
 
         return user;
     }
+
 }
+*/

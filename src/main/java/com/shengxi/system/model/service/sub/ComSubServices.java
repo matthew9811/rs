@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * @author : 郑杰
  * @Date: 2019/4/24 20:44
- * @deprecated 已修课程信息服务层
+ * 已修课程信息服务层
  */
 @Service("comSub")
 public class ComSubServices {

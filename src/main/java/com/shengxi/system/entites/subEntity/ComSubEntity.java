@@ -11,6 +11,10 @@ import java.util.Date;
  */
 public class ComSubEntity extends BaseEntity {
     /**
+     * id
+     */
+    private String id;
+    /**
      * 学号
      */
     private String stuNo;
@@ -29,7 +33,7 @@ public class ComSubEntity extends BaseEntity {
     /**
      * 学分
      */
-    private String subredit;
+    private String credit;
     /**
      * 创建人
      */
@@ -54,6 +58,16 @@ public class ComSubEntity extends BaseEntity {
      * 删除标识
      */
     private String delFlag;
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getStuNo() {
         return stuNo;
@@ -87,12 +101,12 @@ public class ComSubEntity extends BaseEntity {
         this.score = score;
     }
 
-    public String getSubredit() {
-        return subredit;
+    public String getCredit() {
+        return credit;
     }
 
-    public void setSubredit(String subredit) {
-        this.subredit = subredit;
+    public void setCredit(String credit) {
+        this.credit = credit;
     }
 
     @Override
@@ -102,7 +116,7 @@ public class ComSubEntity extends BaseEntity {
                 ", subNo='" + subNo + '\'' +
                 ", subName='" + subName + '\'' +
                 ", score='" + score + '\'' +
-                ", subredit='" + subredit + '\'' +
+                ", credit='" + credit + '\'' +
                 '}';
     }
 }
