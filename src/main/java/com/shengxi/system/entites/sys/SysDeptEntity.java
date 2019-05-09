@@ -1,16 +1,22 @@
 package com.shengxi.system.entites.sys;
 
-import java.util.Date;
+import com.shengxi.rs.common.domain.BaseEntity;
 
-public class SysDeptEntity {
+import java.util.Date;
+/**
+ * @author : 郑杰
+ * @Date: 2019/5/10 00:34
+ * @Description: 部门实体类
+ */
+public class SysDeptEntity extends BaseEntity {
     /**
      * 上级部门id
      */
-    private String parent_id;
+    private String parentId;
     /**
      * 部门名称
      */
-    private String dept_name;
+    private String deptName;
     /**
      * 排序
      */
@@ -40,20 +46,20 @@ public class SysDeptEntity {
      */
     private String delFlag;
 
-    public String getParent_id() {
-        return parent_id;
+    public String getParentId() {
+        return parentId;
     }
 
-    public void setParent_id(String parent_id) {
-        this.parent_id = parent_id;
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
     }
 
-    public String getDept_name() {
-        return dept_name;
+    public String getDeptName() {
+        return deptName;
     }
 
-    public void setDept_name(String dept_name) {
-        this.dept_name = dept_name;
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
     }
 
     public String getSort() {
@@ -67,8 +73,8 @@ public class SysDeptEntity {
     @Override
     public String toString() {
         return "SysDeptEntity{" +
-                "parent_id='" + parent_id + '\'' +
-                ", dept_name='" + dept_name + '\'' +
+                "parentId='" + parentId + '\'' +
+                ", deptName='" + deptName + '\'' +
                 ", sort='" + sort + '\'' +
                 '}';
     }

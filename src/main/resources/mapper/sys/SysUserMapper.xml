@@ -4,10 +4,11 @@
 
     <select id="findByNo"
             resultType="com.shengxi.rs.common.config.SysUser">
-        select *
-        from sys_user
+        select u.user_no,u.user_name,u.dept_id
+        from sys_user as u
         <where>
             user_no=#{userNo}
+            status = '1'
         </where>
     </select>
 
