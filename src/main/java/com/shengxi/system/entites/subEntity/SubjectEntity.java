@@ -1,5 +1,6 @@
 package com.shengxi.system.entites.subEntity;
 
+import com.shengxi.rs.common.config.SysUser;
 import com.shengxi.rs.common.domain.BaseEntity;
 
 import java.util.Date;
@@ -9,6 +10,9 @@ import java.util.Date;
  * @Description: 课程实体类
  */
 public class SubjectEntity extends BaseEntity {
+    /**
+     * id
+     */
     private String id;
     /**
      * 开课编号
@@ -78,6 +82,7 @@ public class SubjectEntity extends BaseEntity {
      * 课程状态
      */
     private String subStatus;
+
     /**
      * 创建人
      */
@@ -102,6 +107,28 @@ public class SubjectEntity extends BaseEntity {
      * 删除标识
      */
     private String delFlag;
+
+    /**
+     * 上课周次
+     */
+    private String subWeek;
+
+    /**
+     * 上课地点
+     */
+    private String subAddress;
+
+    /**
+     * 上课星期几
+     */
+    private String subWeekDay;
+
+    /**
+     * 上课节次
+     */
+    private String subPeriod;
+
+    private SysUser sysUser;
 
     @Override
     public String getId() {
@@ -247,6 +274,46 @@ public class SubjectEntity extends BaseEntity {
 
     public void setSubStatus(String subStatus) {
         this.subStatus = subStatus;
+    }
+
+    public String getSubWeek() {
+        return subWeek;
+    }
+
+    public void setSubWeek(String subWeek) {
+        this.subWeek = subWeek;
+    }
+
+    public String getSubAddress() {
+        return subAddress;
+    }
+
+    public void setSubAddress(String subAddress) {
+        this.subAddress = subAddress;
+    }
+
+    public String getSubWeekDay() {
+        return subWeekDay;
+    }
+
+    public void setSubWeekDay(String subWeekDay) {
+        this.subWeekDay = subWeekDay;
+    }
+
+    public String getSubPeriod() {
+        return subPeriod;
+    }
+
+    public void setSubPeriod(String subPeriod) {
+        this.subPeriod = subPeriod;
+    }
+
+    public SysUser getSysUser() {
+        return sysUser;
+    }
+
+    public void setSysUser(SysUser sysUser) {
+        this.sysUser = sysUser;
     }
 
     @Override

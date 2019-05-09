@@ -55,31 +55,29 @@
         </td>
     </tr>
     <th>姓名</th>
-    <td><input type="text" name="" />
+    <td><input type="text" name=""/>
     </td>
     <th>年级</th>
     <td><input type="text" name="" />
     </td>
     <th>开课编号</th>
-    <td><input type="text" name=""  />
+    <td><input type="text" name="" />
     </td>
     <td height="27"><div align="center">
         <input type="submit" name="Submit" value="查询">
     </div></td>
     </tr>
 </table>
-<th>学期</th>
-<td>2018—2019—1</td>
-<table border="1" align="center" cellpadding="0" cellspacing="0" width="100%">
+<table width="100%" border="1" align="center" cellpadding="0" cellspacing="0">
     <tr>
         <th width="35"><input type="checkbox" id="ckall" onclick="checkall()"  /></th>
-
+        <th width="100">学期</th>
         <th width="35">学号</th>
         <th width="50">姓名</th>
         <th width="60">班级</th>
         <th width="70">专业</th>
         <th width="150">所属学院</th>
-        <th width="78">开课院系</th>
+        <th width="150">开课学院</th>
         <th width="66">原课程代码</th>
         <th width="100">原课程名称</th>
         <th width="38">原学分</th>
@@ -91,142 +89,37 @@
         <th width="50">是否审批</th>
         <th width="56">审批</th>
     </tr>
-    <tr>
+    <tr  th:each="subOptEntity : ${list}">
         <td><form name="form1" method="post" action="">
             <div align="center">
                 <input type="checkbox" name="box" />
             </div>
         </form>
         </td>
-        <td>1234567890</td>
-        <td>张三三</td>
-        <td>软工一班</td>
-        <td>软件工程</td>
-        <td>计算机科学与技术院</td>
-        <td>基础教育院</td>
-        <td>GE001</td>
-        <td>线性代数</td>
-        <td>3</td>
-        <td>GE001</td>
-        <td>线性代数</td>
-        <td>3</td>
-        <td>1243</td>
-        <td>网工三班</td>
-        <td>已审批</td>
-        <td><select>
-            <option value="1">通过</option>
-            <option value="1">不通过</option>
-        </select></td>
-    </tr>
-    <tr>
-        <td height="22"><div align="center">
-            <input type="checkbox" name="box" />
-        </div></td>
-        <td>134567891</td>
-        <td>张四</td>
-        <td>软工二班</td>
-        <td>软件工程</td>
-        <td>计算机科学与技术院</td>
-        <td>基础教育院</td>
-        <td>GE002</td>
-        <td>高数Ⅰ</td>
-        <td>6</td>
-        <td>CS1789</td>
-        <td>高数Ⅰ</td>
-        <td>6</td>
-        <td>1243</td>
-        <td>网工三班</td>
-        <td>未审批</td>
-        <td><select>
-            <option value="1">通过</option>
-            <option value="1">不通过</option>
-        </select></td>
-    </tr>
-    <tr>
-        <td height="27" colspan="18"><div align="center">
-            <input type="submit" name="Submit" value="同意">
-        </div></td>
-    </tr>
-</table>
-</br>
-<th>学期</th>
-<td>2018—2019—2</td>
-<table border="1" align="center" cellpadding="0" cellspacing="0" width="100%">
-    <tr>
-        <th width="35"><input type="checkbox" id="ckall" onclick="checkall()"  /></th>
-
-        <th width="35">学号</th>
-        <th width="50">姓名</th>
-        <th width="60">班级</th>
-        <th width="70">专业</th>
-        <th width="150">所属学院</th>
-        <th width="78">开课院系</th>
-        <th width="66">原课程代码</th>
-        <th width="100">原课程名称</th>
-        <th width="38">原学分</th>
-        <th width="77">现课程代码</th>
-        <th width="106">现课程名称</th>
-        <th width="39">现学分</th>
-        <th width="73">开课编号</th>
-        <th width="97">教学班级</th>
-        <th width="50">是否审批</th>
-        <th width="56">审批</th>
-    </tr>
-    <tr>
-        <td><form name="form1" method="post" action="">
-            <div align="center">
-                <input type="checkbox" name="box" />
-            </div>
-        </form>
+        <td>2018—2019—1</td>
+        <td th:text="${subOptEntity.subId}">1234567890</td>
+        <td th:text="${subOptEntity.sysUser.userName}">张三三</td>
+        <td th:text="${subOptEntity.sysUser.deptId}">软工一班</td>
+        <td th:text="${subOptEntity.sysUser.deptId}">软件工程</td>
+        <td th:text="${subOptEntity.sysUser.deptId}">计算机科学与技术院</td>
+        <td th:text="${subOptEntity.subjectEntity.subInstitute}">计算机科学与技术院</td>
+        <td th:text="${subOptEntity.subjectEntity.subNo}">GE001</td>
+        <td th:text="${subOptEntity.subName}">线性代数</td>
+        <td th:text="${subOptEntity.subjectEntity.subCredit}">3</td>
+        <td th:text="${subOptEntity.subjectEntity.subNo}">GE001</td>
+        <td th:text="${subOptEntity.subName}">线性代数</td>
+        <td th:text="${subOptEntity.subjectEntity.subCredit}">3</td>
+        <td th:text="${subOptEntity.subId}">1243</td>
+        <td th:text="${subOptEntity.subjectEntity.subClassName}">18网工三班</td>
+        <td th:if="${subOptEntity.status=='0'}">未审核</td>
+        <td th:if="${subOptEntity.status=='1'}">开课系部审核通过</td>
+        <td th:if="${subOptEntity.status=='2'}">开课系部审核未通过</td>
+        <td th:if="${subOptEntity.status=='3'}">审核通过</td>
+        <td th:if="${subOptEntity.status=='4'}">教务审核未通过</td>
+        <td>
+            <a href="approval.html" th:href="@{/administration/administration/approval(id=${subOptEntity.id},status=3)}">同意</a>
+            <a href="approval.html" th:href="@{/administration/administration/approval(id=${subOptEntity.id},status=4)}">驳回</a>
         </td>
-        <td>1234567890</td>
-        <td>张三三</td>
-        <td>软工一班</td>
-        <td>软件工程</td>
-        <td>计算机科学与技术院</td>
-        <td>基础教育院</td>
-        <td>GE001</td>
-        <td>线性代数</td>
-        <td>3</td>
-        <td>GE001</td>
-        <td>线性代数</td>
-        <td>3</td>
-        <td>1243</td>
-        <td>网工三班</td>
-        <td>已审批</td>
-        <td><select>
-            <option value="1">通过</option>
-            <option value="1">不通过</option>
-        </select></td>
-    </tr>
-    <tr>
-        <td height="22"><div align="center">
-            <input type="checkbox" name="box" />
-        </div></td>
-        <td>134567891</td>
-        <td>张四</td>
-        <td>软工二班</td>
-        <td>软件工程</td>
-        <td>计算机科学与技术院</td>
-        <td>基础教育院</td>
-        <td>GE002</td>
-        <td>高数Ⅰ</td>
-        <td>6</td>
-        <td>GE002</td>
-        <td>高数Ⅰ</td>
-        <td>6</td>
-        <td>1243</td>
-        <td>网工三班</td>
-        <td>未审批</td>
-        <td><select>
-            <option value="1">通过</option>
-            <option value="1">不通过</option>
-        </select></td>
-    </tr>
-    <tr>
-        <td height="27" colspan="18"><div align="center">
-            <input type="submit" name="Submit" value="同意">
-        </div></td>
     </tr>
 </table>
 <div align="center"></div>

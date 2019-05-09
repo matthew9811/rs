@@ -2,6 +2,7 @@ package com.shengxi.rs.common.config;
 
 import com.shengxi.rs.common.domain.BaseEntity;
 import com.shengxi.rs.common.domain.SysRole;
+import com.shengxi.system.entites.sys.SysDeptEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,7 +25,7 @@ public class SysUser extends BaseEntity implements UserDetails {
      * Database Column Remarks:
      *   用户ID
      */
-    private String userId;
+    private String userNo;
 
     /**
      * Database Column Remarks:
@@ -50,33 +51,47 @@ public class SysUser extends BaseEntity implements UserDetails {
      */
     private String status;
 
+    /**
+     * 创建人
+     */
+    private String createBy;
 
     /**
-     * Database Column Remarks:
-     *   最近访问时间
+     * 创建时间
      */
-    private Date loginTime;
+    private Date createTime;
 
     /**
-     * Database Column Remarks:
-     *   性别 0男 1女
+     * 更新时间
      */
-    private String userSex;
+    private Date udpateTime;
 
     /**
-     * Database Column Remarks:
-     *   专业
+     * 更新人
      */
-    private String major;
+    private String udpateBy;
+
+    /**
+     * 备注
+     */
+    private String remark;
+
+    /**
+     * 删除标识
+     */
+    private String delFlag;
+
 
     private List<SysRole> roles;
 
-    public String getUserId() {
-        return userId;
+    private List<SysDeptEntity> dept;
+
+    public String getUserNo() {
+        return userNo;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserNo(String userNo) {
+        this.userNo = userNo;
     }
 
     public String getUserName() {
@@ -111,41 +126,22 @@ public class SysUser extends BaseEntity implements UserDetails {
         this.status = status;
     }
 
-    public Date getLoginTime() {
-        return loginTime;
+    public List<SysRole> getRoles() {
+        return roles;
     }
 
-    public void setLoginTime(Date loginTime) {
-        this.loginTime = loginTime;
-    }
-
-    public String getUserSex() {
-        return userSex;
-    }
-
-    public void setUserSex(String userSex) {
-        this.userSex = userSex;
-    }
-
-    public String getMajor() {
-        return major;
-    }
-
-    public void setMajor(String major) {
-        this.major = major;
+    public void setRoles(List<SysRole> roles) {
+        this.roles = roles;
     }
 
     @Override
     public String toString() {
         return "SysUser{" +
-                "userId='" + userId + '\'' +
+                "userNo='" + userNo + '\'' +
                 ", userName='" + userName + '\'' +
                 ", passWord='" + passWord + '\'' +
                 ", deptId=" + deptId +
                 ", status='" + status + '\'' +
-                ", loginTime=" + loginTime +
-                ", userSex='" + userSex + '\'' +
-                ", major='" + major + '\'' +
                 '}';
     }
 

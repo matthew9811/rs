@@ -1,6 +1,5 @@
 package com.shengxi.system.model.mapper.sub;
 
-import com.shengxi.system.entites.subEntity.ComSubEntity;
 import com.shengxi.system.entites.subEntity.SubReplaceEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.data.repository.query.Param;
@@ -8,9 +7,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 /**
+ *
  * @author : 郑杰
  * @Date: 2019/5/2 20:38
- * @deprecated 替代课程信息数据接口
+ * 替代课程信息数据接口
  */
 @Component
 @Mapper

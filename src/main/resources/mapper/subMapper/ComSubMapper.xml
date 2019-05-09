@@ -5,28 +5,28 @@
     <sql id="key">
         <trim suffixOverrides=",">
 
-            <if test="id!=null">
+            <if test="id!=null and id!=''">
                 id,
             </if>
 
-            <if test="stuNo!=null">
+            <if test="stuNo!=null and stuNo!=''">
                 stu_no,
             </if>
 
-            <if test="subNo!=null">
+            <if test="subNo!=null and subNo!=''">
                 sub_no,
             </if>
 
-            <if test="subName!=null">
+            <if test="subName!=null and subName!=''">
                 sub_name,
             </if>
 
-            <if test="score!=null">
+            <if test="score!=null and score!=''">
                 score,
             </if>
 
-            <if test="subredit!=null">
-                sub_redit,
+            <if test="credit!=null and credit!=''">
+                credit,
             </if>
 
         </trim>
@@ -35,28 +35,28 @@
     <sql id="value">
         <trim suffixOverrides=",">
 
-            <if test="id!=null">
+            <if test="id!=null and id!=''">
                 #{id},
             </if>
 
-            <if test="stuNo!=null">
+            <if test="stuNo!=null and stuNo!=''">
                 #{stuNo},
             </if>
 
-            <if test="subNo!=null">
+            <if test="subNo!=null and subNo!=''">
                 #{subNo},
             </if>
 
-            <if test="subName!=null">
+            <if test="subName!=null and subName!=''">
                 #{subName},
             </if>
 
-            <if test="score!=null">
+            <if test="score!=null and score!=''">
                 #{score},
             </if>
 
-            <if test="subredit!=null">
-                #{subredit},
+            <if test="credit!=null and credit!=''">
+                #{credit},
             </if>
 
         </trim>
@@ -68,9 +68,10 @@
 
     <select id="selectComSubEntityList"
             resultType="com.shengxi.system.entites.subEntity.ComSubEntity">
-        select * from com_sub
+        select c.stu_no,c.sub_no,c.sub_name,c.score,c.credit
+        from com_sub as c
         <where>
-
+        stu_no = 17210210613
         </where>
     </select>
 

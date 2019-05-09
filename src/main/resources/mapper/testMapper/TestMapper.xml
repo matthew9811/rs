@@ -26,7 +26,9 @@
     <update id="updateByTestEntityList">
         update test set
         name = #{name},
-        age = #{age}
+        age = #{age},
+        update_by = #{updateBy},
+        update_time = now()
         <where>
             id = #{id}
         </where>

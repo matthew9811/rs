@@ -10,6 +10,10 @@ import java.util.Date;
  */
 public class SubReplaceEntity extends BaseEntity {
     /**
+     * id
+     */
+    private String id;
+    /**
      * 原课程编号
      */
     private String subNo;
@@ -41,6 +45,16 @@ public class SubReplaceEntity extends BaseEntity {
      * 删除标识
      */
     private String delFlag;
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getSubNo() {
         return subNo;

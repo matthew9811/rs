@@ -1,7 +1,7 @@
 package com.shengxi.rs.common.config;
 
 import com.shengxi.rs.common.domain.SecurityUser;
-import com.shengxi.system.common.services.sys.CustomUserService;
+//import com.shengxi.system.common.services.sys.CustomUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -104,9 +104,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         };
     }
 
+/*
 
     @Bean
     UserDetailsService customUserService() {
         return new CustomUserService();
     }
+     */
 }

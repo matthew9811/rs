@@ -5,31 +5,31 @@
     <sql id="key">
         <trim suffixOverrides=",">
 
-            <if test="id!=null">
+            <if test="id!=null and id!=''">
                 id,
             </if>
 
-            <if test="stuNo!=null">
+            <if test="stuNo!=null and stuNo!=''">
                 stu_no,
             </if>
 
-            <if test="subId!=null">
+            <if test="subId!=null and subId!=''">
                 sub_id,
             </if>
 
-            <if test="subName!=null">
+            <if test="subName!=null and subName!=''">
                 sub_name,
             </if>
 
-            <if test="status!=null">
+            <if test="status!=null and status!=''">
                 status,
             </if>
 
-            <if test="instituteRemark!=null">
+            <if test="instituteRemark!=null and instituteRemark!=''">
                 institute_remark,
             </if>
 
-            <if test="academicRemark!=null">
+            <if test="academicRemark!=null and academicRemark!=''">
                 academic_remark,
             </if>
 
@@ -39,31 +39,31 @@
     <sql id="value">
         <trim suffixOverrides=",">
 
-            <if test="id!=null">
+            <if test="id!=null and id!=''">
                 #{id},
             </if>
 
-            <if test="stuNo!=null">
+            <if test="stuNo!=null and stuNo!=''">
                 #{stuNo},
             </if>
 
-            <if test="subId!=null">
+            <if test="subId!=null and subId!=''">
                 #{subId},
             </if>
 
-            <if test="subName!=null">
+            <if test="subName!=null and subName!=''">
                 #{subName},
             </if>
 
-            <if test="status!=null">
+            <if test="status!=null and status!=''">
                 #{status},
             </if>
 
-            <if test="instituteRemark!=null">
+            <if test="instituteRemark!=null and instituteRemark!=''">
                 #{instituteRemark},
             </if>
 
-            <if test="academicRemark!=null">
+            <if test="academicRemark!=null and academicRemark!=''">
                 #{academicRemark},
             </if>
 
@@ -76,10 +76,49 @@
 
     <select id="selectSubOptEntityList"
             resultType="com.shengxi.system.entites.subEntity.SubOptEntity">
-        select * from sub_opt
-        <where>
+        select o.stu_no,o.sub_id,o.sub_name,o.status,o.institute_remark,o.academic_remark
+        from sub_opt as o
 
+    </select>
+    <resultMap id="selectSubStuListMap" type="com.shengxi.system.entites.subEntity.SubOptEntity">
+        <id column="sub_id" property="subId"/>
+        <result column="id" property="id"/>
+        <result column="stu_no" property="stuNo"/>
+        <result column="sub_name" property="subName"/>
+        <result column="status" property="status"/>
+        <association property="sysUser" javaType="com.shengxi.rs.common.config.SysUser">
+            <result column="user_name" property="userName"/>
+        </association>
+        <association property="subjectEntity" javaType="com.shengxi.system.entites.subEntity.SubjectEntity">
+            <result column="sub_no" property="subNo"/>
+            <result column="sub_credit" property="subCredit"/>
+            <result column="sub_class_name" property="subClassName"/>
+            <result column="sub_institute" property="subInstitute"/>
+        </association>
+    </resultMap>
+
+    <select id="selectSubStuList"
+            resultMap="selectSubStuListMap" parameterType="String">
+         SELECT o.sub_id,o.id,o.stu_no,o.sub_name,o.status,u.user_name,j.sub_no,j.sub_credit,j.sub_class_name,j.sub_institute
+         FROM sub_opt o,sys_user u,`subject` j
+        <where>
+        o.stu_no = CONVERT(u.user_no USING utf8) COLLATE utf8_general_ci
+        AND
+        o.sub_id = CONVERT(j.sub_carry_no USING utf8) COLLATE utf8_general_ci
+        <if test="_parameter !=5">
+        AND
+        o.status = #{distinguish}
+        </if>
         </where>
     </select>
+
+    <update id="updateByStuOpt">
+        update sub_opt set
+        status = #{status},
+        update_time = now()
+        <where>
+            id = #{id}
+        </where>
+    </update>
 
 </mapper>

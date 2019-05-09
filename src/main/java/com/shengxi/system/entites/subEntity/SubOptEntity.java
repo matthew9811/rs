@@ -1,5 +1,6 @@
 package com.shengxi.system.entites.subEntity;
 
+import com.shengxi.rs.common.config.SysUser;
 import com.shengxi.rs.common.domain.BaseEntity;
 
 import java.util.Date;
@@ -9,6 +10,10 @@ import java.util.Date;
  * @Description: 学生-已选重修实体类
  */
 public class SubOptEntity extends BaseEntity {
+    /**
+     * id
+     */
+    private String id;
     /**
      * 学号
      */
@@ -58,6 +63,20 @@ public class SubOptEntity extends BaseEntity {
      */
     private String delFlag;
 
+    private SubjectEntity subjectEntity;
+
+    private SysUser sysUser;
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getStuNo() {
         return stuNo;
     }
@@ -104,6 +123,22 @@ public class SubOptEntity extends BaseEntity {
 
     public void setAcademicRemark(String academicRemark) {
         this.academicRemark = academicRemark;
+    }
+
+    public SubjectEntity getSubjectEntity() {
+        return subjectEntity;
+    }
+
+    public void setSubjectEntity(SubjectEntity subjectEntity) {
+        this.subjectEntity = subjectEntity;
+    }
+
+    public SysUser getSysUser() {
+        return sysUser;
+    }
+
+    public void setSysUser(SysUser sysUser) {
+        this.sysUser = sysUser;
     }
 
     @Override
