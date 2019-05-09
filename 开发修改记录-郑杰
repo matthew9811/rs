@@ -33,6 +33,9 @@
 ###2019.05.9 
     1.修改sql语句
     2.增加用户搜索，用户sql层
+###2019.05.9 
+     1.修改SysUserMapper查询sql语句*问题
+     2.修改SysDeptEntity实体
     
 
     
