@@ -12,9 +12,12 @@
                 </div>
                 <a class="layui-btn search_btn layui-btn-radius" data-type="reload">搜索</a>
             </div>
-            <!--<div class="layui-inline">-->
-            <!--<a class="layui-btn layui-btn-normal addNews_btn">确定</a>-->
-            <!--</div>-->
+            <div class="col-sm-4">
+                <label class="layui-form-label col-sm-3">请选择范围</label>
+                <div class="layui-input-inline col-sm-9">
+                    <input type="text" class="layui-input" id="test16" placeholder="开始 到 结束">
+                </div>
+            </div>
         </form>
     </blockquote>
 
@@ -28,7 +31,7 @@
     </script>
     <!--操作-->
     <script type="text/html" id="newsListBar">
-        <a class="layui-btn layui-btn-xs"  lay-event="detail">点击选课</a>
+        <a class="layui-btn layui-btn-xs" lay-event="detail">点击选课</a>
     </script>
 </form>
 <div th:include="include :: footer"></div>
@@ -52,7 +55,7 @@
             cellMinWidth : 95,
             page : true,
             toolbar: '#toolbarDemo', //开启工具栏
-            height : "full-250",
+            height : "full-125",
             limit : 10,
             limits : [10,15,20,25],
             id : "newsListTable",
@@ -61,14 +64,14 @@
                 type: 'asc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
             },
             cols : [
-            [
-                {type: 'checkbox', fixed: 'left'},
-                {field: 'subNo', title: '课程代码', align:"center"},
-                {field: 'subName', title: '课程名称', align:"center"},
-                {field: 'term', title: '历史修读学期', align:'center'},
-                {field: 'grade', title: '历史成绩',  align:'center', edit: 'text'},
-                {title: '选课操作', width:120, templet:'#newsListBar',fixed:"right",align:"center"}
-            ]
+                [
+                    {type: 'checkbox', fixed: 'left'},
+                    {field: 'subNo', title: '课程代码', align:"center"},
+                    {field: 'subName', title: '课程名称', align:"center"},
+                    {field: 'term', title: '历史修读学期', align:'center'},
+                    {field: 'grade', title: '历史成绩',  align:'center', edit: 'text'},
+                    {title: '选课操作', width:120, templet:'#newsListBar',fixed:"right",align:"center"}
+                ]
             ]
         });
 
@@ -126,8 +129,21 @@
             }
         });
 
+        //日期时间范围选择
+        laydate.render({
+            elem: '#test16',
+            type: 'datetime',
+            range: '到',
+            format: 'yyyy-MM-dd HH:mm:ss',
+            calendar: true,
+            done: function(date){
+                console.log(date); //得到初始的日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+            }
+        });
+
     })
     })
+
 
 
 
