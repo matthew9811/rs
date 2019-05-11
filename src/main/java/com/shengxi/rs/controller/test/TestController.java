@@ -63,6 +63,7 @@ public class TestController extends BaseController {
         stu.setSubName("线性代数");
         stu.setTerm("2017-2018-1");
         stu.setChoiceStatus("0");
+        stu.setRemark("这是备注这是备注这是备注");
         stu.setGrade(59.5);
         list.add(stu);
         Map<String, Object> map = new HashMap<>();
