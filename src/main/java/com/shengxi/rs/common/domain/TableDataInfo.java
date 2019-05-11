@@ -22,6 +22,10 @@ public class TableDataInfo implements Serializable {
      * 消息状态码
      */
     private int code;
+    /**
+     * 信息
+     */
+    private String msg;
 
     /**
      * 表格数据对象
@@ -40,14 +44,6 @@ public class TableDataInfo implements Serializable {
         this.count = count;
     }
 
-    public long getcount() {
-        return count;
-    }
-
-    public void setcount(long count) {
-        this.count = count;
-    }
-
     public List<?> getdata() {
         return data;
     }
@@ -62,5 +58,29 @@ public class TableDataInfo implements Serializable {
 
     public void setCode(int code) {
         this.code = code;
+    }
+
+    public long getCount() {
+        return count;
+    }
+
+    public void setCount(long count) {
+        this.count = count;
+    }
+
+    public List<?> getData() {
+        return data;
+    }
+
+    public void setData(List<?> data) {
+        this.data = data;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }

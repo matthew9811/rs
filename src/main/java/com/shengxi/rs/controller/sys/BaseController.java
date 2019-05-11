@@ -64,7 +64,8 @@ public class BaseController {
         TableDataInfo rspData = new TableDataInfo();
         rspData.setCode(0);
         rspData.setdata(list);
-        rspData.setcount(new PageInfo(list).getTotal());
+        rspData.setCount(new PageInfo(list).getTotal());
+        rspData.setMsg("没有数据!");
         return rspData;
     }
 

@@ -1,12 +1,12 @@
 /**
-*
-**/
-(function($){
+ *
+ **/
+(function ($) {
     /*jq扩展函数直接包含在内部的代码能直接使用jq扩展*/
     $.extend({
-    //layer-table 模块
+        //layer-table 模块
         table: {
-            init: function(options){
+            init: function (options) {
                 var defaults = {
                     title: '',
                     url: ''
@@ -17,10 +17,10 @@
                 var options = $.extend(defaults, options);
                 var table = layer.table;
                 table.render({
-                    title : options.title,
+                    title: options.title,
                     url: options.url,
                 })
-            };
+            }
         },
     })
 })(jQuery);

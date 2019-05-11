@@ -50,7 +50,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .and()
                 .formLogin();
-        http.headers().frameOptions().sameOrigin();
+        http.headers().frameOptions().disable();
+        http.csrf().disable();
     }
 
     @Override
