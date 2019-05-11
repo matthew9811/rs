@@ -33,6 +33,11 @@
                 academic_remark,
             </if>
 
+            <if test="academicRemark!=null and academicRemark!=''">
+                academic_remark,
+            </if>
+            del_flag,
+            create_time,
         </trim>
     </sql>
 
@@ -66,7 +71,8 @@
             <if test="academicRemark!=null and academicRemark!=''">
                 #{academicRemark},
             </if>
-
+            0,
+            now(),
         </trim>
     </sql>
 
@@ -78,6 +84,9 @@
             resultType="com.shengxi.system.entites.subEntity.SubOptEntity">
         select o.stu_no,o.sub_id,o.sub_name,o.status,o.institute_remark,o.academic_remark
         from sub_opt as o
+        <where>
+            o.del_flag = '0'
+        </where>
 
     </select>
     <resultMap id="selectSubStuListMap" type="com.shengxi.system.entites.subEntity.SubOptEntity">
@@ -95,12 +104,13 @@
             <result column="sub_class_name" property="subClassName"/>
             <result column="sub_institute" property="subInstitute"/>
         </association>
+
     </resultMap>
 
     <select id="selectSubStuList"
             resultMap="selectSubStuListMap" parameterType="String">
-         SELECT o.sub_id,o.id,o.stu_no,o.sub_name,o.status,u.user_name,j.sub_no,j.sub_credit,j.sub_class_name,j.sub_institute
-         FROM sub_opt o,sys_user u,`subject` j
+         SELECT o.sub_id,o.id,o.stu_no,o.sub_name,o.status,u.user_name,j.sub_no,j.sub_credit,j.sub_class_name,j.sub_institute,d.parent_id,e.parent_id,p.parent_id
+         FROM sub_opt o,sys_user u,`subject` j,sys_dept d,sys_dept e,sys_dept p
         <where>
         o.stu_no = CONVERT(u.user_no USING utf8) COLLATE utf8_general_ci
         AND
@@ -109,6 +119,24 @@
         AND
         o.status = #{distinguish}
         </if>
+        and
+            u.dept_id = CONVERT(d.id USING utf8) COLLATE utf8_general_ci
+        and
+            d.parent_id = CONVERT(e.id USING utf8) COLLATE utf8_general_ci
+        and
+            e.parent_id = CONVERT(p.id USING utf8) COLLATE utf8_general_ci
+        and
+            o.del_flag = '0'
+        and
+            u.del_flag = '0'
+        and
+            j.del_flag = '0'
+        and
+            d.del_flag = '0'
+        and
+            e.del_flag = '0'
+        and
+            p.del_flag = '0'
         </where>
     </select>
 

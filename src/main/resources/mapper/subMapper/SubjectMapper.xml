@@ -73,6 +73,8 @@
             <if test="subStatus!=null and subStatus!=''">
                 sub_status,
             </if>
+            del_flag,
+            create_time,
         </trim>
     </sql>
 
@@ -147,6 +149,8 @@
             <if test="subStatus!=null and subStatus!=''">
                 #{subStatus},
             </if>
+            0,
+            now(),
         </trim>
     </sql>
 
@@ -158,6 +162,9 @@
             resultType="com.shengxi.system.entites.subEntity.SubjectEntity">
         select j.sub_carry_no,j.sub_no,j.sub_name,j.sub_institute,j.sub_plan_type,j.sub_total_period,j.sub_theory_period,j.sub_practice_period,j.sub_credit,j.sub_class_name,j.sub_men_count,j.sub_men_total_count,j.sub_address,j.sub_week,j.sub_week_day,j.sub_period,j.replace
         from subject as j
+        <where>
+            j.del_flag = '0'
+        </where>
 
     </select>
 
@@ -194,6 +201,10 @@
             sub_carry_no = #{sou}
             AND
             j.sub_teacher_id = CONVERT(u.user_no USING utf8) COLLATE utf8_general_ci
+            and
+            j.del_flag = '0'
+            and
+            u.del_flag = '0'
         </where>
     </select>
 

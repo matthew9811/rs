@@ -16,9 +16,8 @@
             <if test="subReplaceNo!=null">
                 sub_replace_no,
             </if>
-
-
-
+            del_flag,
+            create_time,
         </trim>
     </sql>
 
@@ -36,9 +35,8 @@
             <if test="subReplaceNo!=null">
                 #{subReplaceNo},
             </if>
-
-
-
+            0,
+            now(),
         </trim>
     </sql>
 
@@ -50,7 +48,9 @@
             resultType="com.shengxi.system.entites.subEntity.SubReplaceEntity">
         select r.sub_no,r.sub_replace_no
         from sub_replace as r
-
+        <where>
+         r.del_flag = '0'
+         </where>
     </select>
 
 </mapper>

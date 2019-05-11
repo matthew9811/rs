@@ -28,7 +28,8 @@
             <if test="credit!=null and credit!=''">
                 credit,
             </if>
-
+            del_flag,
+            create_time,
         </trim>
     </sql>
 
@@ -58,7 +59,8 @@
             <if test="credit!=null and credit!=''">
                 #{credit},
             </if>
-
+            0,
+            now(),
         </trim>
     </sql>
 
@@ -71,7 +73,9 @@
         select c.stu_no,c.sub_no,c.sub_name,c.score,c.credit
         from com_sub as c
         <where>
-        stu_no = 17210210613
+        c.stu_no = '17210210613'
+        and
+        c.del_flag = '0'
         </where>
     </select>
 
