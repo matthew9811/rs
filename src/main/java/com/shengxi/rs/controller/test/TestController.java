@@ -5,6 +5,7 @@ import com.shengxi.rs.controller.sys.BaseController;
 import com.shengxi.system.entites.test.TestEntity;
 import com.shengxi.system.entites.test.TestStu;
 import com.shengxi.system.model.service.test.TestServices;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,7 +51,8 @@ public class TestController extends BaseController {
     }
 
     @GetMapping("/main")
-    public String main() {
+    public String main(HttpServletResponse response) {
+        response.addHeader("x-frame-options","SAMEORIGIN");
         return "main";
     }
 
