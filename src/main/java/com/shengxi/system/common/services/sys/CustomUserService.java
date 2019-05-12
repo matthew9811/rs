@@ -2,7 +2,6 @@ package com.shengxi.system.common.services.sys;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.rs.common.config.SysUser;
-import com.shengxi.system.model.mapper.sys.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
