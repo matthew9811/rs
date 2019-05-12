@@ -1,4 +1,4 @@
-package com.shengxi.rs.controller.sys;
+package com.shengxi.rs.common.handler;
 
 
 import cn.hutool.core.util.ObjectUtil;
@@ -62,7 +62,7 @@ public class BaseController {
     protected TableDataInfo getDataTable(List<?> list) {
 
         TableDataInfo rspData = new TableDataInfo();
-        rspData.setCode(0);
+        rspData.setCode(200);
         rspData.setData(list);
         rspData.setCount(new PageInfo(list).getTotal());
         rspData.setMsg("没有数据!");
