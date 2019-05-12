@@ -4,11 +4,15 @@ package com.shengxi.rs.common.handler;
 import cn.hutool.core.util.ObjectUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.shengxi.rs.common.config.SysUser;
 import com.shengxi.rs.common.domain.PageResult;
+import com.shengxi.rs.common.domain.SecurityUser;
 import com.shengxi.rs.common.domain.TableDataInfo;
 import com.shengxi.rs.common.util.AjaxResult;
 import com.shengxi.rs.common.util.TableSupport;
 import org.apache.commons.lang3.time.DateUtils;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
@@ -115,26 +119,5 @@ public class BaseController {
         return AjaxResult.error(code, message);
     }
 
-//    /**
-//     * 页面跳转
-//     */
-//    public String redirect(String url) {
-//        return StringUtils.format("redirect:{}", url);
-//    }
-//
-//    public SysUser getSysUser() {
-//        return ShiroUtils.getSysUser();
-//    }
-//
-//    public void setSysUser(SysUser user) {
-//        ShiroUtils.setSysUser(user);
-//    }
-//
-//    public Long getUserId() {
-//        return getSysUser().getUserId();
-//    }
-//
-//    public String getLoginName() {
-//        return getSysUser().getLoginName();
-//    }
+
 }

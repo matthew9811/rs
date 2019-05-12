@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shengxi.system.model.mapper.sys.SysMenuMapper">
+    <resultMap id="BaseResultMap" type="com.shengxi.system.entites.sys.SysMenuEntity">
+        <id column="sys_menu_id" jdbcType="VARCHAR" property="id"/>
+        <result column="sys_menu_parent_id" jdbcType="VARCHAR" property="parentId"/>
+        <result column="sys_menu_url" jdbcType="VARCHAR" property="url"/>
+        <result column="sys_menu_menu_name" jdbcType="VARCHAR" property="menuName"/>
+        <result column="sys_menu_icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="sys_menu_type" jdbcType="CHAR" property="type"/>
+        <result column="sys_menu_perms" jdbcType="VARCHAR" property="perms"/>
+        <result column="sys_menu_create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="sys_menu_create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="sys_menu_update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="sys_menu_update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="sys_menu_del_flag" jdbcType="CHAR" property="delFlag"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    sys_menu.id as sys_menu_id, sys_menu.parent_id as sys_menu_parent_id, sys_menu.url as sys_menu_url, 
+    sys_menu.menu_name as sys_menu_menu_name, sys_menu.icon as sys_menu_icon, sys_menu.`type` as `sys_menu_type`, 
+    sys_menu.perms as sys_menu_perms, sys_menu.create_by as sys_menu_create_by, sys_menu.create_time as sys_menu_create_time, 
+    sys_menu.update_by as sys_menu_update_by, sys_menu.update_time as sys_menu_update_time, 
+    sys_menu.del_flag as sys_menu_del_flag
+  </sql>
+    <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_menu sys_menu
+        where sys_menu.id = #{id,jdbcType=VARCHAR}
+    </select>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shengxi.system.entites.sys.SysMenuEntity"
+            useGeneratedKeys="true">
+    insert into sys_menu (parent_id, url, menu_name, 
+      icon, `type`, perms, create_by, 
+      create_time, update_by, update_time, 
+      del_flag)
+    values (#{parentId,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, 
+      #{icon,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, #{perms,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{delFlag,jdbcType=CHAR})
+  </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.shengxi.system.entites.sys.SysMenuEntity" useGeneratedKeys="true">
+        insert into sys_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="menuName != null">
+                menu_name,
+            </if>
+            <if test="icon != null">
+                icon,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+            <if test="perms != null">
+                perms,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="parentId != null">
+                #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="menuName != null">
+                #{menuName,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null">
+                #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=CHAR},
+            </if>
+            <if test="perms != null">
+                #{perms,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateSelective" parameterType="com.shengxi.system.entites.sys.SysMenuEntity">
+        update sys_menu
+        <set>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="menuName != null">
+                menu_name = #{menuName,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null">
+                icon = #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                `type` = #{type,jdbcType=CHAR},
+            </if>
+            <if test="perms != null">
+                perms = #{perms,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=CHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateById" parameterType="com.shengxi.system.entites.sys.SysMenuEntity">
+    update sys_menu
+    set parent_id = #{parentId,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      menu_name = #{menuName,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=CHAR},
+      perms = #{perms,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
