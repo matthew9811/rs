@@ -1,11 +1,9 @@
 package com.shengxi.rs.controller.test;
 
-import afu.org.checkerframework.checker.oigj.qual.O;
 import com.shengxi.rs.common.domain.TableDataInfo;
-import com.shengxi.rs.controller.sys.BaseController;
+import com.shengxi.rs.common.handler.BaseController;
 import com.shengxi.system.entites.subEntity.ComSubEntity;
 import com.shengxi.system.entites.test.TestEntity;
-import com.shengxi.system.entites.test.TestStu;
 import com.shengxi.system.model.service.sub.ComSubServices;
 import com.shengxi.system.model.service.test.TestServices;
 import javax.servlet.http.HttpServletResponse;
@@ -16,10 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author: Matthew
