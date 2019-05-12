@@ -44,14 +44,6 @@ public class TableDataInfo implements Serializable {
         this.count = count;
     }
 
-    public List<?> getdata() {
-        return data;
-    }
-
-    public void setdata(List<?> data) {
-        this.data = data;
-    }
-
     public int getCode() {
         return code;
     }

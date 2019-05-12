@@ -69,7 +69,6 @@
             </if>
 
 
-
             <if test="subStatus!=null and subStatus!=''">
                 sub_status,
             </if>
@@ -145,7 +144,6 @@
             </if>
 
 
-
             <if test="subStatus!=null and subStatus!=''">
                 #{subStatus},
             </if>
@@ -160,7 +158,24 @@
 
     <select id="selectSubjectEntityList"
             resultType="com.shengxi.system.entites.subEntity.SubjectEntity">
-        select j.sub_carry_no,j.sub_no,j.sub_name,j.sub_institute,j.sub_plan_type,j.sub_total_period,j.sub_theory_period,j.sub_practice_period,j.sub_credit,j.sub_class_name,j.sub_men_count,j.sub_men_total_count,j.sub_address,j.sub_week,j.sub_week_day,j.sub_period,j.replace
+        select
+        j.sub_carry_no,
+        j.sub_no,
+        j.sub_name,
+        j.sub_institute,
+        j.sub_plan_type,
+        j.sub_total_period,
+        j.sub_theory_period,
+        j.sub_practice_period,
+        j.sub_credit,
+        j.sub_class_name,
+        j.sub_men_count,
+        j.sub_men_total_count,
+        j.sub_address,
+        j.sub_week,
+        j.sub_week_day,
+        j.sub_period,
+        j.replace
         from subject as j
         <where>
             j.del_flag = '0'
@@ -191,8 +206,9 @@
 
     <select id="souSubjectEntityList"
             resultMap="souSubjectEntityListMap">
-         select j.sub_carry_no,j.sub_no,j.sub_name,j.sub_institute,j.sub_plan_type,j.sub_total_period,j.sub_theory_period,j.sub_practice_period,j.sub_credit,j.sub_class_name,j.sub_men_count,j.sub_men_total_count,j.sub_address,j.sub_week,j.sub_week_day,j.sub_period,u.user_name
-         from subject j,sys_user u
+        select
+        j.sub_carry_no,j.sub_no,j.sub_name,j.sub_institute,j.sub_plan_type,j.sub_total_period,j.sub_theory_period,j.sub_practice_period,j.sub_credit,j.sub_class_name,j.sub_men_count,j.sub_men_total_count,j.sub_address,j.sub_week,j.sub_week_day,j.sub_period,u.user_name
+        from subject j,sys_user u
         <where>
             sub_name = #{sou}
             or
