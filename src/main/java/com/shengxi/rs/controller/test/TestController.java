@@ -2,10 +2,12 @@ package com.shengxi.rs.controller.test;
 
 import com.shengxi.rs.common.domain.TableDataInfo;
 import com.shengxi.rs.common.handler.BaseController;
+import com.shengxi.system.common.util.SecurityUserUtil;
 import com.shengxi.system.entites.subEntity.ComSubEntity;
 import com.shengxi.system.entites.test.TestEntity;
 import com.shengxi.system.model.service.sub.ComSubServices;
 import com.shengxi.system.model.service.test.TestServices;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,10 +46,10 @@ public class TestController extends BaseController {
 
     @PostMapping("/input")
     @ResponseBody
-    public List<TestEntity> input(TestEntity entity) {
-        System.out.println(entity.toString());
-        System.out.println("---------------------");
-        List<TestEntity> list = testServices.selectList();
+    public List<Object> input(TestEntity entity) {
+        List<Object> list = new ArrayList<>();
+        list.addAll(testServices.selectList());
+        list.add(SecurityUserUtil.getCurrentUserAuthentication().getDetails());
         return list;
     }
 
@@ -81,7 +83,6 @@ public class TestController extends BaseController {
     public TableDataInfo getList(ComSubEntity comSubEntity) {
         startPage();
         List<ComSubEntity> list = comSubServices.selectList();
-        System.out.println(list);
         return getDataTable(list);
     }
 

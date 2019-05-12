@@ -106,11 +106,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         };
     }
 
-/*
 
-    @Bean
-    UserDetailsService customUserService() {
-        return new CustomUserService();
-    }
-     */
+//    @Bean
+//    UserDetailsService customUserService() {
+//        return new CustomUserService();
+//    }
+//
 }

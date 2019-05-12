@@ -18,6 +18,8 @@ import java.util.List;
  * This class corresponds to the database table sys_user
  *
  * @mbg.generated do_not_delete_during_merge
+ * @author 梁焰豪
+ * @date 2019.05.12
  */
 @SuppressWarnings("serial")
 public class SysUser extends BaseEntity implements UserDetails {

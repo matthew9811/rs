@@ -137,11 +137,3 @@ rs:
   timeFormat: yyyy-MM-dd HH:mm:ss
   # 是否开启 AOP 日志，默认开启
   openAopLog: true
-  # 验证码
-#  validateCode:
-#    # 宽度，默认 146px
-#    width: 146
-#    # 高度，默认 33px
-#    height: 33
-#    # 验证码字符个数，默认4个字符
-#    length: 4

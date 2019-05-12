@@ -57,4 +57,8 @@ public class SecurityUserUtil {
     public static String getUserNo(){
         return getUser().getUserNo();
     }
+
+//    public static String getLoginName(){
+//        return getCurrentUserAuthentication().getAuthorities();
+//    }
 }
