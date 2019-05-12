@@ -33,7 +33,7 @@ public class menuController extends BaseController {
 
     @GetMapping("/add")
     public String add(){
-        return perfix + "/add";
+        return perfix + "/menuCreate";
     }
 
     @PostMapping("/add")
