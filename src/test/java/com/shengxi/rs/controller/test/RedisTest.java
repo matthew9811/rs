@@ -4,6 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.RsApplication;
 import com.shengxi.system.common.contant.Index;
 import com.shengxi.system.entites.test.TestEntity;
+import com.shengxi.system.model.service.sys.SysMenuServices;
 import com.shengxi.system.model.service.test.TestServices;
 import org.checkerframework.checker.units.qual.A;
 import org.junit.Test;
@@ -31,6 +32,9 @@ public class RedisTest {
 
     @Autowired
     StringRedisTemplate stringObjectStringRedisTemplate;
+
+    @Autowired
+    SysMenuServices menuServices;
 
     @Autowired
     private TestServices testServices;
@@ -70,4 +74,9 @@ public class RedisTest {
         }
     }
 
+    @Test
+    @Rollback
+    public void testTree(){
+        System.out.println(menuServices.selectByInit());
+    }
 }

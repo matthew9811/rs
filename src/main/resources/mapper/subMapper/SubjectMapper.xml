@@ -199,7 +199,7 @@
         <result column="sub_address" property="subAddress"/>
         <result column="sub_week" property="subWeek"/>
         <result column="sub_weekDay" property="subPeriod"/>
-        <association property="sysUser" javaType="com.shengxi.rs.common.config.SysUser">
+        <association property="sysUser" javaType="com.shengxi.system.entites.sys.SysUser">
             <result column="user_name" property="userName"/>
         </association>
     </resultMap>

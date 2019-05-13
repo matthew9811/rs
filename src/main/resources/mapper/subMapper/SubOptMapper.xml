@@ -95,7 +95,7 @@
         <result column="stu_no" property="stuNo"/>
         <result column="sub_name" property="subName"/>
         <result column="status" property="status"/>
-        <association property="sysUser" javaType="com.shengxi.rs.common.config.SysUser">
+        <association property="sysUser" javaType="com.shengxi.system.entites.sys.SysUser">
             <result column="user_name" property="userName"/>
         </association>
         <association property="subjectEntity" javaType="com.shengxi.system.entites.subEntity.SubjectEntity">

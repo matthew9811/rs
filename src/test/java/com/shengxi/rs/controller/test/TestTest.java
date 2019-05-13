@@ -28,9 +28,7 @@ public class TestTest {
 
     @Test
     public void testId() {
-//        for (int i = 0; i < 1000; i++) {
             System.out.println(IdUtil.uuid());
-//        }
     }
 
     @Test
@@ -60,4 +58,5 @@ public class TestTest {
         System.out.println(UUID.randomUUID(true));
         System.out.println(cn.hutool.core.util.IdUtil.createSnowflake(SysContant.WORK_ID,SysContant.DATA_CENTER_ID).nextId());
     }
+
 }
