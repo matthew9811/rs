@@ -35,7 +35,7 @@ public interface ComSubMapper {
      *@param comSubEntity 实体
      * @return Integer
      */
-    Integer insereComSubEntity(@Param("comSubEntity")ComSubEntity comSubEntity);
+    Integer insertComSubEntity(@Param("comSubEntity")ComSubEntity comSubEntity);
 
     /**
      * 删除已修课程信息

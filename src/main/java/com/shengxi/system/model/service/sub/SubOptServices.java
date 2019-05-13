@@ -34,7 +34,7 @@ public class SubOptServices {
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
     public Integer addList(SubOptEntity subOptEntity){
-        return subOptMapper.insereSubOptEntity(subOptEntity);
+        return subOptMapper.insertSubOptEntity(subOptEntity);
     }
     /**
      * 增加选择课程信息

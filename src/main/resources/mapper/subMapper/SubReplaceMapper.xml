@@ -40,13 +40,14 @@
         </trim>
     </sql>
 
-    <insert id="insereSubReplaceEntity" parameterType="com.shengxi.system.entites.subEntity.SubReplaceEntity">
+    <insert id="insertSubReplaceEntity" parameterType="com.shengxi.system.entites.subEntity.SubReplaceEntity">
         insert into sub_replace(<include refid="key"/>) values(<include refid="value"/>);
     </insert>
 
     <select id="selectSubReplaceEntityList"
             resultType="com.shengxi.system.entites.subEntity.SubReplaceEntity">
-        select r.sub_no,r.sub_replace_no
+        select r.sub_no,
+        r.sub_replace_no
         from sub_replace as r
         <where>
          r.del_flag = '0'

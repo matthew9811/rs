@@ -33,7 +33,7 @@ public interface SubjectMapper {
      *@param subjectEntity 实体
      * @return Integer
      */
-    Integer insereSubject(SubjectEntity subjectEntity);
+    Integer insertSubject(SubjectEntity subjectEntity);
 
     /**
      * 删除课程信息

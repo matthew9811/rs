@@ -36,7 +36,7 @@ public interface SubOptMapper {
      *@param subOptEntity 实体
      * @return Integer
      */
-    Integer insereSubOptEntity(@Param("subOptEntity")SubOptEntity subOptEntity);
+    Integer insertSubOptEntity(@Param("subOptEntity")SubOptEntity subOptEntity);
 
     /**
      * 删除选择课程信息
