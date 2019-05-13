@@ -15,31 +15,31 @@ public class BaseEntity implements Serializable {
     /**
      * id
      */
-    private String id;
+    protected String id;
     /**
      * 生成时间
      */
-    private Date createTime;
+    protected Date createTime;
     /**
      * 创建人
      */
-    private String createBy;
+    protected String createBy;
     /**
      * 更新时间
      */
-    private Date updateTime;
+    protected Date updateTime;
     /**
      * 更新人
      */
-    private String updateBy;
+    protected String updateBy;
     /**
      * 备注
      */
-    private String remark;
+    protected String remark;
     /**
      * 删除标识
      */
-    private String delFlag;
+    protected String delFlag;
 
     public String getId() {
         return id;

@@ -1,9 +1,11 @@
 package com.shengxi.system.entites.sys;
 
 import com.shengxi.rs.common.domain.BaseEntity;
+import com.shengxi.rs.common.domain.Tree;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 /**
  * sys_menu
@@ -40,9 +42,18 @@ public class SysMenuEntity extends BaseEntity {
      * 权限
      */
     private String perms;
+    /**
+     * 子结点
+     */
+    private List<SysMenuEntity> child;
 
+    public List<SysMenuEntity> getChild() {
+        return child;
+    }
 
-    private static final long serialVersionUID = 1L;
+    public void setChild(List<SysMenuEntity> child) {
+        this.child = child;
+    }
 
     public String getParentId() {
         return parentId;
@@ -94,30 +105,15 @@ public class SysMenuEntity extends BaseEntity {
 
 
     @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        SysMenuEntity other = (SysMenuEntity) that;
-        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-                && (this.getParentId() == null ? other.getParentId() == null : this.getParentId().equals(other.getParentId()))
-                && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
-                && (this.getMenuName() == null ? other.getMenuName() == null : this.getMenuName().equals(other.getMenuName()))
-                && (this.getIcon() == null ? other.getIcon() == null : this.getIcon().equals(other.getIcon()))
-                && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
-                && (this.getPerms() == null ? other.getPerms() == null : this.getPerms().equals(other.getPerms()))
-                && (this.getCreateBy() == null ? other.getCreateBy() == null : this.getCreateBy().equals(other.getCreateBy()))
-                && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
-                && (this.getUpdateBy() == null ? other.getUpdateBy() == null : this.getUpdateBy().equals(other.getUpdateBy()))
-                && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
-                && (this.getDelFlag() == null ? other.getDelFlag() == null : this.getDelFlag().equals(other.getDelFlag()));
+    public String toString() {
+        return "SysMenuEntity{" +
+                "parentId='" + parentId + '\'' +
+                ", url='" + url + '\'' +
+                ", menuName='" + menuName + '\'' +
+                ", icon='" + icon + '\'' +
+                ", type='" + type + '\'' +
+                ", perms='" + perms + '\'' +
+                ", child=" + child +
+                '}';
     }
-
-
 }

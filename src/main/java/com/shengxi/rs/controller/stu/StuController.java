@@ -1,16 +1,15 @@
 package com.shengxi.rs.controller.stu;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.shengxi.rs.common.config.SysUser;
 import com.shengxi.rs.common.util.IdUtil;
-import com.shengxi.system.common.services.sys.UserService;
 import com.shengxi.system.entites.subEntity.ComSubEntity;
 import com.shengxi.system.entites.subEntity.SubOptEntity;
 import com.shengxi.system.entites.subEntity.SubjectEntity;
-import com.shengxi.system.model.mapper.sys.SysUserMapper;
+import com.shengxi.system.entites.sys.SysUser;
 import com.shengxi.system.model.service.sub.ComSubServices;
 import com.shengxi.system.model.service.sub.SubOptServices;
 import com.shengxi.system.model.service.sub.SubjectServices;
+import com.shengxi.system.model.service.sys.SysUserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +41,7 @@ public class StuController {
     private SubOptServices subOptServices;
 
     @Autowired
-    private UserService userService;
+    private SysUserServices userService;
 
     @PostMapping("/news")
     public String pnews() {
@@ -61,12 +60,12 @@ public class StuController {
     @GetMapping("/course")
     public String course(Model model,String subCarryNo) {
         List<SubjectEntity> list = subjectServices.souSubjectEntityList(subCarryNo);
-        SysUser sysUser = userService.selectUserNo("17210210613");
+//        SysUser sysUser = userService.selectUserNo("17210210613");
 
         for(SubjectEntity subjectEntity : list){
             model.addAttribute("subjectEntity",subjectEntity);
         }
-        model.addAttribute("sysUser",sysUser);
+//        model.addAttribute("sysUser",sysUser);
         return prefix + "/course";
     }
 

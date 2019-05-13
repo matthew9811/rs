@@ -1,31 +1,35 @@
 package com.shengxi.system.model.mapper.sys;
 
-//import com.shengxi.rs.common.config.SysUser;
-import com.shengxi.rs.common.config.SysUser;
+import com.shengxi.system.entites.sys.SysUser;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
- * @author : Matthew
- * @Date: 2019/5/5 11:29
- * @Description:
+ * 用户类
+ * @author matthew
+ * @date 2019.05.13
  */
-@Component
 @Mapper
 public interface SysUserMapper {
-    /**
-     * 通过用户名搜索
-     * @param userName username
-     * @return sysUser
-     */
-    //SysUser findByName(String userName);
+
+    int deleteByPrimaryKey(String id);
+
+    int insert(SysUser record);
+
+    int insertSelective(SysUser record);
+
+
+    SysUser selectByPrimaryKey(String id);
+
+
+    int updateByPrimaryKeySelective(SysUser record);
+
+    int updateByPrimaryKey(SysUser record);
 
     /**
-     * 通过用户编号搜索
-     * @param userNo
-     * @return sysUser
+     * 通过用户编号获取用户信息
+     * @param s
+     * @return
      */
-    SysUser findByNo(String userNo);
+    UserDetails getUserByNo(String s);
 }
