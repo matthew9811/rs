@@ -35,7 +35,7 @@ public interface SubReplaceMapper {
      *@param subReplaceEntity 实体
      * @return Integer
      */
-    Integer insereSubReplaceEntity(@Param("comSubEntity")SubReplaceEntity subReplaceEntity);
+    Integer insertSubReplaceEntity(@Param("comSubEntity")SubReplaceEntity subReplaceEntity);
 
     /**
      * 删除替代课程信息

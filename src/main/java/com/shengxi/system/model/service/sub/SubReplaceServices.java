@@ -36,6 +36,6 @@ public class SubReplaceServices {
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
     public Integer addList(SubReplaceEntity subReplaceEntity){
-        return subReplaceMapper.insereSubReplaceEntity(subReplaceEntity);
+        return subReplaceMapper.insertSubReplaceEntity(subReplaceEntity);
     }
 }

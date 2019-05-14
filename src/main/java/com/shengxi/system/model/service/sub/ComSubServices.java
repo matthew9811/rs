@@ -36,6 +36,6 @@ public class ComSubServices {
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
     public Integer addList(ComSubEntity comSubEntity){
-        return comSubMapper.insereComSubEntity(comSubEntity);
+        return comSubMapper.insertComSubEntity(comSubEntity);
     }
 }
