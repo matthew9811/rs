@@ -1,11 +1,12 @@
 package com.shengxi.rs.controller.stu;
 
 import cn.hutool.core.util.ObjectUtil;
+
 import com.shengxi.rs.common.util.IdUtil;
-import com.shengxi.system.common.services.sys.UserService;
 import com.shengxi.system.entites.subEntity.ComSubEntity;
 import com.shengxi.system.entites.subEntity.SubOptEntity;
 import com.shengxi.system.entites.subEntity.SubjectEntity;
+import com.shengxi.system.entites.sys.SysUser;
 import com.shengxi.system.model.mapper.sys.SysUserMapper;
 import com.shengxi.system.model.service.sub.ComSubServices;
 import com.shengxi.system.model.service.sub.SubOptServices;
@@ -41,7 +42,7 @@ public class StuController {
     private SubOptServices subOptServices;
 
     @Autowired
-    private UserService userService;
+    private SysUserMapper sysUserMapper;
 
     @PostMapping("/news")
     public String pnews() {
@@ -80,13 +81,15 @@ public class StuController {
         if(ObjectUtil.isNotNull(subCarryNo)) {
             subOptServices.addList(subOptEntity);
         }
-        List<SubOptEntity> list = subOptServices.selectList();
+        List<SubOptEntity> list = subOptServices.selectList(subOptEntity);
         model.addAttribute("list",list);
         return prefix + "/news";
     }
     @GetMapping("/search")
     public String search(Model model) {
-        List<ComSubEntity> list = comSubServices.selectList();
+        ComSubEntity comSubEntity = new ComSubEntity();
+        comSubEntity.setStuNo("17210210613");
+        List<ComSubEntity> list = comSubServices.selectList(comSubEntity);
         model.addAttribute("list",list);
         return prefix + "/search";
     }
@@ -107,6 +110,6 @@ public class StuController {
     @ResponseBody
     public String souSubject(String sou,Model model) {
         List<SubjectEntity> list = subjectServices.souSubjectEntityList(sou);
-        return "redirect:/stu/stu/choose";
+        return prefix + "/choose";
     }
 }

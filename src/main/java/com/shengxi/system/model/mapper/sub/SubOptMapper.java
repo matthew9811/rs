@@ -20,7 +20,7 @@ public interface SubOptMapper {
      * 获取有效选择课程信息
      * @return list
      */
-    List<SubOptEntity> selectSubOptEntityList();
+    List<SubOptEntity> selectSubOptEntityList(SubOptEntity subOptEntity);
 
 
     /**
@@ -36,7 +36,7 @@ public interface SubOptMapper {
      *@param subOptEntity 实体
      * @return Integer
      */
-    Integer insertSubOptEntity(@Param("subOptEntity")SubOptEntity subOptEntity);
+    Integer insertSubOptEntity(SubOptEntity subOptEntity);
 
     /**
      * 删除选择课程信息

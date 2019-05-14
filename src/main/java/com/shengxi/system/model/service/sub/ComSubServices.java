@@ -26,8 +26,8 @@ public class ComSubServices {
      * @return list
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
-    public List<ComSubEntity> selectList() {
-        return comSubMapper.selectComSubEntityList();
+    public List<ComSubEntity> selectList(ComSubEntity comSubEntity) {
+        return comSubMapper.selectComSubEntityList(comSubEntity);
     }
     /**
      * 增加已修课程信息

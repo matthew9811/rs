@@ -19,7 +19,7 @@ public interface SubjectMapper {
      * 获取有效课程信息
      * @return list
      */
-    List<SubjectEntity> selectSubjectEntityList();
+    List<SubjectEntity> selectSubjectEntityList(SubjectEntity subjectEntity);
 
     /**
      * 修改课程信息
@@ -45,7 +45,7 @@ public interface SubjectMapper {
      * add对应行
      * @return list
      */
-    Integer addSubject(@Param("subjectEntity")SubjectEntity subjectEntity);
+    Integer addSubject(SubjectEntity subjectEntity);
 
     /**
      * 搜索课程代码或课程名

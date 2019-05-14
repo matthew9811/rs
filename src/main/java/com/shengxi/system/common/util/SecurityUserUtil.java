@@ -1,6 +1,6 @@
 package com.shengxi.system.common.util;
 
-import com.shengxi.rs.common.config.SysUser;
+import com.shengxi.system.entites.sys.SysUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 

@@ -9,21 +9,22 @@
 <table width="50%" height="110" border="1" align="center" cellpadding="0" cellspacing="0">
     <tr>
         <th>原课程代码</th>
-        <th>原课程名称</th>
+
         <th>替换课程代码</th>
-        <th>替换课程名称</th>
+
         <th>修改</th>
     </tr>
-    <tr>
-        <td>GE011</td>
-        <td>英语Ⅰ</td>
-        <td>GE011</td>
-        <td>英语Ⅰ</td>
-        <td><input type="submit" name="Submit" value="修改"></td>
+    <tr th:each="subReplaceEntity : ${list}">
+        <td th:text="${subReplaceEntity.subNo}">GE011</td>
+
+        <td th:text="${subReplaceEntity.subReplaceNo}">GE011</td>
+
+        <td><a href="upSubReplace.html" th:href="@{/academic/academic/upReplace(Id=${subReplaceEntity.Id})}">修改</a></td>
     </tr>
     <tr>
         <td height="27" colspan="18"><div align="center">
-            <input type="submit" name="Submit" value="添加">
+            <a href="/add/add/addSubReplace">添加</a>
+        </div>
         </td>
     </tr>
 </table>

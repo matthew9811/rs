@@ -31,5 +31,5 @@ public interface SysUserMapper {
      * @param s
      * @return
      */
-    UserDetails getUserByNo(String s);
+    SysUser getUserByNo(String s);
 }
