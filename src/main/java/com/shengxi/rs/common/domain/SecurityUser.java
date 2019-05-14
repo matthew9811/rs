@@ -11,6 +11,11 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @Description:
  */
 public class SecurityUser extends SysUser implements UserDetails {
+
+    public SecurityUser() {
+        super();
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
