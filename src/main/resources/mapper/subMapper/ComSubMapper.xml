@@ -77,9 +77,11 @@
         c.credit
         from com_sub as c
         <where>
-        c.stu_no = #{stuNo}
-        and
+
         c.del_flag = '0'
+            <if test="stuNo != null and stuNo != '' ">
+               and  c.stu_no = #{stuNo}
+            </if>
         </where>
     </select>
 
