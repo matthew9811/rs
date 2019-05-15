@@ -46,7 +46,8 @@
 
     <select id="selectSubReplaceEntityList"
             resultType="com.shengxi.system.entites.subEntity.SubReplaceEntity">
-        select r.sub_no,
+        select r.Id,
+        r.sub_no,
         r.sub_replace_no
         from sub_replace as r
         <where>
@@ -54,4 +55,15 @@
          </where>
     </select>
 
+    <update id="updateBySubReplaceEntityList">
+    update sub_replace <set>
+        sub_replace_no = #{subReplaceNo},
+    update_time = now()
+    </set>
+
+    <where>
+        sub_no = #{subNo}
+    </where>
+
+    </update>
 </mapper>

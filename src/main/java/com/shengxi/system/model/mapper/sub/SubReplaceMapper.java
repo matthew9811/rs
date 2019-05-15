@@ -19,7 +19,7 @@ public interface SubReplaceMapper {
      * 获取有效替代课程信息
      * @return list
      */
-    List<SubReplaceEntity> selectSubReplaceEntityList();
+    List<SubReplaceEntity> selectSubReplaceEntityList(SubReplaceEntity subReplaceEntity);
 
 
     /**
@@ -35,7 +35,7 @@ public interface SubReplaceMapper {
      *@param subReplaceEntity 实体
      * @return Integer
      */
-    Integer insertSubReplaceEntity(@Param("comSubEntity")SubReplaceEntity subReplaceEntity);
+    Integer insertSubReplaceEntity(SubReplaceEntity subReplaceEntity);
 
     /**
      * 删除替代课程信息

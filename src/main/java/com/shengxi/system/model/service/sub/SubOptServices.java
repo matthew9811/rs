@@ -24,8 +24,8 @@ public class SubOptServices {
      * @return list
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
-    public List<SubOptEntity> selectList() {
-        return subOptMapper.selectSubOptEntityList();
+    public List<SubOptEntity> selectList(SubOptEntity subOptEntity) {
+        return subOptMapper.selectSubOptEntityList(subOptEntity);
     }
     /**
      * 增加选择课程信息

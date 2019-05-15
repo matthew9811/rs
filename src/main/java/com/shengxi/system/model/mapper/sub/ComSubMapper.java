@@ -19,7 +19,7 @@ public interface ComSubMapper {
      * 获取有效已修课程信息
      * @return list
      */
-    List<ComSubEntity> selectComSubEntityList();
+    List<ComSubEntity> selectComSubEntityList(ComSubEntity comSubEntity);
 
 
     /**
@@ -35,7 +35,7 @@ public interface ComSubMapper {
      *@param comSubEntity 实体
      * @return Integer
      */
-    Integer insertComSubEntity(@Param("comSubEntity")ComSubEntity comSubEntity);
+    Integer insertComSubEntity(ComSubEntity comSubEntity);
 
     /**
      * 删除已修课程信息

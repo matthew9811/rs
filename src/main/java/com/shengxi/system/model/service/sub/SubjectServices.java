@@ -25,8 +25,8 @@ public class SubjectServices {
      * @return list
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
-    public List<SubjectEntity> selectList() {
-        return subjectMapper.selectSubjectEntityList();
+    public List<SubjectEntity> selectList(SubjectEntity subjectEntity) {
+        return subjectMapper.selectSubjectEntityList(subjectEntity);
     }
     /**
      * 增加课程信息

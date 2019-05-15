@@ -1,8 +1,11 @@
 package com.shengxi.system.entites.subEntity;
 
 import com.shengxi.rs.common.domain.BaseEntity;
+import com.shengxi.system.entites.sys.SysDeptEntity;
 import com.shengxi.system.entites.sys.SysUser;
 import java.util.Date;
+import java.util.List;
+
 /**
  * @author : 郑杰
  * @Date: 2019/4/26 15:08
@@ -65,6 +68,8 @@ public class SubOptEntity extends BaseEntity {
     private SubjectEntity subjectEntity;
 
     private SysUser sysUser;
+
+    private List<SysDeptEntity> sysDeptEntityList;
 
     @Override
     public String getId() {
@@ -138,6 +143,14 @@ public class SubOptEntity extends BaseEntity {
 
     public void setSysUser(SysUser sysUser) {
         this.sysUser = sysUser;
+    }
+
+    public List<SysDeptEntity> getSysDeptEntityList() {
+        return sysDeptEntityList;
+    }
+
+    public void setSysDeptEntityList(List<SysDeptEntity> sysDeptEntityList) {
+        this.sysDeptEntityList = sysDeptEntityList;
     }
 
     @Override

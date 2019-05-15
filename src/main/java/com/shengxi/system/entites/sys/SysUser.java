@@ -3,6 +3,7 @@ package com.shengxi.system.entites.sys;
 import com.shengxi.rs.common.domain.BaseEntity;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -40,7 +41,6 @@ public class SysUser extends BaseEntity {
      * 状态 0锁定 1有效
      */
     protected String status;
-
 
     public String getUserNo() {
         return userNo;
@@ -81,6 +81,7 @@ public class SysUser extends BaseEntity {
     public void setStatus(String status) {
         this.status = status;
     }
+
 
     @Override
     public String toString() {

@@ -104,7 +104,9 @@
             <result column="sub_class_name" property="subClassName"/>
             <result column="sub_institute" property="subInstitute"/>
         </association>
-
+        <collection property="sysDeptEntityList" ofType="com.shengxi.system.entites.sys.SysDeptEntity" column="parent_id" select="selectSubStuList2">
+            <result column="dept_name" property="deptName"/>
+        </collection>
     </resultMap>
 
     <select id="selectSubStuList"
@@ -112,13 +114,13 @@
          SELECT o.sub_id,o.id,o.stu_no,o.sub_name,o.status,u.user_name,j.sub_no,j.sub_credit,j.sub_class_name,j.sub_institute,d.parent_id,e.parent_id,p.parent_id
          FROM sub_opt o,sys_user u,`subject` j,sys_dept d,sys_dept e,sys_dept p
         <where>
+            <if test="_parameter !=5">
+                o.status = #{distinguish}
+            </if>
+        AND
         o.stu_no = CONVERT(u.user_no USING utf8) COLLATE utf8_general_ci
         AND
         o.sub_id = CONVERT(j.sub_carry_no USING utf8) COLLATE utf8_general_ci
-        <if test="_parameter !=5">
-        AND
-        o.status = #{distinguish}
-        </if>
         and
             u.dept_id = CONVERT(d.id USING utf8) COLLATE utf8_general_ci
         and

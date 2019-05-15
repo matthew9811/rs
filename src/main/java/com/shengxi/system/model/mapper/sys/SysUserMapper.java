@@ -1,5 +1,6 @@
 package com.shengxi.system.model.mapper.sys;
 
+import com.shengxi.rs.common.domain.SecurityUser;
 import com.shengxi.system.entites.sys.SysUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,5 +32,5 @@ public interface SysUserMapper {
      * @param s
      * @return
      */
-    UserDetails getUserByNo(String s);
+    SecurityUser getUserByNo(String s);
 }

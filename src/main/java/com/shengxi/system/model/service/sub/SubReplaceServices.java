@@ -26,8 +26,8 @@ public class SubReplaceServices {
      * @return list
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
-    public List<SubReplaceEntity> selectList() {
-        return subReplaceMapper.selectSubReplaceEntityList();
+    public List<SubReplaceEntity> selectList(SubReplaceEntity subReplaceEntity) {
+        return subReplaceMapper.selectSubReplaceEntityList(subReplaceEntity);
     }
     /**
      * 增加替代课程信息
@@ -37,5 +37,14 @@ public class SubReplaceServices {
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
     public Integer addList(SubReplaceEntity subReplaceEntity){
         return subReplaceMapper.insertSubReplaceEntity(subReplaceEntity);
+    }
+    /**
+     * 修改替代课程信息
+     *
+     * @return list
+     */
+    @Transactional(readOnly = false, rollbackFor = SQLException.class)
+    public Integer updateBySubReplaceEntityList(SubReplaceEntity subReplaceEntity){
+        return subReplaceMapper.updateBySubReplaceEntityList(subReplaceEntity);
     }
 }

@@ -2,6 +2,7 @@ package com.shengxi.rs.controller.college;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.system.entites.subEntity.SubOptEntity;
+import com.shengxi.system.entites.sys.SysDeptEntity;
 import com.shengxi.system.model.service.sub.SubOptServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,12 @@ public class CollegeController {
     @GetMapping("/subordinate")
     public String subordinate(Model model) {
         List<SubOptEntity> list = subOptServices.selectSubStuList("5");
+        for(SubOptEntity subOptEntity : list){
+            System.out.println("1");
+            for (SysDeptEntity sysDeptEntity : subOptEntity.getSysDeptEntityList()){
+                System.out.println(sysDeptEntity.getDeptName());
+            }
+        }
         model.addAttribute("list",list);
         return prefix + "/subordinate";
     }

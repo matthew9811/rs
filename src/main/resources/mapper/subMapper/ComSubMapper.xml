@@ -77,7 +77,7 @@
         c.credit
         from com_sub as c
         <where>
-        c.stu_no = #{stu_no}
+        c.stu_no = #{stuNo}
         and
         c.del_flag = '0'
         </where>
