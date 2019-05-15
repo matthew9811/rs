@@ -13,19 +13,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Mapper
 public interface SysUserMapper {
 
-    int deleteByPrimaryKey(String id);
+    Integer deleteByPrimaryKey(String id);
 
-    int insert(SysUser record);
+    Integer insert(SysUser record);
 
-    int insertSelective(SysUser record);
+    Integer insertSelective(SysUser record);
 
 
     SysUser selectByPrimaryKey(String id);
 
 
-    int updateByPrimaryKeySelective(SysUser record);
+    Integer updateByPrimaryKeySelective(SysUser record);
 
-    int updateByPrimaryKey(SysUser record);
+    Integer updateByPrimaryKey(SysUser record);
 
     /**
      * 通过用户编号获取用户信息
@@ -33,4 +33,12 @@ public interface SysUserMapper {
      * @return
      */
     SecurityUser getUserByNo(String s);
+
+    /**
+     * 修改密码
+     * @param id id
+     * @param encode 密码
+     * @return status
+     */
+    Integer changePwd(String id, String encode);
 }

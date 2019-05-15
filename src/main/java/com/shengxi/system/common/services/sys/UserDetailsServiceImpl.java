@@ -1,8 +1,13 @@
 package com.shengxi.system.common.services.sys;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
+import com.shengxi.rs.common.domain.SecurityUser;
+import com.shengxi.system.entites.sys.SysMenuEntity;
 import com.shengxi.system.entites.sys.SysUser;
 import com.shengxi.system.model.mapper.sys.SysUserMapper;
+import com.shengxi.system.model.service.sys.SysMenuServices;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,8 +25,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     SysUserMapper sysUserMapper;
 
+    @Autowired
+    SysMenuServices sysMenuServices;
+
     /**
      * 通过用户登录帐号获取数据
+     *
      * @param s
      * @return
      * @throws UsernameNotFoundException
@@ -32,9 +41,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
          * 用户校验
          */
         UserDetails user = sysUserMapper.getUserByNo(s);
-        if (ObjectUtil.isNull(user)){
+        if (ObjectUtil.isNull(user)) {
             throw new AuthenticationCredentialsNotFoundException("帐号不存在");
         }
-        return null;
+
+        SecurityUser securityUser = new SecurityUser();
+        BeanUtil.copyProperties(user, securityUser);
+        List<SysMenuEntity> permList = sysMenuServices.selectPermList(((SecurityUser) user).getId());
+        securityUser.setPermList(permList);
+        return securityUser;
     }
 }

@@ -61,4 +61,13 @@ public class SysMenuServices {
         list = TreeUtil.Recursive(list);
         return list;
     }
+
+    /**
+     * 返回用户的权限
+     * @param id user_id
+     * @return list
+     */
+    public List<SysMenuEntity> selectPermList(String id) {
+        return null;
+    }
 }
