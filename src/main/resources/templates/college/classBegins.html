@@ -100,9 +100,7 @@
         <td>2018—2019—1</td>
         <td th:text="${subOptEntity.subId}">1234567890</td>
         <td th:text="${subOptEntity.sysUser.userName}">张三三</td>
-        <td th:text="${subOptEntity.sysUser.deptId}">软工一班</td>
-        <td th:text="${subOptEntity.sysUser.deptId}">软件工程</td>
-        <td th:text="${subOptEntity.sysUser.deptId}">计算机科学与技术院</td>
+        <td th:each="dept : ${subOptEntity.sysDeptEntityList}" th:text="${dept.deptName}">软工一班</td>
         <td th:text="${subOptEntity.subjectEntity.subNo}">GE001</td>
         <td th:text="${subOptEntity.subName}">线性代数</td>
         <td th:text="${subOptEntity.subjectEntity.subCredit}">3</td>

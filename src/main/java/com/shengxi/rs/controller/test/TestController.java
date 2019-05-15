@@ -82,7 +82,7 @@ public class TestController extends BaseController {
     @ResponseBody
     public TableDataInfo getList(ComSubEntity comSubEntity) {
         startPage();
-        List<ComSubEntity> list = comSubServices.selectList();
+        List<ComSubEntity> list = comSubServices.selectList(new ComSubEntity());
         return getDataTable(list);
     }
 

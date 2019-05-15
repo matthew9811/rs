@@ -3,26 +3,73 @@
  **/
 (function ($) {
     /*jq扩展函数直接包含在内部的代码能直接使用jq扩展*/
+
     $.extend({
         //layer-table 模块
         table: {
             init: function (options) {
                 var defaults = {
                     title: '',
-                    url: ''
+                    url: '',
+                    cellMinWidth: 95,
+                    page: true,
+                    height: "full-125",
+                    limit: 10,
+                    limits: [10, 20, 50, 100],
+                    response: {
+                        statusCode: 200 //重新规定成功的状态码为 200，table 组件默认为 0
+                    },
+                    parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
+                        return {
+                            "code": res.code, //解析接口状态
+                            "msg": res.msg, //解析提示文本
+                            "count": res.count, //解析数据长度
+                            "data": res.data //解析数据列表
+                        };
+                    },
                 };
                 //传入两个对象。返回合并的值
                 //defaults没有的属性，会增加
                 //options有的会覆盖defaults
                 var options = $.extend(defaults, options);
-                var table = layer.table;
-                table.render({
-                    title: options.title,
-                    url: options.url,
+                layui.use(['table'], function () {
+                    var table = layui.table;
+                    table.render({
+                        elem: options.elem,
+                        url: options.url,
+                        title: options.title,
+                        toolbar: options.toolbar, //开启工具栏
+                        id: options.id,
+                        page: options.page,
+                        response: options.response,
+                        parseData: options.parseData,
+                        cols: options.cols
+                    })
+                })
+            },
+
+            edit: function (tableId) {
+                layui.use(['table'], function () {
+                    var table = layui.table;
+                    table.on("edit(" + tableId + ")", function (obj) {
+                        console.log(obj);
+                        return obj;
+                    })
+                })
+            },
+
+            checkbox: function (tableId) {
+                layui.use(['table'],function () {
+                    var table = layui.table;
+                    table.on('checkbox(' + tableId + ')', function (obj) {
+                        console.log(obj);
+                        return obj;
+                    });
                 })
             }
-        },
+        }
     })
+
 })(jQuery);
 
 /** 消息状态码 */
