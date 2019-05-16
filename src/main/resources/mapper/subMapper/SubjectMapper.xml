@@ -4,72 +4,72 @@
     <sql id="key">
         <trim suffixOverrides=",">
 
-            <if test="id!=null and id!=''">
+            <if test="id != null and id != ''">
                 id,
             </if>
 
-            <if test="subCarryNo!=null and subCarryNo!=''">
+            <if test="subCarryNo != null and subCarryNo != ''">
                 sub_carry_no,
             </if>
 
-            <if test="subNo!=null and subNo!=''">
+            <if test="subNo != null and subNo != ''">
                 sub_no,
             </if>
 
-            <if test="subName!=null and subName!=''">
+            <if test="subName != null and subName != ''">
                 sub_name,
             </if>
 
-            <if test="subInstitute!=null and subInstitute!=''">
+            <if test="subInstitute != null and subInstitute != ''">
                 sub_institute,
             </if>
 
-            <if test="subCredit!=null and subCredit!=''">
+            <if test="subCredit != null and subCredit != ''">
                 sub_credit,
             </if>
 
-            <if test="subClassName!=null and subClassName!=''">
+            <if test="subClassName != null and subClassName != ''">
                 sub_class_name,
             </if>
 
-            <if test="subMenCount!=null and subMenCount!=''">
+            <if test="subMenCount != null and subMenCount != ''">
                 sub_men_count,
             </if>
 
-            <if test="subMenTotalCount!=null and subMenTotalCount!=''">
+            <if test="subMenTotalCount != null and subMenTotalCount != ''">
                 sub_men_total_count,
             </if>
 
-            <if test="subPlanType!=null and subPlanType!=''">
+            <if test="subPlanType != null and subPlanType != ''">
                 sub_plan_type,
             </if>
 
-            <if test="subTotalPeriod!=null and subTotalPeriod!=''">
+            <if test="subTotalPeriod != null and subTotalPeriod != ''">
                 sub_total_period,
             </if>
 
-            <if test="subTheoryPeriod!=null and subTheoryPeriod!=''">
+            <if test="subTheoryPeriod != null and subTheoryPeriod != ''">
                 sub_theory_period,
             </if>
 
-            <if test="subPracticePeriod!=null and subPracticePeriod!=''">
+            <if test="subPracticePeriod != null and subPracticePeriod != ''">
                 sub_practice_period,
             </if>
 
-            <if test="subTeacherId!=null and subTeacherId!=''">
+            <if test="subTeacherId != null and subTeacherId != ''">
                 sub_teacher_id,
             </if>
 
-            <if test="subCourseType!=null and subCourseType!=''">
+            <if test="subCourseType != null and subCourseType != ''">
                 sub_course_type,
             </if>
 
-            <if test="subCourseGenre!=null and subCourseGenre!=''">
+            <if test="subCourseGenre != null and subCourseGenre != ''">
                 sub_course_genre,
             </if>
 
 
-            <if test="subStatus!=null and subStatus!=''">
+            <if test="subStatus != null and subStatus != ''">
                 sub_status,
             </if>
             del_flag,
@@ -79,72 +79,72 @@
 
     <sql id="value">
         <trim suffixOverrides=",">
-            <if test="id!=null and id!=''">
+            <if test="id != null and id != ''">
                 #{id},
             </if>
 
-            <if test="subCarryNo!=null and subCarryNo!=''">
+            <if test="subCarryNo != null and subCarryNo != ''">
                 #{subCarryNo},
             </if>
 
-            <if test="subNo!=null and subNo!=''">
+            <if test="subNo != null and subNo != ''">
                 #{subNo},
             </if>
 
-            <if test="subName!=null and subName!=''">
+            <if test="subName != null and subName != ''">
                 #{subName},
             </if>
 
-            <if test="subInstitute!=null and subInstitute!=''">
+            <if test="subInstitute != null and subInstitute != ''">
                 #{subInstitute},
             </if>
 
-            <if test="subCredit!=null and subCredit!=''">
+            <if test="subCredit != null and subCredit != ''">
                 #{subCredit},
             </if>
 
-            <if test="subClassName!=null and subClassName!=''">
+            <if test="subClassName != null and subClassName != ''">
                 #{subClassName},
             </if>
 
-            <if test="subMenCount!=null and subMenCount!=''">
+            <if test="subMenCount != null and subMenCount != ''">
                 #{subMenCount},
             </if>
 
-            <if test="subMenTotalCount!=null and subMenTotalCount!=''">
+            <if test="subMenTotalCount != null and subMenTotalCount != ''">
                 #{subMenTotalCount},
             </if>
 
-            <if test="subPlanType!=null and subPlanType!=''">
+            <if test="subPlanType != null and subPlanType != ''">
                 #{subPlanType},
             </if>
 
-            <if test="subTotalPeriod!=null and subTotalPeriod!=''">
+            <if test="subTotalPeriod != null and subTotalPeriod != ''">
                 #{subTotalPeriod},
             </if>
 
-            <if test="subTheoryPeriod!=null and subTheoryPeriod!=''">
+            <if test="subTheoryPeriod != null and subTheoryPeriod != ''">
                 #{subTheoryPeriod},
             </if>
 
-            <if test="subPracticePeriod!=null and subPracticePeriod!=''">
+            <if test="subPracticePeriod != null and subPracticePeriod != ''">
                 #{subPracticePeriod},
             </if>
 
-            <if test="subTeacherId!=null and subTeacherId!=''">
+            <if test="subTeacherId != null and subTeacherId != ''">
                 #{subTeacherId},
             </if>
 
-            <if test="subCourseType!=null and subCourseType!=''">
+            <if test="subCourseType != null and subCourseType != ''">
                 #{subCourseType},
             </if>
 
-            <if test="subCourseGenre!=null and subCourseGenre!=''">
+            <if test="subCourseGenre != null and subCourseGenre != ''">
                 #{subCourseGenre},
             </if>
 
 
-            <if test="subStatus!=null and subStatus!=''">
+            <if test="subStatus != null and subStatus != ''">
                 #{subStatus},
             </if>
             0,
@@ -156,29 +156,146 @@
         insert into subject(<include refid="key"/>) values(<include refid="value"/>);
     </insert>
 
+    <resultMap id="selectSubjectEntityListMap" type="com.shengxi.system.entites.subEntity.SubjectEntity">
+        <id column="id" property="id"/>
+        <result column="sub_carry_no" property="subCarryNo"/>
+        <result column="sub_no" property="subNo"/>
+        <result column="sub_name" property="subName"/>
+        <result column="sub_institute" property="subInstitute"/>
+        <result column="sub_credit" property="subCredit"/>
+        <result column="sub_class_name" property="subClassName"/>
+        <result column="sub_men_count" property="subMenCount"/>
+        <result column="sub_men_total_count" property="subMenTotalCount"/>
+        <result column="sub_plan_type" property="subPlanType"/>
+        <result column="sub_total_period" property="subTotalPeriod"/>
+        <result column="sub_theory_period" property="subTheoryPeriod"/>
+        <result column="sub_practice_period" property="subPracticePeriod"/>
+        <result column="sub_teacher_id" property="subTeacherId"/>
+        <result column="sub_course_type" property="subCourseType"/>
+        <result column="sub_course_genre" property="subCourseGenre"/>
+        <result column="replace" property="replace"/>
+        <result column="sub_status" property="subStatus"/>
+        <result column="sub_week" property="subWeek"/>
+        <result column="sub_address" property="subAddress"/>
+        <result column="sub_weekDay" property="subPeriod"/>
+        <result column="subPeriod" property="subPeriod"/>
+    </resultMap>
+
     <select id="selectSubjectEntityList"
-            resultType="com.shengxi.system.entites.subEntity.SubjectEntity">
-        select
+            resultMap="selectSubjectEntityListMap">
+        select j.id,
         j.sub_carry_no,
         j.sub_no,
         j.sub_name,
         j.sub_institute,
-        j.sub_plan_type,
-        j.sub_total_period,
-        j.sub_theory_period,
-        j.sub_practice_period,
         j.sub_credit,
         j.sub_class_name,
         j.sub_men_count,
         j.sub_men_total_count,
+        j.sub_plan_type,
+        j.sub_total_period,
+        j.sub_theory_period,
+        j.sub_practice_period,
+        j.sub_teacher_id,
+        j.sub_course_type,
+        j.sub_course_genre,
+        j.replace,
+        j.sub_status,
         j.sub_address,
         j.sub_week,
         j.sub_week_day,
         j.sub_period,
-        j.replace
         from subject as j
         <where>
             j.del_flag = '0'
+            <if test="id != null and id != ''">
+               and id = #{id}
+            </if>
+
+            <if test="subCarryNo != null and subCarryNo != ''">
+               and sub_carry_no = #{subCarryNo}
+            </if>
+
+            <if test="subNo != null and subNo != ''">
+               and sub_no = #{subNo}
+            </if>
+
+            <if test="subName != null and subName != ''">
+               and sub_name = #{subName}
+            </if>
+
+            <if test="subInstitute != null and subInstitute != ''">
+               and sub_institute = #{subInstitute}
+            </if>
+
+            <if test="subCredit != null and subCredit != ''">
+               and sub_credit = #{credit}
+            </if>
+
+            <if test="subClassName != null and subClassName != ''">
+               and sub_class_name = #{subClassName}
+            </if>
+
+            <if test="subMenCount != null and subMenCount != ''">
+               and sub_men_count = #{subMenCount}
+            </if>
+
+            <if test="subMenTotalCount != null and subMenTotalCount != ''">
+               and sub_men_total_count = #{subMenTotalCount}
+            </if>
+
+            <if test="subPlanType != null and subPlanType != ''">
+               and sub_plan_type = #{subPlanType}
+            </if>
+
+            <if test="subTotalPeriod != null and subTotalPeriod != ''">
+               and sub_total_period = #{subTotalPeriod}
+            </if>
+
+            <if test="subTheoryPeriod != null and subTheoryPeriod != ''">
+               and sub_theory_period = #{subTheoryPeriod}
+            </if>
+
+            <if test="subPracticePeriod != null and subPracticePeriod != ''">
+               and sub_practice_period = #{subPracticePeriod}
+            </if>
+
+            <if test="subTeacherId != null and subTeacherId != ''">
+               and sub_teacher_id = #{subTeacherId}
+            </if>
+
+            <if test="subCourseType != null and subCourseType != ''">
+               and sub_course_type = #{subCourseType}
+            </if>
+
+            <if test="subCourseGenre != null and subCourseGenre != ''">
+               and sub_course_genre = #{subCourseGenre}
+            </if>
+
+            <if test="replace != null and replace != ''">
+                and replace = #{replace}
+            </if>
+
+            <if test="subStatus != null and subStatus != ''">
+               and sub_status = #{subStatus}
+            </if>
+
+            <if test="subWeek != null and subWeek != ''">
+                and sub_week = #{subWeek}
+            </if>
+
+            <if test="subAddress != null and subAddress != ''">
+                and sub_address = #{subAddress}
+            </if>
+
+            <if test="subWeekDay != null and subWeekDay != ''">
+                and sub_week_day = #{subWeekDay}
+            </if>
+
+            <if test="subPeriod != null and subPeriod != ''">
+                and sub_period = #{subPeriod}
+            </if>
+
         </where>
 
     </select>
@@ -206,9 +323,25 @@
 
     <select id="souSubjectEntityList"
             resultMap="souSubjectEntityListMap">
-        select
-        j.sub_carry_no,j.sub_no,j.sub_name,j.sub_institute,j.sub_plan_type,j.sub_total_period,j.sub_theory_period,j.sub_practice_period,j.sub_credit,j.sub_class_name,j.sub_men_count,j.sub_men_total_count,j.sub_address,j.sub_week,j.sub_week_day,j.sub_period,u.user_name
-        from subject j,sys_user u
+        select j.sub_carry_no,
+        j.sub_no,
+        j.sub_name,
+        j.sub_institute,
+        j.sub_plan_type,
+        j.sub_total_period,
+        j.sub_theory_period,
+        j.sub_practice_period,
+        j.sub_credit,
+        j.sub_class_name,
+        j.sub_men_count,
+        j.sub_men_total_count,
+        j.sub_address,
+        j.sub_week,
+        j.sub_week_day,
+        j.sub_period,
+        u.user_name
+        from subject j,
+        sys_user u
         <where>
             sub_name = #{sou}
             or
@@ -216,7 +349,7 @@
             or
             sub_carry_no = #{sou}
             AND
-            j.sub_teacher_id = CONVERT(u.user_no USING utf8) COLLATE utf8_general_ci
+            j.sub_teacher_id = u.user_no
             and
             j.del_flag = '0'
             and

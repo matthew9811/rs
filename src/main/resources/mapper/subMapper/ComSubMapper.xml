@@ -5,27 +5,27 @@
     <sql id="key">
         <trim suffixOverrides=",">
 
-            <if test="id!=null and id!=''">
+            <if test="id != null and id != ''">
                 id,
             </if>
 
-            <if test="stuNo!=null and stuNo!=''">
+            <if test="stuNo != null and stuNo != ''">
                 stu_no,
             </if>
 
-            <if test="subNo!=null and subNo!=''">
+            <if test="subNo != null and subNo != ''">
                 sub_no,
             </if>
 
-            <if test="subName!=null and subName!=''">
+            <if test="subName != null and subName != ''">
                 sub_name,
             </if>
 
-            <if test="score!=null and score!=''">
+            <if test="score != null and score != ''">
                 score,
             </if>
 
-            <if test="credit!=null and credit!=''">
+            <if test="credit != null and credit != ''">
                 credit,
             </if>
             del_flag,
@@ -36,27 +36,27 @@
     <sql id="value">
         <trim suffixOverrides=",">
 
-            <if test="id!=null and id!=''">
+            <if test="id != null and id != ''">
                 #{id},
             </if>
 
-            <if test="stuNo!=null and stuNo!=''">
+            <if test="stuNo != null and stuNo != ''">
                 #{stuNo},
             </if>
 
-            <if test="subNo!=null and subNo!=''">
+            <if test="subNo != null and subNo != ''">
                 #{subNo},
             </if>
 
-            <if test="subName!=null and subName!=''">
+            <if test="subName != null and subName != ''">
                 #{subName},
             </if>
 
-            <if test="score!=null and score!=''">
+            <if test="score != null and score != ''">
                 #{score},
             </if>
 
-            <if test="credit!=null and credit!=''">
+            <if test="credit != null and credit != ''">
                 #{credit},
             </if>
             0,
@@ -68,10 +68,17 @@
         insert into com_sub(<include refid="key"/>) values(<include refid="value"/>);
     </insert>
 
-
+    <resultMap id="selectComSubEntityListMap" type="com.shengxi.system.entites.subEntity.ComSubEntity">
+        <id column="id" property="id"/>
+        <result column="stu_no" property="stuNo"/>
+        <result column="sub_no" property="subNo"/>
+        <result column="sub_name" property="subName"/>
+        <result column="score" property="score"/>
+        <result column="credit" property="credit"/>
+    </resultMap>
 
     <select id="selectComSubEntityList"
-            resultType="com.shengxi.system.entites.subEntity.ComSubEntity">
+            resultMap="selectComSubEntityListMap">
         select c.id,
         c.stu_no,
         c.sub_no,
@@ -81,27 +88,27 @@
         from com_sub as c
         <where>
             c.del_flag = '0'
-            <if test="id!=null and id!=''">
+            <if test="id != null and id != ''">
                 and id = #{id}
             </if>
 
-            <if test="stuNo!=null and stuNo!=''">
+            <if test="stuNo != null and stuNo != ''">
                 and stu_no = #{stuNo}
             </if>
 
-            <if test="subNo!=null and subNo!=''">
+            <if test="subNo != null and subNo != ''">
                 and sub_no = #{subNo}
             </if>
 
-            <if test="subName!=null and subName!=''">
+            <if test="subName != null and subName != ''">
                 and sub_name = #{subName}
             </if>
 
-            <if test="score!=null and score!=''">
+            <if test="score != null and score != ''">
                 and score = #{score}
             </if>
 
-            <if test="credit!=null and credit!=''">
+            <if test="credit != null and credit != ''">
                 and credit = #{credit}
             </if>
         </where>
@@ -128,12 +135,14 @@
         c.score,
         c.credit,
         j.sub_class_name
-        from com_sub c,sub_opt o,subject j
+        from com_sub c,
+        sub_opt o,
+        subject j
         <where>
             c.stu_no = #{stuNo}
-            and c.stu_no=o.stu_no
-            and o.sub_id=j.sub_carry_no
-            and c.sub_no=j.sub_no
+            and c.stu_no = o.stu_no
+            and o.sub_id = j.sub_carry_no
+            and c.sub_no = j.sub_no
             and c.del_flag = '0'
         </where>
     </select>

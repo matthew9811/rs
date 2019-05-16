@@ -36,6 +36,28 @@
 ###2019.05.9 
      1.修改SysUserMapper查询sql语句*问题
      2.修改SysDeptEntity实体
-    
-
-    
+###2019.05.10
+     1.修改SysUserMapper查询sql语句*问题
+     2.修改SysDeptEntity实体
+###2019.05.11
+     1.sql增加语句添加del.flag,create_time字段
+     2.sql查找语句增加del.flag='0'条件
+     3.修改部门查询sql
+###2019.05.12
+     1.修改部门sql
+###2019.05.13
+     1.修改部门显示
+     2.修改sql查询语句改为传入参数
+###2019.05.14
+     1.增加addcontroller
+     2.增加替代课程显示，修改
+     3.addhtml
+     4.修改替代课程html
+###2019.05.15
+     1.修改sql查询
+     2.增加部门add，数据层，服务层，sql
+     3.修改controller跳转设置
+     4.审批成功jq提示
+###2019.05.16
+     1.修改学生已修课程显示
+     2.
