@@ -59,6 +59,8 @@ public class ComSubEntity extends BaseEntity {
      */
     private String delFlag;
 
+    private SubjectEntity subjectEntity;
+
     @Override
     public String getId() {
         return id;
@@ -107,6 +109,14 @@ public class ComSubEntity extends BaseEntity {
 
     public void setCredit(String credit) {
         this.credit = credit;
+    }
+
+    public SubjectEntity getSubjectEntity() {
+        return subjectEntity;
+    }
+
+    public void setSubjectEntity(SubjectEntity subjectEntity) {
+        this.subjectEntity = subjectEntity;
     }
 
     @Override

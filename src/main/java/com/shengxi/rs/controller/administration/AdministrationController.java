@@ -21,9 +21,9 @@ import java.util.List;
  * 教务审批跳转
  */
 @Controller
-@RequestMapping("/administration/administration")
+@RequestMapping("/academic/academic")
 public class AdministrationController {
-    private  String prefix = "administration";
+    private  String prefix = "academic";
 
     @Autowired
     private SubOptServices subOptServices;

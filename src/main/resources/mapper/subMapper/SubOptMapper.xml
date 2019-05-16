@@ -76,16 +76,49 @@
         </trim>
     </sql>
 
-    <insert id="insereSubOptEntity" parameterType="com.shengxi.system.entites.subEntity.SubOptEntity">
+    <insert id="insertSubOptEntity" parameterType="com.shengxi.system.entites.subEntity.SubOptEntity">
         insert into sub_opt(<include refid="key"/>) values(<include refid="value"/>);
     </insert>
 
     <select id="selectSubOptEntityList"
             resultType="com.shengxi.system.entites.subEntity.SubOptEntity">
-        select o.stu_no,o.sub_id,o.sub_name,o.status,o.institute_remark,o.academic_remark
+        select o.id,
+        o.stu_no,
+        o.sub_id,
+        o.sub_name,
+        o.status,
+        o.institute_remark,
+        o.academic_remark
         from sub_opt as o
         <where>
             o.del_flag = '0'
+            <if test="id!=null and id!=''">
+                and id = #{id}
+            </if>
+
+            <if test="stuNo!=null and stuNo!=''">
+                and stu_no = #{stuNo}
+            </if>
+
+            <if test="subId!=null and subId!=''">
+                and sub_id = #{subId}
+            </if>
+
+            <if test="subName!=null and subName!=''">
+                and sub_name = #{subName}
+            </if>
+
+            <if test="status!=null and status!=''">
+                and status = #{status}
+            </if>
+
+            <if test="instituteRemark!=null and instituteRemark!=''">
+                and institute_remark = #{instituteRemark}
+            </if>
+
+            <if test="academicRemark!=null and academicRemark!=''">
+                and academic_remark = #{academicRemark}
+            </if>
         </where>
 
     </select>
@@ -104,41 +137,36 @@
             <result column="sub_class_name" property="subClassName"/>
             <result column="sub_institute" property="subInstitute"/>
         </association>
-        <collection property="sysDeptEntityList" ofType="com.shengxi.system.entites.sys.SysDeptEntity" column="parent_id" select="selectSubStuList2">
-            <result column="dept_name" property="deptName"/>
-        </collection>
     </resultMap>
 
     <select id="selectSubStuList"
             resultMap="selectSubStuListMap" parameterType="String">
-         SELECT o.sub_id,o.id,o.stu_no,o.sub_name,o.status,u.user_name,j.sub_no,j.sub_credit,j.sub_class_name,j.sub_institute,d.parent_id,e.parent_id,p.parent_id
-         FROM sub_opt o,sys_user u,`subject` j,sys_dept d,sys_dept e,sys_dept p
+        SELECT o.sub_id,
+        o.id,
+        o.stu_no,
+        o.sub_name,
+        o.status,
+        u.user_name,
+        u.dept_id,
+        j.sub_no,
+        j.sub_credit,
+        j.sub_class_name,
+        j.sub_institute
+        FROM sub_opt o,sys_user u,`subject` j
         <where>
             <if test="_parameter !=5">
                 o.status = #{distinguish}
             </if>
-        AND
-        o.stu_no = CONVERT(u.user_no USING utf8) COLLATE utf8_general_ci
-        AND
-        o.sub_id = CONVERT(j.sub_carry_no USING utf8) COLLATE utf8_general_ci
-        and
-            u.dept_id = CONVERT(d.id USING utf8) COLLATE utf8_general_ci
-        and
-            d.parent_id = CONVERT(e.id USING utf8) COLLATE utf8_general_ci
-        and
-            e.parent_id = CONVERT(p.id USING utf8) COLLATE utf8_general_ci
-        and
+            AND
+            o.stu_no = CONVERT(u.user_no USING utf8) COLLATE utf8_general_ci
+            AND
+            o.sub_id = CONVERT(j.sub_carry_no USING utf8) COLLATE utf8_general_ci
+            and
             o.del_flag = '0'
-        and
+            and
             u.del_flag = '0'
-        and
+            and
             j.del_flag = '0'
-        and
-            d.del_flag = '0'
-        and
-            e.del_flag = '0'
-        and
-            p.del_flag = '0'
         </where>
     </select>
 

@@ -38,4 +38,14 @@ public class ComSubServices {
     public Integer addList(ComSubEntity comSubEntity){
         return comSubMapper.insertComSubEntity(comSubEntity);
     }
+
+    /**
+     * 判断是否已选择课程
+     *
+     * @return list
+     */
+    @Transactional(readOnly = false, rollbackFor = SQLException.class)
+    public List<ComSubEntity> selectComSub(ComSubEntity comSubEntity){
+        return comSubMapper.selectComSubList(comSubEntity);
+    }
 }

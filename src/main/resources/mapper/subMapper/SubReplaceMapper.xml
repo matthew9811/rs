@@ -5,15 +5,15 @@
     <sql id="key">
         <trim suffixOverrides=",">
 
-            <if test="id!=null">
+            <if test="id!=null and id!=''">
                 id,
             </if>
 
-            <if test="subNo!=null">
+            <if test="subNo!=null and subNo!=''">
                 sub_no,
             </if>
 
-            <if test="subReplaceNo!=null">
+            <if test="subReplaceNo!=null and subReplaceNo!=''">
                 sub_replace_no,
             </if>
             del_flag,
@@ -24,15 +24,15 @@
     <sql id="value">
         <trim suffixOverrides=",">
 
-            <if test="id!=null">
+            <if test="id!=null and id!=''">
                 #{id},
             </if>
 
-            <if test="subNo!=null">
+            <if test="subNo!=null and subNo!=''">
                 #{subNo},
             </if>
 
-            <if test="subReplaceNo!=null">
+            <if test="subReplaceNo!=null and subReplaceNo!=''">
                 #{subReplaceNo},
             </if>
             0,
@@ -51,19 +51,30 @@
         r.sub_replace_no
         from sub_replace as r
         <where>
-         r.del_flag = '0'
-         </where>
+            r.del_flag = '0'
+            <if test="id!=null and id!=''">
+                and id = #{id}
+            </if>
+
+            <if test="subNo!=null and subNo!=''">
+                and sub_no = #{subNo}
+            </if>
+
+            <if test="subReplaceNo!=null and subReplaceNo!=''">
+                and sub_replace_no = #{subReplaceNo}
+            </if>
+        </where>
     </select>
 
     <update id="updateBySubReplaceEntityList">
-    update sub_replace <set>
+        update sub_replace <set>
         sub_replace_no = #{subReplaceNo},
-    update_time = now()
+        update_time = now()
     </set>
 
-    <where>
-        sub_no = #{subNo}
-    </where>
+        <where>
+            sub_no = #{subNo}
+        </where>
 
     </update>
 </mapper>

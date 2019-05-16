@@ -59,25 +59,7 @@ public class TestController extends BaseController {
         return "main";
     }
 
-    //    @RequestMapping("/getList")
-//    @ResponseBody
-//    public Map<String, Object> getList() {
-//        List<TestStu> list = new ArrayList<>();
-//        TestStu stu = new TestStu();
-//        stu.setSubNo("CS1007");
-//        stu.setSubName("线性代数");
-//        stu.setTerm("2017-2018-1");
-//        stu.setChoiceStatus("0");
-//        stu.setRemark("这是备注这是备注这是备注");
-//        stu.setGrade(59.5);
-//        list.add(stu);
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("code","200");
-//        map.put("msg", "200");
-//        map.put("count", 5);
-//        map.put("data", list);
-//        return map;
-//    }
+
     @RequestMapping("/getList")
     @ResponseBody
     public TableDataInfo getList(ComSubEntity comSubEntity) {

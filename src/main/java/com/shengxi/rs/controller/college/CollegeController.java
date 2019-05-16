@@ -38,12 +38,6 @@ public class CollegeController {
     @GetMapping("/subordinate")
     public String subordinate(Model model) {
         List<SubOptEntity> list = subOptServices.selectSubStuList("5");
-        for(SubOptEntity subOptEntity : list){
-            System.out.println("1");
-            for (SysDeptEntity sysDeptEntity : subOptEntity.getSysDeptEntityList()){
-                System.out.println(sysDeptEntity.getDeptName());
-            }
-        }
         model.addAttribute("list",list);
         return prefix + "/subordinate";
     }

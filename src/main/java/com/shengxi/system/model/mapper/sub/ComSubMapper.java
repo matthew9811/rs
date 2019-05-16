@@ -42,4 +42,10 @@ public interface ComSubMapper {
      * @return list
      */
     Integer deleteSubject();
+
+    /**
+     * 判断是否已选择课程
+     * @return lis
+     */
+    List<ComSubEntity> selectComSubList(ComSubEntity comSubEntity);
 }

@@ -41,4 +41,11 @@ public interface SysUserMapper {
      * @return status
      */
     Integer changePwd(String id, String encode);
+
+    /**
+     * 获取用户信息
+     * @param sysUser
+     * @return
+     */
+    SysUser selectUserNo(SysUser sysUser);
 }

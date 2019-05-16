@@ -68,21 +68,73 @@
         insert into com_sub(<include refid="key"/>) values(<include refid="value"/>);
     </insert>
 
+
+
     <select id="selectComSubEntityList"
             resultType="com.shengxi.system.entites.subEntity.ComSubEntity">
-        select c.stu_no,
+        select c.id,
+        c.stu_no,
         c.sub_no,
         c.sub_name,
         c.score,
         c.credit
         from com_sub as c
         <where>
+            c.del_flag = '0'
+            <if test="id!=null and id!=''">
+                and id = #{id}
+            </if>
 
-        c.del_flag = '0'
-            <if test="stuNo != null and stuNo != '' ">
-               and  c.stu_no = #{stuNo}
+            <if test="stuNo!=null and stuNo!=''">
+                and stu_no = #{stuNo}
+            </if>
+
+            <if test="subNo!=null and subNo!=''">
+                and sub_no = #{subNo}
+            </if>
+
+            <if test="subName!=null and subName!=''">
+                and sub_name = #{subName}
+            </if>
+
+            <if test="score!=null and score!=''">
+                and score = #{score}
+            </if>
+
+            <if test="credit!=null and credit!=''">
+                and credit = #{credit}
             </if>
         </where>
     </select>
 
+    <resultMap id="selectComSubListMap" type="com.shengxi.system.entites.subEntity.ComSubEntity">
+        <id column="id" property="id"/>
+        <result column="stu_no" property="stuNo"/>
+        <result column="sub_no" property="subNo"/>
+        <result column="sub_name" property="subName"/>
+        <result column="score" property="score"/>
+        <result column="credit" property="credit"/>
+        <association property="subjectEntity" javaType="com.shengxi.system.entites.subEntity.SubjectEntity">
+            <result column="sub_class_name" property="subClassName"/>
+        </association>
+    </resultMap>
+
+    <select id="selectComSubList"
+            resultMap="selectComSubListMap">
+        select c.id,
+        c.stu_no,
+        c.sub_no,
+        c.sub_name,
+        c.score,
+        c.credit,
+        j.sub_class_name
+        from com_sub c,sub_opt o,subject j
+        <where>
+            c.stu_no = #{stuNo}
+            and c.stu_no=o.stu_no
+            and o.sub_id=j.sub_carry_no
+            and c.sub_no=j.sub_no
+            and c.del_flag = '0'
+        </where>
+    </select>
 </mapper>

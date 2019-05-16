@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <meta charset="utf-8">
     <title>开课学院审批页</title>
     <script>
@@ -17,6 +18,13 @@
                 ho[i].checked=!ho[i].checked;
             }
         }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("a").click(function(){
+                alert("审批成功");
+            });
+        });
     </script>
     <meta charset="UTF-8">
 </head>
@@ -76,9 +84,9 @@
         <th width="100">学期</th>
         <th width="35">学号</th>
         <th width="50">姓名</th>
-        <th width="60">班级</th>
-        <th width="70">专业</th>
         <th width="150">所属学院</th>
+        <th width="70">专业</th>
+        <th width="60">班级</th>
         <th width="66">原课程代码</th>
         <th width="100">原课程名称</th>
         <th width="38">原学分</th>

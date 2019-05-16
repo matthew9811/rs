@@ -30,14 +30,29 @@
                 <option value="1">2019-2020-2</option>
             </select>
         <tr>
-            <th>课程</td>
-            <th>成绩</td>
-            <th>申请重修</td>
+            <th>课程代码</th>
+            <th>课程名</th>
+            <th>历史修读学期</th>
+            <th>历史成绩</th>
+            <th>选课操作</th>
+            <th>选课情况</th>
         </tr>
-        <tr th:each="comSubEntity : ${list}">
+            <tr th:each="comSubEntity : ${list}">
+            <td th:text="${comSubEntity.subNo}">GE6045</td>
             <td th:text="${comSubEntity.subName}">高数Ⅰ</td>
+            <td>2017-2018-1</td>
             <td th:text="${comSubEntity.score}">11</td>
-            <td><a href="choose.html" th:href="@{/stu/stu/choose(subNo=${comSubEntity.subNo})}">申请重修</a></td>
+            <td><a href="choose.html" th:href="@{/stu/stu/choose(subNo=${comSubEntity.subNo})}">点击选课</a></td>
+                <td></td>
+            </tr>
+        <tr th:each="comSubEntity1 : ${list1}">
+            <td th:text="${comSubEntity1.subNo}">GE6045</td>
+            <td th:text="${comSubEntity1.subName}">高数Ⅰ</td>
+            <td>2017-2018-1</td>
+            <td th:text="${comSubEntity1.score}">11</td>
+            <td>已选择</td>
+            <td></td>
+        </tr>
         </tr>
     </table>
 </form>

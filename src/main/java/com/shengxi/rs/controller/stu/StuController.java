@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -61,12 +62,13 @@ public class StuController {
     @GetMapping("/course")
     public String course(Model model,String subCarryNo) {
         List<SubjectEntity> list = subjectServices.souSubjectEntityList(subCarryNo);
-//        SysUser sysUser = userService.selectUserNo("17210210613");
-
+        SysUser sysUser = new SysUser();
+        sysUser.setUserNo("17210210613");
+        sysUser = sysUserMapper.selectUserNo(sysUser);
         for(SubjectEntity subjectEntity : list){
             model.addAttribute("subjectEntity",subjectEntity);
         }
-//        model.addAttribute("sysUser",sysUser);
+        model.addAttribute("sysUser",sysUser);
         return prefix + "/course";
     }
 
@@ -81,7 +83,9 @@ public class StuController {
         if(ObjectUtil.isNotNull(subCarryNo)) {
             subOptServices.addList(subOptEntity);
         }
-        List<SubOptEntity> list = subOptServices.selectList(subOptEntity);
+        SubOptEntity subOptEntity1 = new SubOptEntity();
+        subOptEntity1.setStuNo("17210210613");
+        List<SubOptEntity> list = subOptServices.selectList(subOptEntity1);
         model.addAttribute("list",list);
         return prefix + "/news";
     }
@@ -90,7 +94,9 @@ public class StuController {
         ComSubEntity comSubEntity = new ComSubEntity();
         comSubEntity.setStuNo("17210210613");
         List<ComSubEntity> list = comSubServices.selectList(comSubEntity);
+        List<ComSubEntity> list1 = comSubServices.selectComSub(comSubEntity);
         model.addAttribute("list",list);
+        model.addAttribute("list1",list1);
         return prefix + "/search";
     }
 
@@ -108,8 +114,10 @@ public class StuController {
 
     @PostMapping("/sou")
     @ResponseBody
-    public String souSubject(String sou,Model model) {
+    public ModelAndView souSubject(String sou, Model model) {
         List<SubjectEntity> list = subjectServices.souSubjectEntityList(sou);
-        return prefix + "/choose";
+        model.addAttribute("list",list);
+        ModelAndView modelAndView = new ModelAndView("redirect:/stu/stu/choose");
+        return modelAndView;
     }
 }
