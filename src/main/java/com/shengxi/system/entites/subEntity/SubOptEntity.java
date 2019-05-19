@@ -65,12 +65,6 @@ public class SubOptEntity extends BaseEntity {
      */
     private String delFlag;
 
-    private SubjectEntity subjectEntity;
-
-    private SysUser sysUser;
-
-    private List<SysDeptEntity> sysDeptEntityList;
-
     @Override
     public String getId() {
         return id;
@@ -127,30 +121,6 @@ public class SubOptEntity extends BaseEntity {
 
     public void setAcademicRemark(String academicRemark) {
         this.academicRemark = academicRemark;
-    }
-
-    public SubjectEntity getSubjectEntity() {
-        return subjectEntity;
-    }
-
-    public void setSubjectEntity(SubjectEntity subjectEntity) {
-        this.subjectEntity = subjectEntity;
-    }
-
-    public SysUser getSysUser() {
-        return sysUser;
-    }
-
-    public void setSysUser(SysUser sysUser) {
-        this.sysUser = sysUser;
-    }
-
-    public List<SysDeptEntity> getSysDeptEntityList() {
-        return sysDeptEntityList;
-    }
-
-    public void setSysDeptEntityList(List<SysDeptEntity> sysDeptEntityList) {
-        this.sysDeptEntityList = sysDeptEntityList;
     }
 
     @Override

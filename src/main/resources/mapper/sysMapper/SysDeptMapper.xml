@@ -51,8 +51,15 @@
         insert into sys_dept(<include refid="key"/>) values(<include refid="value"/>);
     </insert>
 
+    <resultMap id="selectSysDeptEntityListMap" type="com.shengxi.system.entites.sys.SysDeptEntity">
+        <id column = "id" property = "id"/>
+        <result column = "parent_id" property = "parentId"/>
+        <result column = "dept_name" property = "deptName"/>
+        <result column = "sort" property = "sort"/>
+    </resultMap>
+
     <select id="selectSysDeptEntityList"
-            resultType="com.shengxi.system.entites.sys.SysDeptEntity">
+            resultMap="selectSysDeptEntityListMap">
         select d.id,
        d.parent_id,
        d.dept_name,

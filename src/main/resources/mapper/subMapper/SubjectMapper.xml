@@ -204,7 +204,7 @@
         j.sub_address,
         j.sub_week,
         j.sub_week_day,
-        j.sub_period,
+        j.sub_period
         from subject as j
         <where>
             j.del_flag = '0'
@@ -348,8 +348,7 @@
             sub_no = #{sou}
             or
             sub_carry_no = #{sou}
-            AND
-            j.sub_teacher_id = u.user_no
+
             and
             j.del_flag = '0'
             and

@@ -81,11 +81,13 @@
     </insert>
 
     <resultMap id="selectSubOptEntityListMap" type="com.shengxi.system.entites.subEntity.SubOptEntity">
-        <id column="sub_id" property="subId"/>
-        <result column="id" property="id"/>
+        <id column="id" property="id"/>
         <result column="stu_no" property="stuNo"/>
+        <result column="sub_id" property="subId"/>
         <result column="sub_name" property="subName"/>
         <result column="status" property="status"/>
+        <result column="institute_remark" property="instituteRemark"/>
+        <result column="academic_remark" property="academicRemark"/>
     </resultMap>
 
     <select id="selectSubOptEntityList"
@@ -130,51 +132,57 @@
         </where>
 
     </select>
-    <resultMap id="selectSubStuListMap" type="com.shengxi.system.entites.subEntity.SubOptEntity">
-        <id column="sub_id" property="subId"/>
-        <result column="id" property="id"/>
-        <result column="stu_no" property="stuNo"/>
-        <result column="sub_name" property="subName"/>
-        <result column="status" property="status"/>
-        <association property="sysUser" javaType="com.shengxi.system.entites.sys.SysUser">
+    <resultMap id="selectSubStuListMap" type="com.shengxi.system.entites.subEntity.SubOptToolEntity">
+            <id column="stu_no" property="stuNo"/>
             <result column="user_name" property="userName"/>
-        </association>
-        <association property="subjectEntity" javaType="com.shengxi.system.entites.subEntity.SubjectEntity">
-            <result column="sub_no" property="subNo"/>
-            <result column="sub_credit" property="subCredit"/>
+            <result column="dname" property="subClass"/>
+            <result column="ename" property="major"/>
+            <result column="pname" property="subordinate"/>
+            <result column="sub_institute" property="institute"/>
+            <result column="cSubNo" property="originalSubNo"/>
+            <result column="cSubName" property="originalSubName"/>
+            <result column="cCredit" property="originalSubCredit"/>
+            <result column="sub_no" property="nowSubNo"/>
+            <result column="sub_name" property="nowSubName"/>
+            <result column="sub_credit" property="nowSubCredit"/>
+            <result column="sub_id" property="subCarryNo"/>
             <result column="sub_class_name" property="subClassName"/>
-            <result column="sub_institute" property="subInstitute"/>
-        </association>
+            <result column="status" property="status"/>
     </resultMap>
 
     <select id="selectSubStuList"
             resultMap="selectSubStuListMap" parameterType="String">
-        SELECT o.sub_id,
-        o.id,
+       SELECT o.sub_id,
         o.stu_no,
         o.sub_name,
         o.status,
         u.user_name,
-        u.dept_id,
         j.sub_no,
         j.sub_credit,
         j.sub_class_name,
-        j.sub_institute
-        FROM sub_opt o,sys_user u,`subject` j
+        j.sub_institute,
+        d.dept_name dname,
+        e.dept_name ename,
+        p.dept_name pname,
+        c.sub_no cSubNo,
+        c.sub_name cSubName,
+        c.credit cCredit
+        FROM sub_opt o,sys_user u,`subject` j,sys_dept d,sys_dept e,sys_dept p,com_sub c
         <where>
-            <if test="_parameter != 5">
-                o.status = #{distinguish}
-            </if>
-            AND
-            o.stu_no = u.user_no
-            AND
-            o.sub_id = j.sub_carry_no
-            and
-            o.del_flag = '0'
-            and
-            u.del_flag = '0'
-            and
-            j.del_flag = '0'
+        o.stu_no=u.user_no
+        and d.id='1626943763580391424'
+        and d.parent_id=e.id
+        and e.parent_id=p.id
+        and o.sub_id = j.sub_carry_no
+        and o.sub_name=c.sub_name
+        and o.stu_no=c.stu_no
+        and o.del_flag='0'
+        and j.del_flag='0'
+        and u.del_flag='0'
+        and d.del_flag='0'
+        and e.del_flag='0'
+        and p.del_flag='0'
+        and c.del_flag='0'
         </where>
     </select>
 

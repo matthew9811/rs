@@ -1,60 +1,145 @@
 <!DOCTYPE HTML>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
-<head>
-    <meta charset="utf-8">
-    <title>搜索页</title>
-</head>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="childrenBody">
+<form class="layui-form">
+    <blockquote class="layui-elem-quote quoteBox">
+        <form class="layui-form">
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input searchVal" placeholder="请输入搜索的内容"/>
+                </div>
+                <a class="layui-btn search_btn layui-btn-radius" data-type="reload">搜索</a>
+            </div>
+            <div class="col-sm-4">
+                <label class="layui-form-label col-sm-3">请选择范围</label>
+                <div class="layui-input-inline col-sm-9">
+                    <input type="text" class="layui-input layer-range-time" id="time" placeholder="开始 到 结束">
+                </div>
+            </div>
+        </form>
+    </blockquote>
 
-<body>
-<form action="/stu/stu/sou" method="post">
-    <table align="center">
-        <tr>
-            <td><input name="sou" type="text" id="sou" /><input type="submit" value="搜索"></td>
-        </tr>
-    </table>
+    <table id="newsList" lay-filter="newsList"></table>
+    <!--<script type="text/html" id="toolbarDemo">-->
+    <!--<div class="layui-btn-container">-->
+    <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>-->
+    <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>-->
+    <!--<button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>-->
+    <!--</div>-->
+    <!--</script>-->
+    <!--操作-->
+    <script type="text/html" id="newsListBar">
+        <a class="layui-btn layui-btn-xs" lay-event="detail" href="/stu/stu/choose">点击选课</a>
+    </script>
 </form>
-<form action="/stu/stu/sou" method="post">
-    <table width="345" border="1" align="center" cellpadding="0" cellspacing="0">
-        <tr><th>学年学期</th>
-            <td colspan="3"><select style="width:173px;">
-                <option value="1">2018-2019-1</option>
-                <option value="1">全部</option>
-                <option value="1">2015-2016-1</option>
-                <option value="1">2015-2016-2</option>
-                <option value="1">2016-2017-1</option>
-                <option value="1">2016-2017-2</option>
-                <option value="1">2017-2018-1</option>
-                <option value="1">2017-2018-2</option>
-                <option value="1">2018-2019-2</option>
-                <option value="1">2019-2020-1</option>
-                <option value="1">2019-2020-2</option>
-            </select>
-        <tr>
-            <th>课程代码</th>
-            <th>课程名</th>
-            <th>历史修读学期</th>
-            <th>历史成绩</th>
-            <th>选课操作</th>
-            <th>选课情况</th>
-        </tr>
-            <tr th:each="comSubEntity : ${list}">
-            <td th:text="${comSubEntity.subNo}">GE6045</td>
-            <td th:text="${comSubEntity.subName}">高数Ⅰ</td>
-            <td>2017-2018-1</td>
-            <td th:text="${comSubEntity.score}">11</td>
-            <td><a href="choose.html" th:href="@{/stu/stu/choose(subNo=${comSubEntity.subNo})}">点击选课</a></td>
-                <td></td>
-            </tr>
-        <tr th:each="comSubEntity1 : ${list1}">
-            <td th:text="${comSubEntity1.subNo}">GE6045</td>
-            <td th:text="${comSubEntity1.subName}">高数Ⅰ</td>
-            <td>2017-2018-1</td>
-            <td th:text="${comSubEntity1.score}">11</td>
-            <td>已选择</td>
-            <td></td>
-        </tr>
-        </tr>
-    </table>
-</form>
+<div th:include="include :: footer"></div>
+<script>
+    $(function () {
+        layui.use(['form', 'layer','table'], function () {
+            var layer = layui.layer;
+            layer.msg('hello');
+            var form = layui.form,
+                layer = parent.layer === undefined ? layui.layer : top.layer,
+                $ = layui.jquery,
+                table = layui.table;
+
+            //学生重修课程列表
+            var options = {
+                elem: '#newsList',
+                url: ctx + 'test/getList',
+                title: '学生成绩表',
+                toolbar: '#toolbarDemo',
+                id: "newsListTable",
+                cols: [
+                    [
+                        {type: 'checkbox', fixed: 'left'},
+                        {field: 'subNo', title: '课程代码', align: "center"},
+                        {field: 'subName', title: '课程名称', align: "center"},
+                        {field: 'score', title: '历史成绩', align: 'center', edit: 'text'},
+                        {title: '选课操作', width: 220, templet: '#newsListBar', fixed: "right", align: "center"},
+                    ]
+                ]
+            };
+
+            $.table.init(options);
+
+            //头工具栏事件
+            table.on('toolbar(newsList)', function (obj) {
+                var checkStatus = table.checkStatus(obj.config.id);
+                switch (obj.event) {
+                    case 'getCheckData':
+                        var data = checkStatus.data;
+                        layer.alert(JSON.stringify(data));
+                        break;
+                    case 'getCheckLength':
+                        var data = checkStatus.data;
+                        layer.msg('选中了：' + data.length + ' 个');
+                        break;
+                    case 'isAll':
+                        layer.msg(checkStatus.isAll ? '全选' : '未全选');
+                        break;
+                }
+                ;
+            });
+
+            // 监听复选框选择
+            // table.on('checkbox(newsList)', function (obj) {
+            //     console.log(obj.checked); //当前是否选中状态
+            //     console.log(obj.data); //选中行的相关数据
+            //     console.log(obj.type); //如果触发的是全选，则为：all，如果触发的是单选，则为：one
+            // });
+
+            //监听点击事件
+            table.on('tool(newsList)', function (obj) {
+                var data = obj.data;
+                <!--layer.msg('点击课程：'+ data.subName);-->
+                if (obj.event === 'setRemark') {
+                    layer.prompt({
+                        formType: 2,
+                        title: '修改课程代码为 [' + data.subNo + '] 的备注',
+                        value: data.subNo
+                    }, function (value, index) {
+                        layer.close(index);
+                        //这里一般是发送修改的Ajax请求
+                        //同步更新表格和缓存对应的值
+                        obj.update({
+                            sign: value
+                        });
+                    });
+                } else if (obj.event === 'detail') {
+                    layer.msg('点击课程：' + data.subName)
+                }
+            });
+
+            //监听单元格编辑
+            console.log($.table.edit('newsList'));
+
+            //监听复选框选择
+            console.log($.table.checkbox('newsList'));
+
+            //搜索
+            $(".search_btn").on("click", function () {
+                console.log($('.layer-range-time').val());
+                if ($(".searchVal").val() != '') {
+                    table.reload("newsListTable", {
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        where: {
+                            key: $(".searchVal").val()  //搜索的关键字
+                        }
+                    })
+                } else {
+                    layer.msg("请输入搜索的内容");
+                }
+            });
+
+        })
+    })
+
+
+</script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.shengxi.system.model.service.sub;
 
 import com.shengxi.system.entites.subEntity.SubOptEntity;
+import com.shengxi.system.entites.subEntity.SubOptToolEntity;
 import com.shengxi.system.model.mapper.sub.SubOptMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,7 @@ public class SubOptServices {
      * @return list
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
-    public  List<SubOptEntity> selectSubStuList(String distinguish){
+    public  List<SubOptToolEntity> selectSubStuList(String distinguish){
         return subOptMapper.selectSubStuList(distinguish);
     }
     /**
