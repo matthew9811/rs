@@ -1,6 +1,9 @@
 package com.shengxi.rs.controller.administration;
 
+import com.shengxi.rs.common.domain.TableDataInfo;
+import com.shengxi.rs.common.handler.BaseController;
 import com.shengxi.system.entites.subEntity.SubOptEntity;
+import com.shengxi.system.entites.subEntity.SubOptToolEntity;
 import com.shengxi.system.entites.subEntity.SubReplaceEntity;
 import com.shengxi.system.model.service.sub.SubOptServices;
 import com.shengxi.system.model.service.sub.SubReplaceServices;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -22,7 +26,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/academic/academic")
-public class AdministrationController {
+public class AdministrationController extends BaseController {
     private  String prefix = "academic";
 
     @Autowired
@@ -31,13 +35,17 @@ public class AdministrationController {
     private SubReplaceServices subReplaceServices;
 
     @GetMapping("/approval")
-    public String approval(Model model, String status, String id) {
-        if(status!=null){
-            subOptServices.updateByStuOpt(status,id);
-        }
-        List<SubOptEntity> list = subOptServices.selectSubStuList("1");
-        model.addAttribute("list",list);
+    public String approval(HttpServletResponse response) {
+        response.addHeader("x-frame-options", "SAMEORIGIN");
         return prefix + "/approval";
+    }
+
+    @RequestMapping("/approvalList")
+    @ResponseBody
+    public TableDataInfo approvaList(SubOptEntity subOptEntity) {
+        startPage();
+        List<SubOptToolEntity> list = subOptServices.selectSubStuList("5");
+        return getDataTable(list);
     }
 
     @GetMapping("/replace")
@@ -49,6 +57,7 @@ public class AdministrationController {
         model.addAttribute("list",list);
         return prefix + "/replace";
     }
+
     @GetMapping("/upReplace")
     public String upReplace(Model model, String Id) {
         SubReplaceEntity subReplaceEntity = new SubReplaceEntity();

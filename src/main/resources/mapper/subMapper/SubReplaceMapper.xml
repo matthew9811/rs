@@ -44,9 +44,15 @@
         insert into sub_replace(<include refid="key"/>) values(<include refid="value"/>);
     </insert>
 
+    <resultMap id="selectSubReplaceEntityListMap" type="com.shengxi.system.entites.subEntity.SubReplaceEntity">
+        <id column = "id" property = "id"/>
+        <result column = "sub_no" property = "subNo"/>
+        <result column = "sub_replace_no" property = "subReplaceNo"/>
+    </resultMap>
+
     <select id="selectSubReplaceEntityList"
-            resultType="com.shengxi.system.entites.subEntity.SubReplaceEntity">
-        select r.Id,
+            resultMap="selectSubReplaceEntityListMap">
+        select r.id,
         r.sub_no,
         r.sub_replace_no
         from sub_replace as r

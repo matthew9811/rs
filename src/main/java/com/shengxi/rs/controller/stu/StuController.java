@@ -2,6 +2,8 @@ package com.shengxi.rs.controller.stu;
 
 import cn.hutool.core.util.ObjectUtil;
 
+import com.shengxi.rs.common.domain.TableDataInfo;
+import com.shengxi.rs.common.handler.BaseController;
 import com.shengxi.rs.common.util.IdUtil;
 import com.shengxi.system.entites.subEntity.ComSubEntity;
 import com.shengxi.system.entites.subEntity.SubOptEntity;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -29,7 +32,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/stu/stu")
-public class StuController {
+public class StuController extends BaseController {
 
     private String prefix = "stu";
 
@@ -45,23 +48,11 @@ public class StuController {
     @Autowired
     private SysUserMapper sysUserMapper;
 
-    @PostMapping("/news")
-    public String pnews() {
-
-        return "redirect:/stu/stu/news";
-    }
-    @PostMapping("/course")
-    public String pcourse() {
-        return "redirect:/stu/stu/course";
-    }
-    @PostMapping("/choose")
-    public String pchoose() {
-        return "redirect:/stu/stu/choose";
-    }
 
     @GetMapping("/course")
     public String course(Model model,String subCarryNo) {
-        List<SubjectEntity> list = subjectServices.souSubjectEntityList(subCarryNo);
+
+        List<SubjectEntity> list = subjectServices.souSubjectEntityList("1068525");
         SysUser sysUser = new SysUser();
         sysUser.setUserNo("17210210613");
         sysUser = sysUserMapper.selectUserNo(sysUser);
@@ -73,8 +64,11 @@ public class StuController {
     }
 
     @GetMapping("/news")
-    public String news(Model model,String subCarryNo,String subName) {
-        SubOptEntity subOptEntity = new SubOptEntity();
+    public String news(HttpServletResponse response) {
+        response.addHeader("x-frame-options", "SAMEORIGIN");
+        return prefix + "/news";
+
+        /**SubOptEntity subOptEntity = new SubOptEntity();
         subOptEntity.setId(IdUtil.uuid());
         subOptEntity.setStuNo("17210210613");
         subOptEntity.setSubId(subCarryNo);
@@ -88,28 +82,18 @@ public class StuController {
         List<SubOptEntity> list = subOptServices.selectList(subOptEntity1);
         model.addAttribute("list",list);
         return prefix + "/news";
+         */
     }
     @GetMapping("/search")
-    public String search(Model model) {
-        ComSubEntity comSubEntity = new ComSubEntity();
-        comSubEntity.setStuNo("17210210613");
-        List<ComSubEntity> list = comSubServices.selectList(comSubEntity);
-        List<ComSubEntity> list1 = comSubServices.selectComSub(comSubEntity);
-        model.addAttribute("list",list);
-        model.addAttribute("list1",list1);
+    public String search(HttpServletResponse response) {
+        response.addHeader("x-frame-options", "SAMEORIGIN");
         return prefix + "/search";
     }
 
     @GetMapping("/choose")
-    public String choose(Model model,String subNo) {
-        List<SubjectEntity> list = subjectServices.souSubjectEntityList(subNo);
-        model.addAttribute("list",list);
+    public String choose(HttpServletResponse response) {
+        response.addHeader("x-frame-options", "SAMEORIGIN");
         return prefix + "/choose";
-    }
-
-    @RequestMapping("")
-    public String test() {
-        return "/test/index";
     }
 
     @PostMapping("/sou")
@@ -119,5 +103,31 @@ public class StuController {
         model.addAttribute("list",list);
         ModelAndView modelAndView = new ModelAndView("redirect:/stu/stu/choose");
         return modelAndView;
+    }
+    @RequestMapping("/newsList")
+    @ResponseBody
+    public TableDataInfo newsList(SubOptEntity subOptEntity) {
+        subOptEntity.setStuNo("17210210613");
+        startPage();
+        List<SubOptEntity> list = subOptServices.selectList(subOptEntity);
+        return getDataTable(list);
+    }
+
+    @RequestMapping("/chooseList")
+    @ResponseBody
+    public TableDataInfo chooseList(SubjectEntity subjectEntity) {
+        subjectEntity.setSubCarryNo("1068515");
+        startPage();
+        List<SubjectEntity> list = subjectServices.selectList(subjectEntity);
+        return getDataTable(list);
+    }
+
+    @RequestMapping("/searchList")
+    @ResponseBody
+    public TableDataInfo searchList(ComSubEntity comSubEntity) {
+        comSubEntity.setStuNo("17210210613");
+        startPage();
+        List<ComSubEntity> list = comSubServices.selectList(comSubEntity);
+        return getDataTable(list);
     }
 }
