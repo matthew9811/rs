@@ -1,5 +1,6 @@
 package com.shengxi.rs.common.filter;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.rs.common.domain.SecurityUser;
 import com.shengxi.rs.common.services.TokenService;
 import java.io.IOException;
@@ -38,7 +39,7 @@ public class TokenFilter extends OncePerRequestFilter {
         String token = getToken(request);
         if (StringUtils.isNotBlank(token)) {
             SecurityUser securityUser = tokenService.getSecurityUser(token);
-            if (securityUser != null) {
+            if (ObjectUtil.isNotNull(securityUser)) {
                 securityUser = checkLoginTime(securityUser);
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(securityUser,
                         null, securityUser.getAuthorities());
@@ -52,26 +53,26 @@ public class TokenFilter extends OncePerRequestFilter {
      * 校验时间<br>
      * 过期时间与当前时间对比，临近过期10分钟内的话，自动刷新缓存
      *
-     * @param loginUser
-     * @return
+     * @param securityUser 当前验证用户
+     * @return securityUser 验证后的用户
      */
-    private SecurityUser checkLoginTime(SecurityUser loginUser) {
-        long expireTime = loginUser.getExpireTime();
+    private SecurityUser checkLoginTime(SecurityUser securityUser) {
+        long expireTime = securityUser.getExpireTime();
         long currentTime = System.currentTimeMillis();
         if (expireTime - currentTime <= MINUTES_10) {
-            String token = loginUser.getToken();
-            loginUser = (SecurityUser) userDetailsService.loadUserByUsername(loginUser.getUserNo());
-            loginUser.setToken(token);
-            tokenService.refresh(loginUser);
+            String token = securityUser.getToken();
+            securityUser = (SecurityUser) userDetailsService.loadUserByUsername(securityUser.getUserNo());
+            securityUser.setToken(token);
+            tokenService.refresh(securityUser);
         }
-        return loginUser;
+        return securityUser;
     }
 
     /**
      * 根据参数或者header获取token
      *
-     * @param request
-     * @return
+     * @param request 请求
+     * @return token
      */
     public static String getToken(HttpServletRequest request) {
         String token = request.getParameter(TOKEN_KEY);

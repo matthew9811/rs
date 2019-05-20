@@ -75,6 +75,7 @@ public class SecurityUser extends SysUser implements UserDetails {
 
     /**
      * 用户是否锁定
+     *
      * @return boolean
      */
     @Override
@@ -84,6 +85,7 @@ public class SecurityUser extends SysUser implements UserDetails {
 
     /**
      * 密码是否过期
+     *
      * @return boolean
      */
     @Override
@@ -93,6 +95,7 @@ public class SecurityUser extends SysUser implements UserDetails {
 
     /**
      * 用户是否激活
+     *
      * @return boolean
      */
     @Override
@@ -112,5 +115,26 @@ public class SecurityUser extends SysUser implements UserDetails {
 
     public void setPermList(List<SysMenuEntity> permList) {
         this.permList = permList;
+    }
+
+    @Override
+    public String toString() {
+        return "SecurityUser{" +
+                "permList=" + permList +
+                ", token='" + token + '\'' +
+                ", loginTime=" + loginTime +
+                ", expireTime=" + expireTime +
+                ", userNo='" + userNo + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", status='" + status + '\'' +
+                ", id='" + id + '\'' +
+                ", createTime=" + createTime +
+                ", createBy='" + createBy + '\'' +
+                ", updateTime=" + updateTime +
+                ", updateBy='" + updateBy + '\'' +
+                ", remark='" + remark + '\'' +
+                ", delFlag='" + delFlag + '\'' +
+                '}';
     }
 }

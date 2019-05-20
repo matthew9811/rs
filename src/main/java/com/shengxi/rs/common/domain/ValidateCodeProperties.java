@@ -1,9 +1,9 @@
 package com.shengxi.rs.common.domain;
 
 /**
- * @Auther: Matthew
+ * @author : Matthew
  * @Date: 2019/4/6 23:40
- * @Description:
+ * @Description: 验证码使用类
  */
 public class ValidateCodeProperties {
 

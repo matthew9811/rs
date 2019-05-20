@@ -1,9 +1,6 @@
 package com.shengxi.rs.common.config;
 
 import com.shengxi.rs.common.filter.TokenFilter;
-import javax.servlet.Filter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -84,21 +81,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         /**
          * 权限配置
          */
-        http.addFilterBefore((Filter) tokenFilter, UsernamePasswordAuthenticationFilter.class);
+        http.formLogin().usernameParameter("userNo");
+        http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
         /*登录页面和登录提交路径*/
-        http.formLogin().loginProcessingUrl("/login").successHandler(authenticationSuccessHandler).failureHandler(authenticationFailureHandler).and()
+        http.formLogin().usernameParameter("userNo").loginProcessingUrl("/login").successHandler(authenticationSuccessHandler).failureHandler(authenticationFailureHandler).and()
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint);
         http.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
         http.headers().frameOptions().disable();
         http.headers().cacheControl();
         http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
+
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
-
-
 
 }
