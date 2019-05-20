@@ -2,11 +2,13 @@ package com.shengxi.rs.controller.test;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.RsApplication;
-import com.shengxi.system.common.contant.Index;
+import com.shengxi.system.common.constant.Index;
+import com.shengxi.system.entites.sys.SysUser;
 import com.shengxi.system.entites.test.TestEntity;
 import com.shengxi.system.model.service.sys.SysMenuServices;
+import com.shengxi.system.model.service.sys.SysUserServices;
 import com.shengxi.system.model.service.test.TestServices;
-import org.checkerframework.checker.units.qual.A;
+import java.util.Date;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,6 @@ import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -35,6 +36,9 @@ public class RedisTest {
 
     @Autowired
     SysMenuServices menuServices;
+
+    @Autowired
+    private SysUserServices userServices;
 
     @Autowired
     private TestServices testServices;
@@ -78,5 +82,15 @@ public class RedisTest {
     @Rollback
     public void testTree(){
         System.out.println(menuServices.selectByInit());
+    }
+
+    @Test
+    public void insertUser(){
+        SysUser user = new SysUser();
+        user.setUserNo("admin");
+        user.setUserName("晟曦");
+        user.setPassword("admin");
+        user.setCreateTime(new Date());
+        userServices.saveUser(user);
     }
 }

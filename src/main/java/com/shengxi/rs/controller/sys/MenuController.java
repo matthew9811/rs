@@ -1,9 +1,8 @@
-package com.shengxi.rs.controller.sys.menu;
+package com.shengxi.rs.controller.sys;
 
-import com.shengxi.rs.common.domain.SecurityUser;
 import com.shengxi.rs.common.handler.BaseController;
 import com.shengxi.rs.common.util.AjaxResult;
-import com.shengxi.system.common.contant.BaseControllerContant;
+import com.shengxi.system.common.constant.BaseControllerConstant;
 import com.shengxi.system.common.util.SecurityUserUtil;
 import com.shengxi.system.entites.sys.SysMenuEntity;
 import com.shengxi.system.model.service.sys.SysMenuServices;
@@ -45,7 +44,7 @@ public class MenuController extends BaseController {
          * 控制del_flag
          */
         sysMenuEntity.setCreateBy(SecurityUserUtil.getUserId());
-        sysMenuEntity.setDelFlag(BaseControllerContant.DEL_FLAG_NOT);
+        sysMenuEntity.setDelFlag(BaseControllerConstant.DEL_FLAG_NOT);
         return toAjax(menuServices.insertEntity(sysMenuEntity));
     }
 

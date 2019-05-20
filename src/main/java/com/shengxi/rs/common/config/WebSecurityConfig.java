@@ -1,25 +1,26 @@
 package com.shengxi.rs.common.config;
 
-import com.shengxi.rs.common.domain.SecurityUser;
-//import com.shengxi.system.common.services.sys.CustomUserService;
+import com.shengxi.rs.common.filter.TokenFilter;
+import javax.servlet.Filter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * @author: Matthew
@@ -29,17 +30,36 @@ import java.io.IOException;
  */
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private static final Logger logger = LoggerFactory.getLogger(WebSecurityConfig.class);
-//
-//    /***
-//     * 数据加密
-//     * @return
-//     */
-//    @Bean
-//    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+
+    @Autowired
+    private TokenFilter tokenFilter;
+
+    @Autowired
+    private LogoutSuccessHandler logoutSuccessHandler;
+
+    @Autowired
+    private AuthenticationSuccessHandler authenticationSuccessHandler;
+
+    @Autowired
+    private AuthenticationFailureHandler authenticationFailureHandler;
+
+    @Autowired
+    private AuthenticationEntryPoint authenticationEntryPoint;
+
+    /***
+     * 数据加密
+     * @return
+     */
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     /**
      * 配置策略
@@ -49,76 +69,36 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.csrf();
-//        http.authorizeRequests().antMatchers("/static/**").permitAll().anyRequest().authenticated()
-//                .and().formLogin().loginPage("/login").permitAll().and().logout().permitAll().invalidateHttpSession(true)
-//                .deleteCookies("sxSession").and().sessionManagement().maximumSessions(1500).expiredUrl("/login/login.html");
-        http.authorizeRequests()
-                .antMatchers("/orders/**").hasRole("USER")    //用户权限
-                .antMatchers("/**").hasRole("ADMIN")    //管理员权限
-                .antMatchers("/login").permitAll()
-                .and()
-                .formLogin();
-        http.headers().frameOptions().disable();
         http.csrf().disable();
+        /**
+         * 基于token, 关闭session
+         */
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        /**
+         * 开放资源
+         */
+        http.authorizeRequests().antMatchers("/", "/**", "/*.html", "/*.ico", "/css/**", "/js/**", "/fonts/**", "/layui/**", "/img/**",
+                "/webjar/**", "/druid/**", "/static/**", "/", "/**", "/*.html", "/favicon.ico", "/css/**", "/js/**", "/fonts/**", "/layui/**", "/img/**",
+                "/v2/api-docs/**", "/swagger-resources/**", "/webjars/**", "/pages/**", "/druid/**",
+                "/statics/**").permitAll().anyRequest().authenticated();
+        /**
+         * 权限配置
+         */
+        http.addFilterBefore((Filter) tokenFilter, UsernamePasswordAuthenticationFilter.class);
+        /*登录页面和登录提交路径*/
+        http.formLogin().loginProcessingUrl("/login").successHandler(authenticationSuccessHandler).failureHandler(authenticationFailureHandler).and()
+                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint);
+        http.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
+        http.headers().frameOptions().disable();
+        http.headers().cacheControl();
+        http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("admin").password("shengxi").roles("ADMIN")
-                .and()
-                .withUser("terry").password("terry").roles("USER")
-                .and()
-                .withUser("larry").password("larry").roles("USER");
-    }
-
-//
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
-//        auth.eraseCredentials(false);
-//    }
-
-//    /**
-//     * 密码加密
-//     */
-//    @Bean
-//    public BCryptPasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder(16);
-//    }
-
-    /**
-     * 官方不推荐
-     * 待删除
-     */
-    @Bean
-    public static NoOpPasswordEncoder passwordEncoder() {
-        return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
-    }
-
-    /**
-     * 登出处理
-     */
-    @Bean
-    public LogoutSuccessHandler logoutSuccessHandler() {
-        return new LogoutSuccessHandler() {
-            @Override
-            public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-                try {
-                    SecurityUser user = (SecurityUser) authentication.getPrincipal();
-                    logger.info("USER : " + user.getUsername() + " LOGOUT SUCCESS !  ");
-                } catch (Exception e) {
-                    logger.info("LOGOUT EXCEPTION , e : " + e.getMessage());
-                }
-                httpServletResponse.sendRedirect("login/login");
-            }
-        };
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
 
 
-//    @Bean
-//    UserDetailsService customUserService() {
-//        return new CustomUserService();
-//    }
-//
+
 }

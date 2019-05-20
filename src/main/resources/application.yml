@@ -129,6 +129,12 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 
+#token过期时间
+token:
+  expire:
+    seconds: 7200
+  jwtSecret: (RS:) _$^11277^$&_(SHENG:)_@@++--(XI:)_++++_.sds_(LEUNG)
+
 # rs 配置
 rs:
   # 是否在控制台打印 sql语句

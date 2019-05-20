@@ -1,7 +1,6 @@
 package com.shengxi.rs.common.config;
 
 import com.shengxi.rs.common.domain.ValidateCodeProperties;
-import com.shengxi.rs.common.shiro.ShiroProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 /**
@@ -13,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "rs")
 public class RsProperties {
-    private ShiroProperties shiro = new ShiroProperties();
 
     private ValidateCodeProperties validateCode = new ValidateCodeProperties();
 
@@ -21,13 +19,6 @@ public class RsProperties {
 
     private boolean openAopLog = true;
 
-    public ShiroProperties getShiro() {
-        return shiro;
-    }
-
-    public void setShiro(ShiroProperties shiro) {
-        this.shiro = shiro;
-    }
 
     public ValidateCodeProperties getValidateCode() {
         return validateCode;

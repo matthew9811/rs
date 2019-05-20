@@ -23,8 +23,38 @@ public class SecurityUser extends SysUser implements UserDetails {
      */
     private List<SysMenuEntity> permList;
 
+    private String token;
+
+    private Long loginTime;
+
+    private Long expireTime;
+
     public SecurityUser() {
         super();
+    }
+
+    public Long getLoginTime() {
+        return loginTime;
+    }
+
+    public void setLoginTime(Long loginTime) {
+        this.loginTime = loginTime;
+    }
+
+    public Long getExpireTime() {
+        return expireTime;
+    }
+
+    public void setExpireTime(Long expireTime) {
+        this.expireTime = expireTime;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     /**
@@ -39,7 +69,7 @@ public class SecurityUser extends SysUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return getUserNo();
+        return getUserName();
     }
 
 
@@ -73,7 +103,7 @@ public class SecurityUser extends SysUser implements UserDetails {
     @JsonIgnore
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     public List<SysMenuEntity> getPermList() {

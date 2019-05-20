@@ -1,4 +1,4 @@
-package com.shengxi.rs.common.contant;
+package com.shengxi.rs.common.constant;
 
 /**
  * @author: Matthew

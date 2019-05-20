@@ -1,10 +1,11 @@
 package com.shengxi.rs.common.util;
 
 import com.alibaba.druid.util.Base64;
-import com.shengxi.rs.common.contant.SysContant;
+import com.shengxi.rs.common.constant.SysConstant;
 import com.shengxi.system.common.util.IdCommon;
 
 import java.security.SecureRandom;
+import java.util.UUID;
 
 /**
  *
@@ -15,14 +16,7 @@ import java.security.SecureRandom;
 public class IdUtil {
 
     public static String uuid() {
-        IdCommon idCommon = new IdCommon(SysContant.WORK_ID, SysContant.DATA_CENTER_ID);
-        //避免事件冲突
-        try {
-            Thread.sleep(Thread.MIN_PRIORITY);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return String.valueOf(idCommon.nextId());
+        return UUID.randomUUID().toString();
     }
 
     public static String iGId(){
@@ -36,6 +30,17 @@ public class IdUtil {
     public static String randomId(){
         SecureRandom secureRandom = new SecureRandom();
         return secureRandom.generateSeed(128).toString();
+    }
+
+    public static String IGenId(){
+        IdCommon idCommon = new IdCommon(SysConstant.WORK_ID, SysConstant.DATA_CENTER_ID);
+        //避免事件冲突
+        try {
+            Thread.sleep(Thread.MIN_PRIORITY);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return String.valueOf(idCommon.nextId());
     }
 
 }

@@ -1,11 +1,11 @@
-package com.shengxi.rs.common.contant;
+package com.shengxi.rs.common.constant;
 
 /**
  * @author: Matthew
  * @Date: 2019/4/19 10:33
  * @Description: 系统底层常用常量
  */
-public class SysContant {
+public class SysConstant {
     /**
      * 雪花算法
      * world

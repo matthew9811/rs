@@ -13,6 +13,7 @@ import org.springframework.security.authentication.AuthenticationCredentialsNotF
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 /**
  * @author matthew
@@ -20,6 +21,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  * 用户登录权限配置类
  * 获取用户拥有的角色
  */
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
@@ -40,7 +42,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         /**
          * 用户校验
          */
-        UserDetails user = sysUserMapper.getUserByNo(s);
+        SecurityUser user = sysUserMapper.getUserByNo("admin");
         if (ObjectUtil.isNull(user)) {
             throw new AuthenticationCredentialsNotFoundException("帐号不存在");
         }
