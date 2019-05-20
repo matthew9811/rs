@@ -1,5 +1,6 @@
 package com.shengxi.rs.controller.add;
 
+import com.shengxi.rs.common.handler.BaseController;
 import com.shengxi.rs.common.util.IdUtil;
 import com.shengxi.system.entites.subEntity.ComSubEntity;
 import com.shengxi.system.entites.subEntity.SubOptEntity;
@@ -23,11 +24,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-
+/**
+ * @author 郑杰
+ * @date  2019/3/25 10:25
+ * 添加数据
+ */
 @Controller
 @RequestMapping("/add/add")
-public class add {
-    private String prifix = "add";
+public class AddController extends BaseController {
+    private String prefix = "add";
 
     @Autowired
     private SubjectServices subjectServices;
@@ -46,35 +51,34 @@ public class add {
 
     @GetMapping("/addSubject")
     public String addSubject() {
-        return prifix + "/addSubject";
+        return prefix + "/addSubject";
 
     }
     @GetMapping("/addComSub")
     public String addComSub() {
-        return prifix + "/addComSub";
+        return prefix + "/addComSub";
 
     }
     @GetMapping("/addSubOpt")
     public String addSubOpt() {
-        return prifix + "/addSubOpt";
+        return prefix + "/addSubOpt";
 
     }
     @GetMapping("/addSubReplace")
     public String addSubReplace() {
-        return prifix + "/addSubReplace";
+        return prefix + "/addSubReplace";
 
     }
     @GetMapping("/addSysDept")
     public String addSysDept() {
-        return prifix + "/addSysDept";
+        return prefix + "/addSysDept";
 
     }
     @PostMapping("/addSubject")
     @ResponseBody
     public List<SubjectEntity> addSubject(SubjectEntity subjectEntity) {
        subjectEntity.setId(IdUtil.uuid());
-        Integer result = subjectServices.addList(subjectEntity);
-        System.out.println(result);
+       subjectServices.addList(subjectEntity);
        List<SubjectEntity> list = subjectServices.selectList(subjectEntity);
        return list;
     }
@@ -82,8 +86,7 @@ public class add {
     @ResponseBody
     public List<ComSubEntity> addComSub(ComSubEntity comSubEntity) {
         comSubEntity.setId(IdUtil.uuid());
-        Integer result = comSubServices.addList(comSubEntity);
-        System.out.println(result);
+        comSubServices.addList(comSubEntity);
         List<ComSubEntity> list =comSubServices.selectList(comSubEntity);
         return list;
     }
@@ -91,8 +94,7 @@ public class add {
     @ResponseBody
     public List<SubOptEntity> addSubject(SubOptEntity subOptEntity) {
         subOptEntity.setId(IdUtil.uuid());
-        Integer result = subOptServices.addList(subOptEntity);
-        System.out.println(result);
+        subOptServices.addList(subOptEntity);
         List<SubOptEntity> list = subOptServices.selectList(subOptEntity);
         return list;
     }
@@ -100,8 +102,7 @@ public class add {
     @ResponseBody
     public ModelAndView addReplace(SubReplaceEntity subReplaceEntity) {
         subReplaceEntity.setId(IdUtil.uuid());
-        Integer result = subReplaceServices.addList(subReplaceEntity);
-        System.out.println(result);
+        subReplaceServices.addList(subReplaceEntity);
         List<SubReplaceEntity> list = subReplaceServices.selectList(subReplaceEntity);
         ModelAndView modelAndView = new ModelAndView("redirect:/academic/academic/replace");
         return modelAndView;
@@ -110,8 +111,7 @@ public class add {
     @ResponseBody
     public List<SysDeptEntity> addSubject(SysDeptEntity sysDeptEntity) {
         sysDeptEntity.setId(IdUtil.uuid());
-        Integer result = sysDeptServices.addList(sysDeptEntity);
-        System.out.println(result);
+        sysDeptServices.addList(sysDeptEntity);
         List<SysDeptEntity> list = sysDeptServices.selectList(sysDeptEntity);
         return list;
     }

@@ -128,7 +128,6 @@ public class SubjectEntity extends BaseEntity {
      */
     private String subPeriod;
 
-    private SysUser sysUser;
 
     @Override
     public String getId() {
@@ -308,13 +307,6 @@ public class SubjectEntity extends BaseEntity {
         this.subPeriod = subPeriod;
     }
 
-    public SysUser getSysUser() {
-        return sysUser;
-    }
-
-    public void setSysUser(SysUser sysUser) {
-        this.sysUser = sysUser;
-    }
 
     @Override
     public String toString() {

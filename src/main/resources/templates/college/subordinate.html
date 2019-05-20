@@ -21,16 +21,8 @@
         </form>
     </blockquote>
 
-    <table id="newsList" lay-filter="newsList"></table>
-    <!--<script type="text/html" id="toolbarDemo">-->
-    <!--<div class="layui-btn-container">-->
-    <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>-->
-    <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>-->
-    <!--<button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>-->
-    <!--</div>-->
-    <!--</script>-->
-    <!--操作-->
-    <script type="text/html" id="newsListBar">
+    <table id="subordinateList" lay-filter="subordinateList"></table>
+    <script type="text/html" id="subordinateListBar">
         <a class="layui-btn layui-btn-xs" lay-event="detail">点击选课</a>
     </script>
 </form>
@@ -45,11 +37,11 @@
                 $ = layui.jquery,
                 table = layui.table;
 
-            //学生重修课程列表
+
             var options = {
-                elem: '#newsList',
+                elem: '#subordinateList',
                 url: ctx + 'college/college/subordinateList',
-                title: '选择课程表',
+                title: '所属系部表',
                 toolbar: '#toolbarDemo',
                 id: "newsListTable",
                 cols: [
@@ -85,24 +77,11 @@
                 ]
             };
 
-            $("[data-field='status']").children().each(function(){
-                if($(this).text()=='0'){
-                    $(this).text("未审批")
-                }else if($(this).text()=='1'){
-                    $(this).text("开课通过")
-                }else if($(this).text()=='2'){
-                    $(this).text("开课驳回")
-                }else if($(this).text()=='3'){
-                    $(this).text("教务通过")
-                }else if($(this).text()=='4'){
-                    $(this).text("教务驳回")
-                }
-            })
 
             $.table.init(options);
 
-            //头工具栏事件
-            table.on('toolbar(newsList)', function (obj) {
+
+            table.on('toolbar(subordinateList)', function (obj) {
                 var checkStatus = table.checkStatus(obj.config.id);
                 switch (obj.event) {
                     case 'getCheckData':
@@ -120,15 +99,7 @@
                 ;
             });
 
-            // 监听复选框选择
-            // table.on('checkbox(newsList)', function (obj) {
-            //     console.log(obj.checked); //当前是否选中状态
-            //     console.log(obj.data); //选中行的相关数据
-            //     console.log(obj.type); //如果触发的是全选，则为：all，如果触发的是单选，则为：one
-            // });
-
-            //监听点击事件
-            table.on('tool(newsList)', function (obj) {
+            table.on('tool(subordinateList)', function (obj) {
                 var data = obj.data;
                 <!--layer.msg('点击课程：'+ data.subName);-->
                 if (obj.event === 'setRemark') {
@@ -149,22 +120,18 @@
                 }
             });
 
-            //监听单元格编辑
-            console.log($.table.edit('newsList'));
+            console.log($.table.checkbox('subordinateList'));
 
-            //监听复选框选择
-            console.log($.table.checkbox('newsList'));
 
-            //搜索
             $(".search_btn").on("click", function () {
                 console.log($('.layer-range-time').val());
                 if ($(".searchVal").val() != '') {
-                    table.reload("newsListTable", {
+                    table.reload("subordinateListTable", {
                         page: {
-                            curr: 1 //重新从第 1 页开始
+                            curr: 1
                         },
                         where: {
-                            key: $(".searchVal").val()  //搜索的关键字
+                            key: $(".searchVal").val()
                         }
                     })
                 } else {

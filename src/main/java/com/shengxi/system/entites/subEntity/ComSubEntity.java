@@ -59,7 +59,11 @@ public class ComSubEntity extends BaseEntity {
      */
     private String delFlag;
 
-    private SubjectEntity subjectEntity;
+    /**
+     * 学年学期
+     */
+    private String semester;
+
 
     @Override
     public String getId() {
@@ -111,22 +115,24 @@ public class ComSubEntity extends BaseEntity {
         this.credit = credit;
     }
 
-    public SubjectEntity getSubjectEntity() {
-        return subjectEntity;
+    public String getSemester() {
+        return semester;
     }
 
-    public void setSubjectEntity(SubjectEntity subjectEntity) {
-        this.subjectEntity = subjectEntity;
+    public void setSemester(String semester) {
+        this.semester = semester;
     }
 
     @Override
     public String toString() {
         return "ComSubEntity{" +
-                "stuNo='" + stuNo + '\'' +
+                "id='" + id + '\'' +
+                ", stuNo='" + stuNo + '\'' +
                 ", subNo='" + subNo + '\'' +
                 ", subName='" + subName + '\'' +
                 ", score='" + score + '\'' +
                 ", credit='" + credit + '\'' +
+                ", semester='" + semester + '\'' +
                 '}';
     }
 }

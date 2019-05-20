@@ -57,7 +57,7 @@
         r.sub_replace_no
         from sub_replace as r
         <where>
-            r.del_flag = '0'
+            r.del_flag = '1'
             <if test="id != null and id != ''">
                 and id = #{id}
             </if>

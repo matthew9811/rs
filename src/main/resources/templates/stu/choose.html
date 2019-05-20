@@ -21,17 +21,10 @@
         </form>
     </blockquote>
 
-    <table id="newsList" lay-filter="newsList"></table>
-    <!--<script type="text/html" id="toolbarDemo">-->
-    <!--<div class="layui-btn-container">-->
-    <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>-->
-    <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>-->
-    <!--<button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>-->
-    <!--</div>-->
-    <!--</script>-->
-    <!--操作-->
-    <script type="text/html" id="newsListBar">
-        <a class="layui-btn layui-btn-xs" lay-event="detail" href="/stu/stu/course">点击选课</a>
+    <table id="chooseList" lay-filter="chooseList"></table>
+
+    <script type="text/html" id="chooseListBar">
+        <a class="layui-btn layui-btn-xs" lay-event="detail">点击选课</a>
     </script>
 
 </form>
@@ -46,13 +39,13 @@
                 $ = layui.jquery,
                 table = layui.table;
 
-            //学生重修课程列表
+
             var options = {
-                elem: '#newsList',
+                elem: '#chooseList',
                 url: ctx + 'stu/stu/chooseList',
                 title: '选择课程表',
                 toolbar: '#toolbarDemo',
-                id: "newsListTable",
+                id: "chooseListTable",
                 cols: [
                     [
                         {type: 'checkbox', fixed: 'left'},
@@ -73,7 +66,7 @@
                         {field: 'subWeek', title: '周次', align: "center"},
                         {field: 'subWeekDay', title: '星期', align: "center"},
                         {field: 'subPeriod', title: '节次', align: "center"},
-                        {title: '选课操作', width: 220, templet: '#newsListBar', fixed: "right", align: "center"},
+                        {title: '选课操作', width: 220, templet: '#chooseListBar', fixed: "right", align: "center"},
 
                     ]
                 ]
@@ -81,8 +74,8 @@
 
             $.table.init(options);
 
-            //头工具栏事件
-            table.on('toolbar(newsList)', function (obj) {
+
+            table.on('toolbar(chooseList)', function (obj) {
                 var checkStatus = table.checkStatus(obj.config.id);
                 switch (obj.event) {
                     case 'getCheckData':
@@ -100,51 +93,25 @@
                 ;
             });
 
-            // 监听复选框选择
-            // table.on('checkbox(newsList)', function (obj) {
-            //     console.log(obj.checked); //当前是否选中状态
-            //     console.log(obj.data); //选中行的相关数据
-            //     console.log(obj.type); //如果触发的是全选，则为：all，如果触发的是单选，则为：one
-            // });
-
-            //监听点击事件
-            table.on('tool(newsList)', function (obj) {
+            table.on('tool(chooseList)', function (obj) {
                 var data = obj.data;
-                <!--layer.msg('点击课程：'+ data.subName);-->
-                if (obj.event === 'setRemark') {
-                    layer.prompt({
-                        formType: 2,
-                        title: '修改课程代码为 [' + data.subNo + '] 的备注',
-                        value: data.subNo
-                    }, function (value, index) {
-                        layer.close(index);
-                        //这里一般是发送修改的Ajax请求
-                        //同步更新表格和缓存对应的值
-                        obj.update({
-                            sign: value
-                        });
-                    });
-                } else if (obj.event === 'detail') {
+              if (obj.event === 'detail') {
                     layer.msg('点击课程：' + data.subName)
                 }
             });
 
-            //监听单元格编辑
-            console.log($.table.edit('newsList'));
+            console.log($.table.checkbox('chooseList'));
 
-            //监听复选框选择
-            console.log($.table.checkbox('newsList'));
 
-            //搜索
             $(".search_btn").on("click", function () {
                 console.log($('.layer-range-time').val());
                 if ($(".searchVal").val() != '') {
-                    table.reload("newsListTable", {
+                    table.reload("chooseList", {
                         page: {
-                            curr: 1 //重新从第 1 页开始
+                            curr: 1
                         },
                         where: {
-                            key: $(".searchVal").val()  //搜索的关键字
+                            key: $(".searchVal").val()
                         }
                     })
                 } else {
