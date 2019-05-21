@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -115,7 +116,10 @@ public class StuController extends BaseController {
 
     @RequestMapping("/chooseList")
     @ResponseBody
-    public TableDataInfo chooseList(SubjectEntity subjectEntity) {
+    public TableDataInfo chooseList(SubjectEntity subjectEntity, HttpServletRequest request) {
+        request.getParameter("subNo");
+        System.out.println("2");
+        System.out.println("subNo");
         subjectEntity.setSubCarryNo("1068515");
         startPage();
         List<SubjectEntity> list = subjectServices.selectList(subjectEntity);
