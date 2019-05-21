@@ -24,9 +24,9 @@
     <table id="layerTable" lay-filter="layerTable"></table>
     <script type="text/html" id="toolbar">
         <div class="layui-btn-container">
-            <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
-            <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
-            <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>
+            <button class="layui-btn" lay-event="getCheckData">获取选中行数据</button>
+            <button class="layui-btn" lay-event="getCheckLength">获取选中数目</button>
+            <button class="layui-btn" lay-event="isAll">验证是否全选</button>
         </div>
     </script>
     <!--操作-->
@@ -57,7 +57,7 @@
                         {field: 'subNo', title: '课程代码', align: "center"},
                         {field: 'subName', title: '课程名称', align: "center"},
                         {field: 'score', title: '历史成绩', align: 'center', edit: 'text'},
-                        {title: '选课操作', width: 220, templet: '#newsListBar', fixed: "right", align: "center"},
+                        {title: '选课操作', width: 220, templet: '#layerTableBar', fixed: "right", align: "center"},
                         {field: 'remark', title: '备注', align: 'center', event: 'setRemark'}
                     ]
                 ]

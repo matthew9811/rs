@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body>
+<div style="padding: 40px">
+    <form action="" class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label rs-input-name" style="text-align: left">
+                    上级菜单
+                </label>
+                <div class="layui-input-inline">
+                    <select class="layui-input rs-input" name="modules" lay-verify="required" lay-search="">
+                        <option value="">直接选择或搜索选择</option>
+                        <option value="1">layer</option>
+                        <option value="2">form</option>
+                        <option value="3">layim</option>
+                        <option value="4">element</option>
+                        <option value="5">laytpl</option>
+                        <option value="6">upload</option>
+                        <option value="7">laydate</option>
+                        <option value="8">laypage</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label rs-input-name" style="text-align: left">
+                菜单名称
+            </label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input rs-input" name="name">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label rs-input-name" style="text-align: left">
+                权限标识
+            </label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input rs-input" name="name">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label rs-input-name" style="text-align: left">
+                链接
+            </label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input rs-input" name="name">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label rs-input-name" style="text-align: left">
+                图标
+            </label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input rs-input" name="name">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label rs-input-name" style="text-align: left">
+                排序
+            </label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input rs-input" name="name">
+            </div>
+        </div>
+    </form>
+</div>
+<div th:include="include :: footer"></div>
+</body>
+</html>
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //各种基于事件的操作，下面会有进一步介绍
+    });
+</script>

@@ -1,4 +1,9 @@
 $(function () {
+    layui.config({
+        base: '/layui/lay/modules/'
+    }).extend({
+        treetable: 'treetable-lay/treetable'
+    });
     layui.use(['laydate'], function () {
         var laydate = layui.laydate;
         if ($(".layer-range-time").length > 0) {
@@ -14,5 +19,6 @@ $(function () {
             });
 
         }
-    })
+    });
+
 })
