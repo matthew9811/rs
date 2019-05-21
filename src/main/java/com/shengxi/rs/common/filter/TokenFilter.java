@@ -18,7 +18,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
  * Token过滤器
- *
+ * 完成访问前的过滤
  * @author matthew
  */
 @Component
