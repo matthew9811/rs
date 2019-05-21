@@ -12,9 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 public class ResponseUtil {
     /**
      * 响应json数据页面
+     *
      * @param response response
-     * @param status 状态码
-     * @param data 数据
+     * @param status   状态码
+     * @param data     数据
      */
     public static void responseJson(HttpServletResponse response, int status, Object data) {
         try {

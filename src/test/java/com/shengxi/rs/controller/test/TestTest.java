@@ -1,16 +1,17 @@
 package com.shengxi.rs.controller.test;
 
 import cn.hutool.core.lang.UUID;
-import com.shengxi.rs.common.contant.SysContant;
+import com.shengxi.rs.common.constant.SysConstant;
 import com.shengxi.rs.common.util.IdUtil;
+import com.shengxi.system.entites.sys.SysUser;
+import com.shengxi.system.model.service.sys.SysUserServices;
 import com.shengxi.system.model.service.test.TestServices;
+import java.util.Date;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * @Auther: Matthew
@@ -21,6 +22,9 @@ public class TestTest {
 
     @Autowired
     private TestServices testServices;
+
+    @Autowired
+    private SysUserServices sysUserServices;
 
     @Test
     public void test1() {
@@ -56,7 +60,17 @@ public class TestTest {
     @Test
     public void testUU(){
         System.out.println(UUID.randomUUID(true));
-        System.out.println(cn.hutool.core.util.IdUtil.createSnowflake(SysContant.WORK_ID,SysContant.DATA_CENTER_ID).nextId());
+        System.out.println(cn.hutool.core.util.IdUtil.createSnowflake(SysConstant.WORK_ID, SysConstant.DATA_CENTER_ID).nextId());
+    }
+
+    @Test
+    public void insertUser(){
+        SysUser user = new SysUser();
+        user.setUserNo("admin");
+        user.setUserName("晟曦");
+        user.setPassword("admin");
+        user.setCreateTime(new Date());
+        sysUserServices.saveUser(user);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.shengxi.system.common.contant;
+package com.shengxi.system.common.constant;
 
 /**
  * 控制器
@@ -6,7 +6,7 @@ package com.shengxi.system.common.contant;
  * @author matthew
  * @date 2019.05.12
  */
-public class BaseControllerContant {
+public class BaseControllerConstant {
     /**
      * 正常状态下的del_flag
      * */

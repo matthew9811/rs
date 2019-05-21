@@ -1,7 +1,7 @@
 package com.shengxi.system.model.service.sys;
 
 
-import com.shengxi.system.common.contant.BaseControllerContant;
+import com.shengxi.system.common.constant.BaseControllerConstant;
 import com.shengxi.system.common.util.TreeUtil;
 import com.shengxi.system.entites.sys.SysMenuEntity;
 import com.shengxi.system.model.mapper.sys.SysMenuMapper;
@@ -38,7 +38,7 @@ public class SysMenuServices {
         List<SysMenuEntity> list = new ArrayList<>();
         SysMenuEntity menuEntity = new SysMenuEntity();
         menuEntity.setId("1");
-        menuEntity.setDelFlag(BaseControllerContant.DEL_FLAG_NOT);
+        menuEntity.setDelFlag(BaseControllerConstant.DEL_FLAG_NOT);
         menuEntity.setIcon("&#xe6af;");
         menuEntity.setParentId("0");
         menuEntity.setMenuName("楚苓大妈网");
@@ -68,6 +68,6 @@ public class SysMenuServices {
      * @return list
      */
     public List<SysMenuEntity> selectPermList(String id) {
-        return null;
+        return sysMenuMapper.selectPermList(id);
     }
 }

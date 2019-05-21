@@ -1,11 +1,11 @@
-package com.shengxi.rs.common.contant;
+package com.shengxi.rs.common.constant;
 
 /**
  * @author: Matthew
  * @Date: 2019/5/8 11:08
  * @Description: 页面通用常量
  */
-public class PageContant {
+public class PageConstant {
     /**
      * UTF-8 字符集
      */

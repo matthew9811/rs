@@ -1,4 +1,6 @@
-package com.shengxi.rs.common.domain;
+package com.shengxi.system.entites.sys;
+
+import com.shengxi.rs.common.domain.BaseEntity;
 
 /**
  * @author: Matthew

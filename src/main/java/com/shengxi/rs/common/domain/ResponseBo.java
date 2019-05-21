@@ -3,7 +3,7 @@ package com.shengxi.rs.common.domain;
 import java.util.HashMap;
 
 /**
- * @Auther: Matthew
+ * @author : Matthew
  * @Date: 2019/4/6 23:22
  * @Description:
  */

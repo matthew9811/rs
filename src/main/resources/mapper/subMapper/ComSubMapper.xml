@@ -75,6 +75,7 @@
         <result column="sub_name" property="subName"/>
         <result column="score" property="score"/>
         <result column="credit" property="credit"/>
+        <result column="semester" property="semester"/>
     </resultMap>
 
     <select id="selectComSubEntityList"
@@ -84,10 +85,11 @@
         c.sub_no,
         c.sub_name,
         c.score,
-        c.credit
+        c.credit,
+        c.semester
         from com_sub as c
         <where>
-            c.del_flag = '0'
+            c.del_flag = '1'
             <if test="id != null and id != ''">
                 and id = #{id}
             </if>
@@ -110,6 +112,10 @@
 
             <if test="credit != null and credit != ''">
                 and credit = #{credit}
+            </if>
+
+            <if test="semester != null and semester != ''">
+                and semester = #{semester}
             </if>
         </where>
     </select>
@@ -143,7 +149,7 @@
             and c.stu_no = o.stu_no
             and o.sub_id = j.sub_carry_no
             and c.sub_no = j.sub_no
-            and c.del_flag = '0'
+            and c.del_flag = '1'
         </where>
     </select>
 </mapper>

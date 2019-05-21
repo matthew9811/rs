@@ -1,9 +1,9 @@
 package com.shengxi.system.common.util;
 
-import org.springframework.stereotype.Component;
 
 /**
  * id生成器
+ *
  * @author: Matthew
  * @Date: 2019/4/9 17:04
  * @Description: * Twitter_Snowflake<br>

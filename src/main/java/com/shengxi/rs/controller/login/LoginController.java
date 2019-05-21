@@ -2,38 +2,31 @@ package com.shengxi.rs.controller.login;
 
 
 import com.shengxi.rs.common.domain.SecurityUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.servlet.http.HttpSession;
-import java.util.regex.Pattern;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 
 /**
- * @author 郑杰
- * @date 2019/3/27 16:37
- * 登录表接受数据跳转
+ * @author matthew
+ * @date 2019/05/19
+ * 登录控制
  */
 @Controller
-@RequestMapping("/login")
 public class LoginController {
 
-    private Pattern pattern = Pattern.compile("[0-9]*");
-    private String prefix = "login";
+    @Autowired
+    private UserDetailsService userDetailsService;
 
-    @GetMapping()
+    @GetMapping("/")
     public String login() {
-        return prefix + "/login";
+        return   "login";
     }
 
-    @PostMapping()
-    @ResponseBody
-    public String login(SecurityUser user){
-        return null;
+    @RequestMapping("/login")
+    public String login(SecurityUser user) {
+        return "page/index/jump";
     }
 }

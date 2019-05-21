@@ -1,6 +1,6 @@
 package com.shengxi.rs.common.util;
 
-import com.shengxi.rs.common.contant.PageContant;
+import com.shengxi.rs.common.constant.PageConstant;
 import com.shengxi.rs.common.domain.PageResult;
 
 /**
@@ -14,10 +14,10 @@ public class TableSupport {
      */
     public static PageResult getPageResult() {
         PageResult pageResult = new PageResult();
-        pageResult.setPageNum(ServletUtils.getParameterToInt(PageContant.PAGE_NUM));
-        pageResult.setPageSize(ServletUtils.getParameterToInt(PageContant.PAGE_SIZE));
-        pageResult.setOrderByColumn(ServletUtils.getParameter(PageContant.ORDER_BY_COLUMN));
-        pageResult.setIsAsc(ServletUtils.getParameter(PageContant.IS_ASC));
+        pageResult.setPageNum(ServletUtils.getParameterToInt(PageConstant.PAGE_NUM));
+        pageResult.setPageSize(ServletUtils.getParameterToInt(PageConstant.PAGE_SIZE));
+        pageResult.setOrderByColumn(ServletUtils.getParameter(PageConstant.ORDER_BY_COLUMN));
+        pageResult.setIsAsc(ServletUtils.getParameter(PageConstant.IS_ASC));
         return pageResult;
     }
 
