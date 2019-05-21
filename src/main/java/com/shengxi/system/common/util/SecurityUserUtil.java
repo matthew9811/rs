@@ -1,5 +1,6 @@
 package com.shengxi.system.common.util;
 
+import com.shengxi.rs.common.domain.SecurityUser;
 import com.shengxi.system.entites.sys.SysUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,8 +31,8 @@ public class SecurityUserUtil {
      * 转化为当前用户
      * @return sysUser
      */
-    public static SysUser getUser(){
-        return (SysUser)getCurrentPrincipal();
+    public static SecurityUser getUser(){
+        return (SecurityUser) getCurrentPrincipal();
     }
 
     /**
@@ -58,7 +59,4 @@ public class SecurityUserUtil {
         return getUser().getUserNo();
     }
 
-//    public static String getLoginName(){
-//        return getCurrentUserAuthentication().getAuthorities();
-//    }
 }
