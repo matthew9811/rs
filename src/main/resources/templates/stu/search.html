@@ -83,12 +83,8 @@
             table.on('tool(searchList)', function (obj) {
                 var data = obj.data;
                 if (obj.event === 'detail') {
-                    $.ajax({
-                        url: ctx + "stu/stu/chooseList",
-                        type: "POST",
-                        data:{"subNo":data.subNo},
-                        dataType: "json",
-                    });
+
+                    window.location.href="choose?subNo="+data.subNo;
                 }
             });
 

@@ -52,8 +52,7 @@ public class StuController extends BaseController {
 
     @GetMapping("/course")
     public String course(Model model,String subCarryNo) {
-
-        List<SubjectEntity> list = subjectServices.souSubjectEntityList("1068525");
+        List<SubjectEntity> list = subjectServices.souSubjectEntityList(subCarryNo);
         SysUser sysUser = new SysUser();
         sysUser.setUserNo("17210210613");
         sysUser = sysUserMapper.selectUserNo(sysUser);
@@ -117,10 +116,7 @@ public class StuController extends BaseController {
     @RequestMapping("/chooseList")
     @ResponseBody
     public TableDataInfo chooseList(SubjectEntity subjectEntity, HttpServletRequest request) {
-        request.getParameter("subNo");
-        System.out.println("2");
-        System.out.println("subNo");
-        subjectEntity.setSubCarryNo("1068515");
+        subjectEntity.setSubNo(request.getParameter("subNo"));
         startPage();
         List<SubjectEntity> list = subjectServices.selectList(subjectEntity);
         return getDataTable(list);

@@ -39,10 +39,16 @@
                 $ = layui.jquery,
                 table = layui.table;
 
+                var subNo;
+                var url = window.location.search;
+                if (url.indexOf("?") != -1) {
+                    subNo = url.substr(url.indexOf("=") + 1);
+                }
 
             var options = {
+
                 elem: '#chooseList',
-                url: ctx + 'stu/stu/chooseList',
+                url: ctx + 'stu/stu/chooseList?subNo='+subNo,
                 title: '选择课程表',
                 toolbar: '#toolbarDemo',
                 id: "chooseListTable",
@@ -96,7 +102,7 @@
             table.on('tool(chooseList)', function (obj) {
                 var data = obj.data;
               if (obj.event === 'detail') {
-                    layer.msg('点击课程：' + data.subName)
+                  window.location.href="course?subCarryNo="+data.subCarryNo;
                 }
             });
 
