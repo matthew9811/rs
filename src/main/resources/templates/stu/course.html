@@ -3,15 +3,15 @@
 <head>
     <meta charset="utf-8">
     <title>广东东软学院学生申请重修表</title>
-
     <script>
-        function check(){
-            alert("提交成功");
+        function check(subCarryNo){
+            window.location.href="news?subCarryNo="+subCarryNo;
         }
     </script>
 </head>
 <body>
     <p align="center">学年学期：2018-2019-2</p>
+
     <table border="1" cellspacing="0" cellpadding="0" align="center">
         <tr>
             <th width="111"><p align="center">申请人 </p></th>
@@ -51,7 +51,7 @@
         </tr>
         <tr>
             <td width="111"><p align="center">开课编号 </p></td>
-            <td colspan="2" th:text="${subjectEntity.subCarryNo}">1067668</td>
+            <td colspan="2" th:text="${subjectEntity.subCarryNo}" id="subCarryNo">1067668</td>
             <td width="111"><p align="center">开课学院 </p></td>
             <td colspan="2" th:text="${subjectEntity.subInstitute}">基础教育院</td>
         </tr>
@@ -66,8 +66,9 @@
             <td colspan="3" th:text="${subjectEntity.subAddress}">F308</td>
         </tr>
         <tr>
-            <td colspan="12" align="center" width="268"><a href="news.html" th:href="@{/stu/stu/news(subCarryNo=${subjectEntity.subCarryNo},subName=${subjectEntity.subName})}">申请重修</a></td>
+           <td><input type="submit" th:onclick="'javascript:check('+${subjectEntity.subCarryNo}+')'"></td>
         </tr>
     </table>
+
 </body>
 </html>

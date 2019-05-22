@@ -68,19 +68,19 @@
         <where>
              d.del_flag = '1'
             <if test="id != null and id != ''">
-               and id = #{id}
+               and d.id = #{id}
             </if>
 
             <if test="parentId != null and parentId != ''">
-              and parent_id = #{parentId}
+              and d.parent_id = #{parentId}
             </if>
 
             <if test="deptName != null and deptName != ''">
-              and dept_name = #{deptName}
+              and d.dept_name = #{deptName}
             </if>
 
             <if test="sort != null and sort != ''">
-              and sort = #{sort}
+              and d.sort = #{sort}
             </if>
 
         </where>

@@ -41,11 +41,7 @@ public interface SubjectMapper {
      */
     Integer deleteSubject();
 
-    /**
-     * add对应行
-     * @return list
-     */
-    Integer addSubject(SubjectEntity subjectEntity);
+
 
     /**
      * 搜索课程代码或课程名

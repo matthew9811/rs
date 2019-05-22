@@ -27,7 +27,7 @@ public interface ComSubMapper {
      * @param comSubEntity 实体
      * @return Integer
      */
-    Integer updateByComSubEntityList(ComSubEntity comSubEntity);
+    Integer updateByComSubEntity(ComSubEntity comSubEntity);
 
 
     /**

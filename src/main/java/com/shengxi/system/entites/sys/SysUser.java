@@ -42,6 +42,19 @@ public class SysUser extends BaseEntity {
      */
     protected String status;
 
+    /**
+     * 班级
+     */
+    private String subClass;
+    /**
+     * 专业
+     */
+    private String major;
+    /**
+     * 所属学院
+     */
+    private String subordinate;
+
     public String getUserNo() {
         return userNo;
     }
@@ -82,6 +95,29 @@ public class SysUser extends BaseEntity {
         this.status = status;
     }
 
+    public String getSubClass() {
+        return subClass;
+    }
+
+    public void setSubClass(String subClass) {
+        this.subClass = subClass;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public String getSubordinate() {
+        return subordinate;
+    }
+
+    public void setSubordinate(String subordinate) {
+        this.subordinate = subordinate;
+    }
 
     @Override
     public String toString() {
@@ -91,6 +127,9 @@ public class SysUser extends BaseEntity {
                 ", password='" + password + '\'' +
                 ", deptId=" + deptId +
                 ", status='" + status + '\'' +
+                ", subClass='" + subClass + '\'' +
+                ", major='" + major + '\'' +
+                ", subordinate='" + subordinate + '\'' +
                 '}';
     }
 }

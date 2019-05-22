@@ -152,7 +152,7 @@
         </trim>
     </sql>
 
-    <insert id="addSubject" parameterType="com.shengxi.system.entites.subEntity.SubjectEntity">
+    <insert id="insertSubject" parameterType="com.shengxi.system.entites.subEntity.SubjectEntity">
         insert into subject(<include refid="key"/>) values(<include refid="value"/>);
     </insert>
 
@@ -209,91 +209,91 @@
         <where>
             j.del_flag = '1'
             <if test="id != null and id != ''">
-               and id = #{id}
+               and j.id = #{id}
             </if>
 
             <if test="subCarryNo != null and subCarryNo != ''">
-               and sub_carry_no = #{subCarryNo}
+               and j.sub_carry_no = #{subCarryNo}
             </if>
 
             <if test="subNo != null and subNo != ''">
-               and sub_no = #{subNo}
+               and j.sub_no = #{subNo}
             </if>
 
             <if test="subName != null and subName != ''">
-               and sub_name = #{subName}
+               and j.sub_name = #{subName}
             </if>
 
             <if test="subInstitute != null and subInstitute != ''">
-               and sub_institute = #{subInstitute}
+               and j.sub_institute = #{subInstitute}
             </if>
 
             <if test="subCredit != null and subCredit != ''">
-               and sub_credit = #{credit}
+               and j.sub_credit = #{credit}
             </if>
 
             <if test="subClassName != null and subClassName != ''">
-               and sub_class_name = #{subClassName}
+               and j.sub_class_name = #{subClassName}
             </if>
 
             <if test="subMenCount != null and subMenCount != ''">
-               and sub_men_count = #{subMenCount}
+               and j.sub_men_count = #{subMenCount}
             </if>
 
             <if test="subMenTotalCount != null and subMenTotalCount != ''">
-               and sub_men_total_count = #{subMenTotalCount}
+               and j.sub_men_total_count = #{subMenTotalCount}
             </if>
 
             <if test="subPlanType != null and subPlanType != ''">
-               and sub_plan_type = #{subPlanType}
+               and j.sub_plan_type = #{subPlanType}
             </if>
 
             <if test="subTotalPeriod != null and subTotalPeriod != ''">
-               and sub_total_period = #{subTotalPeriod}
+               and j.sub_total_period = #{subTotalPeriod}
             </if>
 
             <if test="subTheoryPeriod != null and subTheoryPeriod != ''">
-               and sub_theory_period = #{subTheoryPeriod}
+               and j.sub_theory_period = #{subTheoryPeriod}
             </if>
 
             <if test="subPracticePeriod != null and subPracticePeriod != ''">
-               and sub_practice_period = #{subPracticePeriod}
+               and j.sub_practice_period = #{subPracticePeriod}
             </if>
 
             <if test="subTeacherId != null and subTeacherId != ''">
-               and sub_teacher_id = #{subTeacherId}
+               and j.sub_teacher_id = #{subTeacherId}
             </if>
 
             <if test="subCourseType != null and subCourseType != ''">
-               and sub_course_type = #{subCourseType}
+               and j.sub_course_type = #{subCourseType}
             </if>
 
             <if test="subCourseGenre != null and subCourseGenre != ''">
-               and sub_course_genre = #{subCourseGenre}
+               and j.sub_course_genre = #{subCourseGenre}
             </if>
 
             <if test="replace != null and replace != ''">
-                and replace = #{replace}
+                and j.replace = #{replace}
             </if>
 
             <if test="subStatus != null and subStatus != ''">
-               and sub_status = #{subStatus}
+               and j.sub_status = #{subStatus}
             </if>
 
             <if test="subWeek != null and subWeek != ''">
-                and sub_week = #{subWeek}
+                and j.sub_week = #{subWeek}
             </if>
 
             <if test="subAddress != null and subAddress != ''">
-                and sub_address = #{subAddress}
+                and j.sub_address = #{subAddress}
             </if>
 
             <if test="subWeekDay != null and subWeekDay != ''">
-                and sub_week_day = #{subWeekDay}
+                and j.sub_week_day = #{subWeekDay}
             </if>
 
             <if test="subPeriod != null and subPeriod != ''">
-                and sub_period = #{subPeriod}
+                and j.sub_period = #{subPeriod}
             </if>
 
         </where>

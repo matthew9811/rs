@@ -22,7 +22,7 @@ public class SubReplaceServices {
 
     /**
      * 获取替代课程信息
-     *
+     *@param subReplaceEntity 实体
      * @return list
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
@@ -31,20 +31,20 @@ public class SubReplaceServices {
     }
     /**
      * 增加替代课程信息
-     *
+     *@param subReplaceEntity 实体
      * @return list
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
-    public Integer addList(SubReplaceEntity subReplaceEntity){
+    public Integer insertSubReplaceEntity(SubReplaceEntity subReplaceEntity){
         return subReplaceMapper.insertSubReplaceEntity(subReplaceEntity);
     }
     /**
      * 修改替代课程信息
-     *
+     *@param subReplaceEntity 实体
      * @return list
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
     public Integer updateBySubReplaceEntityList(SubReplaceEntity subReplaceEntity){
-        return subReplaceMapper.updateBySubReplaceEntityList(subReplaceEntity);
+        return subReplaceMapper.updateBySubReplaceEntity(subReplaceEntity);
     }
 }

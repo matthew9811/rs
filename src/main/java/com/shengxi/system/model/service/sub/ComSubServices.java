@@ -22,7 +22,7 @@ public class ComSubServices {
 
     /**
      * 获取已修课程信息
-     *
+     *@param comSubEntity 实体
      * @return list
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
@@ -31,11 +31,11 @@ public class ComSubServices {
     }
     /**
      * 增加已修课程信息
-     *
+     *@param comSubEntity 实体
      * @return list
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
-    public Integer addList(ComSubEntity comSubEntity){
+    public Integer insertComSubEntity(ComSubEntity comSubEntity){
         return comSubMapper.insertComSubEntity(comSubEntity);
     }
 

@@ -21,7 +21,7 @@ public class SubjectServices {
 
     /**
      * 获取课程信息
-     *
+     *@param subjectEntity 实体
      * @return list
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
@@ -30,16 +30,17 @@ public class SubjectServices {
     }
     /**
      * 增加课程信息
-     *
+     *@param subjectEntity 实体
      * @return list
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
-    public Integer addList(SubjectEntity subjectEntity){
-        return subjectMapper.addSubject(subjectEntity);
+    public Integer insertSubject(SubjectEntity subjectEntity){
+        return subjectMapper.insertSubject(subjectEntity);
     }
 
     /**
      * 搜索课程代码或课程名
+     * @param sou 实体
      * @return list
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)

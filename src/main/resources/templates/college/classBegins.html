@@ -24,8 +24,8 @@
     <table id="classBeginsList" lay-filter="classBeginsList"></table>
 
     <script type="text/html" id="classBeginsListBar">
-        <a class="layui-btn layui-btn-xs" lay-event="detail">通过</a>
-        <a class="layui-btn layui-btn-xs" lay-event="detail">驳回</a>
+        <a class="layui-btn layui-btn-xs" lay-event="adopt">通过</a>
+        <a class="layui-btn layui-btn-xs" lay-event="reject">驳回</a>
     </script>
 </form>
 <div th:include="include :: footer"></div>
@@ -104,22 +104,20 @@
 
             table.on('tool(classBeginsList)', function (obj) {
                 var data = obj.data;
-                <!--layer.msg('点击课程：'+ data.subName);-->
-                if (obj.event === 'setRemark') {
-                    layer.prompt({
-                        formType: 2,
-                        title: '修改课程代码为 [' + data.subNo + '] 的备注',
-                        value: data.subNo
-                    }, function (value, index) {
-                        layer.close(index);
-                        //这里一般是发送修改的Ajax请求
-                        //同步更新表格和缓存对应的值
-                        obj.update({
-                            sign: value
-                        });
+                if (obj.event === 'adopt') {
+                    $.ajax({
+                        url: "classBeginsList",
+                        type: "POST",
+                        data:{"id":data.id,"status":"1"},
+                        dataType: "json",
                     });
-                } else if (obj.event === 'detail') {
-                    layer.msg('点击课程：' + data.subName)
+                } else if (obj.event === 'reject') {
+                    $.ajax({
+                        url: "classBeginsList",
+                        type: "POST",
+                        data:{"id":data.id,"status":"2"},
+                        dataType: "json",
+                    });
                 }
             });
 

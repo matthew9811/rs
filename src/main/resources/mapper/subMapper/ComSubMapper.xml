@@ -91,31 +91,31 @@
         <where>
             c.del_flag = '1'
             <if test="id != null and id != ''">
-                and id = #{id}
+                and c.id = #{id}
             </if>
 
             <if test="stuNo != null and stuNo != ''">
-                and stu_no = #{stuNo}
+                and c.stu_no = #{stuNo}
             </if>
 
             <if test="subNo != null and subNo != ''">
-                and sub_no = #{subNo}
+                and c.sub_no = #{subNo}
             </if>
 
             <if test="subName != null and subName != ''">
-                and sub_name = #{subName}
+                and c.sub_name = #{subName}
             </if>
 
             <if test="score != null and score != ''">
-                and score = #{score}
+                and c.score = #{score}
             </if>
 
             <if test="credit != null and credit != ''">
-                and credit = #{credit}
+                and c.credit = #{credit}
             </if>
 
             <if test="semester != null and semester != ''">
-                and semester = #{semester}
+                and c.semester = #{semester}
             </if>
         </where>
     </select>
@@ -150,6 +150,8 @@
             and o.sub_id = j.sub_carry_no
             and c.sub_no = j.sub_no
             and c.del_flag = '1'
+            and o.del_flag = '1'
+            and j.del_flag = '1'
         </where>
     </select>
 </mapper>

@@ -29,7 +29,7 @@ public interface SubOptMapper {
      * @param subOptEntity 实体
      * @return Integer
      */
-    Integer updateByStuOptEntityList(SubOptEntity subOptEntity);
+    Integer updateByStuOptEntity(SubOptEntity subOptEntity);
 
 
     /**
@@ -56,5 +56,5 @@ public interface SubOptMapper {
      * @param status
      * @return Integer
      */
-    Integer updateByStuOpt(String status,String id);
+    Integer updateByStuOpt(String id,String status);
 }

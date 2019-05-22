@@ -21,7 +21,7 @@ public class SubOptServices {
 
     /**
      * 获取选择课程信息
-     *
+     *@param subOptEntity 实体
      * @return list
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
@@ -30,16 +30,16 @@ public class SubOptServices {
     }
     /**
      * 增加选择课程信息
-     *
+     *@param subOptEntity 实体
      * @return list
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
-    public Integer addList(SubOptEntity subOptEntity){
+    public Integer insertSubOptEntity(SubOptEntity subOptEntity){
         return subOptMapper.insertSubOptEntity(subOptEntity);
     }
     /**
      * 增加选择课程信息
-     *
+     *@param distinguish 审核状态
      * @return list
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
@@ -48,11 +48,12 @@ public class SubOptServices {
     }
     /**
      * 增加选择课程信息
-     *
+     *@param id id
+     * @param status 审核状态
      * @return list
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
     public Integer updateByStuOpt(String status,String id){
-        return subOptMapper.updateByStuOpt(status,id);
+        return subOptMapper.updateByStuOpt(id,status);
     }
 }

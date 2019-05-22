@@ -59,20 +59,20 @@
         <where>
             r.del_flag = '1'
             <if test="id != null and id != ''">
-                and id = #{id}
+                and r.id = #{id}
             </if>
 
             <if test="subNo != null and subNo != ''">
-                and sub_no = #{subNo}
+                and r.sub_no = #{subNo}
             </if>
 
             <if test="subReplaceNo != null and subReplaceNo != ''">
-                and sub_replace_no = #{subReplaceNo}
+                and r.sub_replace_no = #{subReplaceNo}
             </if>
         </where>
     </select>
 
-    <update id="updateBySubReplaceEntityList">
+    <update id="updateBySubReplaceEntity">
         update sub_replace
         <set>
         sub_replace_no = #{subReplaceNo},

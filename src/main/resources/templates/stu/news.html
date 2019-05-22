@@ -38,10 +38,15 @@
                 $ = layui.jquery,
                 table = layui.table;
 
+            var subCarryNo;
+            var url = window.location.search;
+            if (url.indexOf("?") != -1) {
+                subCarryNo = url.substr(url.indexOf("=") + 1);
+            }
 
             var options = {
                 elem: '#newsList',
-                url: ctx + 'stu/stu/newsList',
+                url: ctx + 'stu/stu/newsList?subCarryNo='+subCarryNo,
                 title: '消息表',
                 toolbar: '#toolbarDemo',
                 id: "newsListTable",

@@ -52,12 +52,14 @@ public class StuController extends BaseController {
 
     @GetMapping("/course")
     public String course(Model model,String subCarryNo) {
-        List<SubjectEntity> list = subjectServices.souSubjectEntityList(subCarryNo);
+        SubjectEntity subjectEntity = new SubjectEntity();
+        subjectEntity.setSubCarryNo(subCarryNo);
+        List<SubjectEntity> list = subjectServices.selectList(subjectEntity);
         SysUser sysUser = new SysUser();
         sysUser.setUserNo("17210210613");
         sysUser = sysUserMapper.selectUserNo(sysUser);
-        for(SubjectEntity subjectEntity : list){
-            model.addAttribute("subjectEntity",subjectEntity);
+        for(SubjectEntity subjectEntity1 : list){
+            model.addAttribute("subjectEntity",subjectEntity1);
         }
         model.addAttribute("sysUser",sysUser);
         return prefix + "/course";
@@ -104,9 +106,22 @@ public class StuController extends BaseController {
         ModelAndView modelAndView = new ModelAndView("redirect:/stu/stu/choose");
         return modelAndView;
     }
+
     @RequestMapping("/newsList")
     @ResponseBody
-    public TableDataInfo newsList(SubOptEntity subOptEntity) {
+    public TableDataInfo newsList(SubOptEntity subOptEntity, HttpServletRequest request) {
+        SubjectEntity subjectEntity = new SubjectEntity();
+        subjectEntity.setSubCarryNo(request.getParameter("subCarryNo"));
+        List<SubjectEntity> list1 = subjectServices.selectList(subjectEntity);
+        for(SubjectEntity subjectEntity1 : list1){
+            SubOptEntity subOptEntity1 = new SubOptEntity();
+            subOptEntity1.setId(IdUtil.uuid());
+            subOptEntity1.setStuNo("17210210613");
+            subOptEntity1.setSubId(subjectEntity1.getSubCarryNo());
+            subOptEntity1.setSubName(subjectEntity1.getSubName());
+            subOptEntity1.setStatus("1");
+            subOptServices.insertSubOptEntity(subOptEntity1);
+        }
         subOptEntity.setStuNo("17210210613");
         startPage();
         List<SubOptEntity> list = subOptServices.selectList(subOptEntity);

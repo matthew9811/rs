@@ -27,7 +27,7 @@ public interface SubReplaceMapper {
      * @param subReplaceEntity 实体
      * @return Integer
      */
-    Integer updateBySubReplaceEntityList(SubReplaceEntity subReplaceEntity);
+    Integer updateBySubReplaceEntity(SubReplaceEntity subReplaceEntity);
 
 
     /**

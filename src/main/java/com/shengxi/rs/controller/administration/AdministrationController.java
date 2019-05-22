@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -42,7 +43,8 @@ public class AdministrationController extends BaseController {
 
     @RequestMapping("/approvalList")
     @ResponseBody
-    public TableDataInfo approvaList(SubOptEntity subOptEntity) {
+    public TableDataInfo approvaList(SubOptEntity subOptEntity, HttpServletRequest request) {
+        subOptServices.updateByStuOpt(request.getParameter("id"),request.getParameter("status"));
         startPage();
         List<SubOptToolEntity> list = subOptServices.selectSubStuList("5");
         return getDataTable(list);

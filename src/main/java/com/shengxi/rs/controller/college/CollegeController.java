@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -53,7 +54,8 @@ public class CollegeController extends BaseController {
 
     @RequestMapping("/classBeginsList")
     @ResponseBody
-    public TableDataInfo classBeginsList(SubOptEntity subOptEntity) {
+    public TableDataInfo classBeginsList(SubOptEntity subOptEntity, HttpServletRequest request) {
+        subOptServices.updateByStuOpt(request.getParameter("id"),request.getParameter("status"));
         startPage();
         List<SubOptToolEntity> list = subOptServices.selectSubStuList("5");
         return getDataTable(list);
