@@ -78,7 +78,7 @@ public class AddController extends BaseController {
     @ResponseBody
     public List<SubjectEntity> addSubject(SubjectEntity subjectEntity) {
        subjectEntity.setId(IdUtil.uuid());
-       subjectServices.addList(subjectEntity);
+       subjectServices.insertSubject(subjectEntity);
        List<SubjectEntity> list = subjectServices.selectList(subjectEntity);
        return list;
     }
@@ -86,7 +86,7 @@ public class AddController extends BaseController {
     @ResponseBody
     public List<ComSubEntity> addComSub(ComSubEntity comSubEntity) {
         comSubEntity.setId(IdUtil.uuid());
-        comSubServices.addList(comSubEntity);
+        comSubServices.insertComSubEntity(comSubEntity);
         List<ComSubEntity> list =comSubServices.selectList(comSubEntity);
         return list;
     }
@@ -94,7 +94,7 @@ public class AddController extends BaseController {
     @ResponseBody
     public List<SubOptEntity> addSubject(SubOptEntity subOptEntity) {
         subOptEntity.setId(IdUtil.uuid());
-        subOptServices.addList(subOptEntity);
+        subOptServices.insertSubOptEntity(subOptEntity);
         List<SubOptEntity> list = subOptServices.selectList(subOptEntity);
         return list;
     }
@@ -102,7 +102,7 @@ public class AddController extends BaseController {
     @ResponseBody
     public ModelAndView addReplace(SubReplaceEntity subReplaceEntity) {
         subReplaceEntity.setId(IdUtil.uuid());
-        subReplaceServices.addList(subReplaceEntity);
+        subReplaceServices.insertSubReplaceEntity(subReplaceEntity);
         List<SubReplaceEntity> list = subReplaceServices.selectList(subReplaceEntity);
         ModelAndView modelAndView = new ModelAndView("redirect:/academic/academic/replace");
         return modelAndView;
@@ -111,7 +111,7 @@ public class AddController extends BaseController {
     @ResponseBody
     public List<SysDeptEntity> addSubject(SysDeptEntity sysDeptEntity) {
         sysDeptEntity.setId(IdUtil.uuid());
-        sysDeptServices.addList(sysDeptEntity);
+        sysDeptServices.insertSysDeptEntity(sysDeptEntity);
         List<SysDeptEntity> list = sysDeptServices.selectList(sysDeptEntity);
         return list;
     }

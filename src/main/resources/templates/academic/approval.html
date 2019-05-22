@@ -109,14 +109,14 @@
                     $.ajax({
                         url: "classBeginsList",
                         type: "POST",
-                        data:{"id":data.id,"status":"1"},
+                        data:{"id":data.id,"status":"3"},
                         dataType: "json",
                     });
                 } else if (obj.event === 'reject') {
                     $.ajax({
                         url: "classBeginsList",
                         type: "POST",
-                        data:{"id":data.id,"status":"2"},
+                        data:{"id":data.id,"status":"4"},
                         dataType: "json",
                     });
                 }

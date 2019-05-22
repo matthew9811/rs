@@ -23,11 +23,11 @@ public class SysDeptServices {
     private SysDeptMapper sysDeptMapper;
     /**
      * 增加部门信息
-     *
+     *@param sysDeptEntity 实体
      * @return list
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
-    public Integer addList(SysDeptEntity sysDeptEntity){
+    public Integer insertSysDeptEntity(SysDeptEntity sysDeptEntity){
         return sysDeptMapper.insertSysDeptEntity(sysDeptEntity);
     }
 
