@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 用户管理控制器
- * @author matthew
- * @date 2019/05/19
+ * 角色管理器
+ * @author chuling
+ * @date 2019-05-22
  */
+@RequestMapping("/role")
 @Controller
-@RequestMapping("/user")
-public class UserController extends BaseController {
+public class RoleController extends BaseController {
 
-    private String prefix = "/admin/user";
+    private String prefix = "/admin/role";
 
     @GetMapping("/current")
     public SysUser currentUser() {
@@ -24,7 +24,8 @@ public class UserController extends BaseController {
     }
 
     @GetMapping()
-    public String index(){
-        return prefix + "/user";
+    public String index() {
+        return prefix + "/role";
     }
+
 }

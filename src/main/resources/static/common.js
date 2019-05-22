@@ -1,8 +1,9 @@
 $(function () {
     layui.config({
-        base: '/layui/lay/modules/'
+        base: ''
     }).extend({
-        treetable: 'treetable-lay/treetable'
+        treetable: '/layui/lay/modules/treetable-lay/treetable',
+        authtree: '/layui_exts/authtree'
     });
     layui.use(['laydate'], function () {
         var laydate = layui.laydate;
