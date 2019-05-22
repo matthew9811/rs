@@ -11,19 +11,11 @@ import java.util.Map;
  * @Date: 2019/4/7 14:25
  * @Description:
  */
-public class Tree<T> {
-    /**
-     * 节点ID
-     */
-    private String id;
+public class Tree<T> extends BaseEntity{
     /**
      * 图标
      */
     private String icon;
-    /**
-     * url
-     */
-    private String url;
     /**
      * 显示节点文本
      */
@@ -59,12 +51,28 @@ public class Tree<T> {
      */
     private boolean hasChildren = false;
 
-    public String getId() {
-        return id;
+    public Tree() {
+        super();
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
+    }
+
+    public void setHasChildren(boolean hasChildren) {
+        this.hasChildren = hasChildren;
     }
 
     public String getText() {
@@ -123,37 +131,9 @@ public class Tree<T> {
         this.hasChildren = isChildren;
     }
 
-    public String getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public Tree() {
-        super();
-    }
 
     @Override
     public String toString() {
-
         return JSON.toJSONString(this);
     }
 

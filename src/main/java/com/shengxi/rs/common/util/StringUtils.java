@@ -1,6 +1,7 @@
 package com.shengxi.rs.common.util;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.shengxi.rs.common.constant.SysConstant;
 
 /**
  * @author : Matthew
@@ -64,5 +65,16 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
             }
         }
         return false;
+    }
+
+    /**
+     * 是否为空
+     */
+    public static boolean isNull(String obj) {
+        return "".equals(obj) || obj.isEmpty() || SysConstant.FREEZE.equals(obj.length()) || obj.equals(null);
+    }
+
+    public static boolean isNotNull(String s) {
+        return !isNull(s);
     }
 }

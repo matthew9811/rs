@@ -2,10 +2,13 @@ package com.shengxi.system.common.util;
 
 
 import cn.hutool.core.util.ObjectUtil;
+import com.shengxi.rs.common.constant.SysConstant;
 import com.shengxi.rs.common.domain.Tree;
-import com.shengxi.system.entites.sys.SysMenuEntity;
+import com.shengxi.rs.common.util.StringUtils;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 树形结构工具类
@@ -15,30 +18,62 @@ import java.util.List;
  */
 public class TreeUtil {
 
-    public static List<SysMenuEntity> Recursive(List<SysMenuEntity> trees){
-        ArrayList<SysMenuEntity> sysMenuEntities = new ArrayList<>();
-        for (SysMenuEntity vo: trees){
-            sysMenuEntities.add(findChild(vo, trees));
+    public static <T> Tree<T> build(List<Tree<T>> nodes) {
+        if (ObjectUtil.isNull(nodes)) {
+            return null;
         }
-        return sysMenuEntities;
+        List<Tree<T>> topNodes = new ArrayList<>();
+        nodes.forEach(children -> {
+            String pid = children.getParentId();
+            if (pid == null || SysConstant.NORMAL.equals(pid)) {
+                topNodes.add(children);
+                return;
+            }
+            for (Tree<T> parent : nodes) {
+                String id = parent.getId();
+                if (id != null && id.equals(pid)) {
+                    parent.getChildren().add(children);
+                    children.setHasParent(true);
+                    parent.setChildren(true);
+                    return;
+                }
+            }
+        });
+
+        Tree<T> root = new Tree<>();
+        root.setId("0");
+        root.setParentId("");
+        root.setHasParent(false);
+        root.setChildren(true);
+        root.setChecked(true);
+        root.setChildren(topNodes);
+        root.setText("根节点");
+        Map<String, Object> state = new HashMap<>(16);
+        state.put("opened", true);
+        root.setState(state);
+        return root;
     }
 
-
-    /**
-     * 查找对子结点
-     * @param node node
-     * @param treeNodes tree
-     * @return entity
-     */
-    public static SysMenuEntity findChild(SysMenuEntity node, List<SysMenuEntity> treeNodes) {
-        for (SysMenuEntity vo : treeNodes) {
-            if (vo.getId().equals(node.getParentId())) {
-                if (ObjectUtil.isNull(node.getChild())) {
-                    node.setChild(new ArrayList<>());
-                }
-                node.getChild().add(findChild(vo, treeNodes));
-            }
+    public static <T> List<Tree<T>> buildList(List<Tree<T>> nodes, String idParam) {
+        if (ObjectUtil.isNull(nodes)) {
+            return new ArrayList<>();
         }
-        return node;
+        List<Tree<T>> topNodes = new ArrayList<>();
+        nodes.forEach(children -> {
+            String pid = children.getParentId();
+            if (StringUtils.isNull(pid) || idParam.equals(pid)) {
+                topNodes.add(children);
+                return;
+            }
+            nodes.forEach(parent -> {
+                String id = parent.getId();
+                if (StringUtils.isNotNull(id) && id.equals(pid)) {
+                    parent.getChildren().add(children);
+                    children.setHasParent(true);
+                    parent.setChildren(true);
+                }
+            });
+        });
+        return topNodes;
     }
 }

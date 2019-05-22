@@ -1,6 +1,7 @@
 package com.shengxi.system.model.service.sys;
 
 
+import com.shengxi.rs.common.domain.Tree;
 import com.shengxi.system.common.constant.BaseControllerConstant;
 import com.shengxi.system.common.util.TreeUtil;
 import com.shengxi.system.entites.sys.SysMenuEntity;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 菜单服务层
+ *
  * @author matthew
  */
 @Service("menu")
@@ -60,7 +62,6 @@ public class SysMenuServices {
         menuEntity.setMenuName("大妈");
         menuEntity.setUrl("https://www.layui.com/doc/modules/layer.html");
         list.add(menuEntity);
-        list = TreeUtil.Recursive(list);
         Map<String, Object> map = new HashMap<>();
         menuEntity = new SysMenuEntity();
         menuEntity.setId("4");
@@ -69,18 +70,31 @@ public class SysMenuServices {
         menuEntity.setMenuName("大妈");
         menuEntity.setUrl("https://www.layui.com/doc/modules/layer.html");
         list.add(menuEntity);
-        map.put("data", list);
-        map.put("msg","楚苓大妈牛逼");
+        List<Tree<SysMenuEntity>> menuEntityList = new ArrayList<>();
+        this.buildTrees(menuEntityList, list);
+        map.put("data", TreeUtil.build(menuEntityList));
+        map.put("msg", "楚苓大妈牛逼");
         map.put("code", 0);
         return map;
     }
 
     /**
      * 返回用户的权限
+     *
      * @param id user_id
      * @return list
      */
     public List<SysMenuEntity> selectPermList(String id) {
         return sysMenuMapper.selectPermList(id);
+    }
+
+    private void buildTrees(List<Tree<SysMenuEntity>> trees, List<SysMenuEntity> menus) {
+        menus.forEach(menu -> {
+            Tree<SysMenuEntity> tree = new Tree<>();
+            tree.setId(menu.getId());
+            tree.setParentId(menu.getParentId());
+            tree.setText(menu.getMenuName());
+            trees.add(tree);
+        });
     }
 }

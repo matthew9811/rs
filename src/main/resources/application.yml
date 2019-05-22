@@ -63,8 +63,12 @@ spring:
         wall:
           config:
             multi-statement-allow: true
+        log4j:
+          statement-logger-name:
 
   mvc:
+    favicon:
+      enabled: false
     view:
       prefix: /templates
       suffix: .html
@@ -117,6 +121,7 @@ mybatis:
     - classpath*:mapper/**/*Mapper.xml
     # 加载全局的配置文件
   config-location: classpath:mapper/mybatis-config.xml
+
 
 mapper:
   not-empty: true

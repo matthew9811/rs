@@ -9,14 +9,11 @@ import java.util.List;
 
 /**
  * sys_menu
+ *
  * @author matthew
  */
-public class SysMenuEntity extends BaseEntity {
+public class SysMenuEntity extends  Tree<SysMenuEntity> {
 
-    /**
-     * 父类id
-     */
-    private String parentId;
 
     /**
      * 路径
@@ -42,25 +39,9 @@ public class SysMenuEntity extends BaseEntity {
      * 权限
      */
     private String perms;
-    /**
-     * 子结点
-     */
-    private List<SysMenuEntity> child;
 
-    public List<SysMenuEntity> getChild() {
-        return child;
-    }
-
-    public void setChild(List<SysMenuEntity> child) {
-        this.child = child;
-    }
-
-    public String getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
+    public SysMenuEntity() {
+        super();
     }
 
     public String getUrl() {
@@ -79,10 +60,12 @@ public class SysMenuEntity extends BaseEntity {
         this.menuName = menuName;
     }
 
+    @Override
     public String getIcon() {
         return icon;
     }
 
+    @Override
     public void setIcon(String icon) {
         this.icon = icon;
     }
@@ -107,13 +90,18 @@ public class SysMenuEntity extends BaseEntity {
     @Override
     public String toString() {
         return "SysMenuEntity{" +
-                "parentId='" + parentId + '\'' +
-                ", url='" + url + '\'' +
+                "url='" + url + '\'' +
                 ", menuName='" + menuName + '\'' +
                 ", icon='" + icon + '\'' +
                 ", type='" + type + '\'' +
                 ", perms='" + perms + '\'' +
-                ", child=" + child +
+                ", id='" + id + '\'' +
+                ", createTime=" + createTime +
+                ", createBy='" + createBy + '\'' +
+                ", updateTime=" + updateTime +
+                ", updateBy='" + updateBy + '\'' +
+                ", remark='" + remark + '\'' +
+                ", delFlag='" + delFlag + '\'' +
                 '}';
     }
 }

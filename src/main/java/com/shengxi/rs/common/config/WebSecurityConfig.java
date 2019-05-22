@@ -1,6 +1,7 @@
 package com.shengxi.rs.common.config;
 
 import com.shengxi.rs.common.filter.TokenFilter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
