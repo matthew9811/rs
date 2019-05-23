@@ -3,6 +3,7 @@ package com.shengxi.system.model.service.sys;
 
 import com.shengxi.rs.common.domain.Tree;
 import com.shengxi.system.common.constant.BaseControllerConstant;
+import com.shengxi.system.common.constant.ServicesConstant;
 import com.shengxi.system.common.util.TreeUtil;
 import com.shengxi.system.entites.sys.SysMenuEntity;
 import com.shengxi.system.model.mapper.sys.SysMenuMapper;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jsoup.select.Selector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,9 +40,9 @@ public class SysMenuServices {
     /**
      * 初始化获取
      */
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, rollbackFor = Selector.SelectorParseException.class)
     public Map<String, Object> selectByInit() {
-        List<SysMenuEntity> list = new ArrayList<>();
+        List<Tree<SysMenuEntity>> list = new ArrayList<>();
         SysMenuEntity menuEntity = new SysMenuEntity();
         menuEntity.setId("1");
         menuEntity.setDelFlag(BaseControllerConstant.DEL_FLAG_NOT);
@@ -71,9 +73,8 @@ public class SysMenuServices {
         menuEntity.setUrl("https://www.layui.com/doc/modules/layer.html");
         list.add(menuEntity);
         List<Tree<SysMenuEntity>> menuEntityList = new ArrayList<>();
-        this.buildTrees(menuEntityList, list);
-        map.put("data", TreeUtil.build(menuEntityList));
         map.put("msg", "楚苓大妈牛逼");
+        map.put("data", TreeUtil.Recursive(list));
         map.put("code", 0);
         return map;
     }
@@ -88,13 +89,26 @@ public class SysMenuServices {
         return sysMenuMapper.selectPermList(id);
     }
 
+    /**
+     * 构建树形list
+     *
+     * @param trees Tree
+     * @param menus 菜单
+     */
     private void buildTrees(List<Tree<SysMenuEntity>> trees, List<SysMenuEntity> menus) {
         menus.forEach(menu -> {
             Tree<SysMenuEntity> tree = new Tree<>();
             tree.setId(menu.getId());
             tree.setParentId(menu.getParentId());
-            tree.setText(menu.getMenuName());
+            Map<String, Object> map = new HashMap<>(ServicesConstant.MENU_VALUE_SIZE);
+            map.put("icon", menu.getIcon());
+            map.put("perms", menu.getPerms());
+            map.put("url", menu.getUrl());
+            map.put("menuName", menu.getMenuName());
+            map.put("type", menu.getType());
             trees.add(tree);
         });
+        /*清空无用的数据*/
+        menus.clear();
     }
 }

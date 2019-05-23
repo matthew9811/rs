@@ -11,6 +11,7 @@ import com.shengxi.system.model.service.test.TestServices;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,6 +62,12 @@ public class TestController extends BaseController {
     }
 
 
+    /**
+     * @param comSubEntity
+     * @return
+     * @PreAuthorize("hasPermission('user', 'read') or hasRole('ROLE_ADMINISTRATOR')")
+     */
+//    @PreAuthorize("hasPermission('test:test:list') or hasRole('admin')")
     @RequestMapping("/getList")
     @ResponseBody
     public TableDataInfo getList(ComSubEntity comSubEntity) {

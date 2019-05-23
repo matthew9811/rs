@@ -5,6 +5,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.rs.common.constant.SysConstant;
 import com.shengxi.rs.common.domain.Tree;
 import com.shengxi.rs.common.util.StringUtils;
+import com.shengxi.system.entites.sys.SysMenuEntity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,62 +19,43 @@ import java.util.Map;
  */
 public class TreeUtil {
 
-    public static <T> Tree<T> build(List<Tree<T>> nodes) {
-        if (ObjectUtil.isNull(nodes)) {
-            return null;
-        }
-        List<Tree<T>> topNodes = new ArrayList<>();
-        nodes.forEach(children -> {
-            String pid = children.getParentId();
-            if (pid == null || SysConstant.NORMAL.equals(pid)) {
-                topNodes.add(children);
-                return;
-            }
-            for (Tree<T> parent : nodes) {
-                String id = parent.getId();
-                if (id != null && id.equals(pid)) {
-                    parent.getChildren().add(children);
-                    children.setHasParent(true);
-                    parent.setChildren(true);
-                    return;
-                }
-            }
+    public static <T> List<Tree<T>> Recursive(List<Tree<T>> trees) {
+        List<Tree<T>> list = new ArrayList<>();
+        trees.forEach((obj) -> {
+            list.add(findChild(obj, trees));
         });
-
-        Tree<T> root = new Tree<>();
-        root.setId("0");
-        root.setParentId("");
-        root.setHasParent(false);
-        root.setChildren(true);
-        root.setChecked(true);
-        root.setChildren(topNodes);
-        root.setText("根节点");
-        Map<String, Object> state = new HashMap<>(16);
-        state.put("opened", true);
-        root.setState(state);
-        return root;
+        return list;
     }
 
-    public static <T> List<Tree<T>> buildList(List<Tree<T>> nodes, String idParam) {
-        if (ObjectUtil.isNull(nodes)) {
-            return new ArrayList<>();
-        }
-        List<Tree<T>> topNodes = new ArrayList<>();
-        nodes.forEach(children -> {
-            String pid = children.getParentId();
-            if (StringUtils.isNull(pid) || idParam.equals(pid)) {
-                topNodes.add(children);
-                return;
-            }
-            nodes.forEach(parent -> {
-                String id = parent.getId();
-                if (StringUtils.isNotNull(id) && id.equals(pid)) {
-                    parent.getChildren().add(children);
-                    children.setHasParent(true);
-                    parent.setChildren(true);
+    /**
+     * 查找对子结点
+     *
+     * @param node      node
+     * @param treeNodes tree
+     * @return entity
+     */
+    private static <T> Tree<T> findChild(Tree<T> node, List<Tree<T>> treeNodes) {
+        for (Tree<T> vo : treeNodes) {
+            if (vo.getId().equals(node.getParentId())) {
+                if (ObjectUtil.isNull(node.getChildren())) {
+                    node.setChildren(new ArrayList<>());
                 }
-            });
-        });
-        return topNodes;
+                node.getChildren().add(findChild(vo, treeNodes));
+            }
+        }
+        return node;
+    }
+
+    private static <T> Tree<T> find(Tree<T> node, List<Tree<T>> treeNodes) {
+        for (Tree<T> vo : treeNodes) {
+            if (node.getId().equals(vo.getParentId())) {
+                node.getChildren().add(vo);
+                treeNodes.remove(vo);
+                for (Tree<T> child : node.getChildren()) {
+                    find(child, treeNodes);
+                }
+            }
+        }
+        return node;
     }
 }

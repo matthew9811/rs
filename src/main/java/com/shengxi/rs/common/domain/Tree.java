@@ -17,42 +17,28 @@ public class Tree<T> extends BaseEntity{
      */
     private String icon;
     /**
-     * 显示节点文本
-     */
-    private String text;
-    /**
-     * 节点状态，open closed
-     */
-    private Map<String, Object> state;
-    /**
-     * 节点是否被选中 true false
-     */
-    private boolean checked = false;
-    /**
-     * 节点属性
-     */
-    private Map<String, Object> attributes;
-
-    /**
      * 节点的子节点
      */
     private List<Tree<T>> children = new ArrayList<>();
+    /**
+     * 属性
+     */
+    private Map<String, Object> attr;
 
     /**
      * 父ID
      */
     private String parentId;
-    /**
-     * 是否有父节点
-     */
-    private boolean hasParent = false;
-    /**
-     * 是否有子节点
-     */
-    private boolean hasChildren = false;
-
     public Tree() {
         super();
+    }
+
+    public Map<String, Object> getAttr() {
+        return attr;
+    }
+
+    public void setAttr(Map<String, Object> attr) {
+        this.attr = attr;
     }
 
     public String getIcon() {
@@ -71,41 +57,6 @@ public class Tree<T> extends BaseEntity{
         this.parentId = parentId;
     }
 
-    public void setHasChildren(boolean hasChildren) {
-        this.hasChildren = hasChildren;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public Map<String, Object> getState() {
-        return state;
-    }
-
-    public void setState(Map<String, Object> state) {
-        this.state = state;
-    }
-
-    public boolean isChecked() {
-        return checked;
-    }
-
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
-
-    public Map<String, Object> getAttributes() {
-        return attributes;
-    }
-
-    public void setAttributes(Map<String, Object> attributes) {
-        this.attributes = attributes;
-    }
 
     public List<Tree<T>> getChildren() {
         return children;
@@ -113,22 +64,6 @@ public class Tree<T> extends BaseEntity{
 
     public void setChildren(List<Tree<T>> children) {
         this.children = children;
-    }
-
-    public boolean isHasParent() {
-        return hasParent;
-    }
-
-    public void setHasParent(boolean isParent) {
-        this.hasParent = isParent;
-    }
-
-    public boolean isHasChildren() {
-        return hasChildren;
-    }
-
-    public void setChildren(boolean isChildren) {
-        this.hasChildren = isChildren;
     }
 
 
