@@ -75,7 +75,7 @@
                                     return '教务驳回'
                                 }
                             }},
-                        {field: 'remark', title: '备注', align: 'center', event: 'setRemark'},
+                        {field: 'instituteRemark', title: '备注', align: 'center', event: 'setRemark'},
                         {title: '选课操作', width: 220, templet: '#classBeginsListBar', fixed: "right", align: "center"},
                     ]
                 ]
@@ -110,13 +110,41 @@
                         type: "POST",
                         data:{"id":data.id,"status":"1"},
                         dataType: "json",
+                        success: function (data) {
+
+                                layer.alert("审批成功", {icon: 6}, function () {
+                                    window.parent.location.reload();
+                                    parent.layer.close(index);
+                                });
+                        }
                     });
+
                 } else if (obj.event === 'reject') {
                     $.ajax({
                         url: "classBeginsList",
                         type: "POST",
                         data:{"id":data.id,"status":"2"},
                         dataType: "json",
+                        success: function (data) {
+                            layer.alert("审批成功", {icon: 6}, function () {
+                                window.parent.location.reload();
+                                parent.layer.close(index);
+                            });
+                        }
+                    });
+
+                }else if (obj.event === 'setRemark') {
+                    layer.prompt({
+                        formType: 2,
+                        title: '修改课程代码为 [' + data.instituteRemark+ '] 的备注',
+                        value: data.instituteRemark
+                    }, function (value, index) {
+                        layer.close(index);
+                        //这里一般是发送修改的Ajax请求
+                        //同步更新表格和缓存对应的值
+                        obj.update({
+                            sign: value
+                        });
                     });
                 }
             });

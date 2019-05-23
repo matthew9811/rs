@@ -111,6 +111,12 @@
                         type: "POST",
                         data:{"id":data.id,"status":"3"},
                         dataType: "json",
+                        success: function (data) {
+                            layer.alert("审批成功", {icon: 6}, function () {
+                                window.parent.location.reload();
+                                parent.layer.close(index);
+                            });
+                        }
                     });
                 } else if (obj.event === 'reject') {
                     $.ajax({
@@ -118,6 +124,12 @@
                         type: "POST",
                         data:{"id":data.id,"status":"4"},
                         dataType: "json",
+                        success: function (data) {
+                            layer.alert("审批成功", {icon: 6}, function () {
+                                window.parent.location.reload();
+                                parent.layer.close(index);
+                            });
+                        }
                     });
                 }
             });

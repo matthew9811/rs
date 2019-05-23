@@ -35,7 +35,7 @@
             <if test="subReplaceNo != null and subReplaceNo != ''">
                 #{subReplaceNo},
             </if>
-            0,
+            1,
             now(),
         </trim>
     </sql>

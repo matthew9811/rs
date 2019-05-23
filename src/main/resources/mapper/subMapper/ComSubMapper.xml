@@ -59,7 +59,7 @@
             <if test="credit != null and credit != ''">
                 #{credit},
             </if>
-            0,
+            1,
             now(),
         </trim>
     </sql>

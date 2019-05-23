@@ -55,9 +55,11 @@ public class CollegeController extends BaseController {
     @RequestMapping("/classBeginsList")
     @ResponseBody
     public TableDataInfo classBeginsList(SubOptEntity subOptEntity, HttpServletRequest request) {
+        System.out.println(request.getParameter("id"));
         subOptServices.updateByStuOpt(request.getParameter("id"),request.getParameter("status"));
         startPage();
         List<SubOptToolEntity> list = subOptServices.selectSubStuList("5");
         return getDataTable(list);
     }
+
 }

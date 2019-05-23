@@ -71,7 +71,7 @@
             <if test="academicRemark != null and academicRemark != ''">
                 #{academicRemark},
             </if>
-            0,
+            1,
             now(),
         </trim>
     </sql>
@@ -133,7 +133,8 @@
 
     </select>
     <resultMap id="selectSubStuListMap" type="com.shengxi.system.entites.subEntity.SubOptToolEntity">
-            <id column="stu_no" property="stuNo"/>
+            <id column="id" property="id"/>
+            <result column="stu_no" property="stuNo"/>
             <result column="user_name" property="userName"/>
             <result column="dname" property="subClass"/>
             <result column="ename" property="major"/>
@@ -148,14 +149,19 @@
             <result column="sub_id" property="subCarryNo"/>
             <result column="sub_class_name" property="subClassName"/>
             <result column="status" property="status"/>
+           <result column="institute_remark" property="instituteRemark"/>
+           <result column="sub_institute" property="academicRemark"/>
     </resultMap>
 
     <select id="selectSubStuList"
             resultMap="selectSubStuListMap" parameterType="String">
-       SELECT o.sub_id,
+       SELECT o.id,
+        o.sub_id,
         o.stu_no,
         o.sub_name,
         o.status,
+        o.institute_remark,
+        o.academic_remark,
         u.user_name,
         j.sub_no,
         j.sub_credit,

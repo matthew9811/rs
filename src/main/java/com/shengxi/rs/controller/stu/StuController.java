@@ -69,22 +69,6 @@ public class StuController extends BaseController {
     public String news(HttpServletResponse response) {
         response.addHeader("x-frame-options", "SAMEORIGIN");
         return prefix + "/news";
-
-        /**SubOptEntity subOptEntity = new SubOptEntity();
-        subOptEntity.setId(IdUtil.uuid());
-        subOptEntity.setStuNo("17210210613");
-        subOptEntity.setSubId(subCarryNo);
-        subOptEntity.setSubName(subName);
-        subOptEntity.setStatus("0");
-        if(ObjectUtil.isNotNull(subCarryNo)) {
-            subOptServices.addList(subOptEntity);
-        }
-        SubOptEntity subOptEntity1 = new SubOptEntity();
-        subOptEntity1.setStuNo("17210210613");
-        List<SubOptEntity> list = subOptServices.selectList(subOptEntity1);
-        model.addAttribute("list",list);
-        return prefix + "/news";
-         */
     }
     @GetMapping("/search")
     public String search(HttpServletResponse response) {
@@ -109,29 +93,31 @@ public class StuController extends BaseController {
 
     @RequestMapping("/newsList")
     @ResponseBody
-    public TableDataInfo newsList(SubOptEntity subOptEntity, HttpServletRequest request) {
-        SubjectEntity subjectEntity = new SubjectEntity();
-        subjectEntity.setSubCarryNo(request.getParameter("subCarryNo"));
-        List<SubjectEntity> list1 = subjectServices.selectList(subjectEntity);
-        for(SubjectEntity subjectEntity1 : list1){
-            SubOptEntity subOptEntity1 = new SubOptEntity();
-            subOptEntity1.setId(IdUtil.uuid());
-            subOptEntity1.setStuNo("17210210613");
-            subOptEntity1.setSubId(subjectEntity1.getSubCarryNo());
-            subOptEntity1.setSubName(subjectEntity1.getSubName());
-            subOptEntity1.setStatus("1");
-            subOptServices.insertSubOptEntity(subOptEntity1);
-        }
+    public TableDataInfo newsList(SubOptEntity subOptEntity) {
         subOptEntity.setStuNo("17210210613");
         startPage();
         List<SubOptEntity> list = subOptServices.selectList(subOptEntity);
         return getDataTable(list);
     }
 
+    @RequestMapping("/insertCourse")
+    @ResponseBody
+    public ModelAndView insertCourse(SubOptEntity subOptEntity, String subCarryNo, String subName){
+            subOptEntity.setId(IdUtil.uuid());
+            subOptEntity.setStuNo("17210210613");
+            subOptEntity.setSubId(subCarryNo);
+            subOptEntity.setSubName(subName);
+            subOptEntity.setStatus("0");
+            subOptServices.insertSubOptEntity(subOptEntity);
+            ModelAndView modelAndView = new ModelAndView("redirect:/stu/stu/news");
+            return modelAndView;
+    }
+
     @RequestMapping("/chooseList")
     @ResponseBody
-    public TableDataInfo chooseList(SubjectEntity subjectEntity, HttpServletRequest request) {
-        subjectEntity.setSubNo(request.getParameter("subNo"));
+    public TableDataInfo chooseList(SubjectEntity subjectEntity,String subNo) {
+        System.out.println(subNo);
+        subjectEntity.setSubNo(subNo);
         startPage();
         List<SubjectEntity> list = subjectServices.selectList(subjectEntity);
         return getDataTable(list);

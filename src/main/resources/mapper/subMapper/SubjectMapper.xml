@@ -147,7 +147,7 @@
             <if test="subStatus != null and subStatus != ''">
                 #{subStatus},
             </if>
-            0,
+            1,
             now(),
         </trim>
     </sql>

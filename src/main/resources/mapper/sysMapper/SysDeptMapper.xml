@@ -42,7 +42,7 @@
             <if test="sort != null and sort != ''">
                 #{sort},
             </if>
-            0,
+            1,
             now(),
         </trim>
     </sql>

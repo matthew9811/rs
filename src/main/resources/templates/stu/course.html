@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <title>广东东软学院学生申请重修表</title>
     <script>
-        function check(subCarryNo){
-            window.location.href="news?subCarryNo="+subCarryNo;
+        function check(subCarryNo,subName){
+            alert("申请成功");
+            window.location.href="insertCourse?subCarryNo="+subCarryNo+"&subName="+subName;
         }
     </script>
 </head>
@@ -66,7 +67,7 @@
             <td colspan="3" th:text="${subjectEntity.subAddress}">F308</td>
         </tr>
         <tr>
-           <td><input type="submit" th:onclick="'javascript:check('+${subjectEntity.subCarryNo}+')'"></td>
+           <td><input type="submit" th:onclick="'javascript:check('+${subjectEntity.subCarryNo}+','+'\''+${subjectEntity.subName}+'\''+')'"></td>
         </tr>
     </table>
 

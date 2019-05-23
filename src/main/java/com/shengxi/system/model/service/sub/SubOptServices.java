@@ -53,7 +53,7 @@ public class SubOptServices {
      * @return list
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
-    public Integer updateByStuOpt(String status,String id){
+    public Integer updateByStuOpt(String id,String status){
         return subOptMapper.updateByStuOpt(id,status);
     }
 }

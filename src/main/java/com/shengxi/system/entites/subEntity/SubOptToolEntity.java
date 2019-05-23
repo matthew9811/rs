@@ -65,6 +65,16 @@ public class SubOptToolEntity extends BaseEntity {
      */
     private String status;
 
+    /**
+     *开课学院备注
+     */
+    private String instituteRemark;
+
+    /**
+     *教务部备注
+     */
+    private String academicRemark;
+
     public String getStuNo() {
         return stuNo;
     }
@@ -185,6 +195,22 @@ public class SubOptToolEntity extends BaseEntity {
         this.status = status;
     }
 
+    public String getInstituteRemark() {
+        return instituteRemark;
+    }
+
+    public void setInstituteRemark(String instituteRemark) {
+        this.instituteRemark = instituteRemark;
+    }
+
+    public String getAcademicRemark() {
+        return academicRemark;
+    }
+
+    public void setAcademicRemark(String academicRemark) {
+        this.academicRemark = academicRemark;
+    }
+
     @Override
     public String toString() {
         return "SubOptToolEntity{" +
@@ -203,6 +229,8 @@ public class SubOptToolEntity extends BaseEntity {
                 ", subCarryNo='" + subCarryNo + '\'' +
                 ", subClassName='" + subClassName + '\'' +
                 ", status='" + status + '\'' +
+                ", instituteRemark='" + instituteRemark + '\'' +
+                ", academicRemark='" + academicRemark + '\'' +
                 '}';
     }
 }
