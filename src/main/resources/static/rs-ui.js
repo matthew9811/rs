@@ -16,6 +16,7 @@
                     height: "full-125",
                     limit: 10,
                     limits: [10, 20, 50, 100],
+                    where: {},
                     response: {
                         statusCode: 200 //重新规定成功的状态码为 200，table 组件默认为 0
                     },
@@ -41,6 +42,7 @@
                         toolbar: options.toolbar, //开启工具栏
                         id: options.id,
                         page: options.page,
+                        where: options.where,
                         response: options.response,
                         parseData: options.parseData,
                         cols: options.cols

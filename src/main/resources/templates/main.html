@@ -38,9 +38,7 @@
 <script>
     $(function () {
         layui.use(['form', 'layer','table'], function () {
-            var layer = layui.layer;
-            var form = layui.form,
-                layer = parent.layer === undefined ? layui.layer : top.layer,
+            var layer = parent.layer === undefined ? layui.layer : top.layer,
                 $ = layui.jquery,
                 table = layui.table;
 
