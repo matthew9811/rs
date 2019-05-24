@@ -2,7 +2,6 @@ package com.shengxi.system.model.mapper.sub;
 
 import com.shengxi.system.entites.subEntity.SubReplaceEntity;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

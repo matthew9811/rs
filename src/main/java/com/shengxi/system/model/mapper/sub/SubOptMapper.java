@@ -4,7 +4,6 @@ package com.shengxi.system.model.mapper.sub;
 import com.shengxi.system.entites.subEntity.SubOptEntity;
 import com.shengxi.system.entites.subEntity.SubOptToolEntity;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -47,14 +46,15 @@ public interface SubOptMapper {
 
     /**
      * 获取学生选择课程信息
+     * @param department 部门id
+     * @param status 审核状态
      * @return list
      */
-    List<SubOptToolEntity> selectSubStuList(String distinguish);
+    List<SubOptToolEntity> selectSubStuList(String department,String status);
     /**
      * 修改选择课程审批状态
-     * @param id
-     * @param status
+     * @param subOptEntity
      * @return Integer
      */
-    Integer updateByStuOpt(String id,String status);
+    Integer updateByStuOpt(SubOptEntity subOptEntity);
 }

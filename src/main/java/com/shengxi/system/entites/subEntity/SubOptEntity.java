@@ -1,10 +1,7 @@
 package com.shengxi.system.entites.subEntity;
 
 import com.shengxi.rs.common.domain.BaseEntity;
-import com.shengxi.system.entites.sys.SysDeptEntity;
-import com.shengxi.system.entites.sys.SysUser;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author : 郑杰

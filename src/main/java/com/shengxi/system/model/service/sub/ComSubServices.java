@@ -1,7 +1,6 @@
 package com.shengxi.system.model.service.sub;
 
 import com.shengxi.system.entites.subEntity.ComSubEntity;
-import com.shengxi.system.entites.subEntity.SubjectEntity;
 import com.shengxi.system.model.mapper.sub.ComSubMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

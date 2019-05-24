@@ -39,21 +39,21 @@ public class SubOptServices {
     }
     /**
      * 增加选择课程信息
-     *@param distinguish 审核状态
-     * @return list
-     */
-    @Transactional(readOnly = false, rollbackFor = SQLException.class)
-    public  List<SubOptToolEntity> selectSubStuList(String distinguish){
-        return subOptMapper.selectSubStuList(distinguish);
-    }
-    /**
-     * 增加选择课程信息
-     *@param id id
+     *@param department 部门id
      * @param status 审核状态
      * @return list
      */
     @Transactional(readOnly = false, rollbackFor = SQLException.class)
-    public Integer updateByStuOpt(String id,String status){
-        return subOptMapper.updateByStuOpt(id,status);
+    public  List<SubOptToolEntity> selectSubStuList(String department,String status){
+        return subOptMapper.selectSubStuList(department,status);
+    }
+    /**
+     * 增加选择课程信息
+     *@param subOptEntity 实体
+     * @return list
+     */
+    @Transactional(readOnly = false, rollbackFor = SQLException.class)
+    public Integer updateByStuOpt(SubOptEntity subOptEntity){
+        return subOptMapper.updateByStuOpt(subOptEntity);
     }
 }

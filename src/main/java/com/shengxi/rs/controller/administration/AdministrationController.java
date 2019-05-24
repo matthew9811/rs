@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
+
 import java.util.List;
 
 /**
@@ -36,18 +36,26 @@ public class AdministrationController extends BaseController {
     private SubReplaceServices subReplaceServices;
 
     @GetMapping("/approval")
-    public String approval(HttpServletResponse response) {
-        response.addHeader("x-frame-options", "SAMEORIGIN");
+    public String approval() {
         return prefix + "/approval";
     }
 
     @RequestMapping("/approvalList")
     @ResponseBody
-    public TableDataInfo approvaList(SubOptEntity subOptEntity, HttpServletRequest request) {
-        subOptServices.updateByStuOpt(request.getParameter("id"),request.getParameter("status"));
+    public TableDataInfo approvalList(SubOptEntity subOptEntity,String status) {
         startPage();
-        List<SubOptToolEntity> list = subOptServices.selectSubStuList("5");
+        List<SubOptToolEntity> list = subOptServices.selectSubStuList("1626943763580391424",status);
         return getDataTable(list);
+    }
+
+    @RequestMapping("/updateApproval")
+    @ResponseBody
+    public Integer updateApproval(SubOptEntity subOptEntity, String id, String status, String academicRemark) {
+        subOptEntity.setId(id);
+        subOptEntity.setStatus(status);
+        subOptEntity.setInstituteRemark(academicRemark);
+        Integer result = subOptServices.updateByStuOpt(subOptEntity);
+        return result;
     }
 
     @GetMapping("/replace")
@@ -81,7 +89,5 @@ public class AdministrationController extends BaseController {
     @GetMapping("/upload")
     public String upload() {
         return prefix + "/upload";
-
-
     }
 }

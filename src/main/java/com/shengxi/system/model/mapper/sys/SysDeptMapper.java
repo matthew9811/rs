@@ -1,6 +1,5 @@
 package com.shengxi.system.model.mapper.sys;
 
-import com.shengxi.system.entites.subEntity.SubReplaceEntity;
 import com.shengxi.system.entites.sys.SysDeptEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;

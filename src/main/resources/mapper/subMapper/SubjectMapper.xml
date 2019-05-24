@@ -170,7 +170,7 @@
         <result column="sub_total_period" property="subTotalPeriod"/>
         <result column="sub_theory_period" property="subTheoryPeriod"/>
         <result column="sub_practice_period" property="subPracticePeriod"/>
-        <result column="sub_teacher_id" property="subTeacherId"/>
+        <result column="user_name" property="subTeacherId"/>
         <result column="sub_course_type" property="subCourseType"/>
         <result column="sub_course_genre" property="subCourseGenre"/>
         <result column="replace" property="replace"/>
@@ -178,7 +178,7 @@
         <result column="sub_week" property="subWeek"/>
         <result column="sub_address" property="subAddress"/>
         <result column="sub_weekDay" property="subPeriod"/>
-        <result column="subPeriod" property="subPeriod"/>
+        <result column="sub_period" property="subPeriod"/>
     </resultMap>
 
     <select id="selectSubjectEntityList"
@@ -204,8 +204,10 @@
         j.sub_address,
         j.sub_week,
         j.sub_week_day,
-        j.sub_period
+        j.sub_period,
+        u.user_name
         from subject as j
+        INNER JOIN sys_user u ON j.sub_teacher_id = u.user_no
         <where>
             j.del_flag = '1'
             <if test="id != null and id != ''">
@@ -341,14 +343,9 @@
         j.sub_period,
         u.user_name
         from subject j,
-        sys_user u
+        INNER JOIN sys_user u ON j.sub_teacher_id = u.user_no
         <where>
-            sub_name = #{sou}
-            or
             sub_no = #{sou}
-            or
-            sub_carry_no = #{sou}
-
             and
             j.del_flag = '1'
             and

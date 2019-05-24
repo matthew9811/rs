@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="childrenBody">
@@ -49,20 +49,20 @@
                 cols: [
                     [
                         {type: 'checkbox', fixed: 'left'},
-                        {field: 'stuNo', title: '学号', align: "center"},
-                        {field: 'userName', title: '姓名', align: "center"},
-                        {field: 'subClass', title: '班级', align: "center"},
-                        {field: 'major', title: '专业', align: "center"},
-                        {field: 'subordinate', title: '所属学院', align: "center"},
-                        {field: 'originalSubNo', title: '原课程代码', align: "center"},
-                        {field: 'originalSubName', title: '原课程名称', align: "center"},
-                        {field: 'originalSubCredit', title: '原学分', align: "center"},
-                        {field: 'nowSubNo', title: '现课程代码', align: "center"},
-                        {field: 'nowSubName', title: '现课程名称', align: "center"},
-                        {field: 'nowSubCredit', title: '现学分', align: "center"},
-                        {field: 'subCarryNo', title: '开课编号', align: "center"},
-                        {field: 'subClassName', title: '教学班级', align: "center"},
-                        {field: 'status', title: '是否审批', align: "center",templet: function (d) {
+                        {field: 'stuNo', title: '学号', align: "center",width: 200},
+                        {field: 'userName', title: '姓名', align: "center",width: 200},
+                        {field: 'subClass', title: '班级', align: "center",width: 200},
+                        {field: 'major', title: '专业', align: "center",width: 200},
+                        {field: 'subordinate', title: '所属学院', align: "center",width: 200},
+                        {field: 'originalSubNo', title: '原课程代码', align: "center",width: 200},
+                        {field: 'originalSubName', title: '原课程名称', align: "center",width: 200},
+                        {field: 'originalSubCredit', title: '原学分', align: "center",width: 200},
+                        {field: 'nowSubNo', title: '现课程代码', align: "center",width: 200},
+                        {field: 'nowSubName', title: '现课程名称', align: "center",width: 200},
+                        {field: 'nowSubCredit', title: '现学分', align: "center",width: 200},
+                        {field: 'subCarryNo', title: '开课编号', align: "center",width: 200},
+                        {field: 'subClassName', title: '教学班级', align: "center",width: 200},
+                        {field: 'status', width: 200,title: '是否审批', align: "center",templet: function (d) {
                                 if (d.status =='0'){
                                     return '未审核'
                                 }else if(d.status =='1'){
@@ -106,45 +106,68 @@
                 var data = obj.data;
                 if (obj.event === 'adopt') {
                     $.ajax({
-                        url: "classBeginsList",
+                        url: "updateClassBegins",
                         type: "POST",
                         data:{"id":data.id,"status":"1"},
                         dataType: "json",
-                        success: function (data) {
-
+                        success: function (result) {
+                            if(result>=1) {
                                 layer.alert("审批成功", {icon: 6}, function () {
                                     window.parent.location.reload();
                                     parent.layer.close(index);
                                 });
+                            }else{
+                                layer.msg("审批失败", {icon: 5});
+                            }
                         }
                     });
 
                 } else if (obj.event === 'reject') {
                     $.ajax({
-                        url: "classBeginsList",
+                        url: "updateClassBegins",
                         type: "POST",
                         data:{"id":data.id,"status":"2"},
                         dataType: "json",
-                        success: function (data) {
-                            layer.alert("审批成功", {icon: 6}, function () {
-                                window.parent.location.reload();
-                                parent.layer.close(index);
-                            });
+                        success: function (result) {
+                            if(result>=1) {
+                                layer.alert("审批成功", {icon: 6}, function () {
+                                    window.parent.location.reload();
+                                    parent.layer.close(index);
+                                });
+                            }else{
+                                layer.msg("审批失败", {icon: 5});
+                            }
                         }
                     });
 
                 }else if (obj.event === 'setRemark') {
                     layer.prompt({
                         formType: 2,
-                        title: '修改课程代码为 [' + data.instituteRemark+ '] 的备注',
+                        title: '修改开课备注为 [' + data.instituteRemark+ '] 的备注',
                         value: data.instituteRemark
                     }, function (value, index) {
                         layer.close(index);
-                        //这里一般是发送修改的Ajax请求
-                        //同步更新表格和缓存对应的值
-                        obj.update({
-                            sign: value
+                        $.ajax({
+                            url: "updateClassBegins",
+                            type: "POST",
+                            data:{"id":data.id,"instituteRemark":value},
+                            dataType: "json",
+                            success: function (result) {
+                                if(result>=1) {
+                                    parent.layer.close(index);
+                                    obj.update({
+                                        sign: value
+                                    });
+                                    layer.alert("修改成功", {icon: 6}, function () {
+                                        window.parent.location.reload();
+                                        parent.layer.close(index);
+                                    });
+                                }else{
+                                    layer.msg("修改失败", {icon: 5});
+                                }
+                            }
                         });
+
                     });
                 }
             });

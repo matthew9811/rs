@@ -150,52 +150,79 @@
             <result column="sub_class_name" property="subClassName"/>
             <result column="status" property="status"/>
            <result column="institute_remark" property="instituteRemark"/>
-           <result column="sub_institute" property="academicRemark"/>
+           <result column="academic_remark" property="academicRemark"/>
     </resultMap>
 
     <select id="selectSubStuList"
             resultMap="selectSubStuListMap" parameterType="String">
-       SELECT o.id,
-        o.sub_id,
-        o.stu_no,
-        o.sub_name,
-        o.status,
-        o.institute_remark,
-        o.academic_remark,
-        u.user_name,
-        j.sub_no,
-        j.sub_credit,
-        j.sub_class_name,
-        j.sub_institute,
-        d.dept_name dname,
-        e.dept_name ename,
-        p.dept_name pname,
-        c.sub_no cSubNo,
-        c.sub_name cSubName,
-        c.credit cCredit
-        FROM sub_opt o,sys_user u,`subject` j,sys_dept d,sys_dept e,sys_dept p,com_sub c
-        <where>
-        o.stu_no=u.user_no
-        and d.id='1626943763580391424'
-        and d.parent_id=e.id
-        and e.parent_id=p.id
-        and o.sub_id = j.sub_carry_no
-        and o.sub_name=c.sub_name
-        and o.stu_no=c.stu_no
-        and o.del_flag='1'
-        and j.del_flag='1'
-        and u.del_flag='1'
-        and d.del_flag='1'
-        and e.del_flag='1'
-        and p.del_flag='1'
-        and c.del_flag='1'
+        SELECT o.id as id,
+        o.sub_id as sub_id,
+        o.stu_no as stu_no,
+        o.sub_name as sub_name,
+        o.status as status,
+        o.institute_remark as institute_remark,
+        o.academic_remark as academic_remark,
+        u.user_name as user_name,
+        j.sub_no as sub_no,
+        j.sub_credit as sub_credit,
+        j.sub_class_name as sub_class_name,
+        j.sub_institute as sub_institute,
+        d.dept_name as dname,
+        e.dept_name as ename,
+        p.dept_name as pname,
+        c.sub_no as cSubNo,
+        c.sub_name as cSubName,
+        c.credit as cCredit
+        FROM sub_opt o
+        INNER JOIN `subject` j ON o.sub_id = j.sub_carry_no
+        INNER JOIN sys_user u ON o.stu_no=u.user_no
+        INNER JOIN com_sub c ON o.sub_name=c.sub_name AND o.stu_no=c.stu_no
+        INNER JOIN sys_dept d ON d.id=#{department}
+        INNER JOIN sys_dept e ON d.parent_id=e.id
+        INNER JOIN sys_dept p ON e.parent_id=p.id
+       <where>
+         o.del_flag='1'
+         <if test="status != null and status != ''">
+               and o.status = #{status}
+           </if>
+        AND j.del_flag='1'
+        AND u.del_flag='1'
+        AND d.del_flag='1'
+        AND e.del_flag='1'
+        AND p.del_flag='1'
+        AND c.del_flag='1'
         </where>
     </select>
 
     <update id="updateByStuOpt">
-        update sub_opt set
-        status = #{status},
+        update sub_opt
+        <set>
+
+        <if test="stuNo != null and stuNo != ''">
+           stu_no = #{stuNo},
+        </if>
+
+        <if test="subId != null and subId != ''">
+            sub_id = #{subId},
+        </if>
+
+        <if test="subName != null and subName != ''">
+            sub_name = #{subName},
+        </if>
+
+        <if test="status != null and status != ''">
+            status = #{status},
+        </if>
+
+        <if test="instituteRemark != null and instituteRemark != ''">
+            institute_remark = #{instituteRemark},
+        </if>
+
+        <if test="academicRemark != null and academicRemark != ''">
+            academic_remark = #{academicRemark},
+        </if>
         update_time = now()
+        </set>
         <where>
             id = #{id}
         </where>

@@ -1,7 +1,11 @@
 package com.shengxi.system.entites.subEntity;
 
 import com.shengxi.rs.common.domain.BaseEntity;
-
+/**
+ * @author : 郑杰
+ * @Date: 2019/5/20 22:08
+ * @Description: 学生-申请信息实体类
+ */
 public class SubOptToolEntity extends BaseEntity {
     /**
      * 学号

@@ -134,24 +134,21 @@
 
     <select id="selectComSubList"
             resultMap="selectComSubListMap">
-        select c.id,
-        c.stu_no,
-        c.sub_no,
-        c.sub_name,
-        c.score,
-        c.credit,
-        j.sub_class_name
-        from com_sub c,
-        sub_opt o,
-        subject j
+        select c.id as id,
+        c.stu_no as stu_no,
+        c.sub_no as sub_no,
+        c.sub_name as sub_name,
+        c.score as score,
+        c.credit as credit,
+        j.sub_class_name as sub_class_name
+        from com_sub c
+        INNER JOIN sub_opt o ON c.stu_no = o.stu_no
+        INNER JOIN `subject` j ON c.sub_no = j.sub_no AND o.sub_id = j.sub_carry_no
         <where>
             c.stu_no = #{stuNo}
-            and c.stu_no = o.stu_no
-            and o.sub_id = j.sub_carry_no
-            and c.sub_no = j.sub_no
             and c.del_flag = '1'
-            and o.del_flag = '1'
-            and j.del_flag = '1'
+            AND o.del_flag = '1'
+            AND j.del_flag = '1'
         </where>
     </select>
 </mapper>

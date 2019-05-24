@@ -1,6 +1,5 @@
 package com.shengxi.rs.controller.stu;
 
-import cn.hutool.core.util.ObjectUtil;
 
 import com.shengxi.rs.common.domain.TableDataInfo;
 import com.shengxi.rs.common.handler.BaseController;
@@ -22,8 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import java.util.List;
 
 /**
@@ -66,23 +64,20 @@ public class StuController extends BaseController {
     }
 
     @GetMapping("/news")
-    public String news(HttpServletResponse response) {
-        response.addHeader("x-frame-options", "SAMEORIGIN");
+    public String news() {
         return prefix + "/news";
     }
     @GetMapping("/search")
-    public String search(HttpServletResponse response) {
-        response.addHeader("x-frame-options", "SAMEORIGIN");
+    public String search() {
         return prefix + "/search";
     }
 
     @GetMapping("/choose")
-    public String choose(HttpServletResponse response) {
-        response.addHeader("x-frame-options", "SAMEORIGIN");
+    public String choose() {
         return prefix + "/choose";
     }
 
-    @PostMapping("/sou")
+    @PostMapping("/souSubject")
     @ResponseBody
     public ModelAndView souSubject(String sou, Model model) {
         List<SubjectEntity> list = subjectServices.souSubjectEntityList(sou);
@@ -116,7 +111,6 @@ public class StuController extends BaseController {
     @RequestMapping("/chooseList")
     @ResponseBody
     public TableDataInfo chooseList(SubjectEntity subjectEntity,String subNo) {
-        System.out.println(subNo);
         subjectEntity.setSubNo(subNo);
         startPage();
         List<SubjectEntity> list = subjectServices.selectList(subjectEntity);

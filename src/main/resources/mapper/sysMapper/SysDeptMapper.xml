@@ -64,7 +64,7 @@
        d.parent_id,
        d.dept_name,
        d.sort
-        from sys_dept as dentites
+        from sys_dept as d
         <where>
              d.del_flag = '1'
             <if test="id != null and id != ''">
