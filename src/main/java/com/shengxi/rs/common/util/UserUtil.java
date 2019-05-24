@@ -29,7 +29,6 @@ public class UserUtil {
                 return (SecurityUser) authentication.getPrincipal();
             }
         }
-
         return null;
     }
 }

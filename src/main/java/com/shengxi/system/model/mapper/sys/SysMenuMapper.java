@@ -53,4 +53,17 @@ public interface SysMenuMapper {
      * @return list
      */
     List<SysMenuEntity> selectPermList(String id);
+
+    /**
+     * 为生成id获取数据
+     * @return list
+     */
+    List<SysMenuEntity> selectOfParentAdd();
+
+    /**
+     * 获取数据
+     * @param menuEntity entity
+     * @return list
+     */
+    List<SysMenuEntity> selectByList(SysMenuEntity menuEntity);
 }

@@ -4,23 +4,16 @@
 <head th:include="include :: header"></head>
 <body>
 <div style="padding: 40px">
-    <form action="" class="layui-form">
+    <form id="formId" class="layui-form">
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label rs-input-name" style="text-align: left">
                     上级菜单
                 </label>
                 <div class="layui-input-inline">
-                    <select class="layui-input rs-input" name="modules" lay-verify="required" lay-search="">
+                    <select class="layui-input rs-input" name="modules" lay-verify="required" lay-search="" th:with="list = ${parentList}">
                         <option value="">直接选择或搜索选择</option>
-                        <option value="1">layer</option>
-                        <option value="2">form</option>
-                        <option value="3">layim</option>
-                        <option value="4">element</option>
-                        <option value="5">laytpl</option>
-                        <option value="6">upload</option>
-                        <option value="7">laydate</option>
-                        <option value="8">laypage</option>
+                        <option th:each="parent: ${list}" th:value="${parent.id}" th:text="${parent.menuName}"></option>
                     </select>
                 </div>
             </div>
@@ -30,7 +23,7 @@
                 菜单名称
             </label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input rs-input" name="name">
+                <input type="text" class="layui-input rs-input" name="menuName">
             </div>
         </div>
         <div class="layui-form-item">
@@ -38,15 +31,15 @@
                 权限标识
             </label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input rs-input" name="name">
+                <input type="text" class="layui-input rs-input" name="perms">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label rs-input-name" style="text-align: left">
-                链接
+                路径
             </label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input rs-input" name="name">
+                <input type="text" class="layui-input rs-input" name="url">
             </div>
         </div>
         <div class="layui-form-item">
@@ -54,26 +47,48 @@
                 图标
             </label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input rs-input" name="name">
+                <input type="text" class="layui-input rs-input" name="icon">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label rs-input-name" style="text-align: left">
-                排序
+                排序编号
             </label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input rs-input" name="name">
+                <input type="text" class="layui-input rs-input" name="sort">
             </div>
         </div>
     </form>
 </div>
-<div th:include="include :: footer"></div>
 </body>
-</html>
-<script>
+<div th:include="include :: footer"></div>
+<script th:inline="javascript">
+    var prefix = ctx + "/add"
     layui.use('form', function(){
         var form = layui.form;
 
         //各种基于事件的操作，下面会有进一步介绍
     });
+
+    /**
+     * 保存ajax
+     * @param formId
+     */
+    function submitHandler(formId) {
+        /*序列化数据*/
+        var data =  $("#" + formId).serialize();
+        var config = {
+            url: prefix + "/add",
+            method: "post",
+            async: true,
+            data: data,
+            dataType: "json",
+            success: function (result) {
+                /*刷新父页面*/
+                parent.location.reload();
+                layer.msg(result.msg);
+            }
+        }
+    }
 </script>
+</html>

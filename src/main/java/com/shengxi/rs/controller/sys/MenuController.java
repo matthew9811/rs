@@ -12,6 +12,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,23 +38,39 @@ public class MenuController extends BaseController {
 
     @GetMapping("/getMenu")
     @ResponseBody
-    public Map<String, Object> getMenu() {
-        return menuServices.selectByInit();
+    public Map<String, Object> getMenu(SysMenuEntity menuEntity) {
+        return menuServices.selectByInit(menuEntity);
     }
 
+    /**
+     * 新增菜单
+     *
+     * @param map model
+     * @return url
+     */
     @GetMapping("/add")
-    public String add() {
+    public String add(ModelMap map) {
+        map.put("parentList", menuServices.selectOfParentAdd());
         return prefix + "/add";
     }
 
 
+    /**
+     * 保存添加
+     *
+     * @param sysMenuEntity 菜单实体
+     * @return ajaxData
+     */
     @PostMapping("/add")
+    @ResponseBody
     public AjaxResult insertMenu(SysMenuEntity sysMenuEntity) {
         /**
          * 控制del_flag
          */
         sysMenuEntity.setCreateBy(SecurityUserUtil.getUserId());
         sysMenuEntity.setDelFlag(BaseControllerConstant.DEL_FLAG_NOT);
+        //暂时使用
+        sysMenuEntity.setCreateBy("admin");
         return toAjax(menuServices.insertEntity(sysMenuEntity));
     }
 

@@ -24,4 +24,13 @@ public class SysConstant {
      * 冻结
      */
     public static final String FREEZE = "0";
+
+    /**
+     * null
+     */
+    public static final Object NULL = null;
+    /**
+     * 默认父类
+     */
+    public static final String PARENT_ID = "1";
 }

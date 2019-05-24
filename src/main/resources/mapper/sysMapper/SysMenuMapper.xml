@@ -16,59 +16,85 @@
         <result column="sys_menu_del_flag" jdbcType="CHAR" property="delFlag"/>
     </resultMap>
     <sql id="Base_Column_List">
-    sys_menu.id as sys_menu_id, sys_menu.parent_id as sys_menu_parent_id, sys_menu.url as sys_menu_url, 
-    sys_menu.menu_name as sys_menu_menu_name, sys_menu.icon as sys_menu_icon, sys_menu.`type` as `sys_menu_type`, 
-    sys_menu.perms as sys_menu_perms, sys_menu.create_by as sys_menu_create_by, sys_menu.create_time as sys_menu_create_time, 
-    sys_menu.update_by as sys_menu_update_by, sys_menu.update_time as sys_menu_update_time, 
+    sys_menu.id as sys_menu_id,
+     sys_menu.parent_id as sys_menu_parent_id,
+     sys_menu.url as sys_menu_url,
+    sys_menu.menu_name as sys_menu_menu_name,
+    sys_menu.icon as sys_menu_icon,
+    sys_menu.`type` as `sys_menu_type`,
+    sys_menu.perms as sys_menu_perms,
+    sys_menu.create_by as sys_menu_create_by,
+    sys_menu.create_time as sys_menu_create_time,
+    sys_menu.update_by as sys_menu_update_by,
+    sys_menu.update_time as sys_menu_update_time,
     sys_menu.del_flag as sys_menu_del_flag
   </sql>
+    <sql id="del_flag">
+        '1'
+    </sql>
+    <select id="selectByList" parameterType="com.shengxi.system.entites.sys.SysMenuEntity" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from sys_menu sys_menu
+        <where>
+            sys_menu.del_flag = <include refid="del_flag"/>
+        </where>
+    </select>
     <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from sys_menu sys_menu
         where sys_menu.id = #{id,jdbcType=VARCHAR}
     </select>
-    <select id="selectPermList" resultType="com.shengxi.system.entites.sys.SysMenuEntity">
-    SELECT
-	a.id AS id,
-	a.parent_id AS parent_id,
-	a.url AS url,
-	a.menu_name AS menu_name,
-	a.icon AS icon,
-	a.`type` AS `type`,
-	a.perms AS perms,
-	a.create_by AS create_by,
-	a.create_time AS create_time,
-	a.update_by AS update_by,
-	a.update_time AS update_time,
-	a.del_flag AS del_flag
-    FROM
-	sys_menu a
-	INNER JOIN sys_role_menu srm ON srm.menu_id = a.id
-	INNER JOIN (
-	SELECT
-		s.id,
-		sru.role_id
-	FROM
-		sys_user s
-		INNER JOIN sys_role_user sru ON s.id = sru.user_id
-		AND sru.del_flag = '0'
-	WHERE
-	s.id = 1
-	) role on role.id = srm.ROLE_ID
-	<where>
-        a.del_flag = '0'
-    </where>
+    <select id="selectPermList" parameterType="String" resultType="com.shengxi.system.entites.sys.SysMenuEntity">
+        SELECT
+        a.id AS id,
+        a.parent_id AS parent_id,
+        a.url AS url,
+        a.menu_name AS menu_name,
+        a.icon AS icon,
+        a.`type` AS `type`,
+        a.perms AS perms,
+        a.create_by AS create_by,
+        a.create_time AS create_time,
+        a.update_by AS update_by,
+        a.update_time AS update_time,
+        a.del_flag AS del_flag
+        FROM
+        sys_menu a
+        INNER JOIN sys_role_menu srm ON srm.menu_id = a.id
+        INNER JOIN (
+        SELECT
+        s.id,
+        sru.role_id
+        FROM
+        sys_user s
+        INNER JOIN sys_role_user sru ON s.id = sru.user_id
+        AND sru.del_flag = '0'
+        WHERE
+        s.id = #{id}
+        ) role on role.id = srm.ROLE_ID
+        <where>
+            a.del_flag = '0'
+        </where>
+    </select>
+    <select id="selectOfParentAdd" resultType="com.shengxi.system.entites.sys.SysMenuEntity">
+        select id as id,
+        parent_id as parentId,
+        menu_name as menuName
+        from sys_menu a
+        where
+        a.del_flag =
+        <include refid="del_flag"/>
     </select>
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shengxi.system.entites.sys.SysMenuEntity"
             useGeneratedKeys="true">
     insert into sys_menu (parent_id, url, menu_name, 
       icon, `type`, perms, create_by, 
-      create_time, update_by, update_time, 
+      create_time,
       del_flag)
     values (#{parentId,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, 
       #{icon,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, #{perms,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP},
       #{delFlag,jdbcType=CHAR})
   </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id"

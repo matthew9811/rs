@@ -1,6 +1,7 @@
 package com.shengxi.system.model.service.sys;
 
 
+import com.shengxi.rs.common.constant.SysConstant;
 import com.shengxi.rs.common.domain.Tree;
 import com.shengxi.system.common.constant.BaseControllerConstant;
 import com.shengxi.system.common.constant.ServicesConstant;
@@ -34,6 +35,9 @@ public class SysMenuServices {
 
     @Transactional(readOnly = false, rollbackFor = SQLTransactionRollbackException.class)
     public Integer insertEntity(SysMenuEntity sysMenuEntity) {
+        if (SysConstant.NULL.equals(sysMenuEntity.getParentId())){
+            sysMenuEntity.setParentId(SysConstant.PARENT_ID);
+        }
         return sysMenuMapper.insert(sysMenuEntity);
     }
 
@@ -41,40 +45,11 @@ public class SysMenuServices {
      * 初始化获取
      */
     @Transactional(readOnly = true, rollbackFor = Selector.SelectorParseException.class)
-    public Map<String, Object> selectByInit() {
-        List<Tree<SysMenuEntity>> list = new ArrayList<>();
-        SysMenuEntity menuEntity = new SysMenuEntity();
-        menuEntity.setId("1");
-        menuEntity.setDelFlag(BaseControllerConstant.DEL_FLAG_NOT);
-        menuEntity.setIcon("&#xe6af;");
-        menuEntity.setParentId("0");
-        menuEntity.setMenuName("楚苓大妈网");
-        menuEntity.setUrl("https://www.layui.com/doc/element/icon.html");
-        list.add(menuEntity);
-        menuEntity = new SysMenuEntity();
-        menuEntity.setParentId("0");
-        menuEntity.setId("3");
-        menuEntity.setIcon("&#xe66e;");
-        menuEntity.setMenuName("楚苓");
-        list.add(menuEntity);
-        menuEntity = new SysMenuEntity();
-        menuEntity.setId("2");
-        menuEntity.setIcon("&#xe715;");
-        menuEntity.setParentId("1");
-        menuEntity.setMenuName("大妈");
-        menuEntity.setUrl("https://www.layui.com/doc/modules/layer.html");
-        list.add(menuEntity);
-        Map<String, Object> map = new HashMap<>();
-        menuEntity = new SysMenuEntity();
-        menuEntity.setId("4");
-        menuEntity.setIcon("&#xe715;");
-        menuEntity.setParentId("3");
-        menuEntity.setMenuName("大妈");
-        menuEntity.setUrl("https://www.layui.com/doc/modules/layer.html");
-        list.add(menuEntity);
-        List<Tree<SysMenuEntity>> menuEntityList = new ArrayList<>();
+    public Map<String, Object> selectByInit(SysMenuEntity menuEntity) {
+        List<SysMenuEntity> list = sysMenuMapper.selectByList(menuEntity);
+        Map map = new HashMap(list.size());
         map.put("msg", "楚苓大妈牛逼");
-        map.put("data", TreeUtil.Recursive(list));
+        map.put("data",list);
         map.put("code", 0);
         return map;
     }
@@ -87,6 +62,16 @@ public class SysMenuServices {
      */
     public List<SysMenuEntity> selectPermList(String id) {
         return sysMenuMapper.selectPermList(id);
+    }
+
+    /**
+     * 获取对应的菜单id + name
+     *
+     * @return list
+     */
+    @Transactional(readOnly = true, rollbackFor = Selector.SelectorParseException.class)
+    public List<SysMenuEntity> selectOfParentAdd() {
+        return sysMenuMapper.selectOfParentAdd();
     }
 
     /**
@@ -111,4 +96,6 @@ public class SysMenuServices {
         /*清空无用的数据*/
         menus.clear();
     }
+
+
 }

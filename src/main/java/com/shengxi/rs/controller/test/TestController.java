@@ -57,7 +57,7 @@ public class TestController extends BaseController {
 
     @GetMapping("/main")
     public String main(HttpServletResponse response) {
-        response.addHeader("x-frame-options", "SAMEORIGIN");
+        System.out.println(UserUtil.getLoginUser());
         return "main";
     }
 

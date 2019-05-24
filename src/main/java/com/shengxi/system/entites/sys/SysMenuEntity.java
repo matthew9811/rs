@@ -1,20 +1,19 @@
 package com.shengxi.system.entites.sys;
 
-import com.shengxi.rs.common.domain.BaseEntity;
 import com.shengxi.rs.common.domain.Tree;
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
 
 /**
  * sys_menu
  *
  * @author matthew
  */
-public class SysMenuEntity extends  Tree<SysMenuEntity> {
+public class SysMenuEntity extends Tree<SysMenuEntity> {
 
 
+    /**
+     * 排序
+     */
+    private String sort;
     /**
      * 路径
      */
@@ -40,8 +39,17 @@ public class SysMenuEntity extends  Tree<SysMenuEntity> {
      */
     private String perms;
 
+
     public SysMenuEntity() {
         super();
+    }
+
+    public String getSort() {
+        return sort;
+    }
+
+    public void setSort(String sort) {
+        this.sort = sort;
     }
 
     public String getUrl() {
