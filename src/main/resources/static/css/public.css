@@ -298,47 +298,14 @@ form input.layui-input[disabled] {
     display: block;
 }
 
-.ufo {
-    text-align: center;
-    height: 100%;
-    position: relative;
-}
-
-.noFind .page_icon, .noFind .ufo_icon {
-    opacity: 1;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    -moz-transform: translateX(-50%);
-    -webkit-transform: translateX(-50%);
-    -o-transform: translateX(-50%);
-}
-
-.noFind .page_icon {
-    top: 300px;
-    animation: pageGo 0.3s ease-in 0.3s forwards;
-    -webkit-animation: pageGo 0.3s ease-in 0.3s forwards;
-    -o-animation: pageGo 0.3s ease-in 0.3s forwards;
-    -moz-animation: pageGo 0.3s ease-in 0.3s forwards;
-}
-
-.noFind .ufo_icon {
-    top: 100px;
-    animation: ufo 1s ease-in 0.6s forwards;
-    -webkit-animation: ufo 1s ease-in 0.6s forwards;
-    -o-animation: ufo 1s ease-in 0.6s forwards;
-    -moz-animation: ufo 1s ease-in 0.6s forwards;
-}
-
 .page404 {
     margin-top: 10%;
     opacity: 0;
     font-size: 0;
-    animation: page404 0.5s ease-in 1.7s forwards;
-    -webkit-animation: page404 0.5s ease-in 1.7s forwards;
-    -o-animation: page404 0.5s ease-in 1.7s forwards;
-    -moz-animation: page404 0.5s ease-in 1.7s forwards;
+    animation: page404 0.0s ease-in 0.0s forwards;
+    -webkit-animation: page404 0.0s ease-in 0.0s forwards;
+    -o-animation: page404 0.0s ease-in 0.0s forwards;
+    -moz-animation: page404 0.0s ease-in 0.0s forwards;
 }
 
 .page404 p {

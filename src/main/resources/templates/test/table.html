@@ -21,67 +21,49 @@
         </form>
     </blockquote>
 
-    <table id="subordinateList" lay-filter="subordinateList"></table>
-    <script type="text/html" id="subordinateListBar">
+    <table id="layerTable" lay-filter="layerTable"></table>
+    <script type="text/html" id="toolbar">
+        <div class="layui-btn-container">
+            <button class="layui-btn" lay-event="getCheckData">获取选中行数据</button>
+            <button class="layui-btn" lay-event="getCheckLength">获取选中数目</button>
+            <button class="layui-btn" lay-event="isAll">验证是否全选</button>
+        </div>
+    </script>
+    <!--操作-->
+    <script type="text/html" id="layerTableBar">
         <a class="layui-btn layui-btn-xs" lay-event="detail">点击选课</a>
     </script>
 </form>
 <div th:include="include :: footer"></div>
 <script>
     $(function () {
-        layui.use(['form', 'layer','table'], function () {
-            var layer = layui.layer;
-            layer.msg('hello');
-            var form = layui.form,
-                layer = parent.layer === undefined ? layui.layer : top.layer,
+        layui.use(['layer','table'], function () {
+            var layer = parent.layer === undefined ? layui.layer : top.layer,
                 $ = layui.jquery,
                 table = layui.table;
 
-
+            //学生重修课程列表
             var options = {
-                elem: '#subordinateList',
-                url: ctx + 'college/college/subordinateList',
-                title: '所属系部表',
-                toolbar: '#toolbarDemo',
-                id: "newsListTable",
+                elem: '#layerTable', //表格id
+                url: ctx + 'test/getList', //数据路径
+                title: '学生成绩表', //表格名
+                toolbar: '#toolbar', //表格工具栏id
                 cols: [
                     [
                         {type: 'checkbox', fixed: 'left'},
-                        {field: 'stuNo', title: '学号', align: "center",width: 200},
-                        {field: 'userName', title: '姓名', align: "center",width: 200},
-                        {field: 'subClass', title: '班级', align: "center",width: 200},
-                        {field: 'major', title: '专业', align: "center",width: 200},
-                        {field: 'institute', title: '开课学院', align: "center",width: 200},
-                        {field: 'originalSubNo', title: '原课程代码', align: "center",width: 200},
-                        {field: 'originalSubName', title: '原课程名称', align: "center",width: 200},
-                        {field: 'originalSubCredit', title: '原学分', align: "center",width: 200},
-                        {field: 'nowSubNo', title: '现课程代码', align: "center",width: 200},
-                        {field: 'nowSubName', title: '现课程名称', align: "center",width: 200},
-                        {field: 'nowSubCredit', title: '现学分', align: "center",width: 200},
-                        {field: 'subCarryNo', title: '开课编号', align: "center",width: 200},
-                        {field: 'subClassName', title: '教学班级', align: "center",width: 200},
-                        {field: 'status', title: '是否审批',width: 200, align: "center",templet: function (d) {
-                                if (d.status =='0'){
-                                    return '未审核'
-                                }else if(d.status =='1'){
-                                    return '开课通过'
-                                }else if(d.status =='2'){
-                                    return '开课驳回'
-                                }else if(d.status =='3'){
-                                    return '教务通过'
-                                }else if(d.status =='4'){
-                                    return '教务驳回'
-                                }
-                            }},
+                        {field: 'subNo', title: '课程代码', align: "center"},
+                        {field: 'subName', title: '课程名称', align: "center"},
+                        {field: 'score', title: '历史成绩', align: 'center', edit: 'text'},
+                        {title: '选课操作', width: 220, templet: '#layerTableBar', fixed: "right", align: "center"},
+                        {field: 'remark', title: '备注', align: 'center', event: 'setRemark'}
                     ]
                 ]
             };
 
-
             $.table.init(options);
 
-
-            table.on('toolbar(subordinateList)', function (obj) {
+            //头工具栏事件
+            table.on('toolbar(layerTable)', function (obj) {
                 var checkStatus = table.checkStatus(obj.config.id);
                 switch (obj.event) {
                     case 'getCheckData':
@@ -95,11 +77,18 @@
                     case 'isAll':
                         layer.msg(checkStatus.isAll ? '全选' : '未全选');
                         break;
-                }
-                ;
+                };
             });
 
-            table.on('tool(subordinateList)', function (obj) {
+            // 监听复选框选择
+            // table.on('checkbox()', function (obj) {
+            //     console.log(obj.checked); //当前是否选中状态
+            //     console.log(obj.data); //选中行的相关数据
+            //     console.log(obj.type); //如果触发的是全选，则为：all，如果触发的是单选，则为：one
+            // });
+
+            //监听点击按钮事件
+            table.on('tool(layerTable)', function (obj) {
                 var data = obj.data;
                 <!--layer.msg('点击课程：'+ data.subName);-->
                 if (obj.event === 'setRemark') {
@@ -120,18 +109,22 @@
                 }
             });
 
-            console.log($.table.checkbox('subordinateList'));
+            //监听单元格编辑
+            console.log($.table.edit('layerTable'));
 
+            //监听复选框选择
+            console.log($.table.checkbox('layerTable'));
 
+            //搜索
             $(".search_btn").on("click", function () {
                 console.log($('.layer-range-time').val());
                 if ($(".searchVal").val() != '') {
-                    table.reload("subordinateListTable", {
+                    table.reload("newsListTable", {
                         page: {
-                            curr: 1
+                            curr: 1 //重新从第 1 页开始
                         },
                         where: {
-                            key: $(".searchVal").val()
+                            key: $(".searchVal").val()  //搜索的关键字
                         }
                     })
                 } else {

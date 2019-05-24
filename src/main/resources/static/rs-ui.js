@@ -40,7 +40,6 @@
                         url: options.url,
                         title: options.title,
                         toolbar: options.toolbar, //开启工具栏
-                        id: options.id,
                         page: options.page,
                         where: options.where,
                         response: options.response,
