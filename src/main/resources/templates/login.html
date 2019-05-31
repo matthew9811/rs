@@ -31,9 +31,12 @@
     if (token != null && token.trim().length != 0) {
         $.ajax({
             type: 'get',
-            url: '/users/current?token=' + token,
+            url: '/user/current?token=' + token,
             success: function (data) {
-                location.href = '/index';
+                /*验证有效*/
+                if (data != null || data != ''){
+                    location.href = '/index';
+                }
             },
             error: function (xhr, textStatus, errorThrown) {
                 var msg = xhr.responseText;
@@ -60,8 +63,7 @@
                 url: '/login',
                 data: $("#login-form").serialize(),
                 success: function (data) {
-                    localStorage.setItem("token", data.token);
-                    location.href = '/test/page/index';
+                    location.href = '/index';
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     var msg = xhr.responseText;

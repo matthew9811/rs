@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/menu")
 public class MenuController extends BaseController {
 
-    private String prefix = "/admin";
+    private String prefix = "/admin/menu";
 
     @Autowired
     private SysMenuServices menuServices;

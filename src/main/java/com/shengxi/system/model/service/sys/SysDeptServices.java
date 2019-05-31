@@ -1,8 +1,6 @@
 package com.shengxi.system.model.service.sys;
 
-import com.shengxi.system.entites.subEntity.SubReplaceEntity;
 import com.shengxi.system.entites.sys.SysDeptEntity;
-import com.shengxi.system.model.mapper.sub.SubReplaceMapper;
 import com.shengxi.system.model.mapper.sys.SysDeptMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
