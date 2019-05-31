@@ -34,7 +34,7 @@
             url: '/user/current?token=' + token,
             success: function (data) {
                 /*验证有效*/
-                if (data != null || data != ''){
+                if (data != null && data != ''){
                     location.href = '/index';
                 }
             },
@@ -63,7 +63,9 @@
                 url: '/login',
                 data: $("#login-form").serialize(),
                 success: function (data) {
-                    location.href = '/index';
+                   if (data != null && data != '' ){
+                        location.href = '/index';
+                    }
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     var msg = xhr.responseText;

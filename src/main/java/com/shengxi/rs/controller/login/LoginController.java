@@ -28,13 +28,5 @@ public class LoginController {
         return "login";
     }
 
-    @RequestMapping("/login")
-    public String login(SecurityUser user) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUserNo());
-        if (ObjectUtil.isNotNull(userDetails)) {
-            return "index";
-        }
-        return "login";
-    }
 
 }
