@@ -64,11 +64,6 @@ public class MenuController extends BaseController {
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult insertMenu(SysMenuEntity sysMenuEntity) {
-        /**
-         * 控制del_flag
-         */
-        sysMenuEntity.setCreateBy(SecurityUserUtil.getUserId());
-        sysMenuEntity.setDelFlag(BaseControllerConstant.DEL_FLAG_NOT);
         //暂时使用
         sysMenuEntity.setCreateBy("admin");
         return toAjax(menuServices.insertEntity(sysMenuEntity));

@@ -11,10 +11,6 @@ import java.util.Date;
  */
 public class SubjectEntity extends BaseEntity {
     /**
-     * id
-     */
-    private String id;
-    /**
      * 开课编号
      */
     private String subCarryNo;
@@ -84,29 +80,9 @@ public class SubjectEntity extends BaseEntity {
     private String subStatus;
 
     /**
-     * 创建人
-     */
-    private String createBy;
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-    /**
-     * 更新时间
-     */
-    private Date udpateTime;
-    /**
-     * 更新人
-     */
-    private String udpateBy;
-    /**
      * 备注
      */
     private String remark;
-    /**
-     * 删除标识
-     */
-    private String delFlag;
 
     /**
      * 上课周次
@@ -128,16 +104,6 @@ public class SubjectEntity extends BaseEntity {
      */
     private String subPeriod;
 
-
-    @Override
-    public String getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getSubCarryNo() {
         return subCarryNo;

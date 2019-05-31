@@ -3,11 +3,13 @@ package com.shengxi.system.model.service.sys;
 
 import com.shengxi.rs.common.constant.SysConstant;
 import com.shengxi.rs.common.domain.Tree;
+import com.shengxi.rs.common.util.IdUtil;
 import com.shengxi.system.common.constant.BaseControllerConstant;
 import com.shengxi.system.common.constant.ServicesConstant;
 import com.shengxi.system.common.util.TreeUtil;
 import com.shengxi.system.entites.sys.SysMenuEntity;
 import com.shengxi.system.model.mapper.sys.SysMenuMapper;
+
 import java.sql.SQLTransactionRollbackException;
 import java.sql.SQLTransientException;
 import java.util.ArrayList;
@@ -35,9 +37,11 @@ public class SysMenuServices {
 
     @Transactional(readOnly = false, rollbackFor = SQLTransactionRollbackException.class)
     public Integer insertEntity(SysMenuEntity sysMenuEntity) {
-        if (SysConstant.NULL.equals(sysMenuEntity.getParentId())){
-            sysMenuEntity.setParentId(SysConstant.PARENT_ID);
-        }
+        /**
+         * 控制del_flag
+         */
+        sysMenuEntity.setDelFlag(BaseControllerConstant.DEL_FLAG_NOT);
+        sysMenuEntity.setId(IdUtil.uuid());
         return sysMenuMapper.insert(sysMenuEntity);
     }
 
@@ -48,8 +52,8 @@ public class SysMenuServices {
     public Map<String, Object> selectByInit(SysMenuEntity menuEntity) {
         List<SysMenuEntity> list = sysMenuMapper.selectByList(menuEntity);
         Map map = new HashMap(list.size());
-        map.put("msg", "楚苓大妈牛逼");
-        map.put("data",list);
+        map.put("msg", "刷新成功!");
+        map.put("data", list);
         map.put("code", 0);
         return map;
     }

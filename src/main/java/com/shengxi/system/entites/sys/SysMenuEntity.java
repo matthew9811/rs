@@ -40,6 +40,7 @@ public class SysMenuEntity extends Tree<SysMenuEntity> {
     private String perms;
 
 
+
     public SysMenuEntity() {
         super();
     }

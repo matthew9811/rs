@@ -16,27 +16,78 @@
         <result column="sys_menu_del_flag" jdbcType="CHAR" property="delFlag"/>
     </resultMap>
     <sql id="Base_Column_List">
-    sys_menu.id as sys_menu_id,
-     sys_menu.parent_id as sys_menu_parent_id,
-     sys_menu.url as sys_menu_url,
-    sys_menu.menu_name as sys_menu_menu_name,
-    sys_menu.icon as sys_menu_icon,
-    sys_menu.`type` as `sys_menu_type`,
-    sys_menu.perms as sys_menu_perms,
-    sys_menu.create_by as sys_menu_create_by,
-    sys_menu.create_time as sys_menu_create_time,
-    sys_menu.update_by as sys_menu_update_by,
-    sys_menu.update_time as sys_menu_update_time,
-    sys_menu.del_flag as sys_menu_del_flag
-  </sql>
+        sys_menu
+        .
+        id
+        as
+        sys_menu_id
+        ,
+        sys_menu
+        .
+        parent_id
+        as
+        sys_menu_parent_id,
+        sys_menu
+        .
+        url
+        as
+        sys_menu_url,
+        sys_menu
+        .
+        menu_name
+        as
+        sys_menu_menu_name,
+        sys_menu
+        .
+        icon
+        as
+        sys_menu_icon,
+        sys_menu
+        .
+        `type`
+        as
+        `sys_menu_type`,
+        sys_menu
+        .
+        perms
+        as
+        sys_menu_perms,
+        sys_menu
+        .
+        create_by
+        as
+        sys_menu_create_by,
+        sys_menu
+        .
+        create_time
+        as
+        sys_menu_create_time,
+        sys_menu
+        .
+        update_by
+        as
+        sys_menu_update_by,
+        sys_menu
+        .
+        update_time
+        as
+        sys_menu_update_time,
+        sys_menu
+        .
+        del_flag
+        as
+        sys_menu_del_flag
+    </sql>
     <sql id="del_flag">
         '1'
     </sql>
     <select id="selectByList" parameterType="com.shengxi.system.entites.sys.SysMenuEntity" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"/>
+        select
+        <include refid="Base_Column_List"/>
         from sys_menu sys_menu
         <where>
-            sys_menu.del_flag = <include refid="del_flag"/>
+            sys_menu.del_flag =
+            <include refid="del_flag"/>
         </where>
     </select>
     <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -86,21 +137,36 @@
         a.del_flag =
         <include refid="del_flag"/>
     </select>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shengxi.system.entites.sys.SysMenuEntity"
-            useGeneratedKeys="true">
-    insert into sys_menu (parent_id, url, menu_name, 
-      icon, `type`, perms, create_by, 
-      create_time,
-      del_flag)
-    values (#{parentId,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, 
-      #{icon,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, #{perms,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP},
-      #{delFlag,jdbcType=CHAR})
-  </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id"
-            parameterType="com.shengxi.system.entites.sys.SysMenuEntity" useGeneratedKeys="true">
+    <insert id="insert"
+            parameterType="com.shengxi.system.entites.sys.SysMenuEntity">
+        insert into sys_menu
+        (id,
+         parent_id,
+         url,
+         menu_name,
+         icon,
+         `type`,
+         perms,
+         create_by,
+         create_time,
+         del_flag)
+        values
+        (#{id,jdbcType=VARCHAR},
+         #{parentId,jdbcType=VARCHAR},
+         #{url,jdbcType=VARCHAR},
+         #{menuName,jdbcType=VARCHAR},
+         #{icon,jdbcType=VARCHAR},
+         #{type,jdbcType=CHAR},
+         #{perms,jdbcType=VARCHAR},
+         #{createBy,jdbcType=VARCHAR},
+         #{createTime,jdbcType=TIMESTAMP},
+         #{delFlag,jdbcType=CHAR})
+    </insert>
+    <insert id="insertSelective"
+            parameterType="com.shengxi.system.entites.sys.SysMenuEntity">
         insert into sys_menu
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
             <if test="parentId != null">
                 parent_id,
             </if>
@@ -125,17 +191,12 @@
             <if test="createTime != null">
                 create_time,
             </if>
-            <if test="updateBy != null">
-                update_by,
-            </if>
-            <if test="updateTime != null">
-                update_time,
-            </if>
             <if test="delFlag != null">
                 del_flag,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            id,
             <if test="parentId != null">
                 #{parentId,jdbcType=VARCHAR},
             </if>
@@ -160,12 +221,7 @@
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="updateBy != null">
-                #{updateBy,jdbcType=VARCHAR},
-            </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
-            </if>
+
             <if test="delFlag != null">
                 #{delFlag,jdbcType=CHAR},
             </if>
@@ -211,18 +267,18 @@
         where id = #{id,jdbcType=VARCHAR}
     </update>
     <update id="updateById" parameterType="com.shengxi.system.entites.sys.SysMenuEntity">
-    update sys_menu
-    set parent_id = #{parentId,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR},
-      menu_name = #{menuName,jdbcType=VARCHAR},
-      icon = #{icon,jdbcType=VARCHAR},
-      `type` = #{type,jdbcType=CHAR},
-      perms = #{perms,jdbcType=VARCHAR},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      del_flag = #{delFlag,jdbcType=CHAR}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
+        update sys_menu
+        set parent_id   = #{parentId,jdbcType=VARCHAR},
+            url         = #{url,jdbcType=VARCHAR},
+            menu_name   = #{menuName,jdbcType=VARCHAR},
+            icon        = #{icon,jdbcType=VARCHAR},
+            `type`      = #{type,jdbcType=CHAR},
+            perms       = #{perms,jdbcType=VARCHAR},
+            create_by   = #{createBy,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_by   = #{updateBy,jdbcType=VARCHAR},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            del_flag    = #{delFlag,jdbcType=CHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 </mapper>

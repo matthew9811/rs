@@ -55,6 +55,10 @@ public class SysUser extends BaseEntity {
      */
     private String subordinate;
 
+    public SysUser() {
+        super();
+    }
+
     public String getUserNo() {
         return userNo;
     }

@@ -12,6 +12,10 @@ public class SysRole extends BaseEntity {
 
     private String userName;
 
+    public SysRole() {
+        super();
+    }
+
     public String getUserName() {
         return userName;
     }

@@ -53,7 +53,7 @@
                 page: false,
                 cols: [
                     [
-                        {field: 'id', width: 180, align: 'center', title: '编号'},
+                        {field: 'sort', width: 180, align: 'center', title: '编号'},
                         {field: 'menuName', title: '菜单名称'},
                         {
                             field: 'icon', width:150,title: '图标', templet: function (d) {
@@ -131,7 +131,7 @@
                 btn: ['确定', '取消'],
                 area: ['600px', '500px'],
                 yes: function (index, layero) {
-                    layer.close(index);
+                    // layer.close(index);
                     //ajax请求
                     callback(index, layero);
                 }
@@ -139,6 +139,7 @@
         });
 
         callback = function (index, layero) {
+            console.log("楚苓");
             var iframeWin = layero.find('iframe')[0];
             iframeWin.contentWindow.submitHandler();
         }
