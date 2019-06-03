@@ -4,9 +4,9 @@ import com.shengxi.rs.common.domain.TableDataInfo;
 import com.shengxi.rs.common.handler.BaseController;
 import com.shengxi.rs.common.util.UserUtil;
 import com.shengxi.system.common.util.SecurityUserUtil;
-import com.shengxi.system.entites.subEntity.ComSubEntity;
+//import com.shengxi.system.entites.subEntity.ComSubEntity;
 import com.shengxi.system.entites.test.TestEntity;
-import com.shengxi.system.model.service.sub.ComSubServices;
+//import com.shengxi.system.model.service.sub.ComSubServices;
 import com.shengxi.system.model.service.test.TestServices;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletResponse;
@@ -33,8 +33,8 @@ public class TestController extends BaseController {
     @Autowired
     private TestServices testServices;
 
-    @Autowired
-    private ComSubServices comSubServices;
+//    @Autowired
+//    private ComSubServices comSubServices;
 
     @RequestMapping("")
     public String test() {
@@ -62,18 +62,18 @@ public class TestController extends BaseController {
     }
 
 
-    /**
-     * @param comSubEntity
-     * @return
-     * @PreAuthorize("hasPermission('user', 'read') or hasRole('ROLE_ADMINISTRATOR')")
-     */
-    @RequestMapping("/getList")
-    @ResponseBody
-    public TableDataInfo getList(ComSubEntity comSubEntity) {
-        startPage();
-        List<ComSubEntity> list = comSubServices.selectList(new ComSubEntity());
-        return getDataTable(list);
-    }
+//    /**
+//     * @param comSubEntity
+//     * @return
+//     * @PreAuthorize("hasPermission('user', 'read') or hasRole('ROLE_ADMINISTRATOR')")
+//     */
+//    @RequestMapping("/getList")
+//    @ResponseBody
+//    public TableDataInfo getList(ComSubEntity comSubEntity) {
+//        startPage();
+//        List<ComSubEntity> list = comSubServices.selectList(new ComSubEntity());
+//        return getDataTable(list);
+//    }
 
 
 }
