@@ -23,7 +23,7 @@ public class RoleController extends BaseController {
         return UserUtil.getLoginUser();
     }
 
-    @GetMapping()
+    @GetMapping("/")
     public String index() {
         return prefix + "/role";
     }

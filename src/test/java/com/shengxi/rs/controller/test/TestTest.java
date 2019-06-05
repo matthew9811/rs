@@ -4,7 +4,7 @@ import cn.hutool.core.lang.UUID;
 import com.shengxi.rs.common.constant.SysConstant;
 import com.shengxi.rs.common.util.IdUtil;
 import com.shengxi.system.entites.sys.SysUser;
-import com.shengxi.system.model.service.sys.SysUserServices;
+import com.shengxi.system.model.service.sys.impl.SysUserServiceImpl;
 import com.shengxi.system.model.service.test.TestServices;
 import java.util.Date;
 import org.junit.Test;
@@ -24,7 +24,7 @@ public class TestTest {
     private TestServices testServices;
 
     @Autowired
-    private SysUserServices sysUserServices;
+    private SysUserServiceImpl sysUserServiceImpl;
 
     @Test
     public void test1() {
@@ -70,7 +70,7 @@ public class TestTest {
         user.setUserName("晟曦");
         user.setPassword("admin");
         user.setCreateTime(new Date());
-        sysUserServices.saveUser(user);
+        sysUserServiceImpl.saveUser(user);
     }
 
 }

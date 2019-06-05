@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <meta charset="utf-8">
 <head>
     <meta charset="utf-8">
@@ -116,7 +117,9 @@
     <div class="layui-side layui-bg-green">
         <div class="user-photo">
             <a class="img" title="我的头像"><img th:src="@{/images/face.jpeg}" class="userAvatar"></a>
-            <p>你好！<span class="userName">17211321321同学</span></p>
+            <p>你好！<span class="userName" sec:authentication="principal.userName"></span>
+                <span sec:authentication="principal.authorities"></span>
+            </p>
         </div>
         <div class="navBar layui-side-scroll" id="navBar">
             <ul class="layui-nav layui-nav-tree">

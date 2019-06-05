@@ -1,4 +1,4 @@
-package com.shengxi.rs.common.services;
+package com.shengxi.system.common.services.sys;
 
 import com.shengxi.rs.common.domain.SecurityUser;
 import com.shengxi.rs.common.domain.Token;

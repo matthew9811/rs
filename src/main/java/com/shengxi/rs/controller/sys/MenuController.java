@@ -3,14 +3,10 @@ package com.shengxi.rs.controller.sys;
 import com.shengxi.rs.common.handler.BaseController;
 import com.shengxi.rs.common.util.AjaxResult;
 import com.shengxi.rs.common.util.UserUtil;
-import com.shengxi.system.common.constant.BaseControllerConstant;
-import com.shengxi.system.common.util.SecurityUserUtil;
 import com.shengxi.system.entites.sys.SysMenuEntity;
-import com.shengxi.system.model.service.sys.SysMenuServices;
-
-import java.util.List;
+import com.shengxi.system.model.service.sys.impl.SysMenuServiceImpl;
 import java.util.Map;
-
+import javax.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -30,8 +26,9 @@ public class MenuController extends BaseController {
     private String prefix = "/admin/menu";
 
     @Autowired
-    private SysMenuServices menuServices;
+    private SysMenuServiceImpl menuServices;
 
+    @PermitAll
     @GetMapping()
     public String index() {
         return prefix + "/menu";
@@ -40,7 +37,6 @@ public class MenuController extends BaseController {
     @GetMapping("/getMenu")
     @ResponseBody
     public Map<String, Object> getMenu(SysMenuEntity menuEntity) {
-        System.out.println(UserUtil.getLoginUser().toString());
         return menuServices.selectByInit(menuEntity);
     }
 
@@ -67,7 +63,7 @@ public class MenuController extends BaseController {
     @ResponseBody
     public AjaxResult insertMenu(SysMenuEntity sysMenuEntity) {
         //暂时使用
-        sysMenuEntity.setCreateBy("admin");
+        sysMenuEntity.setCreateBy(UserUtil.getUserNo());
         return toAjax(menuServices.insertEntity(sysMenuEntity));
     }
 

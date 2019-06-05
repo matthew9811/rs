@@ -1,4 +1,4 @@
-package com.shengxi.rs.common.util;
+package com.shengxi.rs.common.domain;
 
 import java.io.Serializable;
 

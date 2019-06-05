@@ -11,12 +11,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * 用户工具类
- * @date 2019/05/19
+ *
  * @author matthew
+ * @date 2019/05/19
  */
 public class UserUtil {
     /**
      * 利用spring security获取当前登录用户
+     *
      * @return securityUser
      */
     public static SecurityUser getLoginUser() {
@@ -33,4 +35,12 @@ public class UserUtil {
         return null;
     }
 
+    /**
+     * 返回用户信息 no
+     *
+     * @return userNo
+     */
+    public static String getUserNo() {
+        return getLoginUser().getUserNo();
+    }
 }

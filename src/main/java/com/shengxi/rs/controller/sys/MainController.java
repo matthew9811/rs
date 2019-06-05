@@ -23,7 +23,7 @@ public class MainController extends BaseController {
      * @return 登录页
      */
     @GetMapping("/")
-    public String login() {
+    public String init() {
         return "login";
     }
 
@@ -41,7 +41,7 @@ public class MainController extends BaseController {
     }
 
     @PostMapping("/login")
-    public String login(SecurityUser user){
+    public String login(){
         return "index";
     }
 }

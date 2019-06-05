@@ -2,9 +2,11 @@ package com.shengxi.rs.common.util;
 
 import com.alibaba.fastjson.JSONObject;
 import java.io.IOException;
+import java.util.logging.Logger;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 
 /**
@@ -13,6 +15,11 @@ import org.springframework.security.core.Authentication;
  * 响应util类
  */
 public class ResponseUtil {
+
+
+    @Autowired
+    private Logger logger;
+    private static final String TOKEN_KEY = "token";
     /**
      * 响应json数据页面
      *
@@ -27,6 +34,7 @@ public class ResponseUtil {
         response.setStatus(status);
         response.getWriter().write(JSONObject.toJSONString(data));
         response.setHeader("token", JSONObject.toJSONString(data));
+        setCookie(response, data);
     }
 
     public static void responseJson(HttpServletResponse response, int status, Authentication authentication, Object data) throws IOException {
@@ -40,7 +48,7 @@ public class ResponseUtil {
 
 
     public static void setCookie(HttpServletResponse httpServletResponse, Object data) {
-        Cookie cookie = new Cookie("token", JSONObject.toJSONString(data));
+        Cookie cookie = new Cookie(TOKEN_KEY, JSONObject.toJSONString(data));
         cookie.setMaxAge(2 * 60 * 60);
         cookie.setPath("/");
         httpServletResponse.addCookie(cookie);

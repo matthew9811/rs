@@ -2,12 +2,14 @@ package com.shengxi.rs.controller.test;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.RsApplication;
+import com.shengxi.rs.common.domain.SecurityUser;
 import com.shengxi.system.common.constant.Index;
+import com.shengxi.system.common.services.sys.impl.TokenServiceJwtImpl;
 import com.shengxi.system.entites.sys.SysMenuEntity;
 import com.shengxi.system.entites.sys.SysUser;
 import com.shengxi.system.entites.test.TestEntity;
-import com.shengxi.system.model.service.sys.SysMenuServices;
-import com.shengxi.system.model.service.sys.SysUserServices;
+import com.shengxi.system.model.service.sys.impl.SysMenuServiceImpl;
+import com.shengxi.system.model.service.sys.impl.SysUserServiceImpl;
 import com.shengxi.system.model.service.test.TestServices;
 import java.util.Date;
 import org.junit.Test;
@@ -36,13 +38,16 @@ public class RedisTest {
     StringRedisTemplate stringObjectStringRedisTemplate;
 
     @Autowired
-    SysMenuServices menuServices;
+    SysMenuServiceImpl menuServices;
 
     @Autowired
-    private SysUserServices userServices;
+    private SysUserServiceImpl userServices;
 
     @Autowired
     private TestServices testServices;
+
+    @Autowired
+    private TokenServiceJwtImpl tokenServiceJwt;
 
     @Test
     @Rollback
@@ -51,6 +56,12 @@ public class RedisTest {
         opsValStr.set("焰皓", "焰豪");
         System.out.println("=================================");
         System.out.println(opsValStr.get("焰皓"));
+    }
+
+    @Test
+    public void token(){
+        SecurityUser user = new SecurityUser();
+        tokenServiceJwt.saveToken(user);
     }
 
     @Test

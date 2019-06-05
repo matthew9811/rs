@@ -1,20 +1,21 @@
-package com.shengxi.system.common.services.sys;
+package com.shengxi.system.common.services.sys.impl;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.rs.common.domain.SecurityUser;
 import com.shengxi.rs.common.domain.Token;
-import com.shengxi.rs.common.services.TokenService;
+import com.shengxi.system.common.services.sys.TokenService;
+import com.shengxi.rs.common.util.RedisUtil;
 import java.security.Key;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -26,6 +27,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 /**
  * token服务类
+ *
  * @author matthew
  */
 @Primary
@@ -41,6 +43,9 @@ public class TokenServiceJwtImpl implements TokenService {
     @Resource
     private RedisTemplate<String, SecurityUser> redisTemplate;
 
+    @Autowired
+    private RedisUtil redisUtil;
+
     private static Key KEY = null;
 
     private static final String LOGIN_USER_KEY = "LOGIN_USER_KEY";
@@ -53,9 +58,7 @@ public class TokenServiceJwtImpl implements TokenService {
 
     @Override
     public Token saveToken(SecurityUser securityUser) {
-        String token = UUID.randomUUID().toString();
-        securityUser.setToken(token);
-
+        securityUser.setToken(UUID.randomUUID().toString());
         String jwtToken = createJWTToken(securityUser);
         cacheUser(securityUser);
         return new Token(jwtToken, securityUser.getLoginTime());
@@ -75,33 +78,32 @@ public class TokenServiceJwtImpl implements TokenService {
     @Override
     public SecurityUser getSecurityUser(String jwtToken) {
         String uuid = getUUidFromJWT(jwtToken);
-        if (ObjectUtil.isNull(uuid)) {
-            return redisTemplate.boundValueOps(getTokenKey(jwtToken)).get();
+        if (ObjectUtil.isNotNull(uuid)) {
+            return redisUtil.get(getTokenKey(uuid), SecurityUser.class);
         }
         return null;
     }
 
 
-
     @Override
     public boolean deleteToken(String jwtToken) {
-        String uuid = getUUidFromJWT(jwtToken);
-        if (ObjectUtil.isNotNull(uuid)) {
-            String key = getTokenKey(uuid);
-            SecurityUser user = redisTemplate.opsForValue().get(key);
-            if (ObjectUtil.isNotNull(user)) {
-                redisTemplate.delete(key);
-                return true;
-            }
-        }
+//        String uuid = getUUidFromJWT(jwtToken);
+//        if (ObjectUtil.isNotNull(uuid)) {
+//            String key = getTokenKey(uuid);
+//            SecurityUser user = redisTemplate.opsForValue().get(key);
+//            if (ObjectUtil.isNotNull(user)) {
+//                redisTemplate.delete(key);
+//                return true;
+//            }
+//        }
         return false;
     }
 
     private void cacheUser(SecurityUser securityUser) {
         securityUser.setLoginTime(System.currentTimeMillis());
         securityUser.setExpireTime(securityUser.getLoginTime() + expireSeconds * 1000);
-        //缓存
-        redisTemplate.boundValueOps(getTokenKey(securityUser.getToken())).set(securityUser, expireSeconds, TimeUnit.SECONDS);
+        /*缓存*/
+        redisUtil.set(getTokenKey(securityUser.getToken()), securityUser);
     }
 
     private String getUUidFromJWT(String jwtToken) {

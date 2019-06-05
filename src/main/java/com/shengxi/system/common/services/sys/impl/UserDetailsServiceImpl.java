@@ -1,12 +1,11 @@
-package com.shengxi.system.common.services.sys;
+package com.shengxi.system.common.services.sys.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.rs.common.domain.SecurityUser;
 import com.shengxi.system.entites.sys.SysMenuEntity;
-import com.shengxi.system.entites.sys.SysUser;
 import com.shengxi.system.model.mapper.sys.SysUserMapper;
-import com.shengxi.system.model.service.sys.SysMenuServices;
+import com.shengxi.system.model.service.sys.impl.SysMenuServiceImpl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
@@ -28,7 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     SysUserMapper sysUserMapper;
 
     @Autowired
-    SysMenuServices sysMenuServices;
+    SysMenuServiceImpl sysMenuServices;
 
     /**
      * 通过用户登录帐号获取数据

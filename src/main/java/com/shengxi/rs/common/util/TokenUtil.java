@@ -1,9 +1,8 @@
 package com.shengxi.rs.common.util;
 
 import com.shengxi.rs.common.domain.SecurityUser;
-import com.shengxi.rs.common.services.TokenService;
-import com.shengxi.system.common.services.sys.TokenServiceJwtImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.shengxi.system.common.services.sys.TokenService;
+import com.shengxi.system.common.services.sys.impl.TokenServiceJwtImpl;
 
 /**
  * @author matthew

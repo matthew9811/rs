@@ -86,12 +86,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin().usernameParameter("userNo");
         http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
         /*登录页面和登录提交路径*/
-        http.formLogin().usernameParameter("userNo").loginProcessingUrl("/login").successHandler(authenticationSuccessHandler).failureHandler(authenticationFailureHandler).and()
+        http.formLogin().usernameParameter("userNo").loginProcessingUrl("/login").successHandler(authenticationSuccessHandler).
+                failureHandler(authenticationFailureHandler).and()
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and().rememberMe();
         http.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
         http.headers().frameOptions().disable();
         http.headers().cacheControl();
         http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
+        http.rememberMe();
     }
 
     @Override

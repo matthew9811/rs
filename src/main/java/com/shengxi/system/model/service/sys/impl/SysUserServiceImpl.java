@@ -1,4 +1,4 @@
-package com.shengxi.system.model.service.sys;
+package com.shengxi.system.model.service.sys.impl;
 
 import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.ObjectUtil;
@@ -7,6 +7,7 @@ import com.shengxi.rs.common.util.IdUtil;
 import com.shengxi.system.common.constant.BaseControllerConstant;
 import com.shengxi.system.entites.sys.SysUser;
 import com.shengxi.system.model.mapper.sys.SysUserMapper;
+import com.shengxi.system.model.service.sys.SysUserService;
 import java.sql.SQLSyntaxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @date 2019.05.13
  */
 @Service("sysUser")
-public class SysUserServices {
+public class SysUserServiceImpl implements SysUserService {
 
     @Autowired
     private SysUserMapper sysUserMapper;
@@ -34,6 +35,7 @@ public class SysUserServices {
      * @param sysUser sysUser
      * @return status
      */
+    @Override
     @Transactional(readOnly = false, rollbackFor = SQLSyntaxErrorException.class)
     public Integer saveUser(SysUser sysUser) {
         /**

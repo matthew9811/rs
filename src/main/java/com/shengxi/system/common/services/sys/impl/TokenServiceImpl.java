@@ -1,9 +1,9 @@
-package com.shengxi.system.common.services.sys;
+package com.shengxi.system.common.services.sys.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.rs.common.domain.SecurityUser;
 import com.shengxi.rs.common.domain.Token;
-import com.shengxi.rs.common.services.TokenService;
+import com.shengxi.system.common.services.sys.TokenService;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
