@@ -1,6 +1,5 @@
 package com.shengxi.rs.common.filter;
 
-import ch.qos.logback.classic.Logger;
 import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.rs.common.domain.SecurityUser;
 import com.shengxi.rs.common.services.TokenService;
@@ -32,9 +31,6 @@ public class TokenFilter extends OncePerRequestFilter {
     private TokenService tokenService;
     @Autowired
     private UserDetailsService userDetailsService;
-
-    @Autowired
-    Logger logger;
 
     private static final Long MINUTES_10 = 10 * 60 * 1000L;
 
