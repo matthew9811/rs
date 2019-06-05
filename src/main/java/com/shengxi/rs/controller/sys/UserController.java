@@ -1,5 +1,7 @@
 package com.shengxi.rs.controller.sys;
 
+import cn.hutool.core.util.ObjectUtil;
+import com.shengxi.rs.common.domain.SecurityUser;
 import com.shengxi.rs.common.handler.BaseController;
 import com.shengxi.rs.common.util.TokenUtil;
 import com.shengxi.rs.common.util.UserUtil;
@@ -8,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,10 +26,14 @@ public class UserController extends BaseController {
 
     private String prefix = "/admin/user";
 
-    @GetMapping("/current/{token}")
+    @PostMapping("/current")
     @ResponseBody
-    public SysUser currentUser(@PathVariable("token") String token) {
-        return TokenUtil.getUser(token);
+    public SecurityUser currentUser(String token) {
+        SecurityUser user = TokenUtil.getUser(token);
+        if (ObjectUtil.isNull(user)){
+            user = new SecurityUser();
+        }
+        return user;
     }
 
     @GetMapping("")

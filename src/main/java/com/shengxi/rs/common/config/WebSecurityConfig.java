@@ -76,8 +76,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         /**
          * 开放资源
          */
-        http.authorizeRequests().antMatchers("/", "/**", "/*.html", "/*.ico", "/css/**", "/js/**", "/fonts/**", "/layui/**", "/img/**",
-                "/webjar/**", "/druid/**", "/static/**", "/", "/**", "/*.html", "/favicon.ico", "/css/**", "/js/**", "/fonts/**", "/layui/**", "/img/**",
+        http.authorizeRequests().antMatchers(
+                "/webjar/**", "/", "/**", "/*.html", "/favicon.ico", "/css/**", "/js/**", "/fonts/**", "/layui/**", "/img/**",
                 "/v2/api-docs/**", "/swagger-resources/**", "/webjars/**", "/pages/**", "/druid/**",
                 "/statics/**").permitAll().anyRequest().authenticated();
         /**

@@ -33,11 +33,6 @@ public class SysUser extends BaseEntity {
     protected String password;
 
     /**
-     * 部门ID
-     */
-    private Long deptId;
-
-    /**
      * 状态 0锁定 1有效
      */
     protected String status;
@@ -83,13 +78,6 @@ public class SysUser extends BaseEntity {
         this.password = password;
     }
 
-    public Long getDeptId() {
-        return deptId;
-    }
-
-    public void setDeptId(Long deptId) {
-        this.deptId = deptId;
-    }
 
     public String getStatus() {
         return status;
@@ -129,7 +117,6 @@ public class SysUser extends BaseEntity {
                 "userNo='" + userNo + '\'' +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
-                ", deptId=" + deptId +
                 ", status='" + status + '\'' +
                 ", subClass='" + subClass + '\'' +
                 ", major='" + major + '\'' +

@@ -2,6 +2,7 @@ package com.shengxi.rs.controller.sys;
 
 import com.shengxi.rs.common.handler.BaseController;
 import com.shengxi.rs.common.util.AjaxResult;
+import com.shengxi.rs.common.util.UserUtil;
 import com.shengxi.system.common.constant.BaseControllerConstant;
 import com.shengxi.system.common.util.SecurityUserUtil;
 import com.shengxi.system.entites.sys.SysMenuEntity;
@@ -39,6 +40,7 @@ public class MenuController extends BaseController {
     @GetMapping("/getMenu")
     @ResponseBody
     public Map<String, Object> getMenu(SysMenuEntity menuEntity) {
+        System.out.println(UserUtil.getLoginUser().toString());
         return menuServices.selectByInit(menuEntity);
     }
 

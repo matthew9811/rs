@@ -48,7 +48,8 @@ public class SecurityHandlerConfig {
             public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
                 SecurityUser user = (SecurityUser) authentication.getPrincipal();
                 Token token = tokenService.saveToken(user);
-                ResponseUtil.responseJson(httpServletResponse, HttpStatus.OK.value(), token);
+//                ResponseUtil.responseJson(httpServletResponse, HttpStatus.OK.value(), token);
+                ResponseUtil.setCookie(httpServletResponse, token.getToken());
             }
         };
     }

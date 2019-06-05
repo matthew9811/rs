@@ -22,33 +22,12 @@
     </div>
 </form>
 <div th:include="include :: footer"></div>
-<script>
+<script th:inline="javascript">
     if (top != self) {
         parent.location.href = '/login';
     }
 
     var token = localStorage.getItem("token");
-    if (token != null && token.trim().length != 0) {
-        $.ajax({
-            type: 'get',
-            url: '/user/current?token=' + token,
-            success: function (data) {
-                /*验证有效*/
-                if (data != null && data != ''){
-                    location.href = '/index';
-                }
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                var msg = xhr.responseText;
-                var response = JSON.parse(msg);
-                var code = response.code;
-                var message = response.message;
-                if (code == 401) {
-                    localStorage.removeItem("token");
-                }
-            }
-        });
-    }
 
     function login(obj) {
         $(obj).attr("disabled", true);
@@ -63,9 +42,8 @@
                 url: '/login',
                 data: $("#login-form").serialize(),
                 success: function (data) {
-                   if (data != null && data != '' ){
-                        location.href = '/index';
-                    }
+                    location.href = '/index';
+                    localStorage.setItem("token", data.token);
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     var msg = xhr.responseText;
@@ -77,6 +55,29 @@
 
         }
     }
+
+    // if (token != null && token.trim().length != 0) {
+    //     $.ajax({
+    //         type: 'post',
+    //         data: {token: token},
+    //         url: '/user/current',
+    //         success: function (data) {
+    //             /*验证有效*/
+    //             if (data != null && data != ''){
+    //                 location.href = '/index';
+    //             }
+    //         },
+    //         error: function (xhr, textStatus, errorThrown) {
+    //             var msg = xhr.responseText;
+    //             var response = JSON.parse(msg);
+    //             var code = response.code;
+    //             var message = response.message;
+    //             if (code == 401) {
+    //                 localStorage.removeItem("token");
+    //             }
+    //         }
+    //     });
+    // }
 </script>
 </body>
 </html>

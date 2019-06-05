@@ -1,11 +1,13 @@
 package com.shengxi.rs.common.filter;
 
+import ch.qos.logback.classic.Logger;
 import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.rs.common.domain.SecurityUser;
 import com.shengxi.rs.common.services.TokenService;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
@@ -31,11 +33,19 @@ public class TokenFilter extends OncePerRequestFilter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    Logger logger;
+
     private static final Long MINUTES_10 = 10 * 60 * 1000L;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+        /*
+        验证对应的请求信息
+        打印请求，查看
+        * */
+        logger.debug(request.toString());
         String token = getToken(request);
         if (StringUtils.isNotBlank(token)) {
             SecurityUser securityUser = tokenService.getSecurityUser(token);
@@ -78,6 +88,15 @@ public class TokenFilter extends OncePerRequestFilter {
         String token = request.getParameter(TOKEN_KEY);
         if (StringUtils.isBlank(token)) {
             token = request.getHeader(TOKEN_KEY);
+        }
+        if (StringUtils.isNotBlank(token)){
+            Cookie[] cookies = request.getCookies();
+            for (Cookie cookie: cookies){
+                String name = cookie.getName();
+                if (TOKEN_KEY.equals(name)){
+                    token = cookie.getValue();
+                }
+            }
         }
 
         return token;

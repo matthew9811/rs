@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Mapper
 public interface SysUserMapper {
 
-    Integer deleteByPrimaryKey(String id);
+    Integer deleteById(String id);
 
     Integer insert(SysUser record);
 
