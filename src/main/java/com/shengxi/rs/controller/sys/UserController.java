@@ -3,7 +3,7 @@ package com.shengxi.rs.controller.sys;
 import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.rs.common.domain.SecurityUser;
 import com.shengxi.rs.common.handler.BaseController;
-import com.shengxi.rs.common.util.TokenUtil;
+import com.shengxi.rs.common.util.web.TokenUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

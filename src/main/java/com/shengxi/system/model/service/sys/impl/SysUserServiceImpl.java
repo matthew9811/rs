@@ -4,7 +4,7 @@ import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.rs.common.constant.SysConstant;
 import com.shengxi.rs.common.util.IdUtil;
-import com.shengxi.system.common.constant.BaseControllerConstant;
+import com.shengxi.system.common.constant.BaseConstant;
 import com.shengxi.system.entites.sys.SysUser;
 import com.shengxi.system.model.mapper.sys.SysUserMapper;
 import com.shengxi.system.model.service.sys.SysUserService;
@@ -44,7 +44,7 @@ public class SysUserServiceImpl implements SysUserService {
         sysUser.setPassword(bCryptPasswordEncoder.encode(sysUser.getPassword()));
         sysUser.setStatus(SysConstant.NORMAL);
         sysUser.setId(IdUtil.uuid());
-        sysUser.setDelFlag(BaseControllerConstant.DEL_FLAG_NOT);
+        sysUser.setDelFlag(BaseConstant.DEL_FLAG_NOT);
         return sysUserMapper.insert(sysUser);
     }
 

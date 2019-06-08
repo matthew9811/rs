@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.shengxi.system.model.mapper.sys.SysDataMapper">
+    <resultMap id = "BaseResultMap" type = "com.shengxi.system.entites.sys.SysData">
+        <id column = "id" jdbcType = "VARCHAR" property = "id" />
+        <result column = "key" jdbcType = "VARCHAR" property = "key" />
+        <result column = "value" jdbcType = "VARCHAR" property = "value" />
+        <result column = "type_no" jdbcType = "VARCHAR" property = "type_no" />
+        <result column = "remark" jdbcType = "VARCHAR" property = "remark" />
+        <result column = "create_by" jdbcType = "VARCHAR" property = "create_by" />
+        <result column = "create_time" jdbcType = "TIMESTAMP" property = "create_time" />
+        <result column = "update_by" jdbcType = "VARCHAR" property = "update_by" />
+        <result column = "update_time" jdbcType = "TIMESTAMP" property = "update_time" />
+        <result column = "del_flag" jdbcType = "CHAR" property = "del_flag" />
+    </resultMap>
+    <sql id = "Base_Column_List">
+    a.id,
+    a.`key`,
+    a.`value`,
+     a.type_no,
+      a.remark,
+      a.create_by,
+      a.create_time,
+      a.update_by,
+      a.update_time
+  </sql>
+    <select id = "selectByPrimaryKey" parameterType = "java.lang.String" resultMap = "BaseResultMap">
+        select
+        <include refid = "Base_Column_List" />
+        from sys_data a
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <insert id = "insert" parameterType = "com.shengxi.system.entites.sys.SysData">
+    insert into sys_data
+    (`key`,
+    `value`,
+    type_no,
+      remark,
+       create_by,
+       create_time,
+      del_flag
+      )
+    values
+     (#{key,jdbcType=VARCHAR},
+     #{value,jdbcType=VARCHAR},
+     #{type_no,jdbcType=VARCHAR},
+      #{remark,jdbcType=VARCHAR},
+      #{create_by,jdbcType=VARCHAR},
+       now(),
+      #{del_flag,jdbcType=CHAR}
+      )
+  </insert>
+    <insert id = "insertSelective" keyColumn = "id" keyProperty = "id"
+            parameterType = "com.shengxi.system.entites.sys.SysData" useGeneratedKeys = "true">
+        insert into sys_data
+        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
+            <if test = "key != null">
+                `key`,
+            </if>
+            <if test = "value != null">
+                `value`,
+            </if>
+            <if test = "type_no != null">
+                type_no,
+            </if>
+            <if test = "remark != null">
+                remark,
+            </if>
+            <if test = "create_by != null">
+                create_by,
+            </if>
+            <if test = "create_time != null">
+                create_time,
+            </if>
+            <if test = "del_flag != null">
+                del_flag,
+            </if>
+        </trim>
+        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
+            <if test = "key != null">
+                #{key,jdbcType=VARCHAR},
+            </if>
+            <if test = "value != null">
+                #{value,jdbcType=VARCHAR},
+            </if>
+            <if test = "type_no != null">
+                #{type_no,jdbcType=VARCHAR},
+            </if>
+            <if test = "remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test = "create_by != null">
+                #{create_by,jdbcType=VARCHAR},
+            </if>
+            <if test = "create_time != null">
+                #{create_time,jdbcType=TIMESTAMP},
+            </if>
+            <if test = "del_flag != null">
+                #{del_flag,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id = "updateByPrimaryKeySelective" parameterType = "com.shengxi.system.entites.sys.SysData">
+        update sys_data
+        <set>
+            <if test = "key != null">
+                `key` = #{key,jdbcType=VARCHAR},
+            </if>
+            <if test = "value != null">
+                `value` = #{value,jdbcType=VARCHAR},
+            </if>
+            <if test = "type_no != null">
+                type_no = #{type_no,jdbcType=VARCHAR},
+            </if>
+            <if test = "remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test = "update_by != null">
+                update_by = #{update_by,jdbcType=VARCHAR},
+            </if>
+            <if test = "update_time != null">
+                update_time = #{update_time,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id = "updateByPrimaryKey" parameterType = "com.shengxi.system.entites.sys.SysData">
+    update sys_data
+    set `key` = #{key,jdbcType=VARCHAR},
+      `value` = #{value,jdbcType=VARCHAR},
+      type_no = #{type_no,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      update_by = #{update_by,jdbcType=VARCHAR},
+      update_time = #{update_time,jdbcType=TIMESTAMP},
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+    <update id = "deleteByPrimaryKey" parameterType = "java.lang.String">
+    update sys_data set del_flag = '0', update_by = #{updateBy}, update_time = now()
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

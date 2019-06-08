@@ -1,6 +1,6 @@
 package com.shengxi.system.model.service.sys;
 
-import com.shengxi.system.entites.sys.SysMenuEntity;
+import com.shengxi.system.entites.sys.SysMenu;
 import java.util.List;
 import java.util.Map;
 
@@ -14,10 +14,10 @@ public interface SysMenuService {
     /**
      * 新增菜单
      *
-     * @param sysMenuEntity elem
+     * @param sysMenu elem
      * @return status
      */
-    Integer insertEntity(SysMenuEntity sysMenuEntity);
+    Integer insertEntity(SysMenu sysMenu);
 
     /**
      * 登录菜单初始化
@@ -25,7 +25,7 @@ public interface SysMenuService {
      * @param menuEntity elem
      * @return list
      */
-    Map<String, Object> selectByInit(SysMenuEntity menuEntity);
+    Map<String, Object> selectByInit(SysMenu menuEntity);
 
     /**
      * 根据用户id获取对应的权限数据
@@ -33,12 +33,18 @@ public interface SysMenuService {
      * @param id user id
      * @return list
      */
-    List<SysMenuEntity> selectPermList(String id);
+    List<SysMenu> selectPermList(String id);
 
     /**
      * 父类添加应用
      *
      * @return list
      */
-    List<SysMenuEntity> selectOfParentAdd();
+    List<SysMenu> selectOfParentAdd();
+
+    /**
+     * 获取所有可以打印的数据
+     * @return list
+     */
+    List<SysMenu> selectListToExcel();
 }

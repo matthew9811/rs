@@ -4,12 +4,14 @@ import com.shengxi.rs.common.domain.SecurityUser;
 import com.shengxi.system.entites.sys.SysUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Repository;
 
 /**
  * 用户类
  * @author matthew
  * @date 2019.05.13
  */
+@Repository
 @Mapper
 public interface SysUserMapper {
 

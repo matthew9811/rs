@@ -6,6 +6,7 @@ import com.shengxi.system.common.util.IdCommon;
 
 import java.security.SecureRandom;
 import java.util.UUID;
+import org.springframework.stereotype.Component;
 
 /**
  *

@@ -3,9 +3,9 @@ package com.shengxi.system.model.service.sys.impl;
 
 import com.shengxi.rs.common.domain.Tree;
 import com.shengxi.rs.common.util.IdUtil;
-import com.shengxi.system.common.constant.BaseControllerConstant;
-import com.shengxi.system.common.constant.ServicesConstant;
-import com.shengxi.system.entites.sys.SysMenuEntity;
+import com.shengxi.system.common.constant.BaseConstant;
+import com.shengxi.system.common.constant.ServiceConstant;
+import com.shengxi.system.entites.sys.SysMenu;
 import com.shengxi.system.model.mapper.sys.SysMenuMapper;
 
 import com.shengxi.system.model.service.sys.SysMenuService;
@@ -35,13 +35,13 @@ public class SysMenuServiceImpl implements SysMenuService {
 
     @Override
     @Transactional(readOnly = false, rollbackFor = SQLTransactionRollbackException.class)
-    public Integer insertEntity(SysMenuEntity sysMenuEntity) {
+    public Integer insertEntity(SysMenu sysMenu) {
         /*
          * 控制del_flag
          */
-        sysMenuEntity.setDelFlag(BaseControllerConstant.DEL_FLAG_NOT);
-        sysMenuEntity.setId(IdUtil.uuid());
-        return sysMenuMapper.insert(sysMenuEntity);
+        sysMenu.setDelFlag(BaseConstant.DEL_FLAG_NOT);
+        sysMenu.setId(IdUtil.uuid());
+        return sysMenuMapper.insert(sysMenu);
     }
 
     /**
@@ -49,8 +49,8 @@ public class SysMenuServiceImpl implements SysMenuService {
      */
     @Override
     @Transactional(readOnly = true, rollbackFor = Selector.SelectorParseException.class)
-    public Map<String, Object> selectByInit(SysMenuEntity menuEntity) {
-        List<SysMenuEntity> list = sysMenuMapper.selectByList(menuEntity);
+    public Map<String, Object> selectByInit(SysMenu menuEntity) {
+        List<SysMenu> list = sysMenuMapper.selectByList(menuEntity);
         Map map = new HashMap(list.size());
         map.put("msg", "刷新成功!");
         map.put("data", list);
@@ -65,7 +65,7 @@ public class SysMenuServiceImpl implements SysMenuService {
      * @return list
      */
     @Override
-    public List<SysMenuEntity> selectPermList(String id) {
+    public List<SysMenu> selectPermList(String id) {
         return sysMenuMapper.selectPermList(id);
     }
 
@@ -76,8 +76,13 @@ public class SysMenuServiceImpl implements SysMenuService {
      */
     @Override
     @Transactional(readOnly = true, rollbackFor = Selector.SelectorParseException.class)
-    public List<SysMenuEntity> selectOfParentAdd() {
+    public List<SysMenu> selectOfParentAdd() {
         return sysMenuMapper.selectOfParentAdd();
+    }
+
+    @Override
+    public List<SysMenu> selectListToExcel() {
+        return sysMenuMapper.selectListToExcel();
     }
 
     /**
@@ -86,12 +91,12 @@ public class SysMenuServiceImpl implements SysMenuService {
      * @param trees Tree
      * @param menus 菜单
      */
-    private void buildTrees(List<Tree<SysMenuEntity>> trees, List<SysMenuEntity> menus) {
+    private void buildTrees(List<Tree<SysMenu>> trees, List<SysMenu> menus) {
         menus.forEach(menu -> {
-            Tree<SysMenuEntity> tree = new Tree<>();
+            Tree<SysMenu> tree = new Tree<>();
             tree.setId(menu.getId());
             tree.setParentId(menu.getParentId());
-            Map<String, Object> map = new HashMap<>(ServicesConstant.MENU_VALUE_SIZE);
+            Map<String, Object> map = new HashMap<>(ServiceConstant.MENU_VALUE_SIZE);
             map.put("icon", menu.getIcon());
             map.put("perms", menu.getPerms());
             map.put("url", menu.getUrl());

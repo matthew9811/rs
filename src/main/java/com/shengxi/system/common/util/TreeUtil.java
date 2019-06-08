@@ -2,14 +2,9 @@ package com.shengxi.system.common.util;
 
 
 import cn.hutool.core.util.ObjectUtil;
-import com.shengxi.rs.common.constant.SysConstant;
 import com.shengxi.rs.common.domain.Tree;
-import com.shengxi.rs.common.util.StringUtils;
-import com.shengxi.system.entites.sys.SysMenuEntity;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 树形结构工具类

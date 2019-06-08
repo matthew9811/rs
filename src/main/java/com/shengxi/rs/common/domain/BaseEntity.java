@@ -1,5 +1,6 @@
 package com.shengxi.rs.common.domain;
 
+import com.alibaba.excel.metadata.BaseRowModel;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -11,7 +12,7 @@ import java.util.Date;
  * @Description: 实体集常用信息
  */
 @Component
-public class BaseEntity implements Serializable {
+public class BaseEntity extends BaseRowModel implements Serializable {
     /**
      * id
      */

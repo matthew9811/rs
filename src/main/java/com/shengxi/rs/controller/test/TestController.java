@@ -1,17 +1,25 @@
 package com.shengxi.rs.controller.test;
 
+import com.alibaba.excel.metadata.BaseRowModel;
+import com.alibaba.excel.support.ExcelTypeEnum;
 import com.shengxi.rs.common.handler.BaseController;
 import com.shengxi.rs.common.util.UserUtil;
+import com.shengxi.rs.common.util.file.excel.EasyExcelUtils;
 import com.shengxi.system.common.util.SecurityUserUtil;
+import com.shengxi.system.entites.test.ExportInfo;
 import com.shengxi.system.entites.test.TestEntity;
 import com.shengxi.system.model.service.test.TestServices;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -29,8 +37,6 @@ public class TestController extends BaseController {
     @Autowired
     private TestServices testServices;
 
-//    @Autowired
-//    private ComSubServices comSubServices;
 
     @RequestMapping("")
     public String test() {
@@ -58,18 +64,35 @@ public class TestController extends BaseController {
     }
 
 
-//    /**
-//     * @param comSubEntity
-//     * @return
-//     * @PreAuthorize("hasPermission('user', 'read') or hasRole('ROLE_ADMINISTRATOR')")
-//     */
-//    @RequestMapping("/getList")
-//    @ResponseBody
-//    public TableDataInfo getList(ComSubEntity comSubEntity) {
-//        startPage();
-//        List<ComSubEntity> list = comSubServices.selectList(new ComSubEntity());
-//        return getDataTable(list);
-//    }
+    /**
+     * 导出 Excel（一个 sheet）
+     */
+    @RequestMapping(value = "/writeExcel", method = RequestMethod.GET)
+    public void writeExcel(HttpServletResponse response) throws IOException {
+        List<ExportInfo> list = getList();
+        String fileName = "一个 Excel 文件";
+        String sheetName = "第一个 sheet.xls";
+        Map<String, List<? extends BaseRowModel>> map = new HashMap<>(1);
+        map.put(fileName, list);
+        EasyExcelUtils.exportExcelMutilEasyExcel(response, map, ExcelTypeEnum.XLSX);
+    }
+
+    private List<ExportInfo> getList() {
+        List<ExportInfo> list = new ArrayList<>();
+        ExportInfo model1 = new ExportInfo();
+        model1.setName("howie");
+        model1.setAge("19");
+        model1.setAddress("123456789");
+        model1.setEmail("123456789@gmail.com");
+        list.add(model1);
+        ExportInfo model2 = new ExportInfo();
+        model2.setName("harry");
+        model2.setAge("20");
+        model2.setAddress("198752233");
+        model2.setEmail("198752233@gmail.com");
+        list.add(model2);
+        return list;
+    }
 
 
 }

@@ -6,8 +6,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.shengxi.rs.common.domain.PageResult;
 import com.shengxi.rs.common.domain.TableDataInfo;
-import com.shengxi.rs.common.util.AjaxResult;
-import com.shengxi.rs.common.util.TableSupport;
+import com.shengxi.rs.common.util.web.AjaxResult;
+import com.shengxi.rs.common.util.web.TableSupport;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -74,10 +74,20 @@ public class BaseController {
      * 响应返回结果
      *
      * @param rows 影响行数
-     * @return 操作结果
+     * @return result
      */
     protected AjaxResult toAjax(int rows) {
         return rows > 0 ? success() : error();
+    }
+
+    /**
+     * 响应返回结果
+     *
+     * @param flag boolean
+     * @return result
+     */
+    protected AjaxResult toAjax(Boolean flag) {
+        return flag ? success() : error();
     }
 
     /**
@@ -115,5 +125,25 @@ public class BaseController {
         return AjaxResult.error(code, message);
     }
 
+    /**
+     * 返回提示码消息
+     */
+    public AjaxResult warn() {
+        return AjaxResult.warn();
+    }
+
+    /**
+     * 返回提示码消息
+     */
+    public AjaxResult warn(String message) {
+        return AjaxResult.warn(message);
+    }
+
+    /**
+     * 返回提示码消息
+     */
+    public AjaxResult warn(Integer code, String message) {
+        return AjaxResult.warn(code, message);
+    }
 
 }

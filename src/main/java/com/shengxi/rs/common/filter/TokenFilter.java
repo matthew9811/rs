@@ -2,7 +2,7 @@ package com.shengxi.rs.common.filter;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.rs.common.domain.SecurityUser;
-import com.shengxi.system.common.services.sys.TokenService;
+import com.shengxi.system.common.service.sys.TokenService;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

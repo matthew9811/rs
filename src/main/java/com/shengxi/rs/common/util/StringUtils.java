@@ -2,6 +2,7 @@ package com.shengxi.rs.common.util;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.rs.common.constant.SysConstant;
+import org.springframework.stereotype.Component;
 
 /**
  * @author : Matthew

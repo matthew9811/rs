@@ -4,8 +4,8 @@ import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.RsApplication;
 import com.shengxi.rs.common.domain.SecurityUser;
 import com.shengxi.system.common.constant.Index;
-import com.shengxi.system.common.services.sys.impl.TokenServiceJwtImpl;
-import com.shengxi.system.entites.sys.SysMenuEntity;
+import com.shengxi.system.common.service.sys.impl.TokenServiceJwtImpl;
+import com.shengxi.system.entites.sys.SysMenu;
 import com.shengxi.system.entites.sys.SysUser;
 import com.shengxi.system.entites.test.TestEntity;
 import com.shengxi.system.model.service.sys.impl.SysMenuServiceImpl;
@@ -93,7 +93,7 @@ public class RedisTest {
     @Test
     @Rollback
     public void testTree(){
-        System.out.println(menuServices.selectByInit(new SysMenuEntity()));
+        System.out.println(menuServices.selectByInit(new SysMenu()));
     }
 
     @Test

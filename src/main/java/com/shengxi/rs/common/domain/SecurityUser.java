@@ -1,7 +1,7 @@
 package com.shengxi.rs.common.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.shengxi.system.entites.sys.SysMenuEntity;
+import com.shengxi.system.entites.sys.SysMenu;
 import com.shengxi.system.entites.sys.SysUser;
 import java.util.Collection;
 import java.util.List;
@@ -21,7 +21,7 @@ public class SecurityUser extends SysUser implements UserDetails {
     /**
      * 权限
      */
-    private List<SysMenuEntity> permList;
+    private List<SysMenu> permList;
 
     private String token;
 
@@ -109,11 +109,11 @@ public class SecurityUser extends SysUser implements UserDetails {
         return true;
     }
 
-    public List<SysMenuEntity> getPermList() {
+    public List<SysMenu> getPermList() {
         return permList;
     }
 
-    public void setPermList(List<SysMenuEntity> permList) {
+    public void setPermList(List<SysMenu> permList) {
         this.permList = permList;
     }
 
