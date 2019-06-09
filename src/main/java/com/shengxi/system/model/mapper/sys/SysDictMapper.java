@@ -73,4 +73,13 @@ public interface SysDictMapper {
      * @return status
      */
     int updateByPrimaryKey(SysDict record);
+
+    /**
+     * 批量删除
+     * @param idArr ids
+     * @param userNo updateBy
+     * @return status
+     * @Description: 删除对应ID的数据
+     */
+    Integer deleteByIdList(String[] idArr, @Param("updateBy") String userNo);
 }

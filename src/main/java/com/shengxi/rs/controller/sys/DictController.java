@@ -9,6 +9,7 @@ import com.shengxi.system.model.service.sys.SysDictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -65,6 +66,16 @@ public class DictController extends BaseController {
     @PostMapping("/edit")
     public AjaxResult editSave(SysDict sysDict) {
         return toAjax(sysDictService.updateByIdSelective(sysDict));
+    }
+    
+    @DeleteMapping("/remove")
+    public AjaxResult remove(String id){
+        return toAjax(sysDictService.deleteSysDictById(id));
+    }
+    
+    @DeleteMapping("/removeList")
+    public AjaxResult removeList(String ids){
+        return toAjax(sysDictService.deleteSysDictByIds(ids));
     }
 
 }

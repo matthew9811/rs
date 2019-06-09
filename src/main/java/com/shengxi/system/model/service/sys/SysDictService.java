@@ -51,4 +51,10 @@ public interface SysDictService {
      */
     Integer deleteSysDictById(String id);
 
+    /**
+     * 批量删除
+     * @param ids ids
+     * @return status
+     */
+    Integer deleteSysDictByIds(String ids);
 }

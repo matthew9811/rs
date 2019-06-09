@@ -2,6 +2,12 @@ server:
   port: 317
   tomcat:
     uri-encoding: utf-8
+    #初始化线程数20
+    min-spare-threads: 20
+    #最大线程数1000
+    max-threads: 1000
+    #超时时间是5000ms
+    max-connections: 5000
 spring:
   security:
     base:
@@ -65,7 +71,6 @@ spring:
             multi-statement-allow: true
         log4j:
           statement-logger-name:
-
   mvc:
     favicon:
       enabled: false

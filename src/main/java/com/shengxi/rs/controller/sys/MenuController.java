@@ -1,6 +1,7 @@
 package com.shengxi.rs.controller.sys;
 
 import com.alibaba.excel.support.ExcelTypeEnum;
+import com.shengxi.rs.common.annotation.Log;
 import com.shengxi.rs.common.handler.BaseController;
 import com.shengxi.rs.common.util.file.excel.EasyExcelUtils;
 import com.shengxi.rs.common.util.web.AjaxResult;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/menu")
+@Log("menu")
 public class MenuController extends BaseController {
 
     private String prefix = "/admin/menu";
@@ -34,6 +36,7 @@ public class MenuController extends BaseController {
 
     @PermitAll
     @GetMapping()
+    @Log("menuIndex")
     public String index() {
         return prefix + "/menu";
     }

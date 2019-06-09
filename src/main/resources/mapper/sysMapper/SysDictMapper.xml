@@ -28,13 +28,13 @@
         <!--left join sys_data s-->
     </sql>
     <!--读操作-->
-    <select id = "selectDictByList" parameterType="SysDict" resultMap="BaseResultMap">
+    <select id = "selectDictByList" parameterType = "SysDict" resultMap = "BaseResultMap">
         select
-        <include refid = "Base_Column_List"/>
+        <include refid = "Base_Column_List" />
         from sys_dict a
         <where>
             a.del_flag = '1'
-            <if test="id != null and id != '' ">
+            <if test = "id != null and id != '' ">
                 and a.id = #{id}
             </if>
         </where>
@@ -181,4 +181,14 @@
     update sys_dict set def_flag = '0', update_time = now(), update_by = #{updateBy}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+    <update id = "deleteByIdList">
+        update sys_dict a set a.del_flag = '0' ,
+        update_time = now(),
+        update_by = #{updateBy}
+        where
+        id in
+        <foreach collection = "array" item = "id" open = "(" close = ")" separator = ",">
+            #{id}
+        </foreach>
+    </update>
 </mapper>

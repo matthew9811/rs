@@ -1,5 +1,7 @@
 package com.shengxi.system.model.service.sys.impl;
 
+import cn.hutool.core.convert.Convert;
+import com.shengxi.rs.common.util.IdUtil;
 import com.shengxi.rs.common.util.UserUtil;
 import com.shengxi.system.common.constant.ServiceConstant;
 import com.shengxi.system.entites.sys.SysDict;
@@ -38,6 +40,7 @@ public class SysDictServiceImpl implements SysDictService {
 
     @Override
     public Integer insertSysDict(SysDict sysDict) {
+        sysDict.setId(IdUtil.uuid());
         sysDict.setCreateBy(UserUtil.getUserNo());
         sysDict.setStatus(ServiceConstant.NORMAL);
         return dictMapper.insert(sysDict);
@@ -58,5 +61,10 @@ public class SysDictServiceImpl implements SysDictService {
     @Override
     public Integer deleteSysDictById(String id) {
         return dictMapper.deleteByPrimaryKey(id, UserUtil.getUserNo());
+    }
+
+    @Override
+    public Integer deleteSysDictByIds(String ids) {
+        return dictMapper.deleteByIdList(Convert.toStrArray(ids), UserUtil.getUserNo());
     }
 }
