@@ -32,7 +32,7 @@ public class UserController extends BaseController {
         return user;
     }
 
-    @GetMapping("/")
+    @GetMapping()
     public String index() {
         return prefix + "/user";
     }

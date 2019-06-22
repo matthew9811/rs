@@ -84,4 +84,5 @@ public interface SysMenuMapper {
      */
     List<SysMenu> selectListToExcel();
 
+    List<SysMenu> selectListByIndex();
 }

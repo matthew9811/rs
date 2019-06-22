@@ -85,6 +85,11 @@ public class SysMenuServiceImpl implements SysMenuService {
         return sysMenuMapper.selectListToExcel();
     }
 
+    @Override
+    public List<SysMenu> selectListByIndex() {
+        return sysMenuMapper.selectListByIndex();
+    }
+
     /**
      * 构建树形list
      *

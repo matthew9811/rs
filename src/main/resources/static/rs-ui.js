@@ -53,7 +53,6 @@
                 layui.use(['table'], function () {
                     var table = layui.table;
                     table.on("edit(" + tableId + ")", function (obj) {
-                        console.log(obj);
                         return obj;
                     })
                 })
@@ -63,7 +62,6 @@
                 layui.use(['table'], function () {
                     var table = layui.table;
                     table.on('checkbox(' + tableId + ')', function (obj) {
-                        console.log(obj);
                         return obj;
                     });
                 })
@@ -149,7 +147,19 @@
                 });
 
             }
+        },
+
+        pop: {
+            success: function () {
+                var options = {
+                    msg: "success",
+                    icon: 1
+                };
+                $.popup.hint(options);
+            }
         }
+
+
     })
 
 })(jQuery);

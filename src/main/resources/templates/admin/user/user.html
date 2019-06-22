@@ -84,8 +84,8 @@
             var layer = layui.layer;
             // 初始化
             $.ajax({
-                url: 'tree.json',
-                dataType: 'json',
+                url: '',
+                dataType: '',
                 success: function (data) {
                     // 渲染时传入渲染目标ID，树形结构数据（具体结构看样例，checked表示默认选中），以及input表单的名字
                     authTree.render('#LAY-auth-tree-index', data.data.trees, {
@@ -155,9 +155,9 @@
                         console.log('监听到双击事件', data);
                     });
                 },
-                error: function (xml, errstr, err) {
-                    layer.alert(errstr + '，获取样例数据失败，请检查是否部署在本地服务器中！');
-                }
+                // error: function (xml, errstr, err) {
+                //     layer.alert(errstr + '，获取样例数据失败，请检查是否部署在本地服务器中！');
+                // }
             });
             // 表单提交样例
             form.on('submit(LAY-auth-tree-submit)', function (obj) {

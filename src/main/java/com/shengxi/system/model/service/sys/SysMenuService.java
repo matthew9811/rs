@@ -47,4 +47,10 @@ public interface SysMenuService {
      * @return list
      */
     List<SysMenu> selectListToExcel();
+
+    /**
+     * 为index菜单框获取数据
+     * @return list
+     */
+    List<SysMenu> selectListByIndex();
 }

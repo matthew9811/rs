@@ -121,19 +121,19 @@
                 <span sec:authentication="principal.authorities"></span>
             </p>
         </div>
-        <div class="navBar layui-side-scroll" id="navBar">
-            <ul class="layui-nav layui-nav-tree">
+        <div class="navBar layui-side-scroll" id="navBar" th:with="menuList = ${menu}">
+            <ul class="layui-nav layui-nav-tree" th:each="list: ${menuList}">
                 <li class="layui-nav-item layui-this">
-                    <a href="javascript:;" data-url="/main">
-                        <i class="layui-icon" data-icon=""></i>
-                        <cite>首页</cite>
+                    <a href="javascript:;" th:data-url="${list.url}">
+                        <i class="layui-icon" th:data-icon="${list.icon}" th:icon="${list.icon}"></i>
+                        <cite th:text="${list.menuName}"></cite>
                     </a>
                 </li>
             </ul>
             <ul class="layui-nav layui-nav-tree">
                 <li class="layui-nav-item layui-this">
                     <a href="javascript:;" data-url="/menu">
-                        <i class="layui-icon" data-icon=""></i>
+                        <i class="layui-icon" data-icon=""></i>
                         <cite>菜单管理</cite>
                     </a>
                 </li>
@@ -142,7 +142,7 @@
                 <li class="layui-nav-item layui-this">
                     <a href="javascript:;" data-url="/role">
                         <i class="layui-icon" data-icon=""></i>
-                        <cite>用户管理</cite>
+                        <cite>角色管理</cite>
                     </a>
                 </li>
             </ul>
