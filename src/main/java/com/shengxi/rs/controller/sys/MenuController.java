@@ -7,6 +7,7 @@ import com.shengxi.rs.common.util.file.excel.EasyExcelUtils;
 import com.shengxi.rs.common.util.web.AjaxResult;
 import com.shengxi.rs.common.util.UserUtil;
 import com.shengxi.system.entites.sys.SysMenu;
+import com.shengxi.system.model.service.sys.SysMenuService;
 import com.shengxi.system.model.service.sys.impl.SysMenuServiceImpl;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class MenuController extends BaseController {
     private String prefix = "/admin/menu";
 
     @Autowired
-    private SysMenuServiceImpl menuServices;
+    private SysMenuService menuServices;
 
     @PermitAll
     @GetMapping()
