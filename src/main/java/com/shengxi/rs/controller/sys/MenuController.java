@@ -24,10 +24,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author matthew
+ * @Description: 菜单管理
+ * @see com.shengxi.rs.common.handler.BaseController
+ * @Date: 2019年6月24日 15:46:47
  */
 @Controller
 @RequestMapping("/admin/menu")
-@Log("menu")
+@Log("MenuController")
 public class MenuController extends BaseController {
 
     private String prefix = "/admin/menu";

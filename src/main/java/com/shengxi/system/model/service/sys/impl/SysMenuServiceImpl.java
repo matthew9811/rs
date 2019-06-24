@@ -36,6 +36,7 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Override
     @Transactional(readOnly = false, rollbackFor = SQLTransactionRollbackException.class)
     public Integer insertEntity(SysMenu sysMenu) {
+        sysMenu = judgeParent(sysMenu);
         /*
          * 控制del_flag
          */
@@ -114,5 +115,17 @@ public class SysMenuServiceImpl implements SysMenuService {
         menus.clear();
     }
 
+    /**
+     * 判断是否有父类id
+     *
+     * @param sysMenu menu
+     * @return menuEntity
+     */
+    private SysMenu judgeParent(SysMenu sysMenu) {
+        if (sysMenu.getParentId().equals(null) || sysMenu.getParentId().equals("")) {
+            sysMenu.setParentId("0");
+        }
+        return sysMenu;
+    }
 
 }
