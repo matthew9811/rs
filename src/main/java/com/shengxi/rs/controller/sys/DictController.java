@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @version 1.0.0
  * @date 2019.06.07
  */
-@RequestMapping("/dict")
+@RequestMapping("/admin/dict")
 @Controller
 public class DictController extends BaseController {
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author chuling
  * @date 2019-05-22
  */
-@RequestMapping("/role")
+@RequestMapping("/admin/role")
 @Controller
 public class RoleController extends BaseController {
 

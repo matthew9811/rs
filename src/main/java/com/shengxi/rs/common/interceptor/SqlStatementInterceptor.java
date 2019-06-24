@@ -25,8 +25,8 @@ import java.util.regex.Matcher;
 
 /**
  * @author : Matthew
- * @date: 2019/4/6 23:12
- * @Description:
+ * @Date:  2019/4/6 23:12
+ * @Description: sql语句执行信息打印
  */
 @Intercepts(value = {
         @Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class}),
@@ -40,26 +40,26 @@ public class SqlStatementInterceptor implements Interceptor {
     public Object intercept(Invocation invocation) throws Throwable {
         Object returnValue;
         long start = System.currentTimeMillis();
-        // 执行 SQL语句
+        /* 执行 SQL语句 */
         returnValue = invocation.proceed();
         long end = System.currentTimeMillis();
-        // 耗时
+        /* 耗时 */
         long time = end - start;
         try {
             final Object[] args = invocation.getArgs();
             MappedStatement ms = (MappedStatement) args[0];
             Object parameter = null;
-            //获取参数，if语句成立，表示sql语句有参数，参数格式是map形式
+            /* 获取参数，if语句成立，表示sql语句有参数，参数格式是map形式 */
             if (args.length > 1) {
                 parameter = invocation.getArgs()[1];
             }
-            // 获取到节点的 id,即 sql语句的 id
+            /* 获取到节点的 id,即 sql语句的 id */
             String sqlId = ms.getId();
-            // BoundSql就是封装 MyBatis最终产生的 sql类
+            /* BoundSql就是封装 MyBatis最终产生的 sql类 */
             BoundSql boundSql = ms.getBoundSql(parameter);
-            // 获取节点的配置
+            /* 获取节点的配置 */
             Configuration configuration = ms.getConfiguration();
-            // 获取到最终的 sql语句
+            /* 获取到最终的 sql语句 */
             printSql(configuration, boundSql, sqlId, time);
         } catch (Exception e) {
             logger.error("sql拦截异常:{} ", e.getMessage());
@@ -69,9 +69,9 @@ public class SqlStatementInterceptor implements Interceptor {
 
     private void printSql(Configuration configuration, BoundSql boundSql, String sqlId, long time) {
         String sql = showSql(configuration, boundSql);
-        logger.info("【SQL语句Id】>>>> {}", sqlId);
-        logger.info("【SQL语句耗时】>>>> {} ms", time);
-        logger.info("【SQL语句】>>>> {}", sql);
+        logger.info("[SQL语句Id]>>>> {}", sqlId);
+        logger.info("[SQL语句耗时]>>>> {} ms", time);
+        logger.info("[SQL语句]>>>> {}", sql);
     }
 
     private static String getParameterValue(Object obj) {

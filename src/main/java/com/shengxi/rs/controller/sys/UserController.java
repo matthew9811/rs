@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @date 2019/05/19
  */
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/admin/user")
 public class UserController extends BaseController {
 
     private String prefix = "/admin/user";
 
-    @PostMapping("/current")
+    @PostMapping("/admin/current")
     @ResponseBody
     public SecurityUser currentUser(String token) {
         SecurityUser user = TokenUtil.getUser(token);
