@@ -54,11 +54,11 @@
                 treeLinkage: true,        // 父级展开时是否自动展开所有子级
                 treeShowName: 'menuName',
                 elem: '#treeTable',
-                url: '/menu/getMenu',
+                url: '/admin/menu/getMenu',
                 page: false,
                 cols: [
                     [
-                        {field: 'id', width: 180, align: 'center', title: '编号'},
+                        {field: 'sort', width: 180, align: 'center', title: '编号'},
                         {field: 'menuName', title: '菜单名称'},
                         {
                             field: 'icon', width:150,title: '图标', templet: function (d) {
