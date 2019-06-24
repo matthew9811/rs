@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author matthew
  */
 @Controller
-@RequestMapping("/menu")
+@RequestMapping("/admin/menu")
 @Log("menu")
 public class MenuController extends BaseController {
 
