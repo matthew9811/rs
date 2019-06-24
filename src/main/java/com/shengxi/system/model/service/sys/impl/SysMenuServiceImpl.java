@@ -51,10 +51,11 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Transactional(readOnly = true, rollbackFor = Selector.SelectorParseException.class)
     public Map<String, Object> selectByInit(SysMenu menuEntity) {
         List<SysMenu> list = sysMenuMapper.selectByList(menuEntity);
+        System.out.println(list.toString());
         Map map = new HashMap(list.size());
         map.put("msg", "刷新成功!");
         map.put("data", list);
-        map.put("code", 0);
+        map.put("code", 200);
         return map;
     }
 

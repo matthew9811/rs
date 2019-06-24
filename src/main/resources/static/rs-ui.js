@@ -27,7 +27,7 @@
                             "count": res.count, //解析数据长度
                             "data": res.data //解析数据列表
                         };
-                    },
+                    }
                 };
                 //传入两个对象。返回合并的值
                 //defaults没有的属性，会增加
@@ -80,7 +80,18 @@
                     treeShowName: 'name',
                     elem: '#treeTable',
                     url: '',
-                    page: false
+                    page: false,
+                    response: {
+                        statusCode: 200 //重新规定成功的状态码为 200，table 组件默认为 0
+                    },
+                    parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
+                        return {
+                            "code": res.code, //解析接口状态
+                            "msg": res.msg, //解析提示文本
+                            // "count": res.count, //解析数据长度
+                            "data": res.data //解析数据列表
+                        };
+                    }
                 };
                 var options = $.extend(defaults, options);
                 layui.use(['treetable'], function () {
@@ -97,6 +108,8 @@
                         elem: options.elem,
                         url: options.url,
                         page: options.page,
+                        response: options.response,
+                        parseData: options.parseData,
                         cols: options.cols
                     });
                 })
@@ -150,12 +163,63 @@
         },
 
         pop: {
-            success: function () {
-                var options = {
-                    msg: "success",
+            success: function (options) {
+                var defaults = {
+                    msg: "操作成功",
                     icon: 1
                 };
+                var options = $.extend(defaults, options);
                 $.popup.hint(options);
+            },
+            error: function (options) {
+                var defaults = {
+                    msg: "操作错误",
+                    icon: 2
+                };
+                var options = $.extend(defaults, options);
+                $.popup.hint(options);
+            },
+            warn: function (options) {
+                var defaults = {
+                    msg: "操作不规范",
+                    icon: 8
+                };
+                var options = $.extend(defaults, options);
+                $.popup.hint(options);
+            }
+        },
+
+        submit: {
+            /*插入提交*/
+            addSubmit: function (options) {
+                var defaults = {
+                    url: "/",
+                    type: "post",
+                    timeout: 60000,
+                    async: true,
+                    cache: true,
+                    data: {},
+                    dataType: "json",
+                    contentType: "application/x-www-form-urlencoded",
+                    success: function () {
+
+                    },
+                    error: function () {
+
+                    }
+                };
+                var options = $.extend(defaults, options);
+                $.modal.ajax(options);
+            },
+
+            /*编辑提交*/
+            editSubmit: function (options) {
+
+            },
+
+            /*删除提交*/
+            moveSubmit: function (options) {
+
             }
         }
 

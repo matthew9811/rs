@@ -63,7 +63,7 @@
 </body>
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
-    var prefix = ctx + "/menu";
+    var prefix = ctx + "menu";
     layui.use('form', function(){
         var form = layui.form;
 
@@ -88,7 +88,8 @@
                 parent.location.reload();
                 layer.msg(result.msg);
             }
-        }
+        };
+        console.log(data);
         $.ajax(config);
     }
 </script>

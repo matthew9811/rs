@@ -1,10 +1,11 @@
-$(function () {
+(function ($) {
     layui.config({
         base: '/layui/lay/modules/'
     }).extend({
         treetable: 'treetable-lay/treetable',
         authtree: 'layui_exts/authtree'
     });
+
     layui.use(['laydate'], function () {
         var laydate = layui.laydate;
         if ($(".layer-range-time").length > 0) {
@@ -22,7 +23,7 @@ $(function () {
         }
     });
 
-})
+})(jQuery);
 
 (function ($) {
     /*jq扩展函数直接包含在内部的代码能直接使用jq扩展*/

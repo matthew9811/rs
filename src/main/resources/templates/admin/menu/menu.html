@@ -58,16 +58,16 @@
                 page: false,
                 cols: [
                     [
-                        {field: 'sort', width: 180, align: 'center', title: '编号'},
+                        {field: 'id', width: 180, align: 'center', title: '编号'},
                         {field: 'menuName', title: '菜单名称'},
                         {
                             field: 'icon', width:150,title: '图标', templet: function (d) {
                                 return '<i class="layui-icon">' + d.icon + '</i>'
                             }
                         },
-                        {field: 'url',width:300, title: '菜单url'},
+                        {field: 'url',width:300, title: '菜单路径'},
                         {
-                            field: 'isMenu', width: 100, align: 'center', templet: function (d) {
+                            field: 'type', width: 100, align: 'center', templet: function (d) {
                                 if (d.isMenu == 1) {
                                     return '<span class="layui-badge layui-bg-gray">按钮</span>';
                                 }
@@ -146,7 +146,7 @@
         callback = function (index, layero) {
             console.log("楚苓");
             var iframeWin = layero.find('iframe')[0];
-            iframeWin.contentWindow.submitHandler();
+            iframeWin.contentWindow.submitHandler("formId");
         }
 
     })
