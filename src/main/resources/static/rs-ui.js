@@ -202,10 +202,11 @@
                     dataType: "json",
                     contentType: "application/x-www-form-urlencoded",
                     success: function () {
-
+                        parent.location.reload();
+                        $.pop.success()
                     },
                     error: function () {
-
+                        $.pop.error()
                     }
                 };
                 var options = $.extend(defaults, options);

@@ -63,7 +63,7 @@
 </body>
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
-    var prefix = ctx + "menu";
+    var prefix = ctx + "admin/menu";
     layui.use('form', function(){
         var form = layui.form;
 
@@ -82,15 +82,16 @@
             method: "post",
             async: true,
             data: data,
-            dataType: "json",
-            success: function (result) {
-                /*刷新父页面*/
-                parent.location.reload();
-                layer.msg(result.msg);
-            }
+            dataType: "json"
+            // success: function (result) {
+            //     /*刷新父页面*/
+            //     parent.location.reload();
+            //     layer.msg(result.msg);
+            // }
         };
-        console.log(data);
-        $.ajax(config);
+        // console.log(data);
+        // $.ajax(config);
+        $.submit.addSubmit(config)
     }
 </script>
 </html>
