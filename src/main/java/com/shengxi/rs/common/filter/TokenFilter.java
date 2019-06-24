@@ -49,8 +49,6 @@ public class TokenFilter extends OncePerRequestFilter {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(securityUser,
                         null, securityUser.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-            }else {
-                response.sendRedirect("/login");
             }
         }
         filterChain.doFilter(request, response);

@@ -1,6 +1,7 @@
 package com.shengxi.system.model.service.sys.impl;
 
 
+import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.rs.common.domain.Tree;
 import com.shengxi.rs.common.util.IdUtil;
 import com.shengxi.system.common.constant.BaseConstant;
@@ -122,7 +123,7 @@ public class SysMenuServiceImpl implements SysMenuService {
      * @return menuEntity
      */
     private SysMenu judgeParent(SysMenu sysMenu) {
-        if (sysMenu.getParentId().equals(null) || sysMenu.getParentId().equals("")) {
+        if (ObjectUtil.isNull(sysMenu.getParentId())) {
             sysMenu.setParentId("0");
         }
         return sysMenu;

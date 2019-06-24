@@ -106,11 +106,13 @@ public class SysMenu extends Tree<SysMenu> {
     @Override
     public String toString() {
         return "SysMenu{" +
-                "url='" + url + '\'' +
+                "sort='" + sort + '\'' +
+                ", url='" + url + '\'' +
                 ", menuName='" + menuName + '\'' +
                 ", icon='" + icon + '\'' +
                 ", type='" + type + '\'' +
                 ", perms='" + perms + '\'' +
+                ", parentId='" + parentId + '\'' +
                 ", id='" + id + '\'' +
                 ", createTime=" + createTime +
                 ", createBy='" + createBy + '\'' +

@@ -28,7 +28,7 @@ public class Tree<T> extends BaseEntity{
     /**
      * 父ID
      */
-    private String parentId;
+    protected String parentId;
     public Tree() {
         super();
     }

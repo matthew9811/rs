@@ -134,7 +134,7 @@
          #{perms,jdbcType=VARCHAR},
          #{createBy,jdbcType=VARCHAR},
          now(),
-         #{delFlag,jdbcType=CHAR}
+         #{delFlag,jdbcType=CHAR},
          #{sort})
     </insert>
     <insert id = "insertSelective"
@@ -176,7 +176,7 @@
         <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
             id,
             <if test = "sort != null ">
-                #{sort}
+                #{sort, jdbcType=INTEGER},
             </if>
             <if test = "parentId != null">
                 #{parentId,jdbcType=VARCHAR},
