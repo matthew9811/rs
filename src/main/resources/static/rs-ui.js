@@ -5,7 +5,7 @@
     /*jq扩展函数直接包含在内部的代码能直接使用jq扩展*/
 
     $.extend({
-        //layer-table 模块
+        /*layer-table 模块*/
         table: {
             init: function (options) {
                 var defaults = {
@@ -68,6 +68,7 @@
             }
         },
 
+        /*treeTable 模块*/
         treeTable: {
             init: function (options) {
                 var defaults = {
@@ -131,6 +132,7 @@
             }
         },
 
+        /*tree 模块*/
         tree: {
             init: function (options) {
                 var defaults = {
@@ -162,7 +164,13 @@
             }
         },
 
+        /*提示层*/
         pop: {
+            // 自行传参
+            init: function (options) {
+              $.popup.hint(options)
+            },
+            //成功提示
             success: function (options) {
                 var defaults = {
                     msg: "操作成功",
@@ -171,6 +179,7 @@
                 var options = $.extend(defaults, options);
                 $.popup.hint(options);
             },
+            //错误提示
             error: function (options) {
                 var defaults = {
                     msg: "操作错误",
@@ -179,6 +188,7 @@
                 var options = $.extend(defaults, options);
                 $.popup.hint(options);
             },
+            //警告提示
             warn: function (options) {
                 var defaults = {
                     msg: "操作不规范",
@@ -189,6 +199,7 @@
             }
         },
 
+        /*ajax提交*/
         submit: {
             /*插入提交*/
             addSubmit: function (options) {
@@ -202,8 +213,8 @@
                     dataType: "json",
                     contentType: "application/x-www-form-urlencoded",
                     success: function () {
+                        $.pop.success();
                         parent.location.reload();
-                        $.pop.success()
                     },
                     error: function () {
                         $.pop.error()
@@ -215,12 +226,48 @@
 
             /*编辑提交*/
             editSubmit: function (options) {
-
+                var defaults = {
+                    url: "/",
+                    type: "post",
+                    timeout: 60000,
+                    async: true,
+                    cache: true,
+                    data: {},
+                    dataType: "json",
+                    contentType: "application/x-www-form-urlencoded",
+                    success: function () {
+                        $.pop.success({msg: '修改成功'});
+                        parent.location.reload();
+                    },
+                    error: function () {
+                        $.pop.error()
+                    }
+                };
+                var options = $.extend(defaults, options);
+                $.modal.ajax(options);
             },
 
             /*删除提交*/
             moveSubmit: function (options) {
-
+                var defaults = {
+                    url: "/",
+                    type: "post",
+                    timeout: 60000,
+                    async: true,
+                    cache: true,
+                    data: {},
+                    dataType: "json",
+                    contentType: "application/x-www-form-urlencoded",
+                    success: function () {
+                        $.pop.success({msg: '删除成功'});
+                        parent.location.reload()
+                    },
+                    error: function () {
+                        $.pop.error()
+                    }
+                };
+                var options = $.extend(defaults, options);
+                $.modal.ajax(options);
             }
         }
 

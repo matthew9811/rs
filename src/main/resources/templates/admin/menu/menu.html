@@ -36,6 +36,7 @@
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
     var prefix = ctx + 'admin/menu';
+    var id;
     $(function () {
         layui.use(['form', 'layer','table'], function () {
             var layer = layui.layer;
@@ -58,6 +59,7 @@
                 page: false,
                 cols: [
                     [
+                        {field: 'id', width: 0, align: 'center', title: 'id',hide: true},
                         {field: 'sort', width: 180, align: 'center', title: '编号'},
                         {field: 'menuName', title: '菜单名称'},
                         {
@@ -92,33 +94,51 @@
             table.on('tool(treeTable)', function (obj) {
                 var data = obj.data;
                 var layEvent = obj.event;
-                var url = prefix + '/add';
+                id = data.id;
+                var url;
                 if (layEvent === 'del') {
-                    layer.msg('删除' + data.id);
+                    //询问框
+                    layer.confirm('是否删除？' + data.menuName, {
+                        btn: ['确认','取消'] //按钮
+                    }, function(){
+                        var config = {
+                            url: prefix + "/move",
+                            method: "post",
+                            async: true,
+                            data: id,
+                            dataType: "json"
+                        };
+                        $.submit.editSubmit(config);
+                        $.pop.success();
+                        layer.closeAll();
+                    }, function(){
+                        layer.closeAll();
+                    });
                 } else if (layEvent === 'add') {
+                    url = prefix + '/add';
                     layer.open({
                         type: 2,
-                        title: '添加',
-                        content: url,
-                        maxmin: true, //开启最大化最小化按钮
-                        shadeClose: true,
+                        title: '添加下一级',
+                        content: url + "/" + id,
+                        maxmin: true,
+                        // shadeClose: true,
                         btn: ['确定', '取消'],
-                        area: ['600px', '500px'],
+                        area: ['600px', '550px'],
                         yes: function (index, layero) {
-                            layer.close(index);
-                            //ajax请求
+                            callback(index, layero);
                         }
                     });
                 } else if (layEvent === 'edit') {
+                    url = prefix + '/edit';
                     layer.open({
                         type: 2,
                         title: '修改',
-                        content: url,
+                        content: url + "/" + id,
+                        maxmin: true,
                         btn: ['确定', '取消'],
-                        area: ['600px', '500px'],
+                        area: ['600px', '550px'],
                         yes: function (index, layero) {
-                            layer.close(index);
-                            //ajax请求
+                            callback(index, layero);
                         }
                     });
                 }
@@ -131,24 +151,20 @@
             layer.open({
                 type: 2,
                 title: '添加',
-                content: url,
-                maxmin: true, //开启最大化最小化按钮
+                content: url + "/" + id,
+                maxmin: true,
                 btn: ['确定', '取消'],
-                area: ['600px', '500px'],
+                area: ['600px', '550px'],
                 yes: function (index, layero) {
-                    // layer.close(index);
-                    //ajax请求
                     callback(index, layero);
                 }
             });
         });
 
         callback = function (index, layero) {
-            console.log("楚苓");
             var iframeWin = layero.find('iframe')[0];
             iframeWin.contentWindow.submitHandler("formId");
         }
-
     })
 </script>
 </body>

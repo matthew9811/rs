@@ -5,6 +5,7 @@
 <body>
 <div style="padding: 40px">
     <form id="formId" class="layui-form">
+
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label rs-input-name" style="text-align: left">
@@ -66,8 +67,6 @@
     var prefix = ctx + "admin/menu";
     layui.use('form', function(){
         var form = layui.form;
-
-        //各种基于事件的操作，下面会有进一步介绍
     });
 
     /**
@@ -83,15 +82,9 @@
             async: true,
             data: data,
             dataType: "json"
-            // success: function (result) {
-            //     /*刷新父页面*/
-            //     parent.location.reload();
-            //     layer.msg(result.msg);
-            // }
         };
-        console.log(data);
-        // $.ajax(config);
         $.submit.addSubmit(config)
     }
+
 </script>
 </html>
