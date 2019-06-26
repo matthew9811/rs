@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="childrenBody">
+<div>
+    <div class="layui-btn-group">
+        <button class="layui-btn" id="add">新增</button>
+    </div>
+    <div class="layui-btn-group">
+        <button class="layui-btn" id="btn-expand">全部展开</button>
+        <button class="layui-btn" id="btn-fold">全部折叠</button>
+    </div>
+    <div class="layui-btn-group">
+        <a class="layui-btn" href="/menu/export">
+            <i class="layui-icon">&#xe647;</i>导出
+        </a>
+    </div>
+
+    <table id="treeTable" class="layui-table" lay-filter="treeTable"></table>
+</div>
+<!-- 操作列 -->
+<script type="text/html" id="treeManage">
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="add">
+        <i class="layui-icon">&#xe654;</i>增加下一级
+    </a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">
+        <i class="layui-icon">&#xe642;</i>修改
+    </a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
+        <i class="layui-icon">&#xe640;</i>删除
+    </a>
+</script>
+<div th:include="include :: footer"></div>
+<script th:inline="javascript">
+    var prefix = ctx + 'admin/dict';
+    var id;
+    //main方法
+    $(function () {
+        layui.use(['form', 'layer', 'table'], function () {
+            var layer = layui.layer;
+            var form = layui.form,
+                layer = parent.layer === undefined ? layui.layer : top.layer,
+                $ = layui.jquery,
+                table = layui.table;
+            // 渲染表格
+            tableInit();
+            tableTool();
+        });
+    })
+
+    //新增菜单
+    $("#add").on("click", function () {
+        var url = prefix + '/add';
+        layer.open({
+            type: 2,
+            title: '添加',
+            content: url,
+            maxmin: true,
+            btn: ['确定', '取消'],
+            area: ['600px', '550px'],
+            yes: function (index, layero) {
+                callback(index, layero);
+            }
+        });
+    });
+
+    callback = function (index, layero) {
+        var iframeWin = layero.find('iframe')[0];
+        iframeWin.contentWindow.submitHandler("formId");
+    }
+
+    function tableInit() {
+        var options = {
+            elem: '#treeTable',
+            url: prefix + '/list',
+            page: false,
+            cols: [
+                [
+                    {field: 'id', width: 0, align: 'center', title: 'id', hide: true},
+                    {field: 'typeNo',  align: 'center', title: '字典编号'},
+                    {field: 'typeName', align: 'center', title: '字典名称'},
+                    {templet: '#treeManage', width: 350, align: 'center', title: '操作'}
+                ]
+            ]
+        };
+        $.table.init(options);
+    }
+
+    function tableTool() {
+        //监听工具条
+        table.on('tool(treeTable)', function (obj) {
+            var data = obj.data;
+            var layEvent = obj.event;
+            id = data.id;
+            var url;
+            if (layEvent === 'del') {
+                //询问框
+                layer.confirm('是否删除？' + data.menuName, {
+                    btn: ['确认', '取消'] //按钮
+                }, function () {
+                    var config = {
+                        url: prefix + "/move",
+                        method: "post",
+                        async: true,
+                        data: id,
+                        dataType: "json"
+                    };
+                    $.submit.editSubmit(config);
+                    $.pop.success();
+                    layer.closeAll();
+                }, function () {
+                    layer.closeAll();
+                });
+            } else if (layEvent === 'edit') {
+                url = prefix + '/edit';
+                layer.open({
+                    type: 2,
+                    title: '修改',
+                    content: url + "/" + id,
+                    maxmin: true,
+                    btn: ['确定', '取消'],
+                    area: ['600px', '550px'],
+                    yes: function (index, layero) {
+                        callback(index, layero);
+                    }
+                });
+            }
+        });
+    }
+</script>
+</body>
+</html>

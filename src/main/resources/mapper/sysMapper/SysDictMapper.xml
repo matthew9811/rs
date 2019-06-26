@@ -3,14 +3,14 @@
 <mapper namespace = "com.shengxi.system.model.mapper.sys.SysDictMapper">
     <resultMap id = "BaseResultMap" type = "com.shengxi.system.entites.sys.SysDict">
         <id column = "sys_dict_id" jdbcType = "VARCHAR" property = "id" />
-        <result column = "sys_dict_type_name" jdbcType = "VARCHAR" property = "type_name" />
-        <result column = "sys_dict_type_no" jdbcType = "VARCHAR" property = "type_no" />
-        <result column = "sys_dict_create_by" jdbcType = "VARCHAR" property = "create_by" />
-        <result column = "sys_dict_create_time" jdbcType = "TIMESTAMP" property = "create_time" />
-        <result column = "sys_dict_update_by" jdbcType = "VARCHAR" property = "update_by" />
-        <result column = "sys_dict_update_time" jdbcType = "TIMESTAMP" property = "update_time" />
+        <result column = "sys_dict_type_name" jdbcType = "VARCHAR" property = "typeName" />
+        <result column = "sys_dict_type_no" jdbcType = "VARCHAR" property = "typeNo" />
+        <result column = "sys_dict_create_by" jdbcType = "VARCHAR" property = "createBy" />
+        <result column = "sys_dict_create_time" jdbcType = "TIMESTAMP" property = "createTime" />
+        <result column = "sys_dict_update_by" jdbcType = "VARCHAR" property = "updateBy" />
+        <result column = "sys_dict_update_time" jdbcType = "TIMESTAMP" property = "updateTime" />
         <result column = "sys_dict_status" jdbcType = "CHAR" property = "status" />
-        <result column = "sys_dict_def_flag" jdbcType = "CHAR" property = "def_flag" />
+        <result column = "sys_dict_del_flag" jdbcType = "CHAR" property = "delFlag" />
         <result column = "sys_dict_remark" jdbcType = "VARCHAR" property = "remark" />
     </resultMap>
     <sql id = "Base_Column_List">
@@ -45,86 +45,87 @@
         from sys_dict sys_dict a
         where a.id = #{id,jdbcType=VARCHAR}
     </select>
+    <select id = "checkNo" resultType = "java.lang.Integer">
+        select count(1) from sys_dict
+    </select>
     <!--写操作-->
     <insert id = "insert" keyColumn = "id" keyProperty = "id" parameterType = "com.shengxi.system.entites.sys.SysDict"
             useGeneratedKeys = "true">
     insert into sys_dict
-    (type_name,
+    (id,
+    type_name,
     type_no,
     create_by,
-      create_time,
-      update_by,
-      update_time,
-      `status`,
-      def_flag,
-      remark)
+    create_time,
+    `status`,
+    del_flag,
+    remark)
     values
-    (#{type_name,jdbcType=VARCHAR},
-    #{type_no,jdbcType=VARCHAR},
-    #{create_by,jdbcType=VARCHAR},
-      #{create_time,jdbcType=TIMESTAMP},
-      #{update_by,jdbcType=VARCHAR},
-      #{update_time,jdbcType=TIMESTAMP},
+    (#{id, jdbcType=VARCHAR},
+    #{typeName,jdbcType=VARCHAR},
+    #{typeNo,jdbcType=VARCHAR},
+    #{createBy,jdbcType=VARCHAR},
+     now(),
       #{status,jdbcType=CHAR},
-      #{def_flag,jdbcType=CHAR},
+      #{delFlag,jdbcType=CHAR},
       #{remark,jdbcType=VARCHAR})
   </insert>
     <insert id = "insertSelective" keyColumn = "id" keyProperty = "id"
             parameterType = "com.shengxi.system.entites.sys.SysDict" useGeneratedKeys = "true">
         insert into sys_dict
         <trim prefix = "(" suffix = ")" suffixOverrides = ",">
-            <if test = "type_name != null">
+            <if test = "typeName != null">
                 type_name,
             </if>
-            <if test = "type_no != null">
+            <if test = "typeNo != null">
                 type_no,
             </if>
-            <if test = "create_by != null">
+            <if test = "createBy != null">
                 create_by,
             </if>
-            <if test = "create_time != null">
+            <if test = "createTime != null">
                 create_time,
             </if>
-            <if test = "update_by != null">
+            <if test = "updateBy != null">
                 update_by,
             </if>
-            <if test = "update_time != null">
+            <if test = "updateTime != null">
                 update_time,
             </if>
             <if test = "status != null">
                 `status`,
             </if>
-            <if test = "def_flag != null">
-                def_flag,
+            <if test = "delFlag != null">
+                del_flag,
             </if>
             <if test = "remark != null">
                 remark,
             </if>
         </trim>
         <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
-            <if test = "type_name != null">
-                #{type_name,jdbcType=VARCHAR},
+            <if test = "typeName != null">
+                #{typeName,jdbcType=VARCHAR},
             </if>
-            <if test = "type_no != null">
-                #{type_no,jdbcType=VARCHAR},
+            <if test = "typeNo != null">
+                #{typeNo,jdbcType=VARCHAR},
             </if>
-            <if test = "create_by != null">
-                #{create_by,jdbcType=VARCHAR},
+            <if test = "createBy != null">
+                #{createBy,jdbcType=VARCHAR},
             </if>
-            <if test = "create_time != null">
-                #{create_time,jdbcType=TIMESTAMP},
+            <if test = "createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
             </if>
-            <if test = "update_by != null">
-                #{update_by,jdbcType=VARCHAR},
+            <if test = "updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
             </if>
-            <if test = "update_time != null">
+            <if test = "updateTime != null">
                 #{update_time,jdbcType=TIMESTAMP},
             </if>
             <if test = "status != null">
                 #{status,jdbcType=CHAR},
             </if>
-            <if test = "def_flag != null">
-                #{def_flag,jdbcType=CHAR},
+            <if test = "delFlag != null">
+                #{delFlag,jdbcType=CHAR},
             </if>
             <if test = "remark != null">
                 #{remark,jdbcType=VARCHAR},
@@ -135,28 +136,28 @@
         update sys_dict
         <set>
             <if test = "type_name != null">
-                type_name = #{type_name,jdbcType=VARCHAR},
+                type_name = #{typeName,jdbcType=VARCHAR},
             </if>
             <if test = "type_no != null">
-                type_no = #{type_no,jdbcType=VARCHAR},
+                type_no = #{typeNo,jdbcType=VARCHAR},
             </if>
             <if test = "create_by != null">
-                create_by = #{create_by,jdbcType=VARCHAR},
+                create_by = #{createBy,jdbcType=VARCHAR},
             </if>
             <if test = "create_time != null">
-                create_time = #{create_time,jdbcType=TIMESTAMP},
+                create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test = "update_by != null">
-                update_by = #{update_by,jdbcType=VARCHAR},
+                update_by = #{updateBy,jdbcType=VARCHAR},
             </if>
             <if test = "update_time != null">
-                update_time = #{update_time,jdbcType=TIMESTAMP},
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test = "status != null">
                 `status` = #{status,jdbcType=CHAR},
             </if>
-            <if test = "def_flag != null">
-                def_flag = #{def_flag,jdbcType=CHAR},
+            <if test = "del_flag != null">
+                del_flag = #{delFlag,jdbcType=CHAR},
             </if>
             <if test = "remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
@@ -166,19 +167,19 @@
     </update>
     <update id = "updateByPrimaryKey" parameterType = "com.shengxi.system.entites.sys.SysDict">
     update sys_dict set
-     type_name = #{type_name,jdbcType=VARCHAR},
-      type_no = #{type_no,jdbcType=VARCHAR},
-      create_by = #{create_by,jdbcType=VARCHAR},
-      create_time = #{create_time,jdbcType=TIMESTAMP},
-      update_by = #{update_by,jdbcType=VARCHAR},
-      update_time = #{update_time,jdbcType=TIMESTAMP},
+     type_name = #{typeName,jdbcType=VARCHAR},
+      type_no = #{typeNo,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
       `status` = #{status,jdbcType=CHAR},
-      def_flag = #{def_flag,jdbcType=CHAR},
+      del_flag = #{delFlag,jdbcType=CHAR},
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
     <update id = "deleteByPrimaryKey">
-    update sys_dict set def_flag = '0', update_time = now(), update_by = #{updateBy}
+    update sys_dict set del_flag = '0', update_time = now(), update_by = #{updateBy}
     where id = #{id,jdbcType=VARCHAR}
   </update>
     <update id = "deleteByIdList">

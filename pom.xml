@@ -4,6 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.shengxi</groupId>
     <artifactId>rs</artifactId>
+    <packaging>war</packaging>
     <version>0.0.2</version>
     <name>rs</name>
     <description>rs project for Spring Boot</description>

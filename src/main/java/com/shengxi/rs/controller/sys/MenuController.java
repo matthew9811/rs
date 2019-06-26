@@ -60,7 +60,6 @@ public class MenuController extends BaseController {
      */
     @GetMapping("/add/{id}")
     public String add(@PathVariable("id")String id, ModelMap map) {
-        System.out.println(id + "+++++++++++++++++++++++++++++++++");
         map.put("parentList", menuServices.selectOfParentAdd());
         return prefix + "/add";
     }

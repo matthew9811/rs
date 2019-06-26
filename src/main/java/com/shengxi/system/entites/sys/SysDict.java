@@ -16,12 +16,12 @@ public class SysDict extends BaseEntity {
     /**
      * 类型名
      */
-    private String type_name;
+    private String typeName;
 
     /**
      * 类型编号
      */
-    private String type_no;
+    private String typeNo;
 
     /**
      * 状态
@@ -46,21 +46,7 @@ public class SysDict extends BaseEntity {
         this.sysDataList = sysDataList;
     }
 
-    public String getType_name() {
-        return type_name;
-    }
 
-    public void setType_name(String type_name) {
-        this.type_name = type_name;
-    }
-
-    public String getType_no() {
-        return type_no;
-    }
-
-    public void setType_no(String type_no) {
-        this.type_no = type_no;
-    }
 
     public String getStatus() {
         return status;
@@ -70,12 +56,29 @@ public class SysDict extends BaseEntity {
         this.status = status;
     }
 
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+    public String getTypeNo() {
+        return typeNo;
+    }
+
+    public void setTypeNo(String typeNo) {
+        this.typeNo = typeNo;
+    }
+
     @Override
     public String toString() {
         return "SysDict{" +
-                "type_name='" + type_name + '\'' +
-                ", type_no='" + type_no + '\'' +
+                "typeName='" + typeName + '\'' +
+                ", typeNo='" + typeNo + '\'' +
                 ", status='" + status + '\'' +
+                ", sysDataList=" + sysDataList +
                 ", id='" + id + '\'' +
                 ", createTime=" + createTime +
                 ", createBy='" + createBy + '\'' +

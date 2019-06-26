@@ -1,6 +1,7 @@
 package com.shengxi.system.model.service.sys.impl;
 
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.rs.common.util.IdUtil;
 import com.shengxi.rs.common.util.UserUtil;
 import com.shengxi.system.common.constant.ServiceConstant;
@@ -41,9 +42,20 @@ public class SysDictServiceImpl implements SysDictService {
     @Override
     public Integer insertSysDict(SysDict sysDict) {
         sysDict.setId(IdUtil.uuid());
+        synchronized (this) {
+            sysDict.setTypeNo(CheckNo());
+        }
         sysDict.setCreateBy(UserUtil.getUserNo());
         sysDict.setStatus(ServiceConstant.NORMAL);
         return dictMapper.insert(sysDict);
+    }
+
+    private String CheckNo() {
+        Integer no = dictMapper.checkNo();
+        if (ObjectUtil.isNull(no)) {
+            no = 0;
+        }
+        return String.valueOf(no);
     }
 
     @Override

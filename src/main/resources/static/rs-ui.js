@@ -16,7 +16,7 @@
                     height: "full-125",
                     limit: 10,
                     limits: [10, 20, 50, 100],
-                    where: {},
+                    // where: {},
                     response: {
                         statusCode: 200 //重新规定成功的状态码为 200，table 组件默认为 0
                     },
@@ -212,8 +212,8 @@
                     data: {},
                     dataType: "json",
                     contentType: "application/x-www-form-urlencoded",
-                    success: function () {
-                        $.pop.success();
+                    success: function (data) {
+                        $.pop.success(data.msg);
                         parent.location.reload();
                     },
                     error: function () {

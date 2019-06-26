@@ -31,6 +31,12 @@ public interface SysDictMapper {
      * @return list
      */
     List<SysDict> selectDictByList(SysDict sysDict);
+    /**
+     * 当前字典的值
+     *
+     * @return num
+     */
+    Integer checkNo();
 
     /**
      * 删除对应的字典
@@ -76,7 +82,8 @@ public interface SysDictMapper {
 
     /**
      * 批量删除
-     * @param idArr ids
+     *
+     * @param idArr  ids
      * @param userNo updateBy
      * @return status
      * @Description: 删除对应ID的数据

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 字典类控制层
@@ -35,12 +36,13 @@ public class DictController extends BaseController {
         this.sysDictService = sysDictService;
     }
 
-    @GetMapping("/")
+    @GetMapping()
     public String dict() {
         return prefix + "/dict";
     }
 
-    @PostMapping("/list")
+    @GetMapping("/list")
+    @ResponseBody
     public TableDataInfo dict(SysDict sysDict) {
         startPage();
         return getDataTable(sysDictService.selectSysDictList(sysDict));

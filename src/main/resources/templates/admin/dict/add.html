@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body>
+<div style="padding: 40px">
+    <form id="formId" class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label rs-input-name" style="text-align: left">
+                字典名称
+            </label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input rs-input" maxlength="64"
+                       name="typeName" placeholder="字典名称" required>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label rs-input-name" style="text-align: left">
+                备注
+            </label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input rs-input" maxlength="500"
+                       name="remark">
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+<div th:include="include :: footer"></div>
+<script th:inline="javascript">
+    var prefix = ctx + "admin/dict";
+    layui.use('form', function () {
+        var form = layui.form;
+    });
+
+    /**
+     * 保存ajax
+     * @param formId
+     */
+    function submitHandler(formId) {
+        /*序列化数据*/
+        var data = $("#" + formId).serialize();
+        var config = {
+            url: prefix + "/add",
+            method: "post",
+            async: true,
+            data: data,
+            dataType: "json"
+        };
+        $.submit.addSubmit(config)
+    }
+
+</script>
+</html>
