@@ -2,179 +2,131 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
-<body>
-<div class="layui-container">
-    <div class="layui-row">
-        <div class="layui-col-md6 layui-col-md-offset1">
-            <fieldset class="layui-elem-field layui-field-title">
-                <legend>权限树</legend>
-            </fieldset>
-            <form class="layui-form">
-                <div class="layui-form-item">
-                    <label class="layui-form-label rs-input-name">角色名称</label>
-                    <div class="layui-input-block">
-                        <input class="layui-input rs-input" type="text" name="name" placeholder="请输入角色名称"/>
-                    </div>
+<body class="childrenBody">
+<form class="layui-form">
+    <blockquote class="layui-elem-quote quoteBox">
+        <form class="layui-form">
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input searchVal" placeholder="请输入搜索的内容"/>
                 </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label rs-input-name">选择权限</label>
-                    <div class="layui-input-block">
-                        <div id="LAY-auth-tree-index"></div>
-                    </div>
+                <a class="layui-btn search_btn layui-btn-radius" data-type="reload">搜索</a>
+            </div>
+            <div class="col-sm-4">
+                <label class="layui-form-label col-sm-3">请选择范围</label>
+                <div class="layui-input-inline col-sm-9">
+                    <input type="text" class="layui-input layer-range-time" id="time" placeholder="开始 到 结束">
                 </div>
-                <div class="layui-form-item">
-                    <div class="layui-input-block">
-                        <button class="layui-btn" type="submit" lay-submit lay-filter="LAY-auth-tree-submit">提交</button>
-                        <button class="layui-btn layui-btn-primary" type="reset">重置</button>
-                    </div>
-                </div>
-            </form>
+            </div>
+        </form>
+    </blockquote>
+
+    <table id="layerTable" lay-filter="layerTable"></table>
+    <script type="text/html" id="toolbar">
+        <div class="layui-btn-container">
+            <button class="layui-btn" lay-event="getCheckData">获取选中行数据</button>
+            <button class="layui-btn" lay-event="getCheckLength">获取选中数目</button>
+            <button class="layui-btn" lay-event="isAll">验证是否全选</button>
         </div>
-    </div>
-</div>
+    </script>
+    <!--操作-->
+    <script type="text/html" id="layerTableBar">
+        <a class="layui-btn layui-btn-xs" lay-event="detail">点击选课</a>
+    </script>
+</form>
 <div th:include="include :: footer"></div>
-</body>
-</html>
 <script>
     $(function () {
-        // 全选样例
-        function checkAll(dst) {
-            layui.use(['jquery', 'layer', 'authtree'], function () {
-                var layer = layui.layer;
-                var authtree = layui.authtree;
+        layui.use(['layer','table'], function () {
+            var layer = parent.layer === undefined ? layui.layer : top.layer,
+                $ = layui.jquery,
+                table = layui.table;
 
-                authtree.checkAll(dst);
+            //学生重修课程列表
+            var options = {
+                elem: '#layerTable', //表格id
+                url: ctx + 'test/getList', //数据路径
+                title: '学生成绩表', //表格名
+                toolbar: '#toolbar', //表格工具栏id
+                cols: [
+                    [
+                        {type: 'checkbox', fixed: 'left'},
+                        {field: 'subNo', title: '课程代码', align: "center"},
+                        {field: 'subName', title: '课程名称', align: "center"},
+                        {field: 'score', title: '历史成绩', align: 'center', edit: 'text'},
+                        {title: '选课操作', width: 220, templet: '#layerTableBar', fixed: "right", align: "center"},
+                        {field: 'remark', title: '备注', align: 'center', event: 'setRemark'}
+                    ]
+                ]
+            };
+
+            $.table.init(options);
+
+            //头工具栏事件
+            table.on('toolbar(layerTable)', function (obj) {
+                var checkStatus = table.checkStatus(obj.config.id);
+                switch (obj.event) {
+                    case 'getCheckData':
+                        var data = checkStatus.data;
+                        layer.alert(JSON.stringify(data));
+                        break;
+                    case 'getCheckLength':
+                        var data = checkStatus.data;
+                        layer.msg('选中了：' + data.length + ' 个');
+                        break;
+                    case 'isAll':
+                        layer.msg(checkStatus.isAll ? '全选' : '未全选');
+                        break;
+                };
             });
-        }
 
-        // 全不选样例
-        function uncheckAll(dst) {
-            layui.use(['jquery', 'layer', 'authtree'], function () {
-                var layer = layui.layer;
-                var authtree = layui.authtree;
-
-                authtree.uncheckAll(dst);
-            });
-        }
-
-        // 显示全部
-        function showAll(dst) {
-            layui.use(['jquery', 'layer', 'authtree'], function () {
-                var layer = layui.layer;
-                var authtree = layui.authtree;
-
-                authtree.showAll(dst);
-            });
-        }
-
-        // 隐藏全部
-        function closeAll(dst) {
-            layui.use(['jquery', 'layer', 'authtree'], function () {
-                var layer = layui.layer;
-                var authtree = layui.authtree;
-
-                authtree.closeAll(dst);
-            });
-        }
-
-        layui.use(['jquery', 'authtree', 'form', 'layer'], function () {
-            var $ = layui.jquery;
-            var authTree = layui.authtree;
-            var form = layui.form;
-            var layer = layui.layer;
-            // 初始化
-            $.ajax({
-                url: '',
-                dataType: '',
-                success: function (data) {
-                    // 渲染时传入渲染目标ID，树形结构数据（具体结构看样例，checked表示默认选中），以及input表单的名字
-                    authTree.render('#LAY-auth-tree-index', data.data.trees, {
-                        inputname: 'ids[]'
-                        , layfilter: 'lay-check-auth'
-                        // ,dblshow: true
-                        // ,dbltimeout: 180
-                        // ,autoclose: false
-                        // ,autochecked: false
-                        // ,openchecked: false
-                        // ,openall: true
-                        // ,hidechoose: true
-                        // ,checkType: 'radio'
-                        // ,checkedKey: 'checked'
-                        // ,disabledKey: 'disabled'
-                        // ,checkSkin: 'primary'
-                        , 'theme': 'auth-skin-default'
-                        // ,'themePath': 'themes/'
-                        , autowidth: true
+            //监听点击按钮事件
+            table.on('tool(layerTable)', function (obj) {
+                var data = obj.data;
+                if (obj.event === 'setRemark') {
+                    layer.prompt({
+                        formType: 2,
+                        title: '修改课程代码为 [' + data.subNo + '] 的备注',
+                        value: data.subNo
+                    }, function (value, index) {
+                        layer.close(index);
+                        //这里一般是发送修改的Ajax请求
+                        //同步更新表格和缓存对应的值
+                        obj.update({
+                            sign: value
+                        });
                     });
-
-                    // PS:使用 form.on() 会引起了事件冒泡延迟的BUG，需要 setTimeout()，并且无法监听全选/全不选
-                    // PS:如果开启双击展开配置，form.on()会记录两次点击事件，authtree.on()不会
-                    /*			form.on('checkbox(lay-check-auth)', function(data){
-                            // 注意这里：需要等待事件冒泡完成，不然获取叶子节点不准确。
-                            setTimeout(function(){
-                              console.log('监听 form 触发事件数据', data);
-                              // 获取选中的叶子节点
-                              var leaf = authtree.getLeaf('#LAY-auth-tree-index');
-                              console.log('leaf', leaf);
-                              // 获取最新选中
-                              var lastChecked = authtree.getLastChecked('#LAY-auth-tree-index');
-                              console.log('lastChecked', lastChecked);
-                              // 获取最新取消
-                              var lastNotChecked = authtree.getLastNotChecked('#LAY-auth-tree-index');
-                              console.log('lastNotChecked', lastNotChecked);
-                            }, 100);
-                          });
-                    */			// 使用 authtree.on() 不会有冒泡延迟
-                    authTree.on('change(lay-check-auth)', function (data) {
-                        console.log('监听 authtree 触发事件数据', data);
-                        // 获取所有节点
-                        var all = authtree.getAll('#LAY-auth-tree-index');
-                        // 获取所有已选中节点
-                        var checked = authtree.getChecked('#LAY-auth-tree-index');
-                        // 获取所有未选中节点
-                        var notchecked = authtree.getNotChecked('#LAY-auth-tree-index');
-                        // 获取选中的叶子节点
-                        var leaf = authtree.getLeaf('#LAY-auth-tree-index');
-                        // 获取最新选中
-                        var lastChecked = authtree.getLastChecked('#LAY-auth-tree-index');
-                        // 获取最新取消
-                        var lastNotChecked = authtree.getLastNotChecked('#LAY-auth-tree-index');
-                        console.log(
-                            'all', all, "\n",
-                            'checked', checked, "\n",
-                            'notchecked', notchecked, "\n",
-                            'leaf', leaf, "\n",
-                            'lastChecked', lastChecked, "\n",
-                            'lastNotChecked', lastNotChecked, "\n"
-                        );
-                    });
-                    authTree.on('deptChange(lay-check-auth)', function (data) {
-                        console.log('监听到显示层数改变', data);
-                    });
-                    authTree.on('dblclick(lay-check-auth)', function (data) {
-                        console.log('监听到双击事件', data);
-                    });
-                },
-                // error: function (xml, errstr, err) {
-                //     layer.alert(errstr + '，获取样例数据失败，请检查是否部署在本地服务器中！');
-                // }
+                } else if (obj.event === 'detail') {
+                    layer.msg('点击课程：' + data.subName)
+                }
             });
-            // 表单提交样例
-            form.on('submit(LAY-auth-tree-submit)', function (obj) {
-                var authids = authtree.getChecked('#LAY-auth-tree-index');
-                console.log('Choosed authids is', authids);
-                // obj.field.authids = authids;
-                $.ajax({
-                    url: 'tree.json',
-                    dataType: 'json',
-                    data: obj.field,
-                    success: function (res) {
-                        layer.alert('提交成功！');
-                    }
-                });
-                return false;
-            });
-        });
 
+            //监听单元格编辑
+            console.log($.table.edit('layerTable'));
+
+            //监听复选框选择
+            console.log($.table.checkbox('layerTable'));
+
+            //搜索
+            $(".search_btn").on("click", function () {
+                console.log($('.layer-range-time').val());
+                if ($(".searchVal").val() != '') {
+                    table.reload("newsListTable", {
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        where: {
+                            key: $(".searchVal").val()  //搜索的关键字
+                        }
+                    })
+                } else {
+                    layer.msg("请输入搜索的内容");
+                }
+            });
+        })
     })
+
+
 </script>
+</body>
+</html>

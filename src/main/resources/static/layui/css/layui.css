@@ -3555,7 +3555,7 @@ body .layui-table-tips .layui-layer-content {
 .layui-nav .layui-nav-more {
     content: '';
     width: 0;
-    height: 0;
+    height: 90px;
     border-style: solid dashed dashed;
     border-color: #fff transparent transparent;
     overflow: hidden;
@@ -3564,7 +3564,6 @@ body .layui-table-tips .layui-layer-content {
     -webkit-transition: all .2s;
     position: absolute;
     top: 50%;
-    right: 3px;
     margin-top: -3px;
     border-width: 6px;
     border-top-color: rgba(255, 255, 255, .7)
@@ -3751,7 +3750,8 @@ body .layui-table-tips .layui-layer-content {
 .layui-tab-title {
     position: relative;
     left: 0;
-    height: 40px;
+    height: 50px;
+    padding: 0 0px;
     white-space: nowrap;
     font-size: 0;
     border-bottom-width: 1px;

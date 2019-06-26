@@ -1,6 +1,6 @@
 /*公共样式*/
 .childrenBody {
-    padding: 10px;
+    padding: 0px;
 }
 
 .layui-table-view {
@@ -928,4 +928,9 @@ h2.method {
 .rs-input { /*输入框样式*/
     width: 320px;
     height: 38px;
+}
+
+.rs_remark {
+    width: 320px;
+    height: 134px;
 }

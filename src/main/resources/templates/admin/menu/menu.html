@@ -47,7 +47,7 @@
             // 渲染表格
             layer.load(2);
             var options = {
-                treeColIndex: 1,
+                treeColIndex: 2,
                 treeSpid: 0,
                 treeIdName: 'id',
                 treePidName: 'parentId',
@@ -108,7 +108,7 @@
                             data: id,
                             dataType: "json"
                         };
-                        $.submit.editSubmit(config);
+                        $.submit.moveSubmit(config);
                         $.pop.success();
                         layer.closeAll();
                     }, function(){

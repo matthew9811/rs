@@ -94,12 +94,12 @@ iframe{ position:absolute; height:100%; width:100%; border:none;}
 .layui-tab-title .layui-this{ background-color:#1AA094; color:#fff; }
 .layui-tab-title .layui-this:after{ border:none; }
 .layui-tab-title li cite{ font-style: normal; padding-left:5px; }
-.clildFrame.layui-tab-content{ top:41px; position:absolute; bottom:0; width:100%; padding:0;}
+.clildFrame.layui-tab-content{ top:61px; position:absolute; bottom:0; width:100%; padding:0;}
 /*多窗口页面操作下拉*/
-.closeBox{ position:absolute; right:0; background-color:#fff !important; color:#000; border-left:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2; }
+.closeBox{ position:absolute; right:0;color:#000; border-left:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2; }
 .closeBox .layui-nav-item{ line-height:40px; }
 .closeBox .layui-nav-item>a,.closeBox .layui-nav-item>a:hover{ color:#000; }
-.closeBox .layui-nav-child{ top:42px; left:-12px; }
+.closeBox .layui-nav-child{ top:40px; left:-12px; }
 .closeBox .layui-nav-bar{ display:none; }
 .closeBox a i.caozuo{ font-size: 20px; position:absolute; top:1px; left:0; }
 .closeBox a span.layui-nav-more{ border-color:#333 transparent transparent;}
@@ -157,3 +157,9 @@ iframe{ position:absolute; height:100%; width:100%; border:none;}
 .header .layui-nav .layui-nav-item,.header .layui-nav .layui-nav-item>a,.header,.logo{ line-height:50px !important; max-height:50px; !important;}
 .mobileTopLevelMenus{ float:left;}
 .hideMenu{ margin-top: 10px;}
+
+.rs_caozuo{
+	color: #000;
+	padding: 0 0px;
+
+}
