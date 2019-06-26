@@ -54,6 +54,7 @@ public class DictController extends BaseController {
     }
 
     @PostMapping("/add")
+    @ResponseBody
     public AjaxResult addSave(SysDict sysDict) {
         sysDict.setDelFlag(BaseConstant.DEL_FLAG_NOT);
         return toAjax(sysDictService.insertSysDict(sysDict));
@@ -66,16 +67,19 @@ public class DictController extends BaseController {
     }
 
     @PostMapping("/edit")
+    @ResponseBody
     public AjaxResult editSave(SysDict sysDict) {
         return toAjax(sysDictService.updateByIdSelective(sysDict));
     }
     
     @DeleteMapping("/remove")
+    @ResponseBody
     public AjaxResult remove(String id){
         return toAjax(sysDictService.deleteSysDictById(id));
     }
     
     @DeleteMapping("/removeList")
+    @ResponseBody
     public AjaxResult removeList(String ids){
         return toAjax(sysDictService.deleteSysDictByIds(ids));
     }
