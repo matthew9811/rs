@@ -42,7 +42,7 @@
             sys_menu.del_flag =
             <include refid = "del_flag" />
         </where>
-
+        order by sys_menu.sort
     </select>
     <select id = "selectByList" parameterType = "com.shengxi.system.entites.sys.SysMenu"
             resultMap = "BaseResultMap">
@@ -53,6 +53,7 @@
             sys_menu.del_flag =
             <include refid = "del_flag" />
         </where>
+        order by sys_menu.sort
     </select>
     <select id = "selectById" parameterType = "java.lang.String" resultMap = "BaseResultMap">
         select

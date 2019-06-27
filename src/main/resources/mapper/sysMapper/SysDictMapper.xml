@@ -38,6 +38,7 @@
                 and a.id = #{id}
             </if>
         </where>
+        order by a.type_no
     </select>
     <select id = "selectByPrimaryKey" parameterType = "java.lang.String" resultMap = "BaseResultMap">
         select
