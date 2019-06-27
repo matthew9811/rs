@@ -16,7 +16,7 @@ public class TestController extends BaseController {
      *
      * @return .html
      */
-    @GetMapping
+    @GetMapping()
     public String index() {
         return prefix + "/test";
     }

@@ -28,10 +28,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 public class TokenFilter extends OncePerRequestFilter {
 
-    public static final String TOKEN_KEY = "token";
+    private static final String TOKEN_KEY = "token";
 
     @Autowired
     private TokenService tokenService;
+
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -46,7 +47,10 @@ public class TokenFilter extends OncePerRequestFilter {
         打印请求，查看
         * */
         String token = getToken(request);
-        logger.info("token: " + token);
+        if (com.shengxi.rs.common.util.StringUtils.isNull(token)) {
+            //token为空是发出log提示
+            logger.info("token: " + token);
+        }
         if (StringUtils.isNotBlank(token)) {
             SecurityUser securityUser = tokenService.getSecurityUser(token);
             if (ObjectUtil.isNotNull(securityUser)) {
