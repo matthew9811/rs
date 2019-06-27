@@ -5,9 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
+/**
+ * @author 楚苓大妈
+ */
 @RequestMapping("/admin/test")
-public class TestController extends BaseController {
+@Controller
+public class AdminTestController extends BaseController {
 
     private String prefix = "/test";
 
@@ -16,7 +19,7 @@ public class TestController extends BaseController {
      *
      * @return .html
      */
-    @GetMapping()
+    @GetMapping("")
     public String index() {
         return prefix + "/test";
     }
