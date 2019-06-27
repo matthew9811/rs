@@ -27,7 +27,7 @@
         <div class="layui-main mag0">
             <div class="logo">重修系统</div>
             <!-- 显示/隐藏菜单 -->
-            <a href="javascript:;" class="seraph hideMenu icon-caidan"></a>
+            <a href="javascript:;" class="seraph hideMenu"><i class="layui-icon layui-icon-return"></i></a>
             <!-- 顶级菜单 -->
             <!--<ul class="layui-nav mobileTopLevelMenus" mobile>-->
             <!--<li class="layui-nav-item" data-menu="contentManagement">-->
@@ -124,8 +124,16 @@
         <div class="navBar layui-side-scroll" id="navBar" th:with="menuList = ${menu}">
             <ul class="layui-nav layui-nav-tree">
                 <li class="layui-nav-item layui-this">
-                    <a href="javascript:;" data-url="/admin/menu">
+                    <a href="javascript:;" data-url="/admin/main">
                         <i class="layui-icon" data-icon=""></i>
+                        <cite>首页</cite>
+                    </a>
+                </li>
+            </ul>
+            <ul class="layui-nav layui-nav-tree">
+                <li class="layui-nav-item layui-this">
+                    <a href="javascript:;" data-url="/admin/menu">
+                        <i class="layui-icon" data-icon="&#xe66f">&#xe66f</i>
                         <cite>菜单管理</cite>
                     </a>
                 </li>
@@ -133,7 +141,7 @@
             <ul class="layui-nav layui-nav-tree" th:each="list: ${menuList}">
                 <li class="layui-nav-item layui-this">
                     <a href="javascript:;" th:data-url="${list.url}">
-                        <i class="layui-icon" th:data-icon="${list.icon}"></i>
+                        <i class="layui-icon" th:data-icon="${list.icon}" th:utext="${list.icon}"></i>
                         <cite th:text="${list.menuName}"></cite>
                     </a>
                 </li>

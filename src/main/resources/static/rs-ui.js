@@ -213,11 +213,11 @@
                     dataType: "json",
                     contentType: "application/x-www-form-urlencoded",
                     success: function (data) {
-                        $.pop.success(data.msg);
+                        $.pop.success({msg: data.msg});
                         parent.location.reload();
                     },
-                    error: function () {
-                        $.pop.error()
+                    error: function (data) {
+                        $.pop.error( {msg: data.msg} )
                     }
                 };
                 var options = $.extend(defaults, options);
