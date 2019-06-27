@@ -87,15 +87,15 @@ public class TokenServiceJwtImpl implements TokenService {
 
     @Override
     public boolean deleteToken(String jwtToken) {
-//        String uuid = getUUidFromJWT(jwtToken);
-//        if (ObjectUtil.isNotNull(uuid)) {
-//            String key = getTokenKey(uuid);
-//            SecurityUser user = redisTemplate.opsForValue().get(key);
-//            if (ObjectUtil.isNotNull(user)) {
-//                redisTemplate.delete(key);
-//                return true;
-//            }
-//        }
+        String uuid = getUUidFromJWT(jwtToken);
+        if (ObjectUtil.isNotNull(uuid)) {
+            String key = getTokenKey(uuid);
+            SecurityUser user = redisUtil.get(key, SecurityUser.class);
+            if (ObjectUtil.isNotNull(user)) {
+                redisTemplate.delete(key);
+                return true;
+            }
+        }
         return false;
     }
 

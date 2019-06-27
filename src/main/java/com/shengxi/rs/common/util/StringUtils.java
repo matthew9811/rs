@@ -69,12 +69,21 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     }
 
     /**
-     * 是否为空
+     * 为空
+     *
+     * @param s s
+     * @return boolean
      */
-    public static boolean isNull(String obj) {
-        return "".equals(obj) || obj.isEmpty() || SysConstant.FREEZE.equals(obj.length()) || obj.equals(null);
+    public static boolean isNull(String s) {
+        return s == null || "".equals(s) || s.isEmpty() || SysConstant.FREEZE.equals(s.length());
     }
 
+    /**
+     * 不为空
+     *
+     * @param s string
+     * @return boolean
+     */
     public static boolean isNotNull(String s) {
         return !isNull(s);
     }

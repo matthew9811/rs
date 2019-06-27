@@ -10,6 +10,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +22,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 /**
  * Token过滤器
  * 完成访问前的过滤
+ *
  * @author matthew
  */
 @Component
@@ -33,6 +36,7 @@ public class TokenFilter extends OncePerRequestFilter {
     private UserDetailsService userDetailsService;
 
     private static final Long MINUTES_10 = 10 * 60 * 1000L;
+    private Logger logger = LoggerFactory.getLogger(TokenFilter.class);
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -42,6 +46,7 @@ public class TokenFilter extends OncePerRequestFilter {
         打印请求，查看
         * */
         String token = getToken(request);
+        logger.info("token: " + token);
         if (StringUtils.isNotBlank(token)) {
             SecurityUser securityUser = tokenService.getSecurityUser(token);
             if (ObjectUtil.isNotNull(securityUser)) {
@@ -84,12 +89,14 @@ public class TokenFilter extends OncePerRequestFilter {
         if (StringUtils.isBlank(token)) {
             token = request.getHeader(TOKEN_KEY);
         }
-        if (StringUtils.isBlank(token)){
+        if (StringUtils.isBlank(token)) {
             Cookie[] cookies = request.getCookies();
-            for (Cookie cookie: cookies){
-                String name = cookie.getName();
-                if (TOKEN_KEY.equals(name)){
-                    token = cookie.getValue();
+            if (ObjectUtil.isNotNull(cookies)) {
+                for (Cookie cookie : cookies) {
+                    String name = cookie.getName();
+                    if (TOKEN_KEY.equals(name)) {
+                        token = cookie.getValue();
+                    }
                 }
             }
         }
