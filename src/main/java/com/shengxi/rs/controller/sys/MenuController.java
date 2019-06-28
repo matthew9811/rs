@@ -2,6 +2,7 @@ package com.shengxi.rs.controller.sys;
 
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.shengxi.rs.common.annotation.Log;
+import com.shengxi.rs.common.annotation.permission.LoginRequired;
 import com.shengxi.rs.common.handler.BaseController;
 import com.shengxi.rs.common.util.file.excel.EasyExcelUtils;
 import com.shengxi.rs.common.util.web.AjaxResult;
@@ -26,8 +27,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * @author matthew
  * @Description: 菜单管理
- * @see com.shengxi.rs.common.handler.BaseController
  * @Date: 2019年6月24日 15:46:47
+ * @see com.shengxi.rs.common.handler.BaseController
  */
 @Controller
 @RequestMapping("/admin/menu")
@@ -47,6 +48,7 @@ public class MenuController extends BaseController {
     }
 
     @GetMapping("/getMenu")
+    @LoginRequired(required = true)
     @ResponseBody
     public Map<String, Object> getMenu(SysMenu menuEntity) {
         return menuServices.selectByInit(menuEntity);
@@ -59,7 +61,7 @@ public class MenuController extends BaseController {
      * @return url
      */
     @GetMapping("/add/{id}")
-    public String add(@PathVariable("id")String id, ModelMap map) {
+    public String add(@PathVariable("id") String id, ModelMap map) {
         map.put("parentList", menuServices.selectOfParentAdd());
         return prefix + "/add";
     }
@@ -71,7 +73,7 @@ public class MenuController extends BaseController {
      * @return url
      */
     @GetMapping("/edit/{id}")
-    public String edit(@PathVariable("id")String id, ModelMap map) {
+    public String edit(@PathVariable("id") String id, ModelMap map) {
         map.put("parentList", menuServices.selectOfParentAdd());
         return prefix + "/edit";
     }

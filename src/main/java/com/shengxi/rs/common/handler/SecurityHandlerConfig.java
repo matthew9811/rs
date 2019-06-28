@@ -45,7 +45,7 @@ public class SecurityHandlerConfig {
     public AuthenticationSuccessHandler loginSuccessHandler() {
         return new AuthenticationSuccessHandler() {
             @Override
-            public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+            public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication)  {
                 SecurityUser user = (SecurityUser) authentication.getPrincipal();
                 Token token = tokenService.saveToken(user);
                 ResponseUtil.setCookie(httpServletResponse, token.getToken());
@@ -62,7 +62,7 @@ public class SecurityHandlerConfig {
     public AuthenticationFailureHandler loginFailureHandler() {
         return new AuthenticationFailureHandler() {
             @Override
-            public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
+            public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException {
                 String msg = null;
                 if (e instanceof BadCredentialsException) {
                     msg = "密码错误!";
@@ -82,7 +82,7 @@ public class SecurityHandlerConfig {
     public AuthenticationEntryPoint authenticationEntryPoint() {
         return new AuthenticationEntryPoint() {
             @Override
-            public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
+            public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException {
                 ResponseInfo info = new ResponseInfo(HttpStatus.UNAUTHORIZED.value() + "", "请先登录");
                 ResponseUtil.responseJson(httpServletResponse, HttpStatus.UNAUTHORIZED.value(), info);
             }

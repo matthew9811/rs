@@ -72,7 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         /**
          * 基于token, 关闭session
          */
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and();
         /**
          * 开放资源
          */
@@ -89,7 +89,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin().usernameParameter("userNo").loginProcessingUrl("/login").successHandler(authenticationSuccessHandler).
                 failureHandler(authenticationFailureHandler).and()
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and().rememberMe();
-        http.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
+        http.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler).and().rememberMe();
         http.headers().frameOptions().disable();
         http.headers().cacheControl();
         http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);

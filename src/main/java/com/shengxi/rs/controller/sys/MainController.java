@@ -60,7 +60,7 @@ public class MainController extends BaseController {
         return "index";
     }
 
-    @PostMapping("/login")
+    @RequestMapping("/login")
     public String login() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (BooleanUtil.isFalse(auth instanceof AnonymousAuthenticationToken)){
