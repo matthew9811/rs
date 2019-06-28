@@ -73,14 +73,9 @@
      * @param formId
      */
     function submitHandler(formId) {
-        /*序列化数据*/
-        var data =  $("#" + formId).serialize();
         var config = {
             url: prefix + "/add",
-            method: "post",
-            async: true,
-            data: data,
-            dataType: "json"
+            data: $("#" + formId).serialize()
         };
         $.submit.addSubmit(config)
     }

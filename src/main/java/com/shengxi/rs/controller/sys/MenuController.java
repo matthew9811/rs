@@ -10,10 +10,12 @@ import com.shengxi.rs.common.util.UserUtil;
 import com.shengxi.system.entites.sys.SysMenu;
 import com.shengxi.system.model.service.sys.SysMenuService;
 import com.shengxi.system.model.service.sys.impl.SysMenuServiceImpl;
+
 import java.util.List;
 import java.util.Map;
 import javax.annotation.security.PermitAll;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -42,6 +44,7 @@ public class MenuController extends BaseController {
 
     @PermitAll
     @GetMapping()
+    @LoginRequired(required = true)
     @Log("menuIndex")
     public String index() {
         return prefix + "/menu";

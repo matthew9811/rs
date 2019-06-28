@@ -1,6 +1,6 @@
 /*公共样式*/
 .childrenBody {
-    padding: 0px;
+    padding: 0px 7px;
 }
 
 .layui-table-view {
@@ -930,7 +930,7 @@ h2.method {
     height: 38px;
 }
 
-.rs_remark {
+.rs-remark {
     width: 320px;
     height: 134px;
 }

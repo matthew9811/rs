@@ -153,7 +153,7 @@
                             "count": res.count, //解析数据长度
                             "data": res.data //解析数据列表
                         };
-                    },
+                    }
                 };
                 var options = $.extend(defaults, options);
                 layui.tree({

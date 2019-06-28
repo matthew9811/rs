@@ -53,7 +53,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         String token = TokenFilter.getToken(request);
         if (StringUtils.isNull(token)) {
             response.getWriter().append("you need login!");
-            response.sendRedirect("http://127.0.0.1:317/");
+//            request.getRequestDispatcher("/main").forward(request, response);
+            response.sendRedirect("/main");
             return false;
         }
         return true;
