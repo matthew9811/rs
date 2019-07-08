@@ -1,5 +1,4 @@
 server:
-  port: 317
   tomcat:
     uri-encoding: utf-8
     #初始化线程数20
@@ -9,6 +8,8 @@ server:
     #超时时间是5000ms
     max-connections: 5000
 spring:
+  profiles:
+    active: dev
   security:
     base:
       enabled: false
@@ -17,67 +18,12 @@ spring:
       password: shengxi
       roles:
         - user
-  datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    sql-script-encoding: utf-8
-    driverClassName: com.mysql.jdbc.Driver
-    druid:
-      # 主库数据源
-      master:
-        url: jdbc:mysql://47.106.188.177:3306/rs?useUnicode=true&characterEncoding=utf8&useServerPstmts=true&cachePrepStmts=true&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&cacheCallableStmts=true&connectTimeout=1000&maxReconnects=5&zeroDateTimeBehavior=convertToNull&useSSL=true
-        username: root
-        password: 1234567
-      # 从库数据源
-      slave:
-        # 从数据源开关/默认关闭
-        enabled: true
-        url: jdbc:mysql://47.106.188.177:3306/rs?useUnicode=true&characterEncoding=utf8&useServerPstmts=true&cachePrepStmts=true&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&cacheCallableStmts=true&connectTimeout=1000&maxReconnects=5&zeroDateTimeBehavior=convertToNull&useSSL=true
-        username: reader
-        password: reader
-      connect-properties:
-        druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-      # 初始连接数
-      initialSize: 10
-      # 最大连接池数量
-      maxActive: 50
-      # 最小连接池数量
-      minIdle: 10
-      # 配置获取连接等待超时的时间
-      maxWait: 60000
-      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
-      timeBetweenEvictionRunsMillis: 60000
-      # 配置一个连接在池中最小生存的时间，单位是毫秒
-      minEvictableIdleTimeMillis: 300000
-      # 配置一个连接在池中最大生存的时间，单位是毫秒
-      maxEvictableIdleTimeMillis: 900000
-      # 配置检测连接是否有效
-      validationQuery: SELECT 1 FROM DUAL
-      testWhileIdle: true
-      testOnBorrow: false
-      testOnReturn: false
-      webStatFilter:
-        enabled: true
-      statViewServlet:
-        enabled: true
-        url-pattern: /monitor/druid/*
-      filter:
-        stat:
-          enabled: true
-          log-slow-sql: true
-          slow-sql-millis: 1000
-          merge-sql: false
-        wall:
-          config:
-            multi-statement-allow: true
-        log4j:
-          statement-logger-name:
   mvc:
     favicon:
       enabled: false
     view:
       prefix: /templates
       suffix: .html
-
   redis:
     # Redis数据库索引（默认为0）
     database: 0
@@ -99,8 +45,6 @@ spring:
         max-wait: 10000
     # 连接超时时间（毫秒）
     timeout: 30000
-
-
   thymeleaf:
     cache: false
 
