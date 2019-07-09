@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableWebSecurity
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableTransactionManagement
-//@MapperScan("com.shengxi.system.model.mapper")
 @EnableConfigurationProperties({RsProperties.class})
 @EnableCaching
 @EnableAsync

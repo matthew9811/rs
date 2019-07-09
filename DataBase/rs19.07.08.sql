@@ -11,7 +11,7 @@
  Target Server Version : 50721
  File Encoding         : 65001
 
- Date: 08/07/2019 21:53:10
+ Date: 09/07/2019 00:02:19
 */
 
 SET NAMES utf8mb4;
@@ -225,8 +225,7 @@ CREATE TABLE `sys_menu`  (
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
-INSERT INTO `sys_menu` VALUES ('805072e5-1cc8-4a93-8d9b-213c5e58b09e', NULL, '222', '222', NULL, '222', NULL, '222', 'admin', '2019-06-24 15:31:58', NULL, NULL, '1', NULL);
-INSERT INTO `sys_menu` VALUES ('a0fb8e1e-80ea-4102-8121-440e0de1fddf', NULL, '111', '111', NULL, '111', NULL, '111', 'admin', '2019-06-24 15:30:48', NULL, NULL, '1', NULL);
+INSERT INTO `sys_menu` VALUES ('25d0981f-2a5e-4700-b517-7aa6cb7c94a2', '0', '/admin/menu', '菜单管理', 2, '&#xe647;', NULL, 'sys:menu:view', 'admin', '2019-07-08 23:58:55', NULL, NULL, '1', NULL);
 
 -- ----------------------------
 -- Table structure for sys_role

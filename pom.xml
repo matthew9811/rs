@@ -5,7 +5,7 @@
     <groupId>com.shengxi</groupId>
     <artifactId>rs</artifactId>
     <packaging>war</packaging>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <name>rs</name>
     <description>rs project for Spring Boot</description>
 
@@ -70,7 +70,15 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+            <version>3.0.1.RELEASE</version>
+        </dependency>
         <!-- spring cache -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -82,8 +90,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-
-
 
         <!-- fastjson -->
         <dependency>
@@ -194,10 +200,7 @@
             <version>4.1.19</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-common</artifactId>
@@ -232,11 +235,6 @@
             <groupId>org.apache.pdfbox</groupId>
             <artifactId>pdfbox</artifactId>
             <version>2.0.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.thymeleaf.extras</groupId>
-            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
-            <version>3.0.4.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>redis.clients</groupId>
