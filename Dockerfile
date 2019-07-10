@@ -1,5 +1,4 @@
-FROM java:8
+FROM frolvlad/alpine-oraclejdk8:slim
 VOLUME /tmp
-ADD scm.jar app.jar
-EXPOSE 317
-ENTRYPOINT [ "java", "-jar", "/app.jar" ]
+ADD /target/rs-0.0.3-SNAPSHOT.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]

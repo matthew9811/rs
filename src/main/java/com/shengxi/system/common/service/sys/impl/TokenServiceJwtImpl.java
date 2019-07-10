@@ -10,15 +10,12 @@ import java.security.Key;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
-import javax.annotation.Resource;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 
@@ -40,9 +37,6 @@ public class TokenServiceJwtImpl implements TokenService {
     @Value("${token.expire.seconds}")
     private Integer expireSeconds;
 
-    @Resource
-    private RedisTemplate<String, SecurityUser> redisTemplate;
-
     @Autowired
     private RedisUtil redisUtil;
 
@@ -60,7 +54,7 @@ public class TokenServiceJwtImpl implements TokenService {
     public Token saveToken(SecurityUser securityUser) {
         securityUser.setToken(UUID.randomUUID().toString());
         String jwtToken = createJWTToken(securityUser);
-        cacheUser(securityUser);
+        this.cacheUser(securityUser);
         return new Token(jwtToken, securityUser.getLoginTime());
     }
 
@@ -72,12 +66,12 @@ public class TokenServiceJwtImpl implements TokenService {
      */
     @Override
     public void refresh(SecurityUser securityUser) {
-        cacheUser(securityUser);
+        this.cacheUser(securityUser);
     }
 
     @Override
     public SecurityUser getSecurityUser(String jwtToken) {
-        String uuid = getUUidFromJWT(jwtToken);
+        String uuid = this.getUUidFromJWT(jwtToken);
         if (ObjectUtil.isNotNull(uuid)) {
             return redisUtil.get(getTokenKey(uuid), SecurityUser.class);
         }
@@ -92,7 +86,7 @@ public class TokenServiceJwtImpl implements TokenService {
             String key = getTokenKey(uuid);
             SecurityUser user = redisUtil.get(key, SecurityUser.class);
             if (ObjectUtil.isNotNull(user)) {
-                redisTemplate.delete(key);
+                redisUtil.delete(key);
                 return true;
             }
         }
@@ -107,9 +101,9 @@ public class TokenServiceJwtImpl implements TokenService {
     }
 
     private String getUUidFromJWT(String jwtToken) {
-        Map<String, Object> jwtClaims = null;
-        jwtClaims = Jwts.parser().setSigningKey(getKeyInstance()).parseClaimsJws(jwtToken).getBody();
-
+        Map<String, Object> jwtClaims;
+        jwtClaims = Jwts.parser().setSigningKey(getKeyInstance()).
+                parseClaimsJws(jwtToken).getBody();
         return MapUtil.getStr(jwtClaims, LOGIN_USER_KEY);
     }
 
@@ -122,10 +116,8 @@ public class TokenServiceJwtImpl implements TokenService {
         Map<String, Object> claims = new HashMap<>();
         /*放入一个随机字符串，通过该串可找到登陆用户*/
         claims.put(LOGIN_USER_KEY, securityUser.getToken());
-        String jwtToken = Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS256, getKeyInstance())
+        return Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS256, getKeyInstance())
                 .compact();
-
-        return jwtToken;
     }
 
     private Key getKeyInstance() {

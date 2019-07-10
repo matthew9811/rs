@@ -27,13 +27,16 @@
     <sql id = "joinList">
         <!--left join sys_data s-->
     </sql>
+    <sql id = "del_flag">
+        '1'
+    </sql>
     <!--读操作-->
     <select id = "selectDictByList" parameterType = "SysDict" resultMap = "BaseResultMap">
         select
         <include refid = "Base_Column_List" />
-        from sys_dict a
+        from sys_dict AS a
         <where>
-            a.del_flag = '1'
+            a.del_flag = <include refid = "del_flag"/>
             <if test = "id != null and id != '' ">
                 and a.id = #{id}
             </if>
@@ -120,7 +123,7 @@
                 #{updateBy,jdbcType=VARCHAR},
             </if>
             <if test = "updateTime != null">
-                #{update_time,jdbcType=TIMESTAMP},
+                #{updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test = "status != null">
                 #{status,jdbcType=CHAR},
@@ -136,29 +139,21 @@
     <update id = "updateByPrimaryKeySelective" parameterType = "com.shengxi.system.entites.sys.SysDict">
         update sys_dict
         <set>
-            <if test = "type_name != null">
+            <if test = "typeName != null">
                 type_name = #{typeName,jdbcType=VARCHAR},
             </if>
-            <if test = "type_no != null">
+            <if test = "typeNo != null">
                 type_no = #{typeNo,jdbcType=VARCHAR},
             </if>
-            <if test = "create_by != null">
-                create_by = #{createBy,jdbcType=VARCHAR},
-            </if>
-            <if test = "create_time != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test = "update_by != null">
+
+            <if test = "updateBy != null">
                 update_by = #{updateBy,jdbcType=VARCHAR},
             </if>
-            <if test = "update_time != null">
+            <if test = "updateTime != null">
                 update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test = "status != null">
                 `status` = #{status,jdbcType=CHAR},
-            </if>
-            <if test = "del_flag != null">
-                del_flag = #{delFlag,jdbcType=CHAR},
             </if>
             <if test = "remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
@@ -170,12 +165,9 @@
     update sys_dict set
      type_name = #{typeName,jdbcType=VARCHAR},
       type_no = #{typeNo,jdbcType=VARCHAR},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
       update_by = #{updateBy,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       `status` = #{status,jdbcType=CHAR},
-      del_flag = #{delFlag,jdbcType=CHAR},
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>

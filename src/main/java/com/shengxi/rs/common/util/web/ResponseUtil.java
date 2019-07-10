@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import jdk.nashorn.internal.runtime.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -34,6 +35,8 @@ public class ResponseUtil {
         response.setStatus(status);
         response.getWriter().write(JSONObject.toJSONString(data));
         response.setHeader("token", JSONObject.toJSONString(data));
+        response.sendRedirect("/");
+        return;
     }
 
     public static void responseJson(HttpServletResponse response, int status, Authentication authentication, Object data) throws IOException {

@@ -22,6 +22,14 @@ public class RedisUtil {
     @Value("${spring.redis.timeout}")
     private int timeout;
 
+    /**
+     * 获取值
+     *
+     * @param key   key
+     * @param clazz Class
+     * @param <T>   T
+     * @return Object
+     */
     public <T> T get(String key, Class<T> clazz) {
         Jedis jedis = null;
         try {
@@ -36,7 +44,7 @@ public class RedisUtil {
     }
 
     /**
-     * 设置对象
+     * set值
      */
     public <T> boolean set(String key, T value) {
         Jedis jedis = null;
@@ -52,6 +60,39 @@ public class RedisUtil {
                 jedis.setex(key, timeout, str);
             }
             return true;
+        } finally {
+            returnToPool(jedis);
+        }
+    }
+
+    /**
+     * 查看key是否存在
+     *
+     * @param key key
+     * @return boolean
+     */
+    public boolean exists(String key) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            return jedis.exists(key);
+        } finally {
+            returnToPool(jedis);
+        }
+    }
+
+    /**
+     * 删除对应的数据
+     *
+     * @param key
+     * @return trur?false
+     */
+    public boolean delete(String key) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            long result = jedis.del(key);
+            return result > 0;
         } finally {
             returnToPool(jedis);
         }
@@ -73,6 +114,14 @@ public class RedisUtil {
         }
     }
 
+    /**
+     * 序列化String转对象
+     *
+     * @param str   ClassStr
+     * @param clazz Class
+     * @param <T>   T
+     * @return Bean
+     */
     public static <T> T stringToBean(String str, Class<T> clazz) {
         if (str == null || str.length() <= 0 || clazz == null) {
             return null;
@@ -88,6 +137,11 @@ public class RedisUtil {
         }
     }
 
+    /**
+     * 释放资源
+     *
+     * @param jedis jedis
+     */
     public void returnToPool(Jedis jedis) {
         if (ObjectUtil.isNotNull(jedis)) {
             jedis.close();

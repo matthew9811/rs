@@ -93,7 +93,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
         http.headers().cacheControl();
         http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
-        http.rememberMe();
     }
 
     @Override

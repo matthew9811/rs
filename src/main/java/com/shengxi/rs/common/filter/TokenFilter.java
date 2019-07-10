@@ -42,10 +42,10 @@ public class TokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        /*
-        验证对应的请求信息
-        打印请求，查看
-        * */
+        /**
+         * 验证对应的请求信息
+         * 打印请求，查看
+         * */
         String token = getToken(request);
         if (com.shengxi.rs.common.util.StringUtils.isNull(token)) {
             //token为空是发出log提示
