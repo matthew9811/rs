@@ -3,6 +3,7 @@ package com.shengxi.system.model.mapper.sys;
 import com.shengxi.system.entites.sys.SysMenu;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,23 +15,6 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface SysMenuMapper {
 
-
-    /**
-     * 插入菜单 强制插入
-     *
-     * @param record record
-     * @return status
-     */
-    int insert(SysMenu record);
-
-    /**
-     * 选择行插入
-     *
-     * @param record record
-     * @return status
-     */
-    int insertSelective(SysMenu record);
-
     /**
      * 通过id查询
      *
@@ -39,21 +23,6 @@ public interface SysMenuMapper {
      */
     SysMenu selectById(String id);
 
-    /**
-     * 整体update
-     *
-     * @param record record
-     * @return status
-     */
-    int updateSelective(SysMenu record);
-
-    /**
-     * 选择行update
-     *
-     * @param record record
-     * @return status
-     */
-    int updateById(SysMenu record);
 
     /**
      * 通过用户信息获取权限
@@ -79,10 +48,47 @@ public interface SysMenuMapper {
     List<SysMenu> selectByList(SysMenu menuEntity);
 
     /**
-     * 获取所有可以打印的数据
-     * @return list
+     * 插入菜单 强制插入
+     *
+     * @param record record
+     * @return status
      */
-    List<SysMenu> selectListToExcel();
+    Integer insert(SysMenu record);
 
-    List<SysMenu> selectListByIndex();
+    /**
+     * 选择行插入
+     *
+     * @param record record
+     * @return status
+     */
+    Integer insertSelective(SysMenu record);
+
+    /**
+     * 整体update
+     *
+     * @param record record
+     * @return status
+     */
+    Integer updateSelective(SysMenu record);
+
+    /**
+     * 选择行update
+     *
+     * @param record record
+     * @return status
+     */
+    Integer updateById(SysMenu record);
+
+    /**
+     * 根据id删除数据
+     * 传入待删除数据的id和本次操作的操作人
+     * 修改数据删除状态，记录操作人
+     *
+     * @param id       userId
+     * @param updateBy updateBy
+     * @return status
+     */
+    Integer deleteById(@Param("id") String id, @Param("updateBy") String updateBy);
+
+
 }

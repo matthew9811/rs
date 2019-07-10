@@ -56,7 +56,7 @@ public class MainController extends BaseController {
 
     @RequestMapping("/index")
     public String index(ModelMap map) {
-        map.put("menu", menuService.selectListByIndex());
+        map.put("menu", menuService.selectByList());
         return "index";
     }
 

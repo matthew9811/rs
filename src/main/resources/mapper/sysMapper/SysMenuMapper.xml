@@ -34,16 +34,7 @@
     <sql id = "del_flag">
         '1'
     </sql>
-    <select id = "selectListByIndex" resultMap = "BaseResultMap">
-        select
-        <include refid = "Base_Column_List" />
-        from sys_menu sys_menu
-        <where>
-            sys_menu.del_flag =
-            <include refid = "del_flag" />
-        </where>
-        order by sys_menu.sort
-    </select>
+    <!--获取所有的有效数据-->
     <select id = "selectByList" parameterType = "com.shengxi.system.entites.sys.SysMenu"
             resultMap = "BaseResultMap">
         select
@@ -60,7 +51,8 @@
         <include refid = "Base_Column_List" />
         from sys_menu sys_menu
         where
-        sys_menu.del_flag = '1'
+        sys_menu.del_flag =
+        <include refid = "del_flag" />
         and sys_menu.id = #{id,jdbcType=VARCHAR}
     </select>
     <select id = "selectPermList" parameterType = "String" resultType = "com.shengxi.system.entites.sys.SysMenu">
@@ -88,12 +80,14 @@
         FROM
         sys_user s
         INNER JOIN sys_role_user sru ON s.id = sru.user_id
-        AND sru.del_flag = '0'
+        AND sru.del_flag =
+        <include refid = "del_flag" />
         WHERE
         s.id = #{id}
         ) role on role.id = srm.ROLE_ID
         <where>
-            a.del_flag = '0'
+            a.del_flag =
+            <include refid = "del_flag" />
         </where>
     </select>
     <select id = "selectOfParentAdd" resultType = "com.shengxi.system.entites.sys.SysMenu">
@@ -104,12 +98,6 @@
         where
         a.del_flag =
         <include refid = "del_flag" />
-    </select>
-    <select id = "selectListToExcel" resultMap = "BaseResultMap">
-        select
-        <include refid = "Base_Column_List" />
-        from sys_menu sys_menu
-        where sys_menu.del_flag = '1'
     </select>
     <insert id = "insert"
             parameterType = "com.shengxi.system.entites.sys.SysMenu">
@@ -233,20 +221,11 @@
             <if test = "perms != null">
                 perms = #{perms,jdbcType=VARCHAR},
             </if>
-            <if test = "createBy != null">
-                create_by = #{createBy,jdbcType=VARCHAR},
-            </if>
-            <if test = "createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
             <if test = "updateBy != null">
                 update_by = #{updateBy,jdbcType=VARCHAR},
             </if>
             <if test = "updateTime != null">
                 update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test = "delFlag != null">
-                del_flag = #{delFlag,jdbcType=CHAR},
             </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
@@ -262,8 +241,16 @@
             `type`      = #{type,jdbcType=CHAR},
             perms       = #{perms,jdbcType=VARCHAR},
             update_by   = #{updateBy,jdbcType=VARCHAR},
-            update_time = #{updateTime,jdbcType=TIMESTAMP},
-            del_flag    = #{delFlag,jdbcType=CHAR}
+            update_time = #{updateTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id = "deleteById">
+        update sys_menu
+        <set>
+            del_flag = "0", update_time = now(), update_by = #{updateBy,jdbcType=VARCHAR}
+        </set>
+        <where>
+            id = #{id,jdbcType=VARCHAR}
+        </where>
     </update>
 </mapper>

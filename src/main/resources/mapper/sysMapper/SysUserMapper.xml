@@ -31,7 +31,9 @@
     update_by,
     remark
   </sql>
-
+    <sql id = "del_flag">
+        "1"
+    </sql>
     <select id = "selectUserNo"
             resultMap = "selectUserNoMap">
         select
@@ -42,7 +44,7 @@
         from
         sys_user as u
         <where>
-            u.del_flag = '1'
+            u.del_flag = <include refid = "del_flag"/>
             <if test = "id != null and id != ''">
                 and id = #{id}
             </if>
@@ -67,7 +69,7 @@
     password as password,
     status as status
     from sys_user
-    where del_flag = '1'
+    where del_flag = <include refid = "del_flag"/>
     and user_no = #{s}
     </select>
     <select id = "selectByPrimaryKey" parameterType = "java.lang.String" resultMap = "BaseResultMap">
@@ -117,23 +119,14 @@
             <if test = "password != null">
                 `password`,
             </if>
-            <if test = "deptId != null">
-                dept_id,
-            </if>
             <if test = "status != null">
                 `status`,
             </if>
             <if test = "createTime != null">
                 create_time,
             </if>
-            <if test = "updateTime != null">
-                update_time,
-            </if>
             <if test = "createBy != null">
                 create_by,
-            </if>
-            <if test = "updateBy != null">
-                update_by,
             </if>
             <if test = "remark != null">
                 remark,
@@ -152,23 +145,14 @@
             <if test = "password != null">
                 #{password,jdbcType=VARCHAR},
             </if>
-            <if test = "deptId != null">
-                #{deptId,jdbcType=BIGINT},
-            </if>
             <if test = "status != null">
                 #{status,jdbcType=CHAR},
             </if>
             <if test = "createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
             </if>
-            <if test = "updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
-            </if>
             <if test = "createBy != null">
                 #{createBy,jdbcType=VARCHAR},
-            </if>
-            <if test = "updateBy != null">
-                #{updateBy,jdbcType=VARCHAR},
             </if>
             <if test = "remark != null">
                 #{remark,jdbcType=VARCHAR},
@@ -190,29 +174,18 @@
             <if test = "password != null">
                 `password` = #{password,jdbcType=VARCHAR},
             </if>
-            <if test = "deptId != null">
-                dept_id = #{deptId,jdbcType=BIGINT},
-            </if>
+
             <if test = "status != null">
                 `status` = #{status,jdbcType=CHAR},
             </if>
-            <if test = "createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
             <if test = "updateTime != null">
                 update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test = "createBy != null">
-                create_by = #{createBy,jdbcType=VARCHAR},
             </if>
             <if test = "updateBy != null">
                 update_by = #{updateBy,jdbcType=VARCHAR},
             </if>
             <if test = "remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
-            </if>
-            <if test = "delFlag != null">
-                del_flag = #{delFlag,jdbcType=CHAR},
             </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
@@ -222,14 +195,10 @@
     set user_no = #{userNo,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},
       `password` = #{password,jdbcType=VARCHAR},
-      dept_id = #{deptId,jdbcType=BIGINT},
       `status` = #{status,jdbcType=CHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      create_by = #{createBy,jdbcType=VARCHAR},
       update_by = #{updateBy,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
-      del_flag = #{delFlag,jdbcType=CHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

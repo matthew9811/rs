@@ -1,18 +1,18 @@
 package com.shengxi.rs.common.config;
 
+import com.shengxi.rs.common.domain.RedisYml;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.GenericToStringSerializer;
-import org.springframework.stereotype.Component;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
@@ -21,23 +21,20 @@ import redis.clients.jedis.JedisPoolConfig;
  * @Date: 2019/4/6 16:47
  * @Description: Redis 缓存配置类
  */
-@Configuration
+
 @EnableCaching
+@Configuration
 public class RedisConfig {
 
-    @Autowired
-    JedisPool jedisPool;
+    private Logger logger = LoggerFactory.getLogger(RedisConfig.class);
 
-    @Value("${spring.redis.host}")
-    private String host;
-    @Value("${spring.redis.port}")
-    private int port;
-    @Value("${spring.redis.timeout}")
-    private int timeout;
-    @Value("${spring.redis.database}")
-    Integer database;
-    @Value("${spring.redis.password}")
-    String password;
+    private RedisYml redisYml;
+
+    @Autowired
+    public void setRedisYml(RedisYml redisYml) {
+        this.redisYml = redisYml;
+    }
+
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     @Bean("redisTemplate")
@@ -64,11 +61,9 @@ public class RedisConfig {
      */
     @Bean
     public JedisPool jedisPoolFactory() {
-        JedisPoolConfig poolConfig = new JedisPoolConfig();
+        logger.debug(">>>>>>redisConfig>>>>>:" + redisYml.getHost() + ":" + redisYml.getPort());
 
-//        JedisPool jedisPool = new JedisPool(poolConfig, host, port, timeout, password);
-        JedisPool jedisPool = new JedisPool(poolConfig, "47.106.188.177");
-        return jedisPool;
+        return new JedisPool(new JedisPoolConfig(), redisYml.getHost(), redisYml.getPort(), redisYml.getTimeout(), redisYml.getPassword());
     }
 
 }

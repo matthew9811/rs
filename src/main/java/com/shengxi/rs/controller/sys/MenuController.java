@@ -39,8 +39,13 @@ public class MenuController extends BaseController {
 
     private String prefix = "/admin/menu";
 
-    @Autowired
+
     private SysMenuService menuServices;
+
+    @Autowired
+    public void setMenuServices(SysMenuService menuServices) {
+        this.menuServices = menuServices;
+    }
 
     @PermitAll
     @GetMapping()
@@ -98,7 +103,7 @@ public class MenuController extends BaseController {
 
     @RequestMapping("/export")
     public void export(HttpServletResponse response) {
-        List<SysMenu> sysMenus = menuServices.selectListToExcel();
+        List<SysMenu> sysMenus = menuServices.selectByList();
         EasyExcelUtils.exportExcel(response, sysMenus, "sheet1", ExcelTypeEnum.XLSX);
     }
 }

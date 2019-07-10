@@ -43,14 +43,9 @@ public interface SysMenuService {
     List<SysMenu> selectOfParentAdd();
 
     /**
-     * 获取所有可以打印的数据
+     * 无筛选获取所有数据
+     *
      * @return list
      */
-    List<SysMenu> selectListToExcel();
-
-    /**
-     * 为index菜单框获取数据
-     * @return list
-     */
-    List<SysMenu> selectListByIndex();
+    List<SysMenu> selectByList();
 }
