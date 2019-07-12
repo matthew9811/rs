@@ -93,12 +93,15 @@ public class SecurityHandlerConfig {
     public LogoutSuccessHandler logoutSuccessHandler() {
         return new LogoutSuccessHandler() {
             @Override
-            public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+            public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException {
                 ResponseInfo info = new ResponseInfo(HttpStatus.OK.value() + "", "退出成功");
                 String token = TokenFilter.getToken(httpServletRequest);
                 tokenService.deleteToken(token);
                 ResponseUtil.responseJson(httpServletResponse, HttpStatus.OK.value(), info);
+                httpServletResponse.sendRedirect("/");
+                return;
             }
         };
     }
+
 }

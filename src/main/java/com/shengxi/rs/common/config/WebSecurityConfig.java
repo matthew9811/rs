@@ -5,7 +5,6 @@ import com.shengxi.rs.common.filter.TokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -31,23 +30,16 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
     @Autowired
     private UserDetailsService userDetailsService;
-
-
     @Autowired
     private TokenFilter tokenFilter;
-
     @Autowired
     private LogoutSuccessHandler logoutSuccessHandler;
-
     @Autowired
     private AuthenticationSuccessHandler authenticationSuccessHandler;
-
     @Autowired
     private AuthenticationFailureHandler authenticationFailureHandler;
-
     @Autowired
     private AuthenticationEntryPoint authenticationEntryPoint;
 
@@ -84,7 +76,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          * 权限配置
          */
         http.formLogin().usernameParameter("userNo");
-        http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
         /*登录页面和登录提交路径*/
         http.formLogin().usernameParameter("userNo").loginProcessingUrl("/login").successHandler(authenticationSuccessHandler).
                 failureHandler(authenticationFailureHandler).and()
@@ -92,6 +83,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler).and().rememberMe();
         http.headers().frameOptions().disable();
         http.headers().cacheControl();
+        /**session失效后跳转*/
+        http.sessionManagement().invalidSessionUrl("/logout");
         http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
 

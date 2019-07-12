@@ -35,8 +35,6 @@ public class ResponseUtil {
         response.setStatus(status);
         response.getWriter().write(JSONObject.toJSONString(data));
         response.setHeader("token", JSONObject.toJSONString(data));
-        response.sendRedirect("/");
-        return;
     }
 
     public static void responseJson(HttpServletResponse response, int status, Authentication authentication, Object data) throws IOException {

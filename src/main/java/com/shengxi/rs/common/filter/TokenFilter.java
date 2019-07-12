@@ -49,7 +49,7 @@ public class TokenFilter extends OncePerRequestFilter {
         String token = getToken(request);
         if (com.shengxi.rs.common.util.StringUtils.isNull(token)) {
             //token为空是发出log提示
-            logger.info("token: " + token);
+            logger.debug("token: " + token);
         }
         if (StringUtils.isNotBlank(token)) {
             SecurityUser securityUser = tokenService.getSecurityUser(token);

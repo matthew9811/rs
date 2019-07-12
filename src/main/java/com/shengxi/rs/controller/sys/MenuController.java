@@ -2,18 +2,15 @@ package com.shengxi.rs.controller.sys;
 
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.shengxi.rs.common.annotation.Log;
-import com.shengxi.rs.common.annotation.permission.LoginRequired;
 import com.shengxi.rs.common.handler.BaseController;
 import com.shengxi.rs.common.util.file.excel.EasyExcelUtils;
 import com.shengxi.rs.common.util.web.AjaxResult;
 import com.shengxi.rs.common.util.UserUtil;
 import com.shengxi.system.entites.sys.SysMenu;
 import com.shengxi.system.model.service.sys.SysMenuService;
-import com.shengxi.system.model.service.sys.impl.SysMenuServiceImpl;
 
 import java.util.List;
 import java.util.Map;
-import javax.annotation.security.PermitAll;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,17 +43,13 @@ public class MenuController extends BaseController {
     public void setMenuServices(SysMenuService menuServices) {
         this.menuServices = menuServices;
     }
-
-    @PermitAll
     @GetMapping()
-    @LoginRequired(required = true)
     @Log("menuIndex")
     public String index() {
         return prefix + "/menu";
     }
 
     @GetMapping("/getMenu")
-    @LoginRequired(required = true)
     @ResponseBody
     public Map<String, Object> getMenu(SysMenu menuEntity) {
         return menuServices.selectByInit(menuEntity);
