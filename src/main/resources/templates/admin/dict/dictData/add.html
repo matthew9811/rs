@@ -48,22 +48,23 @@
 </body>
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
-    var prefix = ctx + "admin/dict";
+
     layui.use('form', function () {
+        var prefix = ctx + "admin/dict";
         var form = layui.form;
+
+
+        /**
+         * 保存ajax
+         * @param formId
+         */
+        function submitHandler(formId) {
+            var config = {
+                url: prefix + "/add",
+                data: $("#" + formId).serialize()
+            };
+            $.submit.addSubmit(config)
+        }
     });
-
-    /**
-     * 保存ajax
-     * @param formId
-     */
-    function submitHandler(formId) {
-        var config = {
-            url: prefix + "/add",
-            data: $("#" + formId).serialize()
-        };
-        $.submit.addSubmit(config)
-    }
-
 </script>
 </html>

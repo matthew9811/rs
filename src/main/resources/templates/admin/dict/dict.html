@@ -49,10 +49,15 @@
                 content: url,
                 maxmin: true,
                 btn: ['确定', '取消'],
+                shadeClose: true,
                 area: ['600px', '550px'],
                 yes: function (index, layero) {
                     callback(index, layero);
+                },
+                cancel: function(index) {
+                    return true;
                 }
+
             });
         });
 

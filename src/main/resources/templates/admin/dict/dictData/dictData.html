@@ -31,6 +31,7 @@
             $ = layui.jquery,
             table = layui.table;
         var prefix = ctx + 'admin/dictData';
+        var addUrl = prefix + '/add/' + typeNo;
         var typeNo = [[${typeNo}]];
         var id;
         //main方法
@@ -42,11 +43,10 @@
 
         //新增菜单
         $("#add").on("click", function () {
-            var url = prefix + '/add/' + typeNo;
             layer.open({
                 type: 2,
                 title: '添加',
-                content: url,
+                content: addUrl,
                 maxmin: true,
                 btn: ['确定', '取消'],
                 area: ['600px', '550px'],

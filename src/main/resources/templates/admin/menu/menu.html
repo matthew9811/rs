@@ -31,8 +31,6 @@
                 <i class = "layui-icon">&#xe640;</i>删除
             </a>
         </script>
-
-
         <div th:include = "include :: footer"></div>
         <script th:inline = "javascript">
             var prefix = ctx + 'admin/menu';
@@ -103,10 +101,7 @@
                             }, function () {
                                 var config = {
                                     url: prefix + "/move",
-                                    method: "post",
-                                    async: true,
                                     data: id,
-                                    dataType: "json"
                                 };
                                 $.submit.moveSubmit(config);
                                 layer.closeAll();
