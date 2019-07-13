@@ -228,7 +228,7 @@
             editSubmit: function (options) {
                 var defaults = {
                     url: "/",
-                    type: "put",
+                    type: "post",
                     timeout: 60000,
                     async: true,
                     cache: true,

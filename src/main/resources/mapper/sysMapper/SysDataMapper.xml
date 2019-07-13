@@ -12,6 +12,7 @@
         <result column = "update_by" jdbcType = "VARCHAR" property = "update_by" />
         <result column = "update_time" jdbcType = "TIMESTAMP" property = "update_time" />
         <result column = "del_flag" jdbcType = "CHAR" property = "del_flag" />
+        <result column = "type_css" jdbcType = "VARCHAR" property = "typeCss" />
     </resultMap>
     <sql id = "Base_Column_List">
         a.id,
@@ -22,7 +23,8 @@
         a.create_by,
         a.create_time,
         a.update_by,
-        a.update_time
+        a.update_time,
+        a.type_css
     </sql>
     <sql id = "del_flag">
         '1'
@@ -59,11 +61,12 @@
     </select>
 
     <insert id = "insert" parameterType = "com.shengxi.system.entites.sys.SysData">
-        insert into sys_data (id, `key`, `value`, type_no, remark, create_by, create_time, del_flag)
+        insert into sys_data (id, `key`, `value`, type_no, type_css, remark, create_by, create_time, del_flag)
         values (#{id,jdbcType=VARCHAR},
                 #{key,jdbcType=VARCHAR},
                 #{value,jdbcType=VARCHAR},
                 #{typeNo,jdbcType=VARCHAR},
+                #{typeCss,jdbcType=VARCHAR},
                 #{remark,jdbcType=VARCHAR},
                 #{createBy,jdbcType=VARCHAR},
                 now(),
@@ -84,6 +87,9 @@
             </if>
             <if test = "typeNo != null">
                 type_no,
+            </if>
+            <if test="typeCss != null and typeCss != ''">
+                type_css,
             </if>
             <if test = "remark != null">
                 remark,
@@ -111,6 +117,9 @@
             <if test = "typeNo != null">
                 #{typeNo,jdbcType=VARCHAR},
             </if>
+            <if test="typeCss != null and typeCss != ''">
+                #{typeCss,jdbcType=VARCHAR},
+            </if>
             <if test = "remark != null">
                 #{remark,jdbcType=VARCHAR},
             </if>
@@ -121,7 +130,7 @@
                 #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test = "delFlag != null">
-                #{delFlag,jdbcType=CHAR},
+                #{delFlag,jdbcType=CHAR}
             </if>
         </trim>
     </insert>
@@ -136,6 +145,9 @@
             </if>
             <if test = "typeNo != null">
                 type_no = #{typeNo,jdbcType=VARCHAR},
+            </if>
+            <if test="typeCss != null and typeCss != ''">
+                type_css = #{typeCss,jdbcType=VARCHAR},
             </if>
             <if test = "remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
@@ -154,6 +166,7 @@
         set `key` = #{key,jdbcType=VARCHAR},
         `value` = #{value,jdbcType=VARCHAR},
         type_no = #{typeNo,jdbcType=VARCHAR},
+        type_css = #{typeCss,jdbcType=VARCHAR},
         remark = #{remark,jdbcType=VARCHAR},
         update_by = #{updateBy,jdbcType=VARCHAR},
         update_time = #{updateTime,jdbcType=TIMESTAMP},

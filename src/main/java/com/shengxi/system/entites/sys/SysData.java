@@ -22,9 +22,10 @@ public class SysData extends BaseEntity {
      * 类型编号
      */
     private String typeNo;
-
-
-    private static final long serialVersionUID = 1L;
+    /**
+     * 样式
+     */
+    private String typeCss;
 
     public SysData(){
         super();
@@ -54,12 +55,21 @@ public class SysData extends BaseEntity {
         this.typeNo = typeNo;
     }
 
+    public String getTypeCss() {
+        return typeCss;
+    }
+
+    public void setTypeCss(String typeCss) {
+        this.typeCss = typeCss;
+    }
+
     @Override
     public String toString() {
         return "SysData{" +
                 "key='" + key + '\'' +
                 ", value='" + value + '\'' +
                 ", typeNo='" + typeNo + '\'' +
+                ", typeCss='" + typeCss + '\'' +
                 ", id='" + id + '\'' +
                 ", createTime=" + createTime +
                 ", createBy='" + createBy + '\'' +
