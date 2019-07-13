@@ -2,9 +2,12 @@ package com.shengxi.rs.common.config;
 
 import com.shengxi.rs.common.filter.TokenFilter;
 
+import com.shengxi.rs.common.handler.RestAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,6 +17,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -37,12 +41,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private LogoutSuccessHandler logoutSuccessHandler;
     @Autowired
+    private RestAccessDeniedHandler accessDeniedHandler;
+    @Autowired
     private AuthenticationSuccessHandler authenticationSuccessHandler;
     @Autowired
     private AuthenticationFailureHandler authenticationFailureHandler;
     @Autowired
     private AuthenticationEntryPoint authenticationEntryPoint;
 
+    @Value("${jwt.auth.path}")
+    private String loginPath;
     /***
      * 数据加密
      * @return
@@ -68,7 +76,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         /**
          * 开放资源
          */
-        http.authorizeRequests().antMatchers(
+        http.authorizeRequests().
+                antMatchers(HttpMethod.POST, loginPath).anonymous()
+                .antMatchers(HttpMethod.GET, "/").anonymous()
+                .antMatchers(
                 "/webjar/**", "/", "/**", "/*.html", "/favicon.ico", "/css/**", "/js/**", "/fonts/**", "/layui/**", "/img/**",
                 "/v2/api-docs/**", "/swagger-resources/**", "/webjars/**", "/pages/**", "/druid/**",
                 "/statics/**").permitAll().anyRequest().authenticated();
@@ -77,10 +88,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          */
         http.formLogin().usernameParameter("userNo");
         /*登录页面和登录提交路径*/
-        http.formLogin().usernameParameter("userNo").loginProcessingUrl("/login").successHandler(authenticationSuccessHandler).
+        http.formLogin().usernameParameter("userNo").
+                loginProcessingUrl("/login").
+                successHandler(authenticationSuccessHandler).
                 failureHandler(authenticationFailureHandler).and()
-                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and().rememberMe();
-        http.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler).and().rememberMe();
+                /*自定义权限拒绝处理类*/
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler).
+                authenticationEntryPoint(authenticationEntryPoint);
+        http.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
         http.headers().frameOptions().disable();
         http.headers().cacheControl();
         /**session失效后跳转*/

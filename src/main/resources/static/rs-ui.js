@@ -205,7 +205,7 @@
             addSubmit: function (options) {
                 var defaults = {
                     url: "/",
-                    type: "post",
+                    type: "put",
                     timeout: 60000,
                     async: true,
                     cache: true,
@@ -228,7 +228,7 @@
             editSubmit: function (options) {
                 var defaults = {
                     url: "/",
-                    type: "post",
+                    type: "put",
                     timeout: 60000,
                     async: true,
                     cache: true,
@@ -251,7 +251,7 @@
             moveSubmit: function (options) {
                 var defaults = {
                     url: "/",
-                    type: "post",
+                    type: "delete",
                     timeout: 60000,
                     async: true,
                     cache: true,
@@ -270,7 +270,6 @@
                 $.modal.ajax(options);
             }
         }
-
 
     })
 

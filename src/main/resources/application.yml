@@ -58,11 +58,9 @@ spring:
   devtools:
     restart:
       enabled: true
-
 jasypt:
   encryptor:
     password: shengxi
-
 mybatis:
   # type-aliases扫描路径
   type-aliases-package: com.shengxi.system.entites
@@ -71,25 +69,22 @@ mybatis:
   - classpath*:mapper/**/*Mapper.xml
   # 加载全局的配置文件
   config-location: classpath:mapper/mybatis-config.xml
-
-
 mapper:
   not-empty: true
   identity: MYSQL
-
-
 pagehelper:
   helperDialect: mysql
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
-
 #token过期时间
 token:
   expire:
     seconds: 7200
   jwtSecret: (RS:) _$^11277^$&_(SHENG:)_@@++--(XI:)_++++_.sds_(LEUNG)
-
+jwt:
+  auth:
+    path: /login
 # rs 配置
 rs:
   # 是否在控制台打印 sql语句

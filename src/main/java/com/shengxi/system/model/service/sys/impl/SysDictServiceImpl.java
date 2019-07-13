@@ -55,7 +55,7 @@ public class SysDictServiceImpl implements SysDictService {
         if (ObjectUtil.isNull(no)) {
             no = 0;
         }
-        return String.valueOf(no);
+        return String.valueOf(no + 1);
     }
 
     @Override

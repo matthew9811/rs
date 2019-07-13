@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -41,7 +42,7 @@ public class DictController extends BaseController {
         return prefix + "/dict";
     }
 
-    @GetMapping("/list")
+    @RequestMapping("/list")
     @ResponseBody
     public TableDataInfo dict(SysDict sysDict) {
         startPage();
@@ -53,7 +54,7 @@ public class DictController extends BaseController {
         return prefix + "/add";
     }
 
-    @PostMapping("/add")
+    @PutMapping("/add")
     @ResponseBody
     public AjaxResult addSave(SysDict sysDict) {
         sysDict.setDelFlag(BaseConstant.DEL_FLAG_NOT);

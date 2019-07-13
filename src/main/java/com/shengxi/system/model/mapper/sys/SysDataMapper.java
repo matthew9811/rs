@@ -1,6 +1,7 @@
 package com.shengxi.system.model.mapper.sys;
 
 import com.shengxi.system.entites.sys.SysData;
+import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -8,10 +9,10 @@ import org.springframework.stereotype.Repository;
 /**
  * 字典数据mapper
  *
- * @see SysDataMapper
  * @author matthew
- * @date 2019.06.06
  * @version 1.0.0
+ * @date 2019.06.06
+ * @see SysDataMapper
  */
 @Repository
 @Mapper
@@ -67,4 +68,12 @@ public interface SysDataMapper {
      * @return status
      */
     int deleteByPrimaryKey(@Param("id") String id, @Param("updateBy") String updateBy);
+
+    /**
+     * 通过dictData获取对应的dictData详情信息
+     *
+     * @param sysData dictData
+     * @return list
+     */
+    List<SysData> selectDictDataListByDictId(SysData sysData);
 }

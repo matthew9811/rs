@@ -1,10 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
 <body>
+<div style="padding: 40px">
+    <form id="formId" class="layui-form">
+        <input id="typeNo" th:value="${typeNo}" hidden>
+        <div class="layui-form-item">
+            <label class="layui-form-label rs-input-name" style="text-align: left">
+                键
+            </label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input rs-input" maxlength="64"
+                       name="key" placeholder="键" required>
+            </div>
+        </div>
+        <div class="layui-form-item">
 
+            <label class="layui-form-label rs-input-name" style="text-align: left">
+                值
+            </label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input rs-input" maxlength="64"
+                       name="value" placeholder="值" required>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label rs-input-name" style="text-align: left">
+                备注
+            </label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input rs-input" maxlength="500"
+                       name="remark">
+            </div>
+        </div>
+    </form>
+</div>
 </body>
+<div th:include="include :: footer"></div>
+<script th:inline="javascript">
+    var prefix = ctx + "admin/dict";
+    layui.use('form', function () {
+        var form = layui.form;
+    });
+
+    /**
+     * 保存ajax
+     * @param formId
+     */
+    function submitHandler(formId) {
+        var config = {
+            url: prefix + "/add",
+            data: $("#" + formId).serialize()
+        };
+        $.submit.addSubmit(config)
+    }
+
+</script>
 </html>

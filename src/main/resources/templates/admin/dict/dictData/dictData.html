@@ -1,10 +1,131 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="childrenBody">
+<div>
+    <div class="layui-btn-group">
+        <button class="layui-btn" id="add">新增</button>
+    </div>
+    <table id="layerTable" class="layui-table" lay-filter="layerTable"></table>
+</div>
+<!-- 操作列 -->
+<script type="text/html" id="tableManage">
+    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">
+        <i class="layui-icon">&#xe654;</i>详情
+    </a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">
+        <i class="layui-icon">&#xe642;</i>修改
+    </a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
+        <i class="layui-icon">&#xe640;</i>删除
+    </a>
+</script>
+<div th:include="include :: footer"></div>
+<script th:inline="javascript">
+    // 全局加载模块
+    layui.use(['form', 'layer', 'table'], function () {
+        var layer = layui.layer;
+        var form = layui.form,
+            layer = parent.layer === undefined ? layui.layer : top.layer,
+            $ = layui.jquery,
+            table = layui.table;
+        var prefix = ctx + 'admin/dictData';
+        var typeNo = [[${typeNo}]];
+        var id;
+        //main方法
+        $(function () {
+            // 渲染表格
+            tableInit();
+            tableTool();
+        })
 
+        //新增菜单
+        $("#add").on("click", function () {
+            var url = prefix + '/add/' + typeNo;
+            layer.open({
+                type: 2,
+                title: '添加',
+                content: url,
+                maxmin: true,
+                btn: ['确定', '取消'],
+                area: ['600px', '550px'],
+                yes: function (index, layero) {
+                    callback(index, layero);
+                }
+            });
+        });
+
+        callback = function (index, layero) {
+            var iframeWin = layero.find('iframe')[0];
+            iframeWin.contentWindow.submitHandler("formId");
+        }
+
+        function tableInit() {
+            var options = {
+                elem: '#layerTable',
+                url: prefix + '/list',
+                page: false,
+                where :{ typeNo: typeNo},
+                cols: [
+                    [
+                        {field: 'id', width: 0, align: 'center', title: 'id', hide: true},
+                        {field: 'typeNo', align: 'center', title: '字典编号'},
+                        {field: 'key', align: 'center', title: '键'},
+                        {field: 'value', align: 'center', title: '值'},
+                        {field: 'remark', align: 'center', title: '备注'},
+                        {templet: '#tableManage', width: 350, align: 'center', title: '操作'}
+                    ]
+                ]
+            };
+            $.table.init(options);
+        }
+
+        function tableTool() {
+            //监听工具条
+            table.on('tool(layerTable)', function (obj) {
+                var data = obj.data;
+                var layEvent = obj.event;
+                id = data.id;
+                var url;
+                if (layEvent === 'del') {
+                    //询问框
+                    layer.confirm('是否删除？' + data.menuName, {
+                        btn: ['确认', '取消'] //按钮
+                    }, function () {
+                        var config = {
+                            url: prefix + "/move",
+                            method: "post",
+                            async: true,
+                            data: id,
+                            dataType: "json"
+                        };
+                        $.submit.editSubmit(config);
+                        $.pop.success();
+                        layer.closeAll();
+                    }, function () {
+                        layer.closeAll();
+                    });
+                } else if (layEvent === 'edit') {
+                    url = prefix + '/edit';
+                    layer.open({
+                        type: 2,
+                        title: '修改',
+                        content: url + "/" + id,
+                        maxmin: true,
+                        btn: ['确定', '取消'],
+                        area: ['600px', '550px'],
+                        yes: function (index, layero) {
+                            callback(index, layero);
+                        }
+                    });
+                } else if (layEvent === 'detail') {
+                    layer.alert(data.id);
+                    location.href = '/admin/dictData/' + data.id;
+                }
+            });
+        }
+    });
+</script>
 </body>
 </html>
