@@ -88,6 +88,11 @@ public class SysMenuServiceImpl implements SysMenuService {
         return sysMenuMapper.selectByList(new SysMenu());
     }
 
+    @Override
+    public SysMenu selectMenuById(String id) {
+        return sysMenuMapper.selectById(id);
+    }
+
     /**
      * 构建树形list
      *

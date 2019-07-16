@@ -77,6 +77,7 @@ public class MenuController extends BaseController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") String id, ModelMap map) {
         map.put("parentList", menuServices.selectOfParentAdd());
+        map.put("menu", menuServices.selectMenuById(id));
         return prefix + "/edit";
     }
 
@@ -87,7 +88,7 @@ public class MenuController extends BaseController {
      * @param sysMenu 菜单实体
      * @return ajaxData
      */
-    @PutMapping("/add")
+    @PostMapping("/add")
     @ResponseBody
     public AjaxResult insertMenu(SysMenu sysMenu) {
         //暂时使用

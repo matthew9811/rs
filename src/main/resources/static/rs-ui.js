@@ -12,6 +12,7 @@
                     title: '',
                     url: '',
                     cellMinWidth: 95,
+                    method: 'post',
                     page: true,
                     height: "full-125",
                     limit: 10,
@@ -38,6 +39,7 @@
                     table.render({
                         elem: options.elem,
                         url: options.url,
+                        method: options.method,
                         title: options.title,
                         toolbar: options.toolbar, //开启工具栏
                         page: options.page,
@@ -168,7 +170,7 @@
         pop: {
             // 自行传参
             init: function (options) {
-              $.popup.hint(options)
+                $.popup.hint(options)
             },
             //成功提示
             success: function (options) {
@@ -204,20 +206,12 @@
             /*插入提交*/
             addSubmit: function (options) {
                 var defaults = {
-                    url: "/",
-                    type: "put",
-                    timeout: 60000,
-                    async: true,
-                    cache: true,
-                    data: {},
-                    dataType: "json",
-                    contentType: "application/x-www-form-urlencoded",
                     success: function (data) {
                         $.pop.success({msg: data.msg});
                         parent.location.reload();
                     },
                     error: function (data) {
-                        $.pop.error( {msg: data.msg} )
+                        $.pop.error({msg: data.msg})
                     }
                 };
                 var options = $.extend(defaults, options);
@@ -227,14 +221,7 @@
             /*编辑提交*/
             editSubmit: function (options) {
                 var defaults = {
-                    url: "/",
-                    type: "post",
-                    timeout: 60000,
-                    async: true,
-                    cache: true,
-                    data: {},
-                    dataType: "json",
-                    contentType: "application/x-www-form-urlencoded",
+                    type: 'post',
                     success: function () {
                         $.pop.success({msg: '修改成功'});
                         parent.location.reload();
@@ -250,14 +237,8 @@
             /*删除提交*/
             moveSubmit: function (options) {
                 var defaults = {
-                    url: "/",
                     type: "delete",
-                    timeout: 60000,
-                    async: true,
-                    cache: true,
-                    data: {},
-                    dataType: "json",
-                    contentType: "application/x-www-form-urlencoded",
+                    contentType: "json",
                     success: function () {
                         $.pop.success({msg: '删除成功'});
                         parent.location.reload()

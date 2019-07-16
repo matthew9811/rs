@@ -5,13 +5,13 @@
         <id column = "id" jdbcType = "VARCHAR" property = "id" />
         <result column = "key" jdbcType = "VARCHAR" property = "key" />
         <result column = "value" jdbcType = "VARCHAR" property = "value" />
-        <result column = "typeNo" jdbcType = "VARCHAR" property = "type_no" />
+        <result column = "type_no" jdbcType = "VARCHAR" property = "typeNo" />
         <result column = "remark" jdbcType = "VARCHAR" property = "remark" />
-        <result column = "create_by" jdbcType = "VARCHAR" property = "create_by" />
-        <result column = "create_time" jdbcType = "TIMESTAMP" property = "create_time" />
-        <result column = "update_by" jdbcType = "VARCHAR" property = "update_by" />
-        <result column = "update_time" jdbcType = "TIMESTAMP" property = "update_time" />
-        <result column = "del_flag" jdbcType = "CHAR" property = "del_flag" />
+        <result column = "create_by" jdbcType = "VARCHAR" property = "createBy" />
+        <result column = "create_time" jdbcType = "TIMESTAMP" property = "createTime" />
+        <result column = "update_by" jdbcType = "VARCHAR" property = "updateBy" />
+        <result column = "update_time" jdbcType = "TIMESTAMP" property = "updateTime" />
+        <result column = "del_flag" jdbcType = "CHAR" property = "delFlag" />
         <result column = "type_css" jdbcType = "VARCHAR" property = "typeCss" />
     </resultMap>
     <sql id = "Base_Column_List">

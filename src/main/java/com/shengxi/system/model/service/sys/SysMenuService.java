@@ -48,4 +48,11 @@ public interface SysMenuService {
      * @return list
      */
     List<SysMenu> selectByList();
+
+    /**
+     * 根据id获取数据
+     * @param id id
+     * @return sysMenu
+     */
+    SysMenu selectMenuById(String id);
 }

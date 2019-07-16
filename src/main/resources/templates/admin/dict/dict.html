@@ -24,10 +24,8 @@
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
     // 全局加载模块
-    layui.use(['form', 'layer', 'table'], function () {
-        var layer = layui.layer;
+    layui.use(['form', 'table'], function () {
         var form = layui.form,
-            layer = parent.layer === undefined ? layui.layer : top.layer,
             $ = layui.jquery,
             table = layui.table;
         var prefix = ctx + 'admin/dict';

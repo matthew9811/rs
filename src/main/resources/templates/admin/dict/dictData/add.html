@@ -5,7 +5,7 @@
 <body>
 <div style="padding: 40px">
     <form id="formId" class="layui-form">
-        <input id="typeNo" th:value="${typeNo}" hidden>
+        <input id="typeNo" name="typeNo" th:value="${typeNo}" hidden>
         <div class="layui-form-item">
             <label class="layui-form-label rs-input-name" style="text-align: left">
                 键
@@ -30,7 +30,7 @@
                 样式
             </label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input rs-input" maxlength="11"
+                <input type="text" class="layui-input rs-input" maxlength="21"
                        name="typeCss" placeholder="样式">
             </div>
         </div>
@@ -48,23 +48,21 @@
 </body>
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
-
+    var prefix = ctx + "admin/dictData";
     layui.use('form', function () {
-        var prefix = ctx + "admin/dict";
         var form = layui.form;
-
-
-        /**
-         * 保存ajax
-         * @param formId
-         */
-        function submitHandler(formId) {
-            var config = {
-                url: prefix + "/add",
-                data: $("#" + formId).serialize()
-            };
-            $.submit.addSubmit(config)
-        }
     });
+
+    /**
+     * 保存ajax
+     * @param formId
+     */
+    function submitHandler(formId) {
+        var config = {
+            url: prefix + "/add",
+            data: $("#" + formId).serialize()
+        };
+        $.submit.addSubmit(config)
+    }
 </script>
 </html>

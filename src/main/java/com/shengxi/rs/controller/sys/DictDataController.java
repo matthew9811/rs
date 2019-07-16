@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -41,9 +42,10 @@ public class DictDataController extends BaseController {
         return prefix + "/dictData";
     }
 
-    @RequestMapping("/list")
+    @PostMapping("/list")
     @ResponseBody
     public TableDataInfo dictDataDetail(SysData sysData) {
+        System.out.println("+++++++++++++" + dictDataService.selectDictDataListByDictId(sysData).toString());
         return getDataTable(dictDataService.selectDictDataListByDictId(sysData));
     }
 
@@ -53,7 +55,8 @@ public class DictDataController extends BaseController {
         return prefix + "/add";
     }
 
-    @PutMapping("/add")
+    @PostMapping("/add")
+    @ResponseBody
     public AjaxResult addSave(SysData sysData) {
         sysData.setDelFlag(BaseConstant.DEL_FLAG_NOT);
         return toAjax(dictDataService.insert(sysData));
