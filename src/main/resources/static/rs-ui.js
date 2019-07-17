@@ -74,7 +74,7 @@
                 var actions = [];
                 $.each(datas, function (index, dict) {
                     if (dict.typeValue == ('' + value)) {
-                        var listCss = $.common.equals("default", dict.listCss) || $.common.isEmpty(dict.listCss) ? "" : dict.listCss;
+                        var listCss = $.common.equals("default", dict.listCss) || $.common.isEmpty(dict.listCss) ? "" : "badge badge-" + dict.listCss;
                         actions.push($.common.sprintf("<span class='%s'>%s</span>", listCss, dict.typeLabel));
                         return false;
                     }
