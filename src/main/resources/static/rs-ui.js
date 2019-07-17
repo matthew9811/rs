@@ -67,6 +67,19 @@
                         return obj;
                     });
                 })
+            },
+
+            // 回显数据字典
+            selectDictLabel: function (datas, value) {
+                var actions = [];
+                $.each(datas, function (index, dict) {
+                    if (dict.typeValue == ('' + value)) {
+                        var listCss = $.common.equals("default", dict.listCss) || $.common.isEmpty(dict.listCss) ? "" : dict.listCss;
+                        actions.push($.common.sprintf("<span class='%s'>%s</span>", listCss, dict.typeLabel));
+                        return false;
+                    }
+                });
+                return actions.join('');
             }
         },
 
@@ -176,6 +189,7 @@
             success: function (options) {
                 var defaults = {
                     msg: "操作成功",
+                    code: 200,
                     icon: 1
                 };
                 var options = $.extend(defaults, options);
@@ -221,9 +235,9 @@
             /*编辑提交*/
             editSubmit: function (options) {
                 var defaults = {
-                    type: 'post',
-                    success: function () {
-                        $.pop.success({msg: '修改成功'});
+                    type: 'put',
+                    success: function (data) {
+                        $.pop.success({msg: data.msg});
                         parent.location.reload();
                     },
                     error: function () {
@@ -238,10 +252,9 @@
             moveSubmit: function (options) {
                 var defaults = {
                     type: "delete",
-                    contentType: "json",
-                    success: function () {
-                        $.pop.success({msg: '删除成功'});
-                        parent.location.reload()
+                    contentType: "application/json",
+                    success: function (data) {
+                        $.pop.success({msg: data.msg, code: data.code});
                     },
                     error: function () {
                         $.pop.error()

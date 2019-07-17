@@ -46,11 +46,11 @@
     <select id = "selectByPrimaryKey" parameterType = "java.lang.String" resultMap = "BaseResultMap">
         select
         <include refid = "Base_Column_List" />
-        from sys_dict sys_dict a
+        from sys_dict a
         where a.id = #{id,jdbcType=VARCHAR}
     </select>
     <select id = "checkNo" resultType = "java.lang.Integer">
-        select count(1) from sys_dict
+        select count(1) from sys_dict where del_flag = <include refid = "del_flag"/>
     </select>
     <!--写操作-->
     <insert id = "insert" keyColumn = "id" keyProperty = "id" parameterType = "com.shengxi.system.entites.sys.SysDict"

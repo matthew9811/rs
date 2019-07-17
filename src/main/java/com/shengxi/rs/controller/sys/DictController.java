@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -64,7 +66,7 @@ public class DictController extends BaseController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable(name = "id") String id, ModelMap map) {
         map.put("dict", sysDictService.selectSysDictById(id));
-        return prefix + "edit";
+        return prefix + "/edit";
     }
 
     @PutMapping("/edit")
@@ -73,13 +75,13 @@ public class DictController extends BaseController {
         return toAjax(sysDictService.updateByIdSelective(sysDict));
     }
     
-    @DeleteMapping("/remove")
+    @DeleteMapping("/move/{id}")
     @ResponseBody
-    public AjaxResult remove(String id){
+    public AjaxResult remove(@PathVariable String id){
         return toAjax(sysDictService.deleteSysDictById(id));
     }
     
-    @DeleteMapping("/removeList")
+    @DeleteMapping("/moveList")
     @ResponseBody
     public AjaxResult removeList(String ids){
         return toAjax(sysDictService.deleteSysDictByIds(ids));

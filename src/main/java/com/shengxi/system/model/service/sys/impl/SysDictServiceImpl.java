@@ -5,6 +5,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.rs.common.util.IdUtil;
 import com.shengxi.rs.common.util.UserUtil;
 import com.shengxi.system.common.constant.ServiceConstant;
+import com.shengxi.system.entites.sys.SysData;
 import com.shengxi.system.entites.sys.SysDict;
 import com.shengxi.system.model.mapper.sys.SysDataMapper;
 import com.shengxi.system.model.mapper.sys.SysDictMapper;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Service;
  * @author matthew
  * @date 2019.06.06
  */
-@Service(value = "sysDict")
+@Service(value = "dict")
 public class SysDictServiceImpl implements SysDictService {
 
     @Autowired
@@ -42,20 +43,9 @@ public class SysDictServiceImpl implements SysDictService {
     @Override
     public Integer insertSysDict(SysDict sysDict) {
         sysDict.setId(IdUtil.uuid());
-        synchronized (this) {
-            sysDict.setTypeNo(CheckNo());
-        }
         sysDict.setCreateBy(UserUtil.getUserNo());
         sysDict.setStatus(ServiceConstant.NORMAL);
         return dictMapper.insert(sysDict);
-    }
-
-    private String CheckNo() {
-        Integer no = dictMapper.checkNo();
-        if (ObjectUtil.isNull(no)) {
-            no = 0;
-        }
-        return String.valueOf(no + 1);
     }
 
     @Override
@@ -78,5 +68,17 @@ public class SysDictServiceImpl implements SysDictService {
     @Override
     public Integer deleteSysDictByIds(String ids) {
         return dictMapper.deleteByIdList(Convert.toStrArray(ids), UserUtil.getUserNo());
+    }
+
+    public List<SysData> getValue(String typeNo) {
+        return dataMapper.getValue(typeNo);
+    }
+
+    private String CheckNo() {
+        Integer no = dictMapper.checkNo();
+        if (ObjectUtil.isNull(no)) {
+            no = 0;
+        }
+        return String.valueOf(no + 1);
     }
 }

@@ -4,58 +4,25 @@
 <head th:include="include :: header"></head>
 <body>
 <div style="padding: 40px">
-    <form id="formId" class="layui-form">
+    <form id="formId" class="layui-form" th:object="${dict}">
+        <input name="id" th:field="*{id}" hidden/>
+        <input name="typeNo" th:field="*{typeNo}" hidden/>
         <div class="layui-form-item">
-            <div class="layui-inline">
-                <label class="layui-form-label rs-input-name" style="text-align: left">
-                    上级菜单
-                </label>
-                <div class="layui-input-inline">
-                    <select class="layui-input rs-input" name="modules" lay-verify="required" lay-search="" th:with="list = ${parentList}">
-                        <option value="">直接选择或搜索选择</option>
-                        <option th:each="parent: ${list}" th:value="${parent.id}" th:text="${parent.menuName}"></option>
-                    </select>
-                </div>
+            <label class="layui-form-label rs-input-name" style="text-align: left">
+                字典名称
+            </label>
+            <div class="layui-input-block">
+                <input type="text" class="layui-input rs-input" maxlength="64"
+                       name="typeName" th:field="*{typeName}" required>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label rs-input-name" style="text-align: left">
-                菜单名称
+                备注
             </label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input rs-input" name="menuName">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label rs-input-name" style="text-align: left">
-                权限标识
-            </label>
-            <div class="layui-input-block">
-                <input type="text" class="layui-input rs-input" name="perms">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label rs-input-name" style="text-align: left">
-                路径
-            </label>
-            <div class="layui-input-block">
-                <input type="text" class="layui-input rs-input" name="url">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label rs-input-name" style="text-align: left">
-                图标
-            </label>
-            <div class="layui-input-block">
-                <input type="text" class="layui-input rs-input" name="icon">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label rs-input-name" style="text-align: left">
-                排序编号
-            </label>
-            <div class="layui-input-block">
-                <input type="text" class="layui-input rs-input" name="sort">
+                <input type="text" class="layui-input rs-input" maxlength="500"
+                       name="remark" th:field="*{remark}">
             </div>
         </div>
     </form>
@@ -63,15 +30,8 @@
 </body>
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
-    var prefix = ctx + "admin/menu";
-    layui.use('form', function(){
-        var form = layui.form;
-    });
+    var prefix = ctx + "admin/dict";
 
-    /**
-     * 保存ajax
-     * @param formId
-     */
     function submitHandler(formId) {
         var config = {
             url: prefix + "/edit",

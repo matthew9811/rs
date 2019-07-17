@@ -4,70 +4,14 @@ import com.shengxi.system.entites.sys.SysData;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 /**
  * 字典数据mapper
  *
  * @author matthew
- * @version 1.0.0
- * @date 2019.06.06
- * @see SysDataMapper
  */
-@Repository
 @Mapper
 public interface SysDataMapper {
-
-    /**********读操作***********/
-    /**
-     * 根据id获取数据
-     *
-     * @param id id
-     * @return sysData
-     */
-    SysData selectByPrimaryKey(String id);
-
-    /***********写操作***********/
-    /**
-     * 完整插入
-     *
-     * @param record record
-     * @return status
-     */
-    int insert(com.shengxi.system.entites.sys.SysData record);
-
-    /**
-     * 动态插入
-     *
-     * @param record record
-     * @return status
-     */
-    int insertSelective(com.shengxi.system.entites.sys.SysData record);
-
-    /**
-     * 动态update
-     *
-     * @param record record
-     * @return status
-     */
-    int updateByPrimaryKeySelective(com.shengxi.system.entites.sys.SysData record);
-
-    /**
-     * update
-     *
-     * @param record record
-     * @return status
-     */
-    int updateByPrimaryKey(com.shengxi.system.entites.sys.SysData record);
-
-    /**
-     * 删除数据
-     *
-     * @param id       id
-     * @param updateBy userNo
-     * @return status
-     */
-    int deleteByPrimaryKey(@Param("id") String id, @Param("updateBy") String updateBy);
 
     /**
      * 通过dictData获取对应的dictData详情信息
@@ -76,4 +20,62 @@ public interface SysDataMapper {
      * @return list
      */
     List<SysData> selectDictDataListByDictId(SysData sysData);
+
+    /**
+     * 根据对应的字典类型和值获取对应的对应数据
+     *
+     * @param typeNo 对应的字典分类
+     * @return List<SysData>
+     */
+    List<SysData> getValue(@Param("typeNo") String typeNo);
+
+    /**
+     * 当前有效数据
+     *
+     * @return count。
+     */
+    String getNum();
+
+
+    /**
+     * 插入数据
+     *
+     * @param record obj
+     * @return status
+     */
+    int insert(SysData record);
+
+    /**
+     * 动态插入数据
+     *
+     * @param record obj
+     * @return status
+     */
+    int insertSelective(SysData record);
+
+
+    /**
+     * 动态update
+     *
+     * @param record record
+     * @return status
+     */
+    int updateByTypeCodeSelective(SysData record);
+
+    /**
+     * update
+     *
+     * @param record record
+     * @return status
+     */
+    int updateByTypeCode(SysData record);
+
+    /**
+     * 删除数据
+     *
+     * @param typeCode typeCode
+     * @param updateBy userNo
+     * @return status
+     */
+    int deleteByTypeCode(@Param("typeCode") String typeCode, @Param("updateBy") String updateBy);
 }

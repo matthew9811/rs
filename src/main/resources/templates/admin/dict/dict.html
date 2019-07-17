@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="childrenBody">
@@ -14,6 +14,9 @@
     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">
         <i class="layui-icon">&#xe654;</i>详情
     </a>
+    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="status">
+        <i class="layui-icon"></i>状态
+    </a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">
         <i class="layui-icon">&#xe642;</i>修改
     </a>
@@ -24,12 +27,13 @@
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
     // 全局加载模块
-    layui.use(['form', 'table'], function () {
-        var form = layui.form,
-            $ = layui.jquery,
+    layui.use(['table'], function () {
+        var layer = layui.layer;
+        $ = layui.jquery,
             table = layui.table;
         var prefix = ctx + 'admin/dict';
-
+        var addUrl = prefix + '/add';
+        var statusDict = [[${@dict.getValue('sys_dict_status')}]];
         var id;
         //main方法
         $(function () {
@@ -40,22 +44,16 @@
 
         //新增菜单
         $("#add").on("click", function () {
-            var url = prefix + '/add';
             layer.open({
                 type: 2,
                 title: '添加',
-                content: url,
+                content: addUrl,
                 maxmin: true,
                 btn: ['确定', '取消'],
-                shadeClose: true,
                 area: ['600px', '550px'],
                 yes: function (index, layero) {
                     callback(index, layero);
-                },
-                cancel: function(index) {
-                    return true;
                 }
-
             });
         });
 
@@ -68,12 +66,17 @@
             var options = {
                 elem: '#layerTable',
                 url: prefix + '/list',
-                page: false,
                 cols: [
                     [
                         {field: 'id', width: 0, align: 'center', title: 'id', hide: true},
                         {field: 'typeNo', align: 'center', title: '字典编号'},
                         {field: 'typeName', align: 'center', title: '字典名称'},
+                        {
+                            field: 'status', align: 'center', title: '字典状态', templet: function (d) {
+                                return $.table.selectDictLabel(statusDict, d.status);
+                            }
+                        },
+                        {field: 'remark', align: 'renter', title: '备注'},
                         {templet: '#tableManage', width: 350, align: 'center', title: '操作'}
                     ]
                 ]
@@ -90,21 +93,16 @@
                 var url;
                 if (layEvent === 'del') {
                     //询问框
-                    layer.confirm('是否删除？' + data.menuName, {
+                    layer.confirm('是否删除？' + data.typeName, {
                         btn: ['确认', '取消'] //按钮
                     }, function () {
                         var config = {
-                            url: prefix + "/move",
-                            method: "post",
-                            async: true,
-                            data: id,
-                            dataType: "json"
+                            url: prefix + "/move/" + id
                         };
-                        $.submit.editSubmit(config);
-                        $.pop.success();
+                        $.submit.moveSubmit(config);
                         layer.closeAll();
                     }, function () {
-                        layer.closeAll();
+                        return true;
                     });
                 } else if (layEvent === 'edit') {
                     url = prefix + '/edit';

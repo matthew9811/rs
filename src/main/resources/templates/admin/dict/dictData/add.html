@@ -12,17 +12,16 @@
             </label>
             <div class="layui-input-block">
                 <input type="text" class="layui-input rs-input" maxlength="64"
-                       name="key" placeholder="键" required>
+                       name="typeLabel" placeholder="键" required>
             </div>
         </div>
         <div class="layui-form-item">
-
             <label class="layui-form-label rs-input-name" style="text-align: left">
                 值
             </label>
             <div class="layui-input-block">
                 <input type="text" class="layui-input rs-input" maxlength="64"
-                       name="value" placeholder="值" required>
+                       name="typeValue" placeholder="值" required>
             </div>
         </div>
         <div class="layui-form-item">
@@ -32,6 +31,30 @@
             <div class="layui-input-block">
                 <input type="text" class="layui-input rs-input" maxlength="21"
                        name="typeCss" placeholder="样式">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label rs-input-name" style="text-align: left">回显样式：</label>
+            <div class="layui-input-inline">
+                <select name="listCss" class="layui-form-select">
+                    <option value="">---请选择---</option>
+                    <option value="default">默认</option>
+                    <option value="primary">主要</option>
+                    <option value="success">成功</option>
+                    <option value="info">   信息</option>
+                    <option value="warning">警告</option>
+                    <option value="danger"> 危险</option>
+                </select>
+                <span><i class="fa fa-info-circle"></i> table表格字典列显示样式属性</span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label rs-input-name" style="text-align: left">
+                是否为默认值
+            </label>
+            <div class="layui-input-block">
+                <input type="radio" name="isDefault" value="1" title="是">
+                <input type="radio" name="isDefault" value="0" title="否" checked>
             </div>
         </div>
         <div class="layui-form-item">

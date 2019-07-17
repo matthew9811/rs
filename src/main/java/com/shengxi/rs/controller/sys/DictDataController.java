@@ -45,7 +45,6 @@ public class DictDataController extends BaseController {
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo dictDataDetail(SysData sysData) {
-        System.out.println("+++++++++++++" + dictDataService.selectDictDataListByDictId(sysData).toString());
         return getDataTable(dictDataService.selectDictDataListByDictId(sysData));
     }
 

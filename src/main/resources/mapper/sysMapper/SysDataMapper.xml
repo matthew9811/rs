@@ -2,9 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "com.shengxi.system.model.mapper.sys.SysDataMapper">
     <resultMap id = "BaseResultMap" type = "com.shengxi.system.entites.sys.SysData">
-        <id column = "id" jdbcType = "VARCHAR" property = "id" />
-        <result column = "key" jdbcType = "VARCHAR" property = "key" />
-        <result column = "value" jdbcType = "VARCHAR" property = "value" />
+        <result column = "type_label" jdbcType = "VARCHAR" property = "typeLabel" />
+        <result column = "type_code" jdbcType = "VARCHAR" property = "typeCode" />
+        <result column = "status" jdbcType = "CHAR" property = "status" />
+        <result column = "is_default" jdbcType = "CHAR" property = "isDefault" />
+        <result column = "list_css" jdbcType = "VARCHAR" property = "listCss" />
+        <result column = "type_value" jdbcType = "VARCHAR" property = "typeValue" />
         <result column = "type_no" jdbcType = "VARCHAR" property = "typeNo" />
         <result column = "remark" jdbcType = "VARCHAR" property = "remark" />
         <result column = "create_by" jdbcType = "VARCHAR" property = "createBy" />
@@ -15,27 +18,25 @@
         <result column = "type_css" jdbcType = "VARCHAR" property = "typeCss" />
     </resultMap>
     <sql id = "Base_Column_List">
-        a.id,
-        a.`key`,
-        a.`value`,
-        a.type_no,
-        a.remark,
-        a.create_by,
-        a.create_time,
-        a.update_by,
-        a.update_time,
-        a.type_css
+               a.`type_label`,
+               a.`type_value`,
+               a.type_no,
+               a.remark,
+               a.create_by,
+               a.create_time,
+               a.update_by,
+               a.update_time,
+               a.type_css,
+               a.status,
+               a.list_css,
+               a.is_default,
+               a.type_code
     </sql>
     <sql id = "del_flag">
-        '1'
+               '1'
     </sql>
-    <select id = "selectByPrimaryKey" parameterType = "java.lang.String" resultMap = "BaseResultMap">
-        select
-        <include refid = "Base_Column_List" />
-        from sys_data a
-        where id = #{id,jdbcType=VARCHAR}
-    </select>
-    <select id = "selectDictDataListByDictId" parameterType = "SysData" resultMap = "BaseResultMap">
+    <select id = "selectDictDataListByDictId" parameterType = "com.shengxi.system.entites.sys.SysData"
+            resultMap = "BaseResultMap">
         select
         <include refid = "Base_Column_List" />
         from sys_data a
@@ -45,11 +46,11 @@
             <if test = "id != null and id != '' ">
                 and a.id = #{id}
             </if>
-            <if test = "key != null and key != ''">
-                and a.key = #{key,jdbcType=VARCHAR}
+            <if test = "typeLabel != null and typeLabel != '' ">
+                and a.type_label = #{typeLabel,jdbcType=VARCHAR}
             </if>
-            <if test = "value != null and value != ''">
-                and a.value = #{value,jdbcType=VARCHAR}
+            <if test = "typeValue != null and typeValue != ''">
+                and a.value = #{typeValue,jdbcType=VARCHAR}
             </if>
             <if test = "typeNo != null and typeNo != ''">
                 and a.type_no = #{typeNo}
@@ -59,13 +60,40 @@
             </if>
         </where>
     </select>
+    <select id = "getValue" resultMap="BaseResultMap">
+        select
+        <include refid = "Base_Column_List" />
+        from sys_data as a
+        <where>
+            a.del_flag =
+            <include refid = "del_flag" />
+            and a.type_no = #{typeNo}
+        </where>
+    </select>
+    <select id = "getNum" resultType = "java.lang.String">
+        select count(1) from sys_data where del_flag = <include refid = "del_flag"/>
+    </select>
 
     <insert id = "insert" parameterType = "com.shengxi.system.entites.sys.SysData">
-        insert into sys_data (id, `key`, `value`, type_no, type_css, remark, create_by, create_time, del_flag)
-        values (#{id,jdbcType=VARCHAR},
-                #{key,jdbcType=VARCHAR},
-                #{value,jdbcType=VARCHAR},
+        insert into sys_data (`type_label`,
+                              `type_value`,
+                              type_no,
+                              type_code,
+                              status,
+                              list_css,
+                              is_default,
+                              type_css,
+                              remark,
+                              create_by,
+                              create_time,
+                              del_flag)
+        values (#{typeLabel,jdbcType=VARCHAR},
+                #{typeValue,jdbcType=VARCHAR},
                 #{typeNo,jdbcType=VARCHAR},
+                #{typeCode,jdbcType=VARCHAR},
+                #{status,jdbcType=VARCHAR},
+                #{listCss,jdbcType=VARCHAR},
+                #{isDefault,jdbcType=VARCHAR},
                 #{typeCss,jdbcType=VARCHAR},
                 #{remark,jdbcType=VARCHAR},
                 #{createBy,jdbcType=VARCHAR},
@@ -79,17 +107,29 @@
             <if test = "id != null and id != ''">
                 id ,
             </if>
-            <if test = "key != null">
-                `key`,
+            <if test = "typeLabel != null">
+                `type_label`,
             </if>
-            <if test = "value != null">
-                `value`,
+            <if test = "typeValue != null">
+                `type_value`,
             </if>
             <if test = "typeNo != null">
                 type_no,
             </if>
-            <if test="typeCss != null and typeCss != ''">
+            <if test = "typeCss != null and typeCss != ''">
                 type_css,
+            </if>
+            <if test = "isDefault != null">
+                is_default,
+            </if>
+            <if test = "listCss != null">
+                list_css,
+            </if>
+            <if test = "typeCode != null">
+                type_code,
+            </if>
+            <if test = "status != null">
+                status,
             </if>
             <if test = "remark != null">
                 remark,
@@ -108,17 +148,29 @@
             <if test = "id != null and id != ''">
                 #{id,jdbcType=VARCHAR},
             </if>
-            <if test = "key != null">
-                #{key,jdbcType=VARCHAR},
+            <if test = "typeLabel != null">
+                #{typeLabel,jdbcType=VARCHAR},
             </if>
-            <if test = "value != null">
-                #{value,jdbcType=VARCHAR},
+            <if test = "typeValue != null">
+                #{typeValue,jdbcType=VARCHAR},
             </if>
             <if test = "typeNo != null">
                 #{typeNo,jdbcType=VARCHAR},
             </if>
-            <if test="typeCss != null and typeCss != ''">
+            <if test = "typeCss != null and typeCss != ''">
                 #{typeCss,jdbcType=VARCHAR},
+            </if>
+            <if test = "isDefault != null">
+                #{isDefault,jdbcType=VARCHAR},
+            </if>
+            <if test = "listCss != null">
+                #{listCss,jdbcType=VARCHAR},
+            </if>
+            <if test = "typeCode != null">
+                #{typeCode,jdbcType=VARCHAR},
+            </if>
+            <if test = "status != null">
+                #{status,jdbcType=VARCHAR} ,
             </if>
             <if test = "remark != null">
                 #{remark,jdbcType=VARCHAR},
@@ -134,20 +186,32 @@
             </if>
         </trim>
     </insert>
-    <update id = "updateByPrimaryKeySelective" parameterType = "com.shengxi.system.entites.sys.SysData">
+    <update id = "updateByTypeCodeSelective" parameterType = "com.shengxi.system.entites.sys.SysData">
         update sys_data
         <set>
-            <if test = "key != null">
-                `key` = #{key,jdbcType=VARCHAR},
+            <if test = "typeLabel != null">
+                `type_label` = #{typeLabel,jdbcType=VARCHAR},
             </if>
-            <if test = "value != null">
-                `value` = #{value,jdbcType=VARCHAR},
+            <if test = "typeValue != null">
+                `type_value` = #{typeValue,jdbcType=VARCHAR},
             </if>
             <if test = "typeNo != null">
                 type_no = #{typeNo,jdbcType=VARCHAR},
             </if>
-            <if test="typeCss != null and typeCss != ''">
+            <if test = "typeCss != null ">
                 type_css = #{typeCss,jdbcType=VARCHAR},
+            </if>
+            <if test = "typeCode != null">
+                type_code = #{typeCode,jdbcType=VARCHAR} ,
+            </if>
+            <if test = "isDefault != null">
+                is_default = #{isDefault,jdbcType=VARCHAR} ,
+            </if>
+            <if test = "status != null">
+                status = #{status,jdbcType=VARCHAR} ,
+            </if>
+            <if test = "listCss != null">
+                list_css = #{listCss,jdbcType=VARCHAR} ,
             </if>
             <if test = "remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
@@ -159,26 +223,28 @@
                 update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
         </set>
-        where id = #{id,jdbcType=VARCHAR}
+        where type_code = #{typeCode,jdbcType=VARCHAR}
     </update>
-    <update id = "updateByPrimaryKey" parameterType = "com.shengxi.system.entites.sys.SysData">
+    <update id = "updateByTypeCode" parameterType = "com.shengxi.system.entites.sys.SysData">
         update sys_data
-        set `key` = #{key,jdbcType=VARCHAR},
-        `value` = #{value,jdbcType=VARCHAR},
-        type_no = #{typeNo,jdbcType=VARCHAR},
-        type_css = #{typeCss,jdbcType=VARCHAR},
-        remark = #{remark,jdbcType=VARCHAR},
-        update_by = #{updateBy,jdbcType=VARCHAR},
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        <set>
+            `type_label` = #{typeLabel,jdbcType=VARCHAR},
+            `type_value` = #{typeValue,jdbcType=VARCHAR},
+            type_no = #{typeNo,jdbcType=VARCHAR},
+            type_css = #{typeCss,jdbcType=VARCHAR},
+            remark = #{remark,jdbcType=VARCHAR},
+            update_by = #{updateBy,jdbcType=VARCHAR},
+            update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </set>
         <where>
-            id = #{id,jdbcType=VARCHAR}
+            type_code = #{typeCode,jdbcType=VARCHAR}
         </where>
     </update>
-    <update id = "deleteByPrimaryKey" parameterType = "java.lang.String">
+    <update id = "deleteByTypeCode" parameterType = "java.lang.String">
         update sys_data
         set del_flag    = '0',
             update_by   = #{updateBy},
             update_time = now()
-        where id = #{id,jdbcType=VARCHAR}
+        where type_code = #{typeCode,jdbcType=VARCHAR}
     </update>
 </mapper>

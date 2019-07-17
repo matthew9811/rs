@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="childrenBody">
@@ -11,9 +11,6 @@
 </div>
 <!-- 操作列 -->
 <script type="text/html" id="tableManage">
-    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">
-        <i class="layui-icon">&#xe654;</i>详情
-    </a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">
         <i class="layui-icon">&#xe642;</i>修改
     </a>
@@ -24,15 +21,15 @@
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
     // 全局加载模块
-    layui.use(['form', 'table'], function () {
+    layui.use(['table'], function () {
         var layer = layui.layer;
-        var form = layui.form,
-            // layer = parent.layer === undefined ? layui.layer : top.layer,
-            $ = layui.jquery,
+        // layer = parent.layer === undefined ? layui.layer : top.layer,
+        $ = layui.jquery,
             table = layui.table;
         var prefix = ctx + 'admin/dictData';
         var typeNo = [[${typeNo}]];
         var addUrl = prefix + '/add/' + typeNo;
+        var tableUrl = prefix + '/list';
         var id;
         //main方法
         $(function () {
@@ -59,22 +56,22 @@
         callback = function (index, layero) {
             var iframeWin = layero.find('iframe')[0];
             iframeWin.contentWindow.submitHandler("formId");
-            iframeWin.contentWindow.submitHandler("formId");
         }
 
         function tableInit() {
             var options = {
                 elem: '#layerTable',
-                url: prefix + '/list',
-                page: false,
-                where :{ typeNo: typeNo},
+                url: tableUrl,
+                where: {typeNo: typeNo},
                 cols: [
                     [
                         {type: 'checkbox'},
-                        {field: 'id', width: 0, align: 'center', title: 'id', hide: true},
-                        {field: 'typeNo', align: 'center', title: '字典编号'},
-                        {field: 'key', align: 'center', title: '键'},
-                        {field: 'value', align: 'center', title: '值'},
+                        {field: 'typeCode', align: 'center', title: '字典编号', hide: true},
+                        {field: 'status', align: 'center', title: '状态'},
+                        {field: 'isDefault', align: 'center', title: '系统默认'},
+                        {field: 'listCss', align: 'center', title: '回显样式'},
+                        {field: 'typeLabel', align: 'center', title: '键'},
+                        {field: 'typeValue', align: 'center', title: '值'},
                         {field: 'typeCss', align: 'center', title: '样式'},
                         {field: 'remark', align: 'center', title: '备注'},
                         {templet: '#tableManage', width: 350, align: 'center', title: '操作'}

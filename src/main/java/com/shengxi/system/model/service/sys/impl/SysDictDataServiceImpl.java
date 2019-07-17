@@ -2,6 +2,8 @@ package com.shengxi.system.model.service.sys.impl;
 
 import com.shengxi.rs.common.util.IdUtil;
 import com.shengxi.rs.common.util.UserUtil;
+import com.shengxi.system.common.constant.BaseConstant;
+import com.shengxi.system.common.constant.ServiceConstant;
 import com.shengxi.system.entites.sys.SysData;
 import com.shengxi.system.model.mapper.sys.SysDataMapper;
 import com.shengxi.system.model.service.sys.SysDictDataService;
@@ -27,13 +29,26 @@ public class SysDictDataServiceImpl implements SysDictDataService {
 
     @Override
     public Integer insert(SysData sysData) {
+        sysData.setStatus(ServiceConstant.NORMAL);
         sysData.setCreateBy(UserUtil.getUserNo());
-        sysData.setId(IdUtil.uuid());
+        synchronized (this){
+            sysData.setTypeCode(this.getNum());
+        }
         return dataMapper.insert(sysData);
     }
 
     @Autowired
     public void setDataMapper(SysDataMapper dataMapper) {
         this.dataMapper = dataMapper;
+    }
+
+    /**
+     * 获取当前的编号
+     *
+     * @return num String
+     */
+    private String getNum() {
+        String num = dataMapper.getNum();
+        return num.equals("0") ? "1" : String.valueOf(Integer.valueOf(num) + 1);
     }
 }
