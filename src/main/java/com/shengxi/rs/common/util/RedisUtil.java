@@ -19,7 +19,6 @@ public class RedisUtil {
     @Autowired
     private JedisPool jedisPool;
 
-    @Value("${spring.redis.timeout}")
     private int timeout;
 
     /**
@@ -47,6 +46,18 @@ public class RedisUtil {
      * set值
      */
     public <T> boolean set(String key, T value) {
+       return this.setex(key, value, this.timeout);
+    }
+
+    /**
+     * set值并设置对应的过期时间
+     * @param key key
+     * @param value value
+     * @param timeout time
+     * @param <T> obj
+     * @return flag
+     */
+    public <T> boolean setex(String key, T value, Integer timeout){
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
@@ -146,5 +157,13 @@ public class RedisUtil {
         if (ObjectUtil.isNotNull(jedis)) {
             jedis.close();
         }
+    }
+
+    public int getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
     }
 }

@@ -11,24 +11,25 @@ import java.util.Map;
  * @Date: 2019/4/7 14:25
  * @Description:
  */
-public class Tree<T> extends BaseEntity{
+public class Tree<T> extends BaseEntity {
     /**
      * 图标
      */
-    private String icon;
+    protected String icon;
     /**
      * 节点的子节点
      */
-    private List<Tree<T>> children = new ArrayList<>();
+    protected List<Tree<T>> children = new ArrayList<>();
     /**
      * 属性
      */
-    private Map<String, Object> attr;
+    protected Map<String, Object> attr;
 
     /**
      * 父ID
      */
     protected String parentId;
+
     public Tree() {
         super();
     }

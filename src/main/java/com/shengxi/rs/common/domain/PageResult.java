@@ -33,7 +33,7 @@ public class PageResult<T> implements Serializable {
 
 
     public String getOrderBy() {
-        if (ObjectUtils.isEmpty(orderByColumn)) {
+        if (StringUtils.isEmpty(orderByColumn)) {
             return "";
         }
         return StringUtils.toUnderScoreCase(orderByColumn) + " " + isAsc;

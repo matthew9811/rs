@@ -50,6 +50,13 @@ public class TokenServiceJwtImpl implements TokenService {
     @Value("${token.jwtSecret}")
     private String jwtSecret;
 
+    /**
+     * 保存对应的token
+     * 传递user实现序列化
+     * 保存并返回token
+     * @param securityUser user
+     * @return token
+     */
     @Override
     public Token saveToken(SecurityUser securityUser) {
         securityUser.setToken(UUID.randomUUID().toString());
@@ -69,6 +76,11 @@ public class TokenServiceJwtImpl implements TokenService {
         this.cacheUser(securityUser);
     }
 
+    /**
+     * 根据token获取对应是信息
+     * @param jwtToken token
+     * @return user Object
+     */
     @Override
     public SecurityUser getSecurityUser(String jwtToken) {
         String uuid = this.getUUidFromJWT(jwtToken);
@@ -79,6 +91,11 @@ public class TokenServiceJwtImpl implements TokenService {
     }
 
 
+    /**
+     * 删除token
+     * @param jwtToken token
+     * @return flag boolean
+     */
     @Override
     public boolean deleteToken(String jwtToken) {
         String uuid = getUUidFromJWT(jwtToken);
@@ -93,6 +110,10 @@ public class TokenServiceJwtImpl implements TokenService {
         return false;
     }
 
+    /**
+     * 缓存数据
+     * @param securityUser user
+     */
     private void cacheUser(SecurityUser securityUser) {
         securityUser.setLoginTime(System.currentTimeMillis());
         securityUser.setExpireTime(securityUser.getLoginTime() + expireSeconds * 1000);
@@ -100,26 +121,47 @@ public class TokenServiceJwtImpl implements TokenService {
         redisUtil.set(getTokenKey(securityUser.getToken()), securityUser);
     }
 
+    /**
+     * 根据jwt获取uuid
+     * @param jwtToken token
+     * @return uuid String
+     */
     private String getUUidFromJWT(String jwtToken) {
-        Map<String, Object> jwtClaims;
-        jwtClaims = Jwts.parser().setSigningKey(getKeyInstance()).
+        Map<String, Object> jwtClaims = Jwts.parser().setSigningKey(getKeyInstance()).
                 parseClaimsJws(jwtToken).getBody();
         return MapUtil.getStr(jwtClaims, LOGIN_USER_KEY);
     }
 
+    /**
+     * 生成键值对
+     *
+     * @param token String
+     * @return string
+     */
     private String getTokenKey(String token) {
         return "tokens:" + token;
     }
 
+    /**
+     * 生成JwtToken
+     *
+     * @param securityUser user
+     * @return string
+     */
     private String createJWTToken(SecurityUser securityUser) {
 
-        Map<String, Object> claims = new HashMap<>();
+        Map<String, Object> claims = new HashMap<>(1);
         /*放入一个随机字符串，通过该串可找到登陆用户*/
         claims.put(LOGIN_USER_KEY, securityUser.getToken());
         return Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS256, getKeyInstance())
                 .compact();
     }
 
+    /**
+     * 获取key实例
+     *
+     * @return KEY
+     */
     private Key getKeyInstance() {
         if (ObjectUtil.isNull(KEY)) {
             synchronized (TokenServiceJwtImpl.class) {

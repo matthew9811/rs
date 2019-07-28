@@ -46,11 +46,9 @@ public class BaseController {
      */
     protected void startPage() {
         PageResult pageDomain = TableSupport.buildPageRequest();
-        Integer pageNum = pageDomain.getPageNum();
-        Integer pageSize = pageDomain.getPageSize();
-        if (ObjectUtil.isNotNull(pageNum) && ObjectUtil.isNotNull(pageSize)) {
+        if (ObjectUtil.isNotNull(pageDomain.getPageNum()) && ObjectUtil.isNotNull( pageDomain.getPageSize())) {
             String orderBy = pageDomain.getOrderBy();
-            PageHelper.startPage(pageNum, pageSize, orderBy);
+            PageHelper.startPage(pageDomain.getPageNum(),  pageDomain.getPageSize(), orderBy);
         }
     }
 
