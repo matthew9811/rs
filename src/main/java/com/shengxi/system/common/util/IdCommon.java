@@ -108,7 +108,7 @@ public class IdCommon {
                     String.format("Clock moved backwards.  Refusing to generate id for %d milliseconds", lastTimestamp - timestamp));
         }
         //如果是同一时间生成的，则进行毫秒内序列
-        if (lastTimestamp == timestamp) {
+        if (lastTimestamp.equals(timestamp)) {
             sequence = (sequence + 1) & sequenceMask;
             //毫秒内序列溢出
             if (sequence == 0) {

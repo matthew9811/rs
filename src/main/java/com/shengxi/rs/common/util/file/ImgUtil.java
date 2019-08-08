@@ -68,14 +68,4 @@ public class ImgUtil {
         BASE64Encoder encoder = new BASE64Encoder();
         return encoder.encode(data);
     }
-
-    /*
-     * 测试代码
-     */
-    public static void main(String[] args) {
-        String imageStr = getImageStr("D:\\001.jpg");
-        System.out.println(imageStr);
-        boolean generateImage = generateImage(imageStr, "001.jpg");
-        System.out.println(generateImage);
-    }
 }

@@ -4,12 +4,14 @@ import com.shengxi.system.entites.sys.SysData;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 /**
  * 字典数据mapper
  *
  * @author matthew
  */
+@Repository
 @Mapper
 public interface SysDataMapper {
 

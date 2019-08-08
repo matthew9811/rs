@@ -65,8 +65,8 @@ public class EasyExcelUtils {
      * @Param Map<String                                                               ,                                                                                                                               List>  sheetName和每个sheet的数据
      * @Date 上午12:16 2019/06/07
      */
-    public static void exportExcelMutilEasyExcel(HttpServletResponse response, Map<String, List<? extends BaseRowModel>> SheetNameAndDateList, ExcelTypeEnum type) throws UnsupportedEncodingException {
-        if (checkParam(SheetNameAndDateList, type)) {
+    public static void exportExcelMultipleEasyExcel(HttpServletResponse response, Map<String, List<? extends BaseRowModel>> sheetNameAndDateList, ExcelTypeEnum type) {
+        if (checkParam(sheetNameAndDateList, type)) {
             return;
         }
         try {
@@ -75,7 +75,7 @@ public class EasyExcelUtils {
             response.setHeader("Content-disposition", "attachment;filename=" + "default" + type.getValue());
             ServletOutputStream out = response.getOutputStream();
             ExcelWriter writer = new ExcelWriter(out, type, true);
-            setSheet(SheetNameAndDateList, writer);
+            setSheet(sheetNameAndDateList, writer);
             writer.finish();
             out.flush();
         } catch (IOException e) {
@@ -87,12 +87,12 @@ public class EasyExcelUtils {
     /**
      * setSheet
      *
-     * @param SheetNameAndDateList data
+     * @param sheetNameAndDateList data
      * @param writer               输出
      */
-    private static void setSheet(Map<String, List<? extends BaseRowModel>> SheetNameAndDateList, ExcelWriter writer) {
+    private static void setSheet(Map<String, List<? extends BaseRowModel>> sheetNameAndDateList, ExcelWriter writer) {
         int sheetNum = 1;
-        for (Map.Entry<String, List<? extends BaseRowModel>> stringListEntry : SheetNameAndDateList.entrySet()) {
+        for (Map.Entry<String, List<? extends BaseRowModel>> stringListEntry : sheetNameAndDateList.entrySet()) {
             Sheet sheet = new Sheet(sheetNum, 0, stringListEntry.getValue().get(0).getClass());
             sheet.setSheetName(stringListEntry.getKey());
             writer.write(stringListEntry.getValue(), sheet);
@@ -104,12 +104,12 @@ public class EasyExcelUtils {
     /**
      * 校验参数
      *
-     * @param SheetNameAndDateList data
+     * @param sheetNameAndDateList data
      * @param type                 类型
      * @return 校验结果
      */
-    private static boolean checkParam(Map<String, List<? extends BaseRowModel>> SheetNameAndDateList, ExcelTypeEnum type) {
-        if (CollectionUtils.isEmpty(SheetNameAndDateList)) {
+    private static boolean checkParam(Map<String, List<? extends BaseRowModel>> sheetNameAndDateList, ExcelTypeEnum type) {
+        if (CollectionUtils.isEmpty(sheetNameAndDateList)) {
             logger.error("SheetNameAndDateList不能为空");
             return true;
         } else if (type == null) {

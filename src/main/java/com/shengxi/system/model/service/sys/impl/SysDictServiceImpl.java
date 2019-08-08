@@ -74,7 +74,7 @@ public class SysDictServiceImpl implements SysDictService {
         return dataMapper.getValue(typeNo);
     }
 
-    private String CheckNo() {
+    private String checkNo() {
         Integer no = dictMapper.checkNo();
         if (ObjectUtil.isNull(no)) {
             no = 0;

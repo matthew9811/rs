@@ -14,14 +14,6 @@ import java.util.List;
  */
 public class TreeUtil {
 
-    public static <T> List<Tree<T>> Recursive(List<Tree<T>> trees) {
-        List<Tree<T>> list = new ArrayList<>();
-        trees.forEach((obj) -> {
-            list.add(findChild(obj, trees));
-        });
-        return list;
-    }
-
     /**
      * 查找对子结点
      *

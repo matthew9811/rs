@@ -1,5 +1,6 @@
 package com.shengxi.rs.common.util.file.excel;
 
+import cn.hutool.core.util.BooleanUtil;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.BaseRowModel;
@@ -148,9 +149,9 @@ public class ExcelUtil {
         File dbfFile = new File(filePath);
         try {
             if (!dbfFile.exists() || dbfFile.isDirectory()) {
-                dbfFile.createNewFile();
+                boolean fileFlag = dbfFile.createNewFile();
             }
-            fileName = new String(filePath.getBytes(), "ISO-8859-1");
+            fileName = new String(filePath.getBytes("utf-8"), "ISO-8859-1");
             response.addHeader("Content-Disposition", "fileName=" + fileName);
             return response.getOutputStream();
         } catch (IOException e) {

@@ -74,7 +74,7 @@ public class TestController extends BaseController {
         String sheetName = "第一个 sheet.xls";
         Map<String, List<? extends BaseRowModel>> map = new HashMap<>(1);
         map.put(fileName, list);
-        EasyExcelUtils.exportExcelMutilEasyExcel(response, map, ExcelTypeEnum.XLSX);
+        EasyExcelUtils.exportExcelMultipleEasyExcel(response, map, ExcelTypeEnum.XLSX);
     }
 
     private List<ExportInfo> getList() {

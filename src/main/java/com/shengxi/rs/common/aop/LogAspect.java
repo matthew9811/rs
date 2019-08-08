@@ -55,23 +55,6 @@ public class LogAspect {
         return point.proceed();
     }
 
-    /**
-     * 方法执行后
-     *
-     * @param joinPoint
-     * @param myLog
-     * @param result
-     * @return
-     * @deprecated
-     * //    @Deprecated
-     * //    @AfterReturning(value = "pointcut() && @annotation(myLog)", returning = "result")
-     * //    public Object afterReturning(JoinPoint joinPoint, Log myLog, Object result) {
-     * //
-     * //        System.out.println("执行结果：" + result);
-     * //
-     * //        return result;
-     * //    }
-     */
 
 
     /**
