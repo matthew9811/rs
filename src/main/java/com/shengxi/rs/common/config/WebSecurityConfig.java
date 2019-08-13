@@ -98,8 +98,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler);
         http.headers().frameOptions().disable();
         http.headers().cacheControl();
-        /**session失效后跳转*/
-        http.sessionManagement().invalidSessionUrl("/logout");
         http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
