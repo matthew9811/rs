@@ -1,6 +1,6 @@
 package com.shengxi.rs.common.config;
 
-import com.shengxi.rs.common.domain.ValidateCodeProperties;
+import com.shengxi.system.entity.config.ValidateCodeProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 /**

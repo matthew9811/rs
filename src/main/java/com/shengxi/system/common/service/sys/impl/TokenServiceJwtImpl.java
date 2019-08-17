@@ -2,10 +2,10 @@ package com.shengxi.system.common.service.sys.impl;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.shengxi.rs.common.domain.SecurityUser;
-import com.shengxi.rs.common.domain.Token;
+import com.shengxi.system.entity.config.SecurityUser;
+import com.shengxi.system.entity.config.Token;
 import com.shengxi.system.common.service.sys.TokenService;
-import com.shengxi.rs.common.util.RedisUtil;
+import com.shengxi.system.common.util.RedisUtil;
 import java.security.Key;
 import java.util.HashMap;
 import java.util.Map;

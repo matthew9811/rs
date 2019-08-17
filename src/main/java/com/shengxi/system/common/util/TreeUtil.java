@@ -2,7 +2,7 @@ package com.shengxi.system.common.util;
 
 
 import cn.hutool.core.util.ObjectUtil;
-import com.shengxi.rs.common.domain.Tree;
+import com.shengxi.system.entity.config.Tree;
 import java.util.ArrayList;
 import java.util.List;
 

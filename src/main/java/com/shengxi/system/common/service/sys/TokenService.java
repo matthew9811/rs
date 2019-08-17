@@ -1,7 +1,7 @@
 package com.shengxi.system.common.service.sys;
 
-import com.shengxi.rs.common.domain.SecurityUser;
-import com.shengxi.rs.common.domain.Token;
+import com.shengxi.system.entity.config.SecurityUser;
+import com.shengxi.system.entity.config.Token;
 
 /**
  * token管理器

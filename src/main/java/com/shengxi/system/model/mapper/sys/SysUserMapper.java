@@ -1,9 +1,8 @@
 package com.shengxi.system.model.mapper.sys;
 
-import com.shengxi.rs.common.domain.SecurityUser;
-import com.shengxi.system.entites.sys.SysUser;
+import com.shengxi.system.entity.config.SecurityUser;
+import com.shengxi.system.entity.sys.SysUser;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 /**

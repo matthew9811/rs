@@ -1,6 +1,6 @@
 package com.shengxi.system.model.mapper.sys;
 
-import com.shengxi.system.entites.sys.SysMenu;
+import com.shengxi.system.entity.sys.SysMenu;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

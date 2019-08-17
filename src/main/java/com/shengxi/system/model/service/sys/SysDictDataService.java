@@ -1,6 +1,6 @@
 package com.shengxi.system.model.service.sys;
 
-import com.shengxi.system.entites.sys.SysData;
+import com.shengxi.system.entity.sys.SysData;
 import java.util.List;
 
 /**

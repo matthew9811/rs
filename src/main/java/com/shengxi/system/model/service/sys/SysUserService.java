@@ -1,6 +1,6 @@
 package com.shengxi.system.model.service.sys;
 
-import com.shengxi.system.entites.sys.SysUser;
+import com.shengxi.system.entity.sys.SysUser;
 
 /**
  * 用户服务层接口

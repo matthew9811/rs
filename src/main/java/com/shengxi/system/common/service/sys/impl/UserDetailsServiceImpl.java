@@ -2,8 +2,8 @@ package com.shengxi.system.common.service.sys.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.shengxi.rs.common.domain.SecurityUser;
-import com.shengxi.system.entites.sys.SysMenu;
+import com.shengxi.system.entity.config.SecurityUser;
+import com.shengxi.system.entity.sys.SysMenu;
 import com.shengxi.system.model.mapper.sys.SysUserMapper;
 import com.shengxi.system.model.service.sys.impl.SysMenuServiceImpl;
 import java.util.List;

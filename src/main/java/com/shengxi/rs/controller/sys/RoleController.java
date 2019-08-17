@@ -1,8 +1,8 @@
 package com.shengxi.rs.controller.sys;
 
 import com.shengxi.rs.common.handler.BaseController;
-import com.shengxi.rs.common.util.UserUtil;
-import com.shengxi.system.entites.sys.SysUser;
+import com.shengxi.system.common.util.UserUtil;
+import com.shengxi.system.entity.sys.SysUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

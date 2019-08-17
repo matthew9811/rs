@@ -13,7 +13,7 @@
 
     <!--查询操作-->
     <select id="selectTestEntityList"
-            resultType="com.shengxi.system.entites.test.TestEntity">
+            resultType="com.shengxi.system.entity.test.TestEntity">
         select a.id, a.name, a.age, a.del_flag
         from test As a
         <where>

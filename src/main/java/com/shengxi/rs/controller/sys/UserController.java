@@ -1,9 +1,8 @@
 package com.shengxi.rs.controller.sys;
 
-import cn.hutool.core.util.ObjectUtil;
-import com.shengxi.rs.common.domain.SecurityUser;
+import com.shengxi.system.entity.config.SecurityUser;
 import com.shengxi.rs.common.handler.BaseController;
-import com.shengxi.rs.common.util.web.TokenUtil;
+import com.shengxi.system.common.util.web.TokenUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,11 +24,8 @@ public class UserController extends BaseController {
     @PostMapping("/admin/current")
     @ResponseBody
     public SecurityUser currentUser(String token) {
-        SecurityUser user = TokenUtil.getUser(token);
-        if (ObjectUtil.isNull(user)){
-            user = new SecurityUser();
-        }
-        return user;
+
+        return TokenUtil.getUser(token);
     }
 
     @GetMapping()

@@ -3,10 +3,10 @@ package com.shengxi.rs.controller.sys;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.shengxi.rs.common.annotation.Log;
 import com.shengxi.rs.common.handler.BaseController;
-import com.shengxi.rs.common.util.file.excel.EasyExcelUtils;
-import com.shengxi.rs.common.util.web.AjaxResult;
-import com.shengxi.rs.common.util.UserUtil;
-import com.shengxi.system.entites.sys.SysMenu;
+import com.shengxi.system.common.util.file.excel.EasyExcelUtils;
+import com.shengxi.system.common.util.web.AjaxResult;
+import com.shengxi.system.common.util.UserUtil;
+import com.shengxi.system.entity.sys.SysMenu;
 import com.shengxi.system.model.service.sys.SysMenuService;
 
 import java.util.List;
@@ -19,7 +19,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 

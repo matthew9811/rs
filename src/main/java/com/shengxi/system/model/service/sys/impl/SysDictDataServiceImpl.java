@@ -1,10 +1,8 @@
 package com.shengxi.system.model.service.sys.impl;
 
-import com.shengxi.rs.common.util.IdUtil;
-import com.shengxi.rs.common.util.UserUtil;
-import com.shengxi.system.common.constant.BaseConstant;
+import com.shengxi.system.common.util.UserUtil;
 import com.shengxi.system.common.constant.ServiceConstant;
-import com.shengxi.system.entites.sys.SysData;
+import com.shengxi.system.entity.sys.SysData;
 import com.shengxi.system.model.mapper.sys.SysDataMapper;
 import com.shengxi.system.model.service.sys.SysDictDataService;
 import java.util.List;

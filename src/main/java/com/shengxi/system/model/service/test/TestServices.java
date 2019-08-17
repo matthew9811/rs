@@ -1,6 +1,6 @@
 package com.shengxi.system.model.service.test;
 
-import com.shengxi.system.entites.test.TestEntity;
+import com.shengxi.system.entity.test.TestEntity;
 import com.shengxi.system.model.mapper.test.TestMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

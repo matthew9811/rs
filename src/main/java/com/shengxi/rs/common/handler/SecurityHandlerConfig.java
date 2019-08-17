@@ -1,13 +1,12 @@
 package com.shengxi.rs.common.handler;
 
-import com.shengxi.rs.common.domain.SecurityUser;
-import com.shengxi.rs.common.domain.Token;
+import com.shengxi.system.entity.config.SecurityUser;
+import com.shengxi.system.entity.config.Token;
 import com.shengxi.rs.common.filter.TokenFilter;
 import com.shengxi.system.common.service.sys.TokenService;
-import com.shengxi.rs.common.domain.ResponseInfo;
-import com.shengxi.rs.common.util.web.ResponseUtil;
+import com.shengxi.system.entity.config.ResponseInfo;
+import com.shengxi.system.common.util.web.ResponseUtil;
 import java.io.IOException;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;

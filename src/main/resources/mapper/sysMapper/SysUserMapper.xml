@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace = "com.shengxi.system.model.mapper.sys.SysUserMapper">
-    <resultMap id = "BaseResultMap" type = "com.shengxi.system.entites.sys.SysUser">
-        <id column = "id" property = "id" />
-        <result column = "user_no" property = "userNo" />
-        <result column = "user_name" property = "userName" />
-        <result column = "password" property = "password" />
-        <result column = "status" property = "status" />
-        <result column = "create_time" property = "createTime" />
-        <result column = "update_time" property = "updateTime" />
-        <result column = "create_by" property = "createBy" />
-        <result column = "update_by" property = "updateBy" />
-        <result column = "remark" property = "remark" />
+<mapper namespace="com.shengxi.system.model.mapper.sys.SysUserMapper">
+    <resultMap id="BaseResultMap" type="com.shengxi.system.entity.sys.SysUser">
+        <id column="id" property="id"/>
+        <result column="user_no" property="userNo"/>
+        <result column="user_name" property="userName"/>
+        <result column="password" property="password"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="remark" property="remark"/>
     </resultMap>
-    <resultMap id = "selectUserNoMap" type = "com.shengxi.system.entites.sys.SysUser">
-        <id column = "id" property = "id" />
-        <result column = "user_no" property = "userNo" />
-        <result column = "user_name" property = "userName" />
-        <result column = "status" property = "status" />
+    <resultMap id="selectUserNoMap" type="com.shengxi.system.entity.sys.SysUser">
+        <id column="id" property="id"/>
+        <result column="user_no" property="userNo"/>
+        <result column="user_name" property="userName"/>
+        <result column="status" property="status"/>
     </resultMap>
-    <sql id = "Base_Column_List">
+    <sql id="Base_Column_List">
         id,
         user_no,
         user_name,
@@ -31,11 +31,11 @@
         update_by,
         remark
     </sql>
-    <sql id = "del_flag">
+    <sql id="del_flag">
         '1'
     </sql>
-    <select id = "selectUserNo"
-            resultMap = "selectUserNoMap">
+    <select id="selectUserNo"
+            resultMap="selectUserNoMap">
         select
         u.id,
         u.user_no,
@@ -45,25 +45,25 @@
         sys_user as u
         <where>
             u.del_flag =
-            <include refid = "del_flag" />
-            <if test = "id != null and id != ''">
+            <include refid="del_flag"/>
+            <if test="id != null and id != ''">
                 and id = #{id}
             </if>
 
-            <if test = "userNo != null and userNo != ''">
+            <if test="userNo != null and userNo != ''">
                 and user_no = #{userNo}
             </if>
 
-            <if test = "userName != null and userName != ''">
+            <if test="userName != null and userName != ''">
                 and user_name = #{userName,}
             </if>
 
-            <if test = "status != null and status != ''">
+            <if test="status != null and status != ''">
                 and status = #{status}
             </if>
         </where>
     </select>
-    <select id = "getUserByNo" parameterType = "String" resultType = "com.shengxi.rs.common.domain.SecurityUser">
+    <select id="getUserByNo" parameterType="String" resultType="com.shengxi.system.entity.config.SecurityUser">
         select
         user_name as userName,
         user_no as userNo,
@@ -71,24 +71,24 @@
         status as status
         from sys_user
         where del_flag =
-        <include refid = "del_flag" />
+        <include refid="del_flag"/>
         and user_no = #{s}
     </select>
-    <select id = "selectByPrimaryKey" parameterType = "java.lang.String" resultMap = "BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
-        <include refid = "Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from sys_user
         where id = #{id,jdbcType=VARCHAR}
     </select>
-    <update id = "deleteById" parameterType = "java.lang.String">
+    <update id="deleteById" parameterType="java.lang.String">
         update sys_user
         set del_flag    = '0',
             update_time = now(),
             update_by   = #{updateBy}
         where id = #{id}
     </update>
-    <insert id = "insert" keyColumn = "id" keyProperty = "id" parameterType = "com.shengxi.system.entites.sys.SysUser"
-            useGeneratedKeys = "true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shengxi.system.entity.sys.SysUser"
+            useGeneratedKeys="true">
         insert into sys_user (user_no, user_name, `password`, `status`, create_time, create_by, remark, del_flag)
         values (#{userNo,jdbcType=VARCHAR},
                 #{userName,jdbcType=VARCHAR},
@@ -99,92 +99,92 @@
                 #{remark,jdbcType=VARCHAR},
                 #{delFlag,jdbcType=CHAR})
     </insert>
-    <insert id = "insertSelective" keyColumn = "id" keyProperty = "id"
-            parameterType = "com.shengxi.system.entites.sys.SysUser"
-            useGeneratedKeys = "true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.shengxi.system.entity.sys.SysUser"
+            useGeneratedKeys="true">
         insert into sys_user
-        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
-            <if test = "userNo != null">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userNo != null">
                 user_no,
             </if>
-            <if test = "userName != null">
+            <if test="userName != null">
                 user_name,
             </if>
-            <if test = "password != null">
+            <if test="password != null">
                 `password`,
             </if>
-            <if test = "status != null">
+            <if test="status != null">
                 `status`,
             </if>
-            <if test = "createTime != null">
+            <if test="createTime != null">
                 create_time,
             </if>
-            <if test = "createBy != null">
+            <if test="createBy != null">
                 create_by,
             </if>
-            <if test = "remark != null">
+            <if test="remark != null">
                 remark,
             </if>
-            <if test = "delFlag != null">
+            <if test="delFlag != null">
                 del_flag,
             </if>
         </trim>
-        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
-            <if test = "userNo != null">
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userNo != null">
                 #{userNo,jdbcType=VARCHAR},
             </if>
-            <if test = "userName != null">
+            <if test="userName != null">
                 #{userName,jdbcType=VARCHAR},
             </if>
-            <if test = "password != null">
+            <if test="password != null">
                 #{password,jdbcType=VARCHAR},
             </if>
-            <if test = "status != null">
+            <if test="status != null">
                 #{status,jdbcType=CHAR},
             </if>
-            <if test = "createTime != null">
+            <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
             </if>
-            <if test = "createBy != null">
+            <if test="createBy != null">
                 #{createBy,jdbcType=VARCHAR},
             </if>
-            <if test = "remark != null">
+            <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
             </if>
-            <if test = "delFlag != null">
+            <if test="delFlag != null">
                 #{delFlag,jdbcType=CHAR},
             </if>
         </trim>
     </insert>
-    <update id = "updateByPrimaryKeySelective" parameterType = "com.shengxi.system.entites.sys.SysUser">
+    <update id="updateByPrimaryKeySelective" parameterType="com.shengxi.system.entity.sys.SysUser">
         update sys_user
         <set>
-            <if test = "userNo != null">
+            <if test="userNo != null">
                 user_no = #{userNo,jdbcType=VARCHAR},
             </if>
-            <if test = "userName != null">
+            <if test="userName != null">
                 user_name = #{userName,jdbcType=VARCHAR},
             </if>
-            <if test = "password != null">
+            <if test="password != null">
                 `password` = #{password,jdbcType=VARCHAR},
             </if>
 
-            <if test = "status != null">
+            <if test="status != null">
                 `status` = #{status,jdbcType=CHAR},
             </if>
-            <if test = "updateTime != null">
+            <if test="updateTime != null">
                 update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
-            <if test = "updateBy != null">
+            <if test="updateBy != null">
                 update_by = #{updateBy,jdbcType=VARCHAR},
             </if>
-            <if test = "remark != null">
+            <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
-    <update id = "updateByPrimaryKey" parameterType = "com.shengxi.system.entites.sys.SysUser">
+    <update id="updateByPrimaryKey" parameterType="com.shengxi.system.entity.sys.SysUser">
         update sys_user
         set user_no = #{userNo,jdbcType=VARCHAR},
         user_name = #{userName,jdbcType=VARCHAR},

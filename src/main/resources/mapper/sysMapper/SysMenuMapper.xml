@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "com.shengxi.system.model.mapper.sys.SysMenuMapper">
-    <resultMap id = "BaseResultMap" type = "com.shengxi.system.entites.sys.SysMenu">
+    <resultMap id = "BaseResultMap" type = "com.shengxi.system.entity.sys.SysMenu">
         <id column = "sys_menu_id" jdbcType = "VARCHAR" property = "id" />
         <result column = "sys_menu_parent_id" jdbcType = "VARCHAR" property = "parentId" />
         <result column = "sys_menu_url" jdbcType = "VARCHAR" property = "url" />
@@ -35,7 +35,7 @@
         '1'
     </sql>
     <!--获取所有的有效数据-->
-    <select id = "selectByList" parameterType = "com.shengxi.system.entites.sys.SysMenu"
+    <select id = "selectByList" parameterType = "com.shengxi.system.entity.sys.SysMenu"
             resultMap = "BaseResultMap">
         select
         <include refid = "Base_Column_List" />
@@ -55,7 +55,7 @@
         <include refid = "del_flag" />
         and sys_menu.id = #{id,jdbcType=VARCHAR}
     </select>
-    <select id = "selectPermList" parameterType = "String" resultType = "com.shengxi.system.entites.sys.SysMenu">
+    <select id = "selectPermList" parameterType = "String" resultType = "com.shengxi.system.entity.sys.SysMenu">
         SELECT
         a.id AS id,
         a.parent_id AS parent_id,
@@ -90,7 +90,7 @@
             <include refid = "del_flag" />
         </where>
     </select>
-    <select id = "selectOfParentAdd" resultType = "com.shengxi.system.entites.sys.SysMenu">
+    <select id = "selectOfParentAdd" resultType = "com.shengxi.system.entity.sys.SysMenu">
         select id as id,
         parent_id as parentId,
         menu_name as menuName
@@ -100,7 +100,7 @@
         <include refid = "del_flag" />
     </select>
     <insert id = "insert"
-            parameterType = "com.shengxi.system.entites.sys.SysMenu">
+            parameterType = "com.shengxi.system.entity.sys.SysMenu">
         insert into sys_menu
         (id,
          parent_id,
@@ -127,7 +127,7 @@
          #{sort})
     </insert>
     <insert id = "insertSelective"
-            parameterType = "com.shengxi.system.entites.sys.SysMenu">
+            parameterType = "com.shengxi.system.entity.sys.SysMenu">
         insert into sys_menu
         <trim prefix = "(" suffix = ")" suffixOverrides = ",">
             id,
@@ -197,7 +197,7 @@
             </if>
         </trim>
     </insert>
-    <update id = "updateSelective" parameterType = "com.shengxi.system.entites.sys.SysMenu">
+    <update id = "updateSelective" parameterType = "com.shengxi.system.entity.sys.SysMenu">
         update sys_menu
         <set>
             <if test = "sort != null">
@@ -230,7 +230,7 @@
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
-    <update id = "updateById" parameterType = "com.shengxi.system.entites.sys.SysMenu">
+    <update id = "updateById" parameterType = "com.shengxi.system.entity.sys.SysMenu">
         update sys_menu
         set
             sort = #{sort},

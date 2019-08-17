@@ -20,7 +20,7 @@ public class MybatisConfig {
      * @return SqlStatementInterceptor
      */
     @Bean
-    @ConditionalOnProperty(name = "rs.showsql", havingValue = "true")
+    @ConditionalOnProperty(name = "rs.showSql", havingValue = "true")
     SqlStatementInterceptor sqlStatementInterceptor() {
         return new SqlStatementInterceptor();
     }

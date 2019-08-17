@@ -1,6 +1,6 @@
 package com.shengxi.system.model.mapper.test;
 
-import com.shengxi.system.entites.test.TestEntity;
+import com.shengxi.system.entity.test.TestEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 

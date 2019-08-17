@@ -1,8 +1,8 @@
 package com.shengxi.system.common.service.sys.impl;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.shengxi.rs.common.domain.SecurityUser;
-import com.shengxi.rs.common.domain.Token;
+import com.shengxi.system.entity.config.SecurityUser;
+import com.shengxi.system.entity.config.Token;
 import com.shengxi.system.common.service.sys.TokenService;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;

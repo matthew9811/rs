@@ -2,10 +2,10 @@ package com.shengxi.system.model.service.sys.impl;
 
 import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.shengxi.rs.common.constant.SysConstant;
-import com.shengxi.rs.common.util.IdUtil;
+import com.shengxi.system.common.constant.SysConstant;
+import com.shengxi.system.common.util.IdUtil;
 import com.shengxi.system.common.constant.BaseConstant;
-import com.shengxi.system.entites.sys.SysUser;
+import com.shengxi.system.entity.sys.SysUser;
 import com.shengxi.system.model.mapper.sys.SysUserMapper;
 import com.shengxi.system.model.service.sys.SysUserService;
 import java.sql.SQLSyntaxErrorException;

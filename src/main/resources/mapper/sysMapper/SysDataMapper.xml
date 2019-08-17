@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace = "com.shengxi.system.model.mapper.sys.SysDataMapper">
-    <resultMap id = "BaseResultMap" type = "com.shengxi.system.entites.sys.SysData">
-        <result column = "type_label" jdbcType = "VARCHAR" property = "typeLabel" />
-        <result column = "type_code" jdbcType = "VARCHAR" property = "typeCode" />
-        <result column = "status" jdbcType = "CHAR" property = "status" />
-        <result column = "is_default" jdbcType = "CHAR" property = "isDefault" />
-        <result column = "list_css" jdbcType = "VARCHAR" property = "listCss" />
-        <result column = "type_value" jdbcType = "VARCHAR" property = "typeValue" />
-        <result column = "type_no" jdbcType = "VARCHAR" property = "typeNo" />
-        <result column = "remark" jdbcType = "VARCHAR" property = "remark" />
-        <result column = "create_by" jdbcType = "VARCHAR" property = "createBy" />
-        <result column = "create_time" jdbcType = "TIMESTAMP" property = "createTime" />
-        <result column = "update_by" jdbcType = "VARCHAR" property = "updateBy" />
-        <result column = "update_time" jdbcType = "TIMESTAMP" property = "updateTime" />
-        <result column = "del_flag" jdbcType = "CHAR" property = "delFlag" />
-        <result column = "type_css" jdbcType = "VARCHAR" property = "typeCss" />
+<mapper namespace="com.shengxi.system.model.mapper.sys.SysDataMapper">
+    <resultMap id="BaseResultMap" type="com.shengxi.system.entity.sys.SysData">
+        <result column="type_label" jdbcType="VARCHAR" property="typeLabel"/>
+        <result column="type_code" jdbcType="VARCHAR" property="typeCode"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="is_default" jdbcType="CHAR" property="isDefault"/>
+        <result column="list_css" jdbcType="VARCHAR" property="listCss"/>
+        <result column="type_value" jdbcType="VARCHAR" property="typeValue"/>
+        <result column="type_no" jdbcType="VARCHAR" property="typeNo"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="del_flag" jdbcType="CHAR" property="delFlag"/>
+        <result column="type_css" jdbcType="VARCHAR" property="typeCss"/>
     </resultMap>
-    <sql id = "Base_Column_List">
+    <sql id="Base_Column_List">
                a.`type_label`,
                a.`type_value`,
                a.type_no,
@@ -32,49 +32,50 @@
                a.is_default,
                a.type_code
     </sql>
-    <sql id = "del_flag">
+    <sql id="del_flag">
                '1'
     </sql>
-    <select id = "selectDictDataListByDictId" parameterType = "com.shengxi.system.entites.sys.SysData"
-            resultMap = "BaseResultMap">
+    <select id="selectDictDataListByDictId" parameterType="com.shengxi.system.entity.sys.SysData"
+            resultMap="BaseResultMap">
         select
-        <include refid = "Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from sys_data a
         <where>
             a.del_flag =
-            <include refid = "del_flag" />
-            <if test = "id != null and id != '' ">
+            <include refid="del_flag"/>
+            <if test="id != null and id != '' ">
                 and a.id = #{id}
             </if>
-            <if test = "typeLabel != null and typeLabel != '' ">
+            <if test="typeLabel != null and typeLabel != '' ">
                 and a.type_label = #{typeLabel,jdbcType=VARCHAR}
             </if>
-            <if test = "typeValue != null and typeValue != ''">
+            <if test="typeValue != null and typeValue != ''">
                 and a.value = #{typeValue,jdbcType=VARCHAR}
             </if>
-            <if test = "typeNo != null and typeNo != ''">
+            <if test="typeNo != null and typeNo != ''">
                 and a.type_no = #{typeNo}
             </if>
-            <if test = "createBy != null and createBy != ''">
+            <if test="createBy != null and createBy != ''">
                 and a.create_by = #{createBy,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
-    <select id = "getValue" resultMap="BaseResultMap">
+    <select id="getValue" resultMap="BaseResultMap">
         select
-        <include refid = "Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from sys_data as a
         <where>
             a.del_flag =
-            <include refid = "del_flag" />
+            <include refid="del_flag"/>
             and a.type_no = #{typeNo}
         </where>
     </select>
-    <select id = "getNum" resultType = "java.lang.String">
-        select count(1) from sys_data where del_flag = <include refid = "del_flag"/>
+    <select id="getNum" resultType="java.lang.String">
+        select count(1) from sys_data where del_flag =
+        <include refid="del_flag"/>
     </select>
 
-    <insert id = "insert" parameterType = "com.shengxi.system.entites.sys.SysData">
+    <insert id="insert" parameterType="com.shengxi.system.entity.sys.SysData">
         insert into sys_data (`type_label`,
                               `type_value`,
                               type_no,
@@ -100,132 +101,132 @@
                 now(),
                 #{delFlag,jdbcType=CHAR})
     </insert>
-    <insert id = "insertSelective" keyColumn = "id" keyProperty = "id"
-            parameterType = "com.shengxi.system.entites.sys.SysData" useGeneratedKeys = "true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.shengxi.system.entity.sys.SysData" useGeneratedKeys="true">
         insert into sys_data
-        <trim prefix = "(" suffix = ")" suffixOverrides = ",">
-            <if test = "id != null and id != ''">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">
                 id ,
             </if>
-            <if test = "typeLabel != null">
+            <if test="typeLabel != null">
                 `type_label`,
             </if>
-            <if test = "typeValue != null">
+            <if test="typeValue != null">
                 `type_value`,
             </if>
-            <if test = "typeNo != null">
+            <if test="typeNo != null">
                 type_no,
             </if>
-            <if test = "typeCss != null and typeCss != ''">
+            <if test="typeCss != null and typeCss != ''">
                 type_css,
             </if>
-            <if test = "isDefault != null">
+            <if test="isDefault != null">
                 is_default,
             </if>
-            <if test = "listCss != null">
+            <if test="listCss != null">
                 list_css,
             </if>
-            <if test = "typeCode != null">
+            <if test="typeCode != null">
                 type_code,
             </if>
-            <if test = "status != null">
+            <if test="status != null">
                 status,
             </if>
-            <if test = "remark != null">
+            <if test="remark != null">
                 remark,
             </if>
-            <if test = "createBy != null">
+            <if test="createBy != null">
                 create_by,
             </if>
-            <if test = "createTime != null">
+            <if test="createTime != null">
                 create_time,
             </if>
-            <if test = "delFlag != null">
+            <if test="delFlag != null">
                 del_flag,
             </if>
         </trim>
-        <trim prefix = "values (" suffix = ")" suffixOverrides = ",">
-            <if test = "id != null and id != ''">
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null and id != ''">
                 #{id,jdbcType=VARCHAR},
             </if>
-            <if test = "typeLabel != null">
+            <if test="typeLabel != null">
                 #{typeLabel,jdbcType=VARCHAR},
             </if>
-            <if test = "typeValue != null">
+            <if test="typeValue != null">
                 #{typeValue,jdbcType=VARCHAR},
             </if>
-            <if test = "typeNo != null">
+            <if test="typeNo != null">
                 #{typeNo,jdbcType=VARCHAR},
             </if>
-            <if test = "typeCss != null and typeCss != ''">
+            <if test="typeCss != null and typeCss != ''">
                 #{typeCss,jdbcType=VARCHAR},
             </if>
-            <if test = "isDefault != null">
+            <if test="isDefault != null">
                 #{isDefault,jdbcType=VARCHAR},
             </if>
-            <if test = "listCss != null">
+            <if test="listCss != null">
                 #{listCss,jdbcType=VARCHAR},
             </if>
-            <if test = "typeCode != null">
+            <if test="typeCode != null">
                 #{typeCode,jdbcType=VARCHAR},
             </if>
-            <if test = "status != null">
+            <if test="status != null">
                 #{status,jdbcType=VARCHAR} ,
             </if>
-            <if test = "remark != null">
+            <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
             </if>
-            <if test = "createBy != null">
+            <if test="createBy != null">
                 #{createBy,jdbcType=VARCHAR},
             </if>
-            <if test = "createTime != null">
+            <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
             </if>
-            <if test = "delFlag != null">
+            <if test="delFlag != null">
                 #{delFlag,jdbcType=CHAR}
             </if>
         </trim>
     </insert>
-    <update id = "updateByTypeCodeSelective" parameterType = "com.shengxi.system.entites.sys.SysData">
+    <update id="updateByTypeCodeSelective" parameterType="com.shengxi.system.entity.sys.SysData">
         update sys_data
         <set>
-            <if test = "typeLabel != null">
+            <if test="typeLabel != null">
                 `type_label` = #{typeLabel,jdbcType=VARCHAR},
             </if>
-            <if test = "typeValue != null">
+            <if test="typeValue != null">
                 `type_value` = #{typeValue,jdbcType=VARCHAR},
             </if>
-            <if test = "typeNo != null">
+            <if test="typeNo != null">
                 type_no = #{typeNo,jdbcType=VARCHAR},
             </if>
-            <if test = "typeCss != null ">
+            <if test="typeCss != null ">
                 type_css = #{typeCss,jdbcType=VARCHAR},
             </if>
-            <if test = "typeCode != null">
+            <if test="typeCode != null">
                 type_code = #{typeCode,jdbcType=VARCHAR} ,
             </if>
-            <if test = "isDefault != null">
+            <if test="isDefault != null">
                 is_default = #{isDefault,jdbcType=VARCHAR} ,
             </if>
-            <if test = "status != null">
+            <if test="status != null">
                 status = #{status,jdbcType=VARCHAR} ,
             </if>
-            <if test = "listCss != null">
+            <if test="listCss != null">
                 list_css = #{listCss,jdbcType=VARCHAR} ,
             </if>
-            <if test = "remark != null">
+            <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
             </if>
-            <if test = "updateBy != null">
+            <if test="updateBy != null">
                 update_by = #{updateBy,jdbcType=VARCHAR},
             </if>
-            <if test = "updateTime != null">
+            <if test="updateTime != null">
                 update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
         </set>
         where type_code = #{typeCode,jdbcType=VARCHAR}
     </update>
-    <update id = "updateByTypeCode" parameterType = "com.shengxi.system.entites.sys.SysData">
+    <update id="updateByTypeCode" parameterType="com.shengxi.system.entity.sys.SysData">
         update sys_data
         <set>
             `type_label` = #{typeLabel,jdbcType=VARCHAR},
@@ -240,7 +241,7 @@
             type_code = #{typeCode,jdbcType=VARCHAR}
         </where>
     </update>
-    <update id = "deleteByTypeCode" parameterType = "java.lang.String">
+    <update id="deleteByTypeCode" parameterType="java.lang.String">
         update sys_data
         set del_flag    = '0',
             update_by   = #{updateBy},

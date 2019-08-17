@@ -1,8 +1,7 @@
 package com.shengxi.rs.common.handler;
 
-import com.shengxi.rs.common.util.web.ResponseUtil;
+import com.shengxi.system.common.util.web.ResponseUtil;
 import java.io.IOException;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.access.AccessDeniedException;

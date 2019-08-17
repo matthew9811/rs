@@ -1,9 +1,10 @@
 package com.shengxi.rs.common.config;
 
-import com.shengxi.rs.common.domain.RedisYml;
+import com.shengxi.system.entity.config.RedisEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,8 +18,8 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 /**
- * @author: Matthew
- * @Date: 2019/4/6 16:47
+ * @author : Matthew
+ * @date : 2019/4/6 16:47
  * @Description: Redis 缓存配置类
  */
 
@@ -27,13 +28,13 @@ import redis.clients.jedis.JedisPoolConfig;
 @Configuration
 public class RedisConfig {
 
-    private Logger logger = LoggerFactory.getLogger(RedisConfig.class);
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private RedisYml redisYml;
+    private RedisEntity redisEntity;
 
     @Autowired
-    public void setRedisYml(RedisYml redisYml) {
-        this.redisYml = redisYml;
+    public void setRedisEntity(RedisEntity redisEntity) {
+        this.redisEntity = redisEntity;
     }
 
 
@@ -62,8 +63,8 @@ public class RedisConfig {
      */
     @Bean
     public JedisPool jedisPoolFactory() {
-        logger.debug(">>>>>>redisConfig>>>>>:" + redisYml.getHost() + ":" + redisYml.getPort());
-        return new JedisPool(new JedisPoolConfig(), redisYml.getHost(), redisYml.getPort(), redisYml.getTimeout(), redisYml.getPassword());
+        logger.debug(">>>>>>redisConfig>>>>>:{}:{}", redisEntity.getHost(), redisEntity.getPort());
+        return new JedisPool(new JedisPoolConfig(), redisEntity.getHost(), redisEntity.getPort(), redisEntity.getTimeout(), redisEntity.getPassword());
     }
 
 }

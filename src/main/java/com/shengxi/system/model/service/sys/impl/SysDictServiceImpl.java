@@ -2,11 +2,11 @@ package com.shengxi.system.model.service.sys.impl;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.ObjectUtil;
-import com.shengxi.rs.common.util.IdUtil;
-import com.shengxi.rs.common.util.UserUtil;
+import com.shengxi.system.common.util.IdUtil;
+import com.shengxi.system.common.util.UserUtil;
 import com.shengxi.system.common.constant.ServiceConstant;
-import com.shengxi.system.entites.sys.SysData;
-import com.shengxi.system.entites.sys.SysDict;
+import com.shengxi.system.entity.sys.SysData;
+import com.shengxi.system.entity.sys.SysDict;
 import com.shengxi.system.model.mapper.sys.SysDataMapper;
 import com.shengxi.system.model.mapper.sys.SysDictMapper;
 import com.shengxi.system.model.service.sys.SysDictService;

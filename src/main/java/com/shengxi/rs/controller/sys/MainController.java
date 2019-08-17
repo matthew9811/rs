@@ -1,22 +1,16 @@
 package com.shengxi.rs.controller.sys;
 
 import cn.hutool.core.util.BooleanUtil;
-import com.shengxi.rs.common.domain.SecurityUser;
 import com.shengxi.rs.common.handler.BaseController;
 
-import javax.annotation.security.PermitAll;
-
-import com.shengxi.system.entites.sys.SysMenu;
 import com.shengxi.system.model.service.sys.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**

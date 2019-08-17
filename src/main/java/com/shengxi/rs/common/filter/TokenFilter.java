@@ -1,7 +1,7 @@
 package com.shengxi.rs.common.filter;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.shengxi.rs.common.domain.SecurityUser;
+import com.shengxi.system.entity.config.SecurityUser;
 import com.shengxi.system.common.service.sys.TokenService;
 import java.io.IOException;
 import javax.servlet.FilterChain;
@@ -37,6 +37,7 @@ public class TokenFilter extends OncePerRequestFilter {
     private UserDetailsService userDetailsService;
 
     private static final Long MINUTES_10 = 10 * 60 * 1000L;
+
     private Logger logger = LoggerFactory.getLogger(TokenFilter.class);
 
     @Override
@@ -47,7 +48,7 @@ public class TokenFilter extends OncePerRequestFilter {
          * 打印请求，查看
          * */
         String token = getToken(request);
-        if (com.shengxi.rs.common.util.StringUtils.isNull(token)) {
+        if (com.shengxi.system.common.util.StringUtils.isNull(token)) {
             //token为空是发出log提示
             logger.debug("token: " + token);
         }

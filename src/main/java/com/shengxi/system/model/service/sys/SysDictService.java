@@ -1,6 +1,6 @@
 package com.shengxi.system.model.service.sys;
 
-import com.shengxi.system.entites.sys.SysDict;
+import com.shengxi.system.entity.sys.SysDict;
 import java.util.List;
 
 /**

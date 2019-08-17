@@ -1,6 +1,6 @@
 package com.shengxi.rs.common.annotation;
 
-import com.shengxi.rs.common.constant.DataSourceType;
+import com.shengxi.system.common.constant.DataSourceType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

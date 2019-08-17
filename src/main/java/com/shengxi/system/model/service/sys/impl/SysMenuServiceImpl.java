@@ -2,11 +2,11 @@ package com.shengxi.system.model.service.sys.impl;
 
 
 import cn.hutool.core.util.ObjectUtil;
-import com.shengxi.rs.common.domain.Tree;
-import com.shengxi.rs.common.util.IdUtil;
+import com.shengxi.system.entity.config.Tree;
+import com.shengxi.system.common.util.IdUtil;
 import com.shengxi.system.common.constant.BaseConstant;
 import com.shengxi.system.common.constant.ServiceConstant;
-import com.shengxi.system.entites.sys.SysMenu;
+import com.shengxi.system.entity.sys.SysMenu;
 import com.shengxi.system.model.mapper.sys.SysMenuMapper;
 
 import com.shengxi.system.model.service.sys.SysMenuService;

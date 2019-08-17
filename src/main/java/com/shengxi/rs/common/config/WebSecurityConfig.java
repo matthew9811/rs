@@ -17,7 +17,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -25,9 +24,9 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 
 
 /**
- * @author: Matthew
- * @Date: 2019/4/26 15:08
- * @Description: 权限配置
+ * @author : Matthew
+ * @date  : 2019/4/26 15:08
+ * @description : 权限配置
  * 继承 WebSecurityConfigurerAdapter 实现权限的配置初始化
  */
 @Configuration
@@ -69,13 +68,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-        /**
-         * 基于token, 关闭session
-         */
+        /* 基于token, 关闭session*/
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and();
-        /**
-         * 开放资源
-         */
+        /* 开放资源*/
         http.authorizeRequests().
                 antMatchers(HttpMethod.POST, loginPath).anonymous()
                 .antMatchers(HttpMethod.GET, "/").anonymous()
@@ -83,9 +78,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/webjar/**", "/", "/**", "/*.html", "/favicon.ico", "/css/**", "/js/**", "/fonts/**", "/layui/**", "/img/**",
                 "/v2/api-docs/**", "/swagger-resources/**", "/webjars/**", "/pages/**", "/druid/**",
                 "/statics/**").permitAll().anyRequest().authenticated();
-        /**
-         * 权限配置
-         */
+        /* 权限配置*/
         http.formLogin().usernameParameter("userNo");
         /*登录页面和登录提交路径*/
         http.formLogin().usernameParameter("userNo").
