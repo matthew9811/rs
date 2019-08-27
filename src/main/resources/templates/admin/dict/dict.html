@@ -28,8 +28,8 @@
 <script th:inline="javascript">
     // 全局加载模块
     layui.use(['table'], function () {
-        var layer = layui.layer;
-        $ = layui.jquery,
+        var layer = layui.layer,
+            $ = layui.jquery,
             table = layui.table;
         var prefix = ctx + 'admin/dict';
         var addUrl = prefix + '/add';
@@ -122,6 +122,8 @@
                 }
             });
         }
+
+
     });
 </script>
 </body>

@@ -79,10 +79,17 @@ $(function () {
         $("body").on("click",".layui-nav .layui-nav-item a:not('.mobileTopLevelMenus .layui-nav-item a')",function(){
             //如果不存在子级
             if($(this).siblings().length == 0){
+
                 addTab($(this));
                 $('body').removeClass('site-mobile');  //移动端点击菜单关闭菜单层
             }
             $(this).parent("li").siblings().removeClass("layui-nav-itemed");
+        });
+
+        //添加非菜单的新窗口
+        $("#new-add").on("click",function () {
+            tabNew();
+
         });
 
         //清除缓存
@@ -141,6 +148,11 @@ $(function () {
 //打开新窗口
     function addTab(_this){
         tab.tabAdd(_this);
+    }
+
+//打开非菜单的新窗口
+    function tabNew(){
+        tab.tabNewAdd();
     }
 
 });

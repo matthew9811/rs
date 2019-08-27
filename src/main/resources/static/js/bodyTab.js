@@ -146,6 +146,7 @@ layui.define(["element","jquery"],function(exports){
 					return;
 				}
 				tabIdIndex++;
+
 				title += '<cite>'+_this.find("cite").text()+'</cite>';
 				title += '<i class="layui-icon layui-unselect layui-tab-close" data-id="'+tabIdIndex+'">&#x1006;</i>';
 				element.tabAdd(tabFilter, {
@@ -161,11 +162,13 @@ layui.define(["element","jquery"],function(exports){
 					"layId" : new Date().getTime()
 				};
 				menu.push(curmenu);
+                console.log(menu);
 				window.sessionStorage.setItem("menu",JSON.stringify(menu)); //打开的窗口
 				window.sessionStorage.setItem("curmenu",JSON.stringify(curmenu));  //当前的窗口
 				element.tabChange(tabFilter, that.getLayId(_this.find("cite").text()));
 				that.tabMove(); //顶部窗口是否可滚动
-			}else{
+			}
+			else{
 				//当前窗口内容
 				var curmenu = {
 					"icon" : _this.find("i.seraph").attr("data-icon")!=undefined ? _this.find("i.seraph").attr("data-icon") : _this.find("i.layui-icon").attr("data-icon"),
@@ -180,7 +183,46 @@ layui.define(["element","jquery"],function(exports){
 		}
 	};
 
-	//顶部窗口移动
+    /**
+     * 定义一个函数，调用tab模块
+     * 调用Tab.prototype.set函数可以修改所有的参数
+     * 考虑直接调用Tab.prototype.tabAdd然后仿造Tab.prototype.set中的方案传递参数
+     * 避免对其他页签的影响。
+     * 更合理的方案时直接利用对本函数的理解
+     * 直接传递对应的参数_this进去。
+     * @type {number}
+     */
+	//非菜单的新窗口
+    var tabId = 0;
+    Tab.prototype.tabNewAdd = function(){
+        if(window.sessionStorage.getItem("menu")){
+            menu = JSON.parse(window.sessionStorage.getItem("menu"));
+        }
+        var that = this;
+        var title = '';
+        var tabFilter = that.tabConfig.tabFilter;
+        title = '<i class="layui-icon">新窗口</i><cite>新窗口</cite><i class="layui-icon layui-unselect layui-tab-close" data-id="">&#x1006;</i>';
+        element.tabAdd(tabFilter, {
+            title : title,
+            content :"<iframe src='/admin/menu' data-id=''></frame>",
+            id : new Date().getTime()
+        });
+        var curmenu = {
+            "icon" : '新窗口',
+            "title" : '新窗口',
+            "href" : '/admin/menu',
+            "layId" : new Date().getTime()
+        };
+        menu.push(curmenu);
+        console.log(menu);
+        window.sessionStorage.setItem("menu",JSON.stringify(menu)); //打开的窗口
+        window.sessionStorage.setItem("curmenu",JSON.stringify(curmenu));  //当前的窗口
+        element.tabChange(tabFilter, that.getLayId('新窗口'));
+        that.tabMove(); //顶部窗口是否可滚动
+    };
+
+
+    //顶部窗口移动
 	Tab.prototype.tabMove = function(){
 		$(window).on("resize",function(event){
 			var topTabsBox = $("#top_tabs_box"),

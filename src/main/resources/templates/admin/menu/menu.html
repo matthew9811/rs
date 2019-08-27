@@ -39,7 +39,7 @@
                 layui.use(['form', 'layer', 'table'], function () {
                     var layer = layui.layer;
                     var form = layui.form,
-                        layer = parent.layer === undefined ? layui.layer : top.layer,
+                        //layer = parent.layer === undefined ? layui.layer : top.layer,
                         $ = layui.jquery,
                         table = layui.table;
                     // 渲染表格
@@ -101,7 +101,7 @@
                             }, function () {
                                 var config = {
                                     url: prefix + "/move",
-                                    data: id,
+                                    data: id
                                 };
                                 $.submit.moveSubmit(config);
                                 layer.closeAll();
@@ -110,31 +110,18 @@
                             });
                         } else if (layEvent === 'add') {
                             url = prefix + '/add';
-                            layer.open({
-                                type: 2,
+                            var options = {
                                 title: '添加下一级',
-                                content: url + "/" + id,
-                                maxmin: true,
-                                // shadeClose: true,
-                                btn: ['确定', '取消'],
-                                area: ['600px', '550px'],
-                                yes: function (index, layero) {
-                                    callback(index, layero);
-                                }
-                            });
+                                content: url + "/" + id
+                            };
+                            $.open.openIframe(options);
                         } else if (layEvent === 'edit') {
                             url = prefix + '/edit';
-                            layer.open({
-                                type: 2,
+                            var options = {
                                 title: '修改',
-                                content: url + "/" + id,
-                                maxmin: true,
-                                btn: ['确定', '取消'],
-                                area: ['600px', '550px'],
-                                yes: function (index, layero) {
-                                    callback(index, layero);
-                                }
-                            });
+                                content: url + "/" + id
+                            };
+                            $.open.openIframe(options);
                         }
                     });
                 });
@@ -142,23 +129,13 @@
                 //新增菜单
                 $("#addMenu").on("click", function () {
                     var url = prefix + '/add/' + id;
-                    layer.open({
+                    var options = {
                         type: 2,
                         title: '添加',
-                        content: url,
-                        maxmin: true,
-                        btn: ['确定', '取消'],
-                        area: ['600px', '550px'],
-                        yes: function (index, layero) {
-                            callback(index, layero);
-                        }
-                    });
+                        content: url
+                    };
+                    $.open.openIframe(options);
                 });
-
-                callback = function (index, layero) {
-                    var iframeWin = layero.find('iframe')[0];
-                    iframeWin.contentWindow.submitHandler("formId");
-                }
             })
         </script>
     </body>

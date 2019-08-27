@@ -19,10 +19,15 @@ spring:
         # 从数据源开关/默认关闭
         enabled: true
         url: jdbc:mysql://47.106.188.177:3306/rs_new?useUnicode=true&characterEncoding=utf8&useServerPstmts=true&cachePrepStmts=true&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&cacheCallableStmts=true&connectTimeout=1000&maxReconnects=5&zeroDateTimeBehavior=convertToNull&useSSL=true
-        username: reader
-        password: CIQna6BlxJyEHvlHjYsChEymRmWxliXsOtcf3jO67OEfB8qftXhFhf7Li0sLxUMaTt9NRn0yzHBNC4IBzZmb1Q==
-        publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMLTrcq555UTKcwpHSqYW/1/ryMQWNKOcipgrTFWyONf3E2dbwrMsEMbP9//Py53GlL0IVYRW1tFinPzTSlBQp8CAwEAAQ==
-        connection-properties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMLTrcq555UTKcwpHSqYW/1/ryMQWNKOcipgrTFWyONf3E2dbwrMsEMbP9//Py53GlL0IVYRW1tFinPzTSlBQp8CAwEAAQ==
+        username: root
+        password: dm/EBMW25AZuDlvuyJe4HIaEVgiFCVRXvBSxwC9c4TUbPRP0YnuADJZvN6YuzEcmj4STFt6EHnBWH16qRHmPpg==
+        publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJIMmD5aAT19WqTrqF5LXWP+dDOy8kuRDWmXBdmJgz+m2AbMSIixrj/t4rnOFl8GM4hYTvX1ATvDp/9M9LtvUXUCAwEAAQ==
+        connection-properties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJIMmD5aAT19WqTrqF5LXWP+dDOy8kuRDWmXBdmJgz+m2AbMSIixrj/t4rnOFl8GM4hYTvX1ATvDp/9M9LtvUXUCAwEAAQ==
+#        url: jdbc:mysql://47.106.188.177:3306/rs_new?useUnicode=true&characterEncoding=utf8&useServerPstmts=true&cachePrepStmts=true&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&cacheCallableStmts=true&connectTimeout=1000&maxReconnects=5&zeroDateTimeBehavior=convertToNull&useSSL=true
+#        username: reader
+#        password: CIQna6BlxJyEHvlHjYsChEymRmWxliXsOtcf3jO67OEfB8qftXhFhf7Li0sLxUMaTt9NRn0yzHBNC4IBzZmb1Q==
+#        publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMLTrcq555UTKcwpHSqYW/1/ryMQWNKOcipgrTFWyONf3E2dbwrMsEMbP9//Py53GlL0IVYRW1tFinPzTSlBQp8CAwEAAQ==
+#        connection-properties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMLTrcq555UTKcwpHSqYW/1/ryMQWNKOcipgrTFWyONf3E2dbwrMsEMbP9//Py53GlL0IVYRW1tFinPzTSlBQp8CAwEAAQ==
       # 初始连接数
       initialSize: 10
       # 最大连接池数量

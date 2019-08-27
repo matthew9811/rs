@@ -7,11 +7,11 @@
     <form id="formId" class="layui-form">
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label class="layui-form-label rs-input-name" style="text-align: left">
+                <label class="layui-form-label sx-input-name" style="text-align: left">
                     上级菜单
                 </label>
                 <div class="layui-input-inline">
-                    <select class="layui-input rs-input" name="modules" lay-verify="required" lay-search="" th:with="list = ${parentList}">
+                    <select class="layui-input sx-input" name="modules" lay-verify="required" lay-search="" th:with="list = ${parentList}">
                         <option value="">直接选择或搜索选择</option>
                         <option th:each="parent: ${list}" th:value="${parent.id}" th:text="${parent.menuName}"></option>
                     </select>
@@ -19,43 +19,43 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label rs-input-name" style="text-align: left">
+            <label class="layui-form-label sx-input-name" style="text-align: left">
                 菜单名称
             </label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input rs-input" name="menuName">
+                <input type="text" class="layui-input sx-input" name="menuName">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label rs-input-name" style="text-align: left">
+            <label class="layui-form-label sx-input-name" style="text-align: left">
                 权限标识
             </label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input rs-input" name="perms">
+                <input type="text" class="layui-input sx-input" name="perms">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label rs-input-name" style="text-align: left">
+            <label class="layui-form-label sx-input-name" style="text-align: left">
                 路径
             </label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input rs-input" name="url">
+                <input type="text" class="layui-input sx-input" name="url">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label rs-input-name" style="text-align: left">
+            <label class="layui-form-label sx-input-name" style="text-align: left">
                 图标
             </label>
             <div class="layui-input-block">
-                <input type="text" class="layui-input rs-input" name="icon">
+                <input type="text" class="layui-input sx-input" name="icon">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label rs-input-name" style="text-align: left">
+            <label class="layui-form-label sx-input-name" style="text-align: left">
                 排序编号
             </label>
             <div class="layui-input-block">
-                <input type="text" maxlength="3" class="layui-input rs-input" name="sort">
+                <input type="text" maxlength="3" class="layui-input sx-input" name="sort">
             </div>
         </div>
     </form>

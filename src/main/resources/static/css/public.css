@@ -920,29 +920,33 @@ h2.method {
 }
 
 /*自定义样式*/
-.rs-input-name { /*输入框提示语样式*/
+.sx-input-name { /*输入框提示语样式*/
     width: 120px;
     height: 38px;
 }
 
-.rs-input { /*输入框样式*/
+.sx-input { /*输入框样式*/
     width: 320px;
     height: 38px;
 }
 
-.rs-remark {
+.sx-remark {
     width: 320px;
     height: 134px;
 }
-.badge {
-    background-color: #d1dade;
-    color: #5e5e5e;
-    font-size: 11px;
-    font-weight: 600;
-    padding-bottom: 4px;
-    padding-left: 6px;
-    padding-right: 6px;
-    text-shadow: none;
+.sx-badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    /*background-color: #777;*/
+    border-radius: 10px;
 }
 
 .label-primary, .badge-primary {

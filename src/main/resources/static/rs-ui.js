@@ -74,7 +74,7 @@
                 var actions = [];
                 $.each(datas, function (index, dict) {
                     if (dict.typeValue == ('' + value)) {
-                        var listCss = $.common.equals("default", dict.listCss) || $.common.isEmpty(dict.listCss) ? "" : "badge badge-" + dict.listCss;
+                        var listCss = $.common.equals("default", dict.listCss) || $.common.isEmpty(dict.listCss) ? "" : "sx-badge badge-" + dict.listCss;
                         actions.push($.common.sprintf("<span class='%s'>%s</span>", listCss, dict.typeLabel));
                         return false;
                     }
@@ -262,6 +262,61 @@
                 };
                 var options = $.extend(defaults, options);
                 $.modal.ajax(options);
+            }
+        },
+
+        /*layer弹出层*/
+        open: {
+            init: function (options) {
+                $.openPage.hint(options)
+            },
+
+            //页面层
+            page: function (options) {
+                var defaults = {
+                    type: 1,
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['600px', '500px'], //宽高
+                    maxmin: true,
+                    content: '',
+                    btn: ['确定', '取消']
+                };
+                var options = $.extend(defaults, options);
+                $.openPage.hint(options)
+            },
+
+            //捕获层
+            capture: function (options) {
+                var defaults = {
+                    type: 1,
+                    shade: false, //隐藏父页面
+                    title: false, //不显示标题
+                    content: '', //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+                    cancel: function(){ //点击关闭
+                    }
+                };
+                var options = $.extend(defaults,options);
+                $.openPage.hint(options);
+            },
+
+            //iframe层
+            openIframe: function (options) {
+                var defaults = {
+                    type: 2,
+                    title: '',
+                    shadeClose: true,
+                    shade: 0.5,//遮罩层透明度，0为无遮罩
+                    area: ['600px', '500px'],
+                    btn: ['确定', '取消'],
+                    maxmin: true,
+                    content: '', //iframe的url
+                    yes: function (index, layero) {
+                        var iframeWin = layero.find('iframe')[0];
+                        iframeWin.contentWindow.submitHandler("formId");
+                    }
+                };
+                var options = $.extend(defaults,options);
+                $.openPage.hint(options);
             }
         }
 
