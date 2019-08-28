@@ -1,0 +1,73 @@
+server:
+  port: 317
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    sql-script-encoding: utf-8
+    driverClassName: com.mysql.jdbc.Driver
+    druid:
+      # 主库数据源
+      master:
+        url: jdbc:mysql://47.106.188.177:3306/rs_bulid?useUnicode=true&characterEncoding=utf8&useServerPstmts=true&cachePrepStmts=true&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&cacheCallableStmts=true&connectTimeout=1000&maxReconnects=5&zeroDateTimeBehavior=convertToNull&useSSL=true
+        username: root
+        password: dm/EBMW25AZuDlvuyJe4HIaEVgiFCVRXvBSxwC9c4TUbPRP0YnuADJZvN6YuzEcmj4STFt6EHnBWH16qRHmPpg==
+        publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJIMmD5aAT19WqTrqF5LXWP+dDOy8kuRDWmXBdmJgz+m2AbMSIixrj/t4rnOFl8GM4hYTvX1ATvDp/9M9LtvUXUCAwEAAQ==
+        connection-properties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJIMmD5aAT19WqTrqF5LXWP+dDOy8kuRDWmXBdmJgz+m2AbMSIixrj/t4rnOFl8GM4hYTvX1ATvDp/9M9LtvUXUCAwEAAQ==
+      # 从库数据源
+      slave:
+        # 从数据源开关/默认关闭
+        enabled: true
+        url: jdbc:mysql://47.106.188.177:3306/rs_bulid?useUnicode=true&characterEncoding=utf8&useServerPstmts=true&cachePrepStmts=true&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&cacheCallableStmts=true&connectTimeout=1000&maxReconnects=5&zeroDateTimeBehavior=convertToNull&useSSL=true
+        username: root
+        password: dm/EBMW25AZuDlvuyJe4HIaEVgiFCVRXvBSxwC9c4TUbPRP0YnuADJZvN6YuzEcmj4STFt6EHnBWH16qRHmPpg==
+        publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJIMmD5aAT19WqTrqF5LXWP+dDOy8kuRDWmXBdmJgz+m2AbMSIixrj/t4rnOFl8GM4hYTvX1ATvDp/9M9LtvUXUCAwEAAQ==
+        connection-properties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJIMmD5aAT19WqTrqF5LXWP+dDOy8kuRDWmXBdmJgz+m2AbMSIixrj/t4rnOFl8GM4hYTvX1ATvDp/9M9LtvUXUCAwEAAQ==
+      #        url: jdbc:mysql://47.106.188.177:3306/rs_new?useUnicode=true&characterEncoding=utf8&useServerPstmts=true&cachePrepStmts=true&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&cacheCallableStmts=true&connectTimeout=1000&maxReconnects=5&zeroDateTimeBehavior=convertToNull&useSSL=true
+      #        username: reader
+      #        password: CIQna6BlxJyEHvlHjYsChEymRmWxliXsOtcf3jO67OEfB8qftXhFhf7Li0sLxUMaTt9NRn0yzHBNC4IBzZmb1Q==
+      #        publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMLTrcq555UTKcwpHSqYW/1/ryMQWNKOcipgrTFWyONf3E2dbwrMsEMbP9//Py53GlL0IVYRW1tFinPzTSlBQp8CAwEAAQ==
+      #        connection-properties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMLTrcq555UTKcwpHSqYW/1/ryMQWNKOcipgrTFWyONf3E2dbwrMsEMbP9//Py53GlL0IVYRW1tFinPzTSlBQp8CAwEAAQ==
+      # 初始连接数
+      initialSize: 10
+      # 最大连接池数量
+      maxActive: 50
+      # 最小连接池数量
+      minIdle: 10
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 300000
+      # 配置一个连接在池中最大生存的时间，单位是毫秒
+      maxEvictableIdleTimeMillis: 900000
+      # 配置检测连接是否有效
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      webStatFilter:
+        enabled: true
+      statViewServlet:
+        enabled: true
+        url-pattern: /monitor/druid/*
+      filter:
+        config:
+          enabled: true
+        stat:
+          enabled: true
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: false
+        wall:
+          config:
+            multi-statement-allow: true
+        log4j:
+          statement-logger-name:
+
+
+###这是盐值，按照自身风格修改
+jasypt:
+  encryptor:
+    password: shengxi

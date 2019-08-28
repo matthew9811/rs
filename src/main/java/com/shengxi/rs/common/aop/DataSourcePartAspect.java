@@ -36,10 +36,10 @@ public class DataSourcePartAspect {
     /**
      * mapper 修改删除操作默认使用主库库
      */
-    @Before("execution(* com..service..impl..*.insert*(..)) || " +
-            "execution(* com..service..impl..*.change*(..)) || " +
-            "execution(* com..service..impl..*.update*(..)) || " +
-            "execution(* com..service..impl..*.delete*(..))")
+    @Before("execution(* com..service..impl..*.*insert*(..)) || " +
+            "execution(* com..service..impl..*.*change*(..)) || " +
+            "execution(* com..service..impl..*.*update*(..)) || " +
+            "execution(* com..service..impl..*.*delete*(..))")
     public void setWriteDataSourceType() {
         DynamicDataSourceContextHolder.setDataSourceType(DataSourceType.MASTER.name());
         log.info("DataSource switch to: {}", DataSourceType.MASTER.name());

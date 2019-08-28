@@ -57,7 +57,6 @@ public class DictController extends BaseController {
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(SysDict sysDict) {
-        sysDict.setDelFlag(BaseConstant.DEL_FLAG_NOT);
         return toAjax(sysDictService.insertSysDict(sysDict));
     }
 

@@ -46,7 +46,6 @@ public class SysDict extends BaseEntity {
     }
 
 
-
     public String getStatus() {
         return status;
     }
@@ -84,7 +83,6 @@ public class SysDict extends BaseEntity {
                 ", updateTime=" + updateTime +
                 ", updateBy='" + updateBy + '\'' +
                 ", remark='" + remark + '\'' +
-                ", delFlag='" + delFlag + '\'' +
                 '}';
     }
 }

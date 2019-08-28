@@ -10,9 +10,14 @@ import com.shengxi.system.entity.sys.SysDict;
 import com.shengxi.system.model.mapper.sys.SysDataMapper;
 import com.shengxi.system.model.mapper.sys.SysDictMapper;
 import com.shengxi.system.model.service.sys.SysDictService;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 字典普通实现类
@@ -36,19 +41,21 @@ public class SysDictServiceImpl implements SysDictService {
     }
 
     @Override
+    @Transactional(readOnly = true, propagation = Propagation.NOT_SUPPORTED)
     public List<SysDict> selectSysDictList(SysDict sysDict) {
         return dictMapper.selectDictByList(sysDict);
     }
 
     @Override
+    @Transactional(readOnly = false, isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED)
     public Integer insertSysDict(SysDict sysDict) {
-        sysDict.setId(IdUtil.uuid());
         sysDict.setCreateBy(UserUtil.getUserNo());
         sysDict.setStatus(ServiceConstant.NORMAL);
         return dictMapper.insert(sysDict);
     }
 
     @Override
+    @Transactional(readOnly = false, isolation = Isolation.DEFAULT)
     public Integer updateSysDict(SysDict sysDict) {
         sysDict.setUpdateBy(UserUtil.getUserNo());
         return dictMapper.updateByPrimaryKey(sysDict);
@@ -62,23 +69,17 @@ public class SysDictServiceImpl implements SysDictService {
 
     @Override
     public Integer deleteSysDictById(String id) {
-        return dictMapper.deleteByPrimaryKey(id, UserUtil.getUserNo());
+        return dictMapper.deleteById(id);
     }
 
     @Override
+    @Transactional(readOnly = false, isolation = Isolation.SERIALIZABLE, propagation = Propagation.REQUIRED)
     public Integer deleteSysDictByIds(String ids) {
-        return dictMapper.deleteByIdList(Convert.toStrArray(ids), UserUtil.getUserNo());
+        return dictMapper.deleteByIdList(Convert.toStrArray(ids));
     }
 
     public List<SysData> getValue(String typeNo) {
         return dataMapper.getValue(typeNo);
     }
 
-    private String checkNo() {
-        Integer no = dictMapper.checkNo();
-        if (ObjectUtil.isNull(no)) {
-            no = 0;
-        }
-        return String.valueOf(no + 1);
-    }
 }

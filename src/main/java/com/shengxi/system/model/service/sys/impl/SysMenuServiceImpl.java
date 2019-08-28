@@ -38,9 +38,7 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Transactional(readOnly = false, rollbackFor = SQLTransactionRollbackException.class)
     public Integer insertEntity(SysMenu sysMenu) {
         sysMenu = judgeParent(sysMenu);
-        /*
-         * 控制del_flag
-         */
+        /* 控制del_flag*/
         sysMenu.setDelFlag(BaseConstant.DEL_FLAG_NOT);
         sysMenu.setId(IdUtil.uuid());
         return sysMenuMapper.insert(sysMenu);

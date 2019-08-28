@@ -1,7 +1,9 @@
 package com.shengxi.system.model.mapper.sys;
 
 import com.shengxi.system.entity.sys.SysDict;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -31,6 +33,7 @@ public interface SysDictMapper {
      * @return list
      */
     List<SysDict> selectDictByList(SysDict sysDict);
+
     /**
      * 当前字典的值
      *
@@ -41,11 +44,10 @@ public interface SysDictMapper {
     /**
      * 删除对应的字典
      *
-     * @param id       id
-     * @param updateBy updateBy
+     * @param id id
      * @return status
      */
-    int deleteByPrimaryKey(@Param("id") String id, @Param("updateBy") String updateBy);
+    int deleteById(@Param("id") String id);
 
     /**
      * 全对象插入数据
@@ -83,10 +85,9 @@ public interface SysDictMapper {
     /**
      * 批量删除
      *
-     * @param idArr  ids
-     * @param userNo updateBy
+     * @param idArr ids
      * @return status
      * @Description: 删除对应ID的数据
      */
-    Integer deleteByIdList(String[] idArr, @Param("updateBy") String userNo);
+    Integer deleteByIdList(String[] idArr);
 }

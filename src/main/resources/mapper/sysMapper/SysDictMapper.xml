@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shengxi.system.model.mapper.sys.SysDictMapper">
     <resultMap id="BaseResultMap" type="com.shengxi.system.entity.sys.SysDict">
-        <id column="sys_dict_id" jdbcType="VARCHAR" property="id"/>
+        <id column="sys_dict_id" jdbcType="INTEGER" property="id"/>
         <result column="sys_dict_type_name" jdbcType="VARCHAR" property="typeName"/>
         <result column="sys_dict_type_no" jdbcType="VARCHAR" property="typeNo"/>
         <result column="sys_dict_create_by" jdbcType="VARCHAR" property="createBy"/>
@@ -10,25 +10,21 @@
         <result column="sys_dict_update_by" jdbcType="VARCHAR" property="updateBy"/>
         <result column="sys_dict_update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <result column="sys_dict_status" jdbcType="CHAR" property="status"/>
-        <result column="sys_dict_del_flag" jdbcType="CHAR" property="delFlag"/>
         <result column="sys_dict_remark" jdbcType="VARCHAR" property="remark"/>
     </resultMap>
     <sql id="Base_Column_List">
-    a.id as sys_dict_id,
-    a.type_name as sys_dict_type_name,
-    a.type_no as sys_dict_type_no,
-    a.create_by as sys_dict_create_by,
-    a.create_time as sys_dict_create_time,
-    a.update_by as sys_dict_update_by,
-    a.update_time as sys_dict_update_time,
-    a.`status` as `sys_dict_status`,
-    a.remark as sys_dict_remark
-  </sql>
+        a.id as sys_dict_id,
+        a.type_name as sys_dict_type_name,
+        a.type_no as sys_dict_type_no,
+        a.create_by as sys_dict_create_by,
+        a.create_time as sys_dict_create_time,
+        a.update_by as sys_dict_update_by,
+        a.update_time as sys_dict_update_time,
+        a.`status` as `sys_dict_status`,
+        a.remark as sys_dict_remark
+    </sql>
     <sql id="joinList">
         <!--left join sys_data s-->
-    </sql>
-    <sql id="del_flag">
-        '1'
     </sql>
     <!--读操作-->
     <select id="selectDictByList" parameterType="com.shengxi.system.entity.sys.SysDict" resultMap="BaseResultMap">
@@ -36,11 +32,6 @@
         <include refid="Base_Column_List"/>
         from sys_dict AS a
         <where>
-            a.del_flag =
-            <include refid="del_flag"/>
-            <if test="id != null and id != '' ">
-                and a.id = #{id}
-            </if>
         </where>
         order by a.type_no
     </select>
@@ -48,34 +39,32 @@
         select
         <include refid="Base_Column_List"/>
         from sys_dict a
-        where a.id = #{id,jdbcType=VARCHAR}
+        where a.id = #{id,jdbcType=INTEGER}
     </select>
     <select id="checkNo" resultType="java.lang.Integer">
-        select count(1) from sys_dict where del_flag =
-        <include refid="del_flag"/>
+        select count(1)
+        from sys_dict
     </select>
     <!--写操作-->
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shengxi.system.entity.sys.SysDict"
             useGeneratedKeys="true">
-    insert into sys_dict
-    (id,
-    type_name,
-    type_no,
-    create_by,
-    create_time,
-    `status`,
-    del_flag,
-    remark)
-    values
-    (#{id, jdbcType=VARCHAR},
-    #{typeName,jdbcType=VARCHAR},
-    #{typeNo,jdbcType=VARCHAR},
-    #{createBy,jdbcType=VARCHAR},
-     now(),
-      #{status,jdbcType=CHAR},
-      #{delFlag,jdbcType=CHAR},
-      #{remark,jdbcType=VARCHAR})
-  </insert>
+        insert into sys_dict
+        (
+        type_name,
+        type_no,
+        create_by,
+        create_time,
+        `status`,
+        remark)
+        values
+        (
+        #{typeName,jdbcType=VARCHAR},
+        #{typeNo,jdbcType=VARCHAR},
+        #{createBy,jdbcType=VARCHAR},
+        now(),
+        #{status,jdbcType=CHAR},
+        #{remark,jdbcType=VARCHAR})
+    </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id"
             parameterType="com.shengxi.system.entity.sys.SysDict" useGeneratedKeys="true">
         insert into sys_dict
@@ -100,9 +89,6 @@
             </if>
             <if test="status != null">
                 `status`,
-            </if>
-            <if test="delFlag != null">
-                del_flag,
             </if>
             <if test="remark != null">
                 remark,
@@ -129,9 +115,6 @@
             </if>
             <if test="status != null">
                 #{status,jdbcType=CHAR},
-            </if>
-            <if test="delFlag != null">
-                #{delFlag,jdbcType=CHAR},
             </if>
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
@@ -161,30 +144,32 @@
                 remark = #{remark,jdbcType=VARCHAR},
             </if>
         </set>
-        where id = #{id,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.shengxi.system.entity.sys.SysDict">
-    update sys_dict set
-     type_name = #{typeName,jdbcType=VARCHAR},
-      type_no = #{typeNo,jdbcType=VARCHAR},
-      update_by = #{updateBy,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      `status` = #{status,jdbcType=CHAR},
-      remark = #{remark,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-    <update id="deleteByPrimaryKey">
-    update sys_dict set del_flag = '0', update_time = now(), update_by = #{updateBy}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-    <update id="deleteByIdList">
-        update sys_dict a set a.del_flag = '0' ,
-        update_time = now(),
-        update_by = #{updateBy}
-        where
-        id in
-        <foreach collection="array" item="id" open="(" close=")" separator=",">
-            #{id}
-        </foreach>
+        update sys_dict
+        set type_name = #{typeName,jdbcType=VARCHAR},
+        type_no = #{typeNo,jdbcType=VARCHAR},
+        update_by = #{updateBy,jdbcType=VARCHAR},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        remark = #{remark,jdbcType=VARCHAR},
+        `status` = #{status,jdbcType=CHAR}
+        where id = #{id,jdbcType=INTEGER}
     </update>
+    <delete id="deleteById">
+        delete
+        from sys_dict
+        <where>
+            id = #{id,jdbcType=INTEGER}
+        </where>
+    </delete>
+    <delete id="deleteByIdList">
+        delete from sys_dict
+        <where>
+            id in
+            <foreach collection="array" item="id" open="(" close=")" separator=",">
+                #{id,jdbcType=INTEGER}
+            </foreach>
+        </where>
+    </delete>
 </mapper>

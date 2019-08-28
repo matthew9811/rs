@@ -2,14 +2,16 @@ package com.shengxi.rs.common.handler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 /**
  * 数据源切换处理
  *
  * @author matthew
  */
+@Component
 public class DynamicDataSourceContextHolder {
-    public static final Logger log = LoggerFactory.getLogger(DynamicDataSourceContextHolder.class);
+    private static final Logger log = LoggerFactory.getLogger(DynamicDataSourceContextHolder.class);
 
     /**
      * 使用ThreadLocal维护变量，ThreadLocal为每个使用该变量的线程提供独立的变量副本，
