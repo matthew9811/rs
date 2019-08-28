@@ -10,7 +10,7 @@
                 <label class="layui-form-label sx-input-name" style="text-align: left">
                     上级菜单
                 </label>
-                <div class="layui-input-inline">
+                <div class="layui-input-inline sx-select-width">
                     <select class="layui-input sx-input" name="modules" lay-verify="required" lay-search="" th:with="list = ${parentList}">
                         <option value="">直接选择或搜索选择</option>
                         <option th:each="parent: ${list}" th:value="${parent.id}" th:text="${parent.menuName}"></option>
