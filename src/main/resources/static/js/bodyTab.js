@@ -118,8 +118,7 @@ layui.define(["element","jquery"],function(exports){
 		});
 		return tabIndex;
 	};
-
-	//右侧内容tab操作
+ //右侧内容tab操作
 	var tabIdIndex = 0;
 	Tab.prototype.tabAdd = function(_this){
 		if(window.sessionStorage.getItem("menu")){

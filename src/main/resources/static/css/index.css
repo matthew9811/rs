@@ -61,7 +61,15 @@ iframe{ position:absolute; height:100%; width:100%; border:none;}
 .topLevelMenus .layui-nav-item.layui-this{ background-color:rgba(0,0,0,0.5);}
 .top_menu.layui-nav .layui-this:after{ width:0px; }
 .top_menu .layui-nav-bar,.mobileTopLevelMenus .layui-nav-bar{background-color:rgba(0,0,0,0.7);}
-
+/*多窗口页面操作下拉*/
+.closeBox{ position:absolute; right:0;color:#000; border-left:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2; }
+.closeBox .layui-nav-item{ line-height:40px; }
+.closeBox .layui-nav-item>a,.closeBox .layui-nav-item>a:hover{ color:#000; }
+.closeBox .layui-nav-child{ top:40px; left:-12px; }
+.closeBox .layui-nav-bar{ display:none; }
+.closeBox a i.caozuo{ font-size: 20px; position:absolute; top:1px; left:0; }
+.closeBox a span.layui-nav-more{ border-color:#333 transparent transparent;}
+.closeBox a span.layui-nav-more.layui-nav-mored{ border-color:transparent transparent #333;}
 /*左侧导航*/
 .layui-nav{background-color: inherit !important;}
 .showMenu.layui-layout-admin .layui-side{ left:-200px; }
@@ -95,15 +103,7 @@ iframe{ position:absolute; height:100%; width:100%; border:none;}
 .layui-tab-title .layui-this:after{ border:none; }
 .layui-tab-title li cite{ font-style: normal; padding-left:5px; }
 .clildFrame.layui-tab-content{ top:61px; position:absolute; bottom:0; width:100%; padding:0;}
-/*多窗口页面操作下拉*/
-.closeBox{ position:absolute; right:0;color:#000; border-left:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2; }
-.closeBox .layui-nav-item{ line-height:40px; }
-.closeBox .layui-nav-item>a,.closeBox .layui-nav-item>a:hover{ color:#000; }
-.closeBox .layui-nav-child{ top:40px; left:-12px; }
-.closeBox .layui-nav-bar{ display:none; }
-.closeBox a i.caozuo{ font-size: 20px; position:absolute; top:1px; left:0; }
-.closeBox a span.layui-nav-more{ border-color:#333 transparent transparent;}
-.closeBox a span.layui-nav-more.layui-nav-mored{ border-color:transparent transparent #333;}
+
 /*功能设定*/
 .functionSrtting_box{ padding-top:15px;}
 .functionSrtting_box .layui-form-label{ width:81px;}
@@ -140,7 +140,7 @@ iframe{ position:absolute; height:100%; width:100%; border:none;}
 	.site-mobile .layui-side{ left: 0; z-index:1100; }
 	.site-tree-mobile {display: block!important; position: fixed; z-index: 100000; bottom: 15px; left: 15px; width:40px; height:40px; line-height:40px; border-radius: 2px; text-align: center; background-color: rgba(0,0,0,.7); color: #fff;}
 	.site-mobile .site-mobile-shade { content: ''; position: fixed; top: 0; bottom: 0; left: 0; right: 0; background-color: rgba(0,0,0,.8); z-index: 999;}
-	.layui-body,.layui-layout-admin .layui-footer{ left:-2px; }
+	.layui-body,.layui-layout-admin .layui-footer{ left:-2px!important; }
 }
 @media screen and (max-width:480px){
 	.logo{ width:120px; font-size: 18px;}

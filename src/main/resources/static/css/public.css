@@ -973,3 +973,7 @@ h2.method {
     background-color: #ed5565;
     color: #FFFFFF;
 }
+
+.sx-select-width {
+    width: 320px!important;
+}
