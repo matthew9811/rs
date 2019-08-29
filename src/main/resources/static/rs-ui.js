@@ -197,8 +197,9 @@
                         treeTable.foldAll('#treeTable');
                     });
                 })
-
             }
+
+
         },
 
             /*tree 模块*/
@@ -229,8 +230,9 @@
                         elem: options.elem,
                         nodes: options.nodes
                     });
+                },
 
-                }
+
             },
 
             /*提示层*/
@@ -309,6 +311,7 @@
                         contentType: "application/json",
                         success: function (data) {
                             $.pop.success({msg: data.msg, code: data.code});
+                            window.location.reload();
                         },
                         error: function () {
                             $.pop.error();
