@@ -278,7 +278,7 @@
                     var defaults = {
                         success: function (data) {
                             $.pop.success({msg: data.msg});
-                            parent.location.reload();
+                            window.location.reload();
                         },
                         error: function (data) {
                             $.pop.error({msg: data.msg})
@@ -294,7 +294,7 @@
                         type: 'put',
                         success: function (data) {
                             $.pop.success({msg: data.msg});
-                            parent.location.reload();
+                            window.location.reload();
                         },
                         error: function () {
                             $.pop.error()
@@ -328,7 +328,7 @@
                     $.openPage.hint(options)
                 },
 
-                //页面层
+                /*页面层*/
                 page: function (options) {
                     var defaults = {
                         type: 1,
@@ -342,7 +342,7 @@
                     $.openPage.hint(options)
                 },
 
-                //捕获层
+                /*捕获层*/
                 capture: function (options) {
                     var defaults = {
                         type: 1,
@@ -356,7 +356,7 @@
                     $.openPage.hint(options);
                 },
 
-                //iframe层
+                /*iframe层*/
                 openIframe: function (options) {
                     var defaults = {
                         type: 2,
@@ -374,6 +374,71 @@
                     };
                     var options = $.extend(defaults,options);
                     $.openPage.hint(options);
+                },
+
+                /*弹出层的ajax提交，与ajax提交的区别：提交成功后刷新父页面*/
+                //新增
+                openAdd: function (options) {
+                    var defaults = {
+                        success: function (data) {
+                            $.pop.success({msg: data.msg});
+                            parent.location.reload();
+                        },
+                        error: function (data) {
+                            $.pop.error({msg: data.msg})
+                        }
+                    };
+                    var options = $.extend(defaults, options);
+                    $.submit.addSubmit(options);
+                },
+
+                //编辑
+                openEdit: function (options) {
+                    var defaults = {
+                        type: 'put',
+                        success: function (data) {
+                            $.pop.success({msg: data.msg});
+                            parent.location.reload();
+                        },
+                        error: function () {
+                            $.pop.error()
+                        }
+                    };
+                    var options = $.extend(defaults, options);
+                    $.submit.editSubmit(options);
+                },
+
+                //删除提交
+                openMove: function (options) {
+                    var defaults = {
+                        type: "delete",
+                        contentType: "application/json",
+                        success: function (data) {
+                            $.pop.success({msg: data.msg, code: data.code});
+                            window.location.reload();
+                        },
+                        error: function () {
+                            $.pop.error();
+                        }
+                    };
+                    var options = $.extend(defaults, options);
+                    $.submit.moveSubmit(options);
+                },
+
+                /*询问框*/
+                openAsk: function (name,options) {
+                    var defaults = {
+                        msg: '是否删除？',
+                        btn: ['确认', '取消'],
+                        yes: function () {},
+                        no: function () {
+                            layer.closeAll();
+                        }
+                    };
+                    var options = $.extend(defaults,options);
+                    layer.confirm(options.msg + name, {
+                        btn: options.btn //按钮
+                    }, options.yes, options.no);
                 }
             }
 

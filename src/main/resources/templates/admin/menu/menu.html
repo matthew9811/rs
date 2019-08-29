@@ -96,16 +96,24 @@
                         var url;
                         if (layEvent === 'del') {
                             //询问框
-                            layer.confirm('是否删除？' + data.menuName, {
-                                btn: ['确认', '取消'] //按钮
-                            }, function () {
-                                var config = {
-                                    url: prefix + "/move/" + id
-                                };
-                                $.submit.moveSubmit(config);
-                            }, function () {
-                                layer.closeAll();
-                            });
+                            // layer.confirm('是否删除？' + data.menuName, {
+                            //     btn: ['确认', '取消'] //按钮
+                            // }, function () {
+                            //     var config = {
+                            //         url: prefix + "/move/" + id
+                            //     };
+                            //     $.open.openMove(config);
+                            // }, function () {
+                            //     layer.closeAll();
+                            // });
+                            $.open.openAsk(data.menuName,{
+                                yes:function () {
+                                    var config = {
+                                        url: prefix + "/move/" + id
+                                    };
+                                    $.open.openMove(config);
+                                }
+                            })
                         } else if (layEvent === 'add') {
                             url = prefix + '/add';
                             var options = {
