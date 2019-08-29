@@ -40,27 +40,16 @@
             // 渲染表格
             tableInit();
             tableTool();
-        })
+        });
 
         //新增菜单
         $("#add").on("click", function () {
-            layer.open({
-                type: 2,
+            var options = {
                 title: '添加',
-                content: addUrl,
-                maxmin: true,
-                btn: ['确定', '取消'],
-                area: ['600px', '550px'],
-                yes: function (index, layero) {
-                    callback(index, layero);
-                }
-            });
+                content: addUrl
+            };
+            $.open.openIframe(options);
         });
-
-        callback = function (index, layero) {
-            var iframeWin = layero.find('iframe')[0];
-            iframeWin.contentWindow.submitHandler("formId");
-        }
 
         function tableInit() {
             var options = {
@@ -99,24 +88,17 @@
                         var config = {
                             url: prefix + "/move/" + id
                         };
-                        $.submit.moveSubmit(config);
-                        layer.closeAll();
+                        $.table.tableMove('layerTable',config,{})
                     }, function () {
                         return true;
                     });
                 } else if (layEvent === 'edit') {
                     url = prefix + '/edit';
-                    layer.open({
-                        type: 2,
+                    var options = {
                         title: '修改',
-                        content: url + "/" + id,
-                        maxmin: true,
-                        btn: ['确定', '取消'],
-                        area: ['600px', '550px'],
-                        yes: function (index, layero) {
-                            callback(index, layero);
-                        }
-                    });
+                        content: url + "/" + id
+                    };
+                    $.open.openIframe(options);
                 } else if (layEvent === 'detail') {
                     location.href = '/admin/dictData/' + data.typeNo;
                 }
