@@ -55,4 +55,12 @@ public interface SysMenuService {
      * @return sysMenu
      */
     SysMenu selectMenuById(String id);
+
+    /**
+     * 根据id删除数据
+     * @param id id
+     * @param userNo userNo
+     * @return boolean
+     */
+    Integer deleteById(String id, String userNo);
 }

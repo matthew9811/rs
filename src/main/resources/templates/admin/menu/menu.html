@@ -100,8 +100,7 @@
                                 btn: ['确认', '取消'] //按钮
                             }, function () {
                                 var config = {
-                                    url: prefix + "/move",
-                                    data: id
+                                    url: prefix + "/move/" + id
                                 };
                                 $.submit.moveSubmit(config);
                                 layer.closeAll();

@@ -10,6 +10,7 @@ import com.shengxi.system.entity.sys.SysMenu;
 import com.shengxi.system.model.mapper.sys.SysMenuMapper;
 
 import com.shengxi.system.model.service.sys.SysMenuService;
+
 import java.sql.SQLTransactionRollbackException;
 import java.sql.SQLTransientException;
 import java.util.HashMap;
@@ -82,36 +83,21 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<SysMenu> selectByList() {
         return sysMenuMapper.selectByList(new SysMenu());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public SysMenu selectMenuById(String id) {
         return sysMenuMapper.selectById(id);
     }
 
-    /**
-     * 构建树形list
-     *
-     * @param trees Tree
-     * @param menus 菜单
-     */
-    private void buildTrees(List<Tree<SysMenu>> trees, List<SysMenu> menus) {
-        menus.forEach(menu -> {
-            Tree<SysMenu> tree = new Tree<>();
-            tree.setId(menu.getId());
-            tree.setParentId(menu.getParentId());
-            Map<String, Object> map = new HashMap<>(ServiceConstant.MENU_VALUE_SIZE);
-            map.put("icon", menu.getIcon());
-            map.put("perms", menu.getPerms());
-            map.put("url", menu.getUrl());
-            map.put("menuName", menu.getMenuName());
-            map.put("type", menu.getType());
-            trees.add(tree);
-        });
-        /*清空无用的数据*/
-        menus.clear();
+    @Override
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
+    public Integer deleteById(String id, String userNo) {
+        return sysMenuMapper.deleteById(id, userNo);
     }
 
     /**
