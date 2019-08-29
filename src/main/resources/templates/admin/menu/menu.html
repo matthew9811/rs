@@ -102,8 +102,7 @@
                                 var config = {
                                     url: prefix + "/move/" + id
                                 };
-                                $.submit.moveSubmit(config);
-                                layer.closeAll();
+                                $.table.tableMove('treeTable',config,{})
                             }, function () {
                                 layer.closeAll();
                             });

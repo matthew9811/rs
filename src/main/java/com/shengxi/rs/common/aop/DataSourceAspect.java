@@ -4,6 +4,7 @@ package com.shengxi.rs.common.aop;
 import cn.hutool.core.util.ObjectUtil;
 import com.shengxi.rs.common.annotation.DataSource;
 import com.shengxi.rs.common.handler.DynamicDataSourceContextHolder;
+import com.shengxi.system.common.constant.DataSourceType;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -42,7 +43,7 @@ public class DataSourceAspect {
         DataSource dataSource = method.getAnnotation(DataSource.class);
 
         if (ObjectUtil.isNotNull(dataSource)) {
-            logger.info("dataSource 切换到：{}", dataSource.value().name());
+            logger.info("DataSource switch to: {}", dataSource.value().name());
             DynamicDataSourceContextHolder.setDataSourceType(dataSource.value().name());
         }
 

@@ -20,6 +20,7 @@ import java.util.Map;
 import org.jsoup.select.Selector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -77,7 +78,7 @@ public class SysMenuServiceImpl implements SysMenuService {
      * @return list
      */
     @Override
-    @Transactional(readOnly = true, rollbackFor = Selector.SelectorParseException.class)
+    @Transactional(readOnly = true, propagation = Propagation.NOT_SUPPORTED)
     public List<SysMenu> selectOfParentAdd() {
         return sysMenuMapper.selectOfParentAdd();
     }
