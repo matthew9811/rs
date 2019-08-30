@@ -51,11 +51,12 @@
                         {field: 'id', width: 0, align: 'center', title: 'id', hide: true},
                         {field: 'typeNo', align: 'center', title: '字典编号'},
                         {field: 'typeName', align: 'center', title: '字典名称'},
-                        {
-                            field: 'status', align: 'center', title: '字典状态', templet: function (d) {
-                                return $.table.selectDictLabel(statusDict, d.status);
-                            }
-                        },
+                        // {
+                        //     field: 'status', align: 'center', title: '字典状态', templet: function (d) {
+                        //         return $.table.selectDictLabel(statusDict, d.status);
+                        //     }
+                        // },
+                        {field:'status', title:'字典状态', templet: '#switchTpl', unresize: true},
                         {field: 'remark', align: 'renter', title: '备注'},
                         {templet: '#tableManage', width: 350, align: 'center', title: '操作'}
                     ]
@@ -74,7 +75,8 @@
                 var moveUrl = prefix + "/move/" + id;
                 var detailUrl = '/admin/dictData/' + data.typeNo;
                 if (layEvent === 'move') {
-                    $.open.openAsk("是否删除 " + data.typeName + "及其相关数据", {
+                    $.open.openAsk({
+                        msg:"是否删除 " + data.typeName + "及其相关数据",
                         yes: function () {
                             move(moveUrl);
                         }
