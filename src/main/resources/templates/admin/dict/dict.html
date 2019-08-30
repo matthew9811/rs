@@ -42,15 +42,6 @@
             tableTool();
         });
 
-        //新增菜单
-        $("#add").on("click", function () {
-            var options = {
-                title: '添加',
-                content: addUrl
-            };
-            $.open.openIframe(options);
-        });
-
         function tableInit() {
             var options = {
                 elem: '#layerTable',
@@ -99,11 +90,19 @@
             });
         }
 
-        function move(moveUrl) {
-            var config = {
-                url: moveUrl
+        //新增菜单
+        $("#add").on("click", function () {
+            var options = {
+                title: '添加',
+                content: addUrl
             };
-            $.table.tableMove('layerTable', config, {})
+            $.open.openIframe(options);
+        });
+
+        function move(moveUrl) {
+            $.table.tableMove('layerTable', {
+                url: moveUrl
+            }, {})
         }
 
     });

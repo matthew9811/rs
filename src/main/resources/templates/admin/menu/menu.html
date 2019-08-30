@@ -39,7 +39,6 @@
                 layui.use(['form', 'layer', 'table'], function () {
                     var layer = layui.layer;
                     var form = layui.form,
-                        //layer = parent.layer === undefined ? layui.layer : top.layer,
                         $ = layui.jquery,
                         table = layui.table;
                     // 渲染表格
@@ -103,11 +102,10 @@
                                 }
                             })
                         } else if (layEvent === 'add') {
-                            var options = {
+                            $.open.openIframe({
                                 title: '添加下一级',
                                 content: addUrl + "/" + id
-                            };
-                            $.open.openIframe(options);
+                            });
                         } else if (layEvent === 'edit') {
                             $.open.openIframe({
                                 title: '修改菜单',
@@ -119,7 +117,7 @@
 
                 //新增菜单
                 $("#addMenu").on("click", function () {
-                    var url = prefix + '/add/' + id;
+                    var url = prefix + '/add';
                     var options = {
                         title: '添加',
                         content: url
@@ -128,10 +126,9 @@
                 });
             });
             move = function (moveUrl) {
-                var config = {
+                $.open.openMove({
                     url: moveUrl
-                };
-                $.open.openMove(config);
+                });
             };
         </script>
     </body>
