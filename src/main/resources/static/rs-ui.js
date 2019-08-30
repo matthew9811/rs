@@ -428,7 +428,7 @@
                 /*询问框*/
                 openAsk: function (name,options) {
                     var defaults = {
-                        msg: '是否删除？',
+                        msg: '',
                         btn: ['确认', '取消'],
                         yes: function () {},
                         no: function () {
