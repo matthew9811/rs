@@ -1,38 +1,38 @@
 <!DOCTYPE html>
-<html lang = "zh" xmlns:th = "http://www.thymeleaf.org" xmlns:shiro = "http://www.pollix.at/thymeleaf/shiro">
-    <meta charset = "utf-8">
-    <head th:include = "include :: header"></head>
-    <body class = "childrenBody">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+    <meta charset="utf-8">
+    <head th:include="include :: header"></head>
+    <body class="childrenBody">
         <div>
-            <div class = "layui-btn-group">
-                <button class = "layui-btn" id = "addMenu">新增</button>
+            <div class="layui-btn-group">
+                <button class="layui-btn" id="addMenu">新增</button>
             </div>
-            <div class = "layui-btn-group">
-                <button class = "layui-btn" id = "btn-expand">全部展开</button>
-                <button class = "layui-btn" id = "btn-fold">全部折叠</button>
+            <div class="layui-btn-group">
+                <button class="layui-btn" id="btn-expand">全部展开</button>
+                <button class="layui-btn" id="btn-fold">全部折叠</button>
             </div>
-            <div class = "layui-btn-group">
-                <a class = "layui-btn" href = "/admin/menu/export">
-                    <i class = "layui-icon">&#xe647;</i>导出
+            <div class="layui-btn-group">
+                <a class="layui-btn" href="/admin/menu/export">
+                    <i class="layui-icon">&#xe647;</i>导出
                 </a>
             </div>
 
-            <table id = "treeTable" class = "layui-table" lay-filter = "treeTable"></table>
+            <table id="treeTable" class="layui-table" lay-filter="treeTable"></table>
         </div>
         <!-- 操作列 -->
-        <script type = "text/html" id = "treeManage">
-            <a class = "layui-btn layui-btn-normal layui-btn-xs" lay-event = "add">
-                <i class = "layui-icon">&#xe654;</i>增加下一级
+        <script type="text/html" id="treeManage">
+            <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="add">
+                <i class="layui-icon">&#xe654;</i>增加下一级
             </a>
-            <a class = "layui-btn layui-btn-xs" lay-event = "edit">
-                <i class = "layui-icon">&#xe642;</i>修改
+            <a class="layui-btn layui-btn-xs" lay-event="edit">
+                <i class="layui-icon">&#xe642;</i>修改
             </a>
-            <a class = "layui-btn layui-btn-danger layui-btn-xs" lay-event = "del">
-                <i class = "layui-icon">&#xe640;</i>删除
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
+                <i class="layui-icon">&#xe640;</i>删除
             </a>
         </script>
-        <div th:include = "include :: footer"></div>
-        <script th:inline = "javascript">
+        <div th:include="include :: footer"></div>
+        <script th:inline="javascript">
             var prefix = ctx + 'admin/menu';
             var id;
             $(function () {
@@ -95,24 +95,8 @@
                         id = data.id;
                         var url;
                         if (layEvent === 'del') {
-                            //询问框
-                            // layer.confirm('是否删除？' + data.menuName, {
-                            //     btn: ['确认', '取消'] //按钮
-                            // }, function () {
-                            //     var config = {
-                            //         url: prefix + "/move/" + id
-                            //     };
-                            //     $.open.openMove(config);
-                            // }, function () {
-                            //     layer.closeAll();
-                            // });
-                            $.open.openAsk(data.menuName,{
-                                yes:function () {
-                                    var config = {
-                                        url: prefix + "/move/" + id
-                                    };
-                                    $.open.openMove(config);
-                                }
+                            $.open.openAsk(data.menuName, {
+                                yes: move
                             })
                         } else if (layEvent === 'add') {
                             url = prefix + '/add';
@@ -142,6 +126,12 @@
                     $.open.openIframe(options);
                 });
             })
+            move = function () {
+                var config = {
+                    url: prefix + "/move/" + id
+                };
+                $.open.openMove(config);
+            };
         </script>
     </body>
 </html>

@@ -1,84 +1,87 @@
 <!DOCTYPE HTML>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
-<body>
-<div style="padding: 40px">
-    <form id="formId" class="layui-form">
-        <div class="layui-form-item">
-            <div class="layui-inline">
-                <label class="layui-form-label sx-input-name" style="text-align: left">
-                    上级菜单
-                </label>
-                <div class="layui-input-inline sx-select-width">
-                    <select class="layui-input sx-input" name="modules" lay-verify="required" lay-search="" th:with="list = ${parentList}">
-                        <option value="">直接选择或搜索选择</option>
-                        <option th:each="parent: ${list}" th:value="${parent.id}" th:text="${parent.menuName}"></option>
-                    </select>
+    <meta charset="utf-8">
+    <head th:include="include :: header"></head>
+    <body>
+        <div style="padding: 40px">
+            <form id="formId" class="layui-form">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label sx-input-name" style="text-align: left">
+                            上级菜单
+                        </label>
+                        <div class="layui-input-inline sx-select-width">
+                            <select id="parentId" class="layui-input sx-input" name="parentId" lay-verify="required"
+                                    lay-search="" th:with="list = ${parentList}">
+                                <option value="">直接选择或搜索选择</option>
+                                <option th:each="parent: ${list}" th:value="${parent.id}"
+                                        th:text="${parent.menuName}"></option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label sx-input-name" style="text-align: left">
+                        菜单名称
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input sx-input" name="menuName">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label sx-input-name" style="text-align: left">
+                        权限标识
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input sx-input" name="perms">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label sx-input-name" style="text-align: left">
+                        路径
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input sx-input" name="url">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label sx-input-name" style="text-align: left">
+                        图标
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input sx-input" name="icon">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label sx-input-name" style="text-align: left">
+                        排序编号
+                    </label>
+                    <div class="layui-input-block">
+                        <input type="text" maxlength="3" class="layui-input sx-input" name="sort">
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label sx-input-name" style="text-align: left">
-                菜单名称
-            </label>
-            <div class="layui-input-block">
-                <input type="text" class="layui-input sx-input" name="menuName">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label sx-input-name" style="text-align: left">
-                权限标识
-            </label>
-            <div class="layui-input-block">
-                <input type="text" class="layui-input sx-input" name="perms">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label sx-input-name" style="text-align: left">
-                路径
-            </label>
-            <div class="layui-input-block">
-                <input type="text" class="layui-input sx-input" name="url">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label sx-input-name" style="text-align: left">
-                图标
-            </label>
-            <div class="layui-input-block">
-                <input type="text" class="layui-input sx-input" name="icon">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label sx-input-name" style="text-align: left">
-                排序编号
-            </label>
-            <div class="layui-input-block">
-                <input type="text" maxlength="3" class="layui-input sx-input" name="sort">
-            </div>
-        </div>
-    </form>
-</div>
-</body>
-<div th:include="include :: footer"></div>
-<script th:inline="javascript">
-    var prefix = ctx + "admin/menu";
-    layui.use('form', function(){
-        var form = layui.form;
-    });
+    </body>
+    <div th:include="include :: footer"></div>
+    <script th:inline="javascript">
+        var prefix = ctx + "admin/menu";
+        layui.use('form', function () {
+            var form = layui.form;
+        });
 
-    /**
-     * 保存ajax
-     * @param formId
-     */
-    function submitHandler(formId) {
-        var config = {
-            url: prefix + "/add",
-            data: $("#" + formId).serialize()
-        };
-        $.open.openAdd(config)
-    }
+        /**
+         * 保存ajax
+         * @param formId
+         */
+        function submitHandler(formId) {
+            var config = {
+                url: prefix + "/add",
+                data: $("#" + formId).serialize()
+            };
+            $.open.openAdd(config)
+        }
 
-</script>
+
+    </script>
 </html>

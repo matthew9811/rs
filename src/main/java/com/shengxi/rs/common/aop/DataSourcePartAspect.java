@@ -26,6 +26,9 @@ public class DataSourcePartAspect {
      */
     @Before("execution(* com..service..impl..*.*select*(..)) || " +
             "execution(* com..service..impl..*.*get*(..)) ||" +
+            "execution(* com..service..impl..*.*elicit*(..)) || " +
+            "execution(* com..service..impl..*.*obtain*(..)) || " +
+            "execution(* com..service..impl..*.*acquire*(..)) || " +
             "execution(* com..service..impl..*.*find*(..)) ||" +
             "execution(* com..service..impl..*.*query*(..))")
     public void setReadDataSourceType() {
@@ -38,6 +41,9 @@ public class DataSourcePartAspect {
      */
     @Before("execution(* com..service..impl..*.*insert*(..)) || " +
             "execution(* com..service..impl..*.*change*(..)) || " +
+            "execution(* com..service..impl..*.*set*(..)) || " +
+            "execution(* com..service..impl..*.*add*(..)) || " +
+            "execution(* com..service..impl..*.*modify*(..))||" +
             "execution(* com..service..impl..*.*update*(..)) || " +
             "execution(* com..service..impl..*.*delete*(..))")
     public void setWriteDataSourceType() {

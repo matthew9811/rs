@@ -36,12 +36,8 @@ public class DataSourceAspect {
 
     @Around("dsPointCut()")
     public Object around(ProceedingJoinPoint point) throws Throwable{
-        MethodSignature signature = (MethodSignature) point.getSignature();
-
-        Method method = signature.getMethod();
-
-        DataSource dataSource = method.getAnnotation(DataSource.class);
-
+        DataSource dataSource = ((MethodSignature) point.getSignature())
+                .getMethod().getAnnotation(DataSource.class);
         if (ObjectUtil.isNotNull(dataSource)) {
             logger.info("DataSource switch to: {}", dataSource.value().name());
             DynamicDataSourceContextHolder.setDataSourceType(dataSource.value().name());
