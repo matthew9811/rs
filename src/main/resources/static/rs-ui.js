@@ -426,9 +426,8 @@
                 },
 
                 /*询问框*/
-                openAsk: function (name,options) {
+                openAsk: function (msg,options) {
                     var defaults = {
-                        msg: '',
                         btn: ['确认', '取消'],
                         yes: function () {},
                         no: function () {
@@ -436,7 +435,7 @@
                         }
                     };
                     var options = $.extend(defaults,options);
-                    layer.confirm(options.msg + name, {
+                    layer.confirm(msg, {
                         btn: options.btn //按钮
                     }, options.yes, options.no);
                 }

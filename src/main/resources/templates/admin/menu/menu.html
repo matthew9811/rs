@@ -97,8 +97,10 @@
                         var editUrl = prefix + '/edit/' + id;
                         var moveUrl = prefix + "/move/" + id;
                         if (layEvent === 'del') {
-                            $.open.openAsk("是否删除 " + data.menuName, {
-                                yes: move(moveUrl)
+                            $.open.openAsk( "是否删除" + data.menuName, {
+                                yes: function () {
+                                    move(moveUrl);
+                                }
                             })
                         } else if (layEvent === 'add') {
                             var options = {
@@ -125,7 +127,7 @@
                     };
                     $.open.openIframe(options);
                 });
-            })
+            });
             move = function (moveUrl) {
                 var config = {
                     url: moveUrl

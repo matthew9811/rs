@@ -84,7 +84,9 @@
                 var detailUrl = '/admin/dictData/' + data.typeNo;
                 if (layEvent === 'del') {
                     $.open.openAsk("是否删除 " + data.typeName + "及其相关数据", {
-                        yes: move(moveUrl)
+                        yes: function () {
+                            move(moveUrl);
+                        }
                     })
                 } else if (layEvent === 'edit') {
                     var options = {
