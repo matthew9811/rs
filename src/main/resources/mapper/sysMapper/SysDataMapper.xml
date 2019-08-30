@@ -35,6 +35,7 @@
     <sql id="del_flag">
                '1'
     </sql>
+
     <select id="selectDictDataListByDictId" parameterType="com.shengxi.system.entity.sys.SysData"
             resultMap="BaseResultMap">
         select
@@ -248,4 +249,12 @@
             update_time = now()
         where type_code = #{typeCode,jdbcType=VARCHAR}
     </update>
+
+
+    <delete id="deleteById" parameterType="java.lang.String">
+        delete from sys_data
+        <where>
+            id = #{id}
+        </where>
+    </delete>
 </mapper>

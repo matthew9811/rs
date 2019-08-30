@@ -1,7 +1,9 @@
 package com.shengxi.system.model.mapper.sys;
 
 import com.shengxi.system.entity.sys.SysData;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -45,7 +47,7 @@ public interface SysDataMapper {
      * @param record obj
      * @return status
      */
-    int insert(SysData record);
+    Integer insert(SysData record);
 
     /**
      * 动态插入数据
@@ -53,7 +55,7 @@ public interface SysDataMapper {
      * @param record obj
      * @return status
      */
-    int insertSelective(SysData record);
+    Integer insertSelective(SysData record);
 
 
     /**
@@ -62,7 +64,7 @@ public interface SysDataMapper {
      * @param record record
      * @return status
      */
-    int updateByTypeCodeSelective(SysData record);
+    Integer updateByTypeCodeSelective(SysData record);
 
     /**
      * update
@@ -70,14 +72,22 @@ public interface SysDataMapper {
      * @param record record
      * @return status
      */
-    int updateByTypeCode(SysData record);
+    Integer updateByTypeCode(SysData record);
 
     /**
-     * 删除数据
+     * 删除同一个字典下的所有数据
      *
      * @param typeCode typeCode
      * @param updateBy userNo
      * @return status
      */
-    int deleteByTypeCode(@Param("typeCode") String typeCode, @Param("updateBy") String updateBy);
+    Integer deleteByTypeCode(@Param("typeCode") String typeCode, @Param("updateBy") String updateBy);
+
+    /**
+     * 根据id删除数据
+     *
+     * @param id id
+     * @return status
+     */
+    Integer deleteById(String id);
 }

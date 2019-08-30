@@ -96,12 +96,13 @@
                         var editUrl = prefix + '/edit/' + id;
                         var moveUrl = prefix + "/move/" + id;
                         if (layEvent === 'move') {
-                            $.open.openAsk( "是否删除" + data.menuName, {
+                            $.open.openAsk({
+                                msg: "是否删除" + data.menuName,
                                 yes: function () {
                                     move(moveUrl);
                                 }
                             })
-                        } else if (layEvent === 'add') {
+                        }  else if (layEvent === 'add') {
                             $.open.openIframe({
                                 title: '添加下一级',
                                 content: addUrl + "/" + id
@@ -117,7 +118,7 @@
 
                 //新增菜单
                 $("#addMenu").on("click", function () {
-                    var url = prefix + '/add';
+                    var url = prefix + '/add/' + id;
                     var options = {
                         title: '添加',
                         content: url

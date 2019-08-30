@@ -35,6 +35,11 @@ public class SysDictDataServiceImpl implements SysDictDataService {
         return dataMapper.insert(sysData);
     }
 
+    @Override
+    public Integer deleteById(String id) {
+        return dataMapper.deleteById(id);
+    }
+
     @Autowired
     public void setDataMapper(SysDataMapper dataMapper) {
         this.dataMapper = dataMapper;

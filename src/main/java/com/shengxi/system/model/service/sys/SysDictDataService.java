@@ -28,4 +28,10 @@ public interface SysDictDataService {
      * @return status
      */
     Integer insert(SysData sysData);
+
+    /**
+     * @param id
+     * @return
+     */
+    Integer deleteById(String id);
 }

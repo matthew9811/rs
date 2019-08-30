@@ -1,5 +1,6 @@
 package com.shengxi.rs.controller.sys;
 
+import com.shengxi.system.common.util.UserUtil;
 import com.shengxi.system.entity.config.TableDataInfo;
 import com.shengxi.rs.common.handler.BaseController;
 import com.shengxi.system.common.util.web.AjaxResult;
@@ -9,6 +10,7 @@ import com.shengxi.system.model.service.sys.SysDictDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,6 +55,13 @@ public class DictDataController extends BaseController {
     public AjaxResult addSave(SysData sysData) {
         sysData.setDelFlag(BaseConstant.DEL_FLAG_NOT);
         return toAjax(dictDataService.insert(sysData));
+    }
+
+
+    @DeleteMapping("/move/{id}")
+    @ResponseBody
+    public AjaxResult move(String id){
+        return toAjax(dictDataService.deleteById(id));
     }
 
 
