@@ -93,23 +93,23 @@
                         var data = obj.data;
                         var layEvent = obj.event;
                         id = data.id;
-                        var url;
+                        var addUrl = prefix + '/add';
+                        var editUrl = prefix + '/edit/' + id;
+                        var moveUrl = prefix + "/move/" + id;
                         if (layEvent === 'del') {
-                            $.open.openAsk(data.menuName, {
-                                yes: move
+                            $.open.openAsk("是否删除 " + data.menuName, {
+                                yes: move(moveUrl)
                             })
                         } else if (layEvent === 'add') {
-                            url = prefix + '/add';
                             var options = {
                                 title: '添加下一级',
-                                content: url + "/" + id
+                                content: addUrl + "/" + id
                             };
                             $.open.openIframe(options);
                         } else if (layEvent === 'edit') {
-                            url = prefix + '/edit';
                             var options = {
                                 title: '修改',
-                                content: url + "/" + id
+                                content: editUrl
                             };
                             $.open.openIframe(options);
                         }
@@ -126,9 +126,9 @@
                     $.open.openIframe(options);
                 });
             })
-            move = function () {
+            move = function (moveUrl) {
                 var config = {
-                    url: prefix + "/move/" + id
+                    url: moveUrl
                 };
                 $.open.openMove(config);
             };
