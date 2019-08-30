@@ -79,28 +79,30 @@
                 var data = obj.data;
                 var layEvent = obj.event;
                 id = data.id;
-                var url;
+                var editUrl = prefix + '/edit/' + id;
+                var moveUrl = prefix + "/move/" + id;
+                var detailUrl = '/admin/dictData/' + data.typeNo;
                 if (layEvent === 'del') {
-                    $.open.openAsk("data.typeName " + data.typeName, {
-                        yes: move
+                    $.open.openAsk("是否删除 " + data.typeName + "及其相关数据", {
+                        yes: move(moveUrl)
                     })
                 } else if (layEvent === 'edit') {
-                    var url = prefix + '/edit';
                     var options = {
-                        title: '修改',
-                        content: url + "/" + id
+                        title: '修改字典',
+                        content: editUrl
                     };
                     $.open.openIframe(options);
                 } else if (layEvent === 'detail') {
-                    location.href = '/admin/dictData/' + data.typeNo;
+                    location.href = detailUrl;
                 }
             });
         }
-        function move() {
+
+        function move(moveUrl) {
             var config = {
-                url: prefix + "/move/" + id
+                url: moveUrl
             };
-            $.table.tableMove('layerTable',config,{})
+            $.table.tableMove('layerTable', config, {})
         }
 
     });
