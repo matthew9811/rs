@@ -30,6 +30,13 @@
 </body>
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
+    layui.use(['form'], function () {
+        var form = layui.form;
+        /**
+         * 保存ajax
+         * @param formId
+         */
+    });
     var prefix = ctx + "admin/dict";
 
     function submitHandler(formId) {
@@ -37,7 +44,7 @@
             url: prefix + "/edit",
             data: $("#" + formId).serialize()
         };
-        $.submit.editSubmit(config)
+        $.open.openEdit(config);
     }
 </script>
 </html>
