@@ -14,7 +14,7 @@
     <a class="layui-btn layui-btn-xs" lay-event="edit">
         <i class="layui-icon">&#xe642;</i>修改
     </a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="move">
         <i class="layui-icon">&#xe640;</i>删除
     </a>
 </script>
@@ -22,115 +22,96 @@
 <script th:inline="javascript">
     // 全局加载模块
     layui.use(['table'], function () {
-        let layer = layui.layer;
-        // layer = parent.layer === undefined ? layui.layer : top.layer,
-        $ = layui.jquery,
-            table = layui.table;
-        let prefix = ctx + 'admin/dictData';
-        let typeNo = [[${typeNo}]];
-        let statusDict = [[${@dict.getValue('sys_dict_status')}]];
-        let yseOrNoDict = [[${@dict.getValue('yes_or_no')}]];
-        let addUrl = prefix + '/add/' + typeNo;
-        let tableUrl = prefix + '/list';
-        let id;
-        //main方法
-        $(function () {
-            // 渲染表格
-            tableInit();
-            tableTool();
-        })
+            var layer = layui.layer;
+            $ = layui.jquery,
+                table = layui.table;
+            var prefix = ctx + 'admin/dictData';
+            var typeNo = [[${typeNo}]];
+            var statusDict = [[${@dict.getValue('sys_dict_status')}]];
+            var yseOrNoDict = [[${@dict.getValue('yes_or_no')}]];
+            var addUrl = prefix + '/add/' + typeNo;
+            var tableUrl = prefix + '/list';
+            var id;
+            //main方法
+            $(function () {
+                // 渲染表格
+                tableInit();
+                tableTool();
+            })
 
-        //新增菜单
-        $("#add").on("click", function () {
-            layer.open({
-                type: 2,
-                title: '添加',
-                content: addUrl,
-                maxmin: true,
-                btn: ['确定', '取消'],
-                area: ['600px', '550px'],
-                yes: function (index, layero) {
-                    callback(index, layero);
-                }
-            });
-        });
 
-        callback = function (index, layero) {
-            let iframeWin = layero.find('iframe')[0];
-            iframeWin.contentWindow.submitHandler("formId");
-        }
-
-        function tableInit() {
-            let options = {
-                elem: '#layerTable',
-                url: tableUrl,
-                where: {typeNo: typeNo},
-                cols: [
-                    [
-                        {type: 'checkbox'},
-                        {field: 'typeCode', align: 'center', title: '字典编号', hide: true},
-                        {
-                            field: 'status', align: 'center', title: '状态', templet: function (d) {
-                                return $.table.selectDictLabel(statusDict, d.status);
-                            }
-                        },
-                        {field: 'isDefault', align: 'center', title: '系统默认', templet : function (d) {
-                                return $.table.selectDictLabel(yseOrNoDict, d.isDefault)
-                            }},
-                        {field: 'listCss', align: 'center', title: '回显样式'},
-                        {field: 'typeLabel', align: 'center', title: '键'},
-                        {field: 'typeValue', align: 'center', title: '值'},
-                        {field: 'typeCss', align: 'center', title: '样式'},
-                        {field: 'remark', align: 'center', title: '备注'},
-                        {templet: '#tableManage', width: 350, align: 'center', title: '操作'}
+            function tableInit() {
+                var options = {
+                    elem: '#layerTable',
+                    url: tableUrl,
+                    where: {typeNo: typeNo},
+                    cols: [
+                        [
+                            {type: 'checkbox'},
+                            {field: 'typeCode', align: 'center', title: '字典编号', hide: true},
+                            {
+                                field: 'status', align: 'center', title: '状态', templet: function (d) {
+                                    return $.table.selectDictLabel(statusDict, d.status);
+                                }
+                            },
+                            {
+                                field: 'isDefault', align: 'center', title: '系统默认', templet: function (d) {
+                                    return $.table.selectDictLabel(yseOrNoDict, d.isDefault)
+                                }
+                            },
+                            {field: 'listCss', align: 'center', title: '回显样式'},
+                            {field: 'typeLabel', align: 'center', title: '键'},
+                            {field: 'typeValue', align: 'center', title: '值'},
+                            {field: 'typeCss', align: 'center', title: '样式'},
+                            {field: 'remark', align: 'center', title: '备注'},
+                            {templet: '#tableManage', width: 350, align: 'center', title: '操作'}
+                        ]
                     ]
-                ]
-            };
-            $.table.init(options);
-        }
+                };
+                $.table.init(options);
+            }
 
-        function tableTool() {
-            //监听工具条
-            table.on('tool(layerTable)', function (obj) {
-                let data = obj.data;
-                let layEvent = obj.event;
-                id = data.id;
-                let url;
-                if (layEvent === 'del') {
-                    //询问框
-                    layer.confirm('是否删除？' + data.menuName, {
-                        btn: ['确认', '取消'] //按钮
-                    }, function () {
-                        let config = {
-                            url: prefix + "/move",
-                            method: "post",
-                            async: true,
-                            data: id,
-                            dataType: "json"
-                        };
-                        $.submit.editSubmit(config);
-                        $.pop.success();
-                        layer.closeAll();
-                    }, function () {
-                        layer.closeAll();
-                    });
-                } else if (layEvent === 'edit') {
-                    url = prefix + '/edit';
-                    layer.open({
-                        type: 2,
-                        title: '修改',
-                        content: url + "/" + id,
-                        maxmin: true,
-                        btn: ['确定', '取消'],
-                        area: ['600px', '550px'],
-                        yes: function (index, layero) {
-                            callback(index, layero);
-                        }
-                    });
-                }
+            function tableTool() {
+                //监听工具条
+                table.on('tool(layerTable)', function (obj) {
+                    var data = obj.data;
+                    var layEvent = obj.event;
+                    id = data.id;
+                    var editUrl = prefix + '/edit/' + id;
+                    var moveUrl = prefix + "/move/" + id;
+                    if (layEvent === 'move') {
+                        $.open.openAsk('是否删除 ' + data.menuName, {
+                            yes: function () {
+                                move(moveUrl);
+                            }
+                        })
+                    } else if (layEvent === 'edit') {
+                        $.open.openIframe({
+                            title: '修改字典数据',
+                            content: editUrl
+                        });
+                    }
+
+                });
+            }
+
+            //新增菜单
+            $("#add").on("click", function () {
+                var options = {
+                    title: '添加字典数据',
+                    content: addUrl
+                };
+                $.open.openIframe(options);
             });
+
+            function move(moveUrl) {
+                $.table.tableMove('layerTable', {
+                    url: moveUrl
+                }, {})
+            }
         }
-    });
+    )
+    ;
 </script>
 </body>
 </html>

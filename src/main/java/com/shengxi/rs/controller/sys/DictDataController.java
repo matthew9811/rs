@@ -29,10 +29,6 @@ public class DictDataController extends BaseController {
 
     private SysDictDataService dictDataService;
 
-    @Autowired
-    public DictDataController(SysDictDataService dictDataService) {
-        this.dictDataService = dictDataService;
-    }
 
     @GetMapping("/{typeNo}")
     public String dictDataDetail(@PathVariable("typeNo") String typeNo, ModelMap map) {
@@ -57,5 +53,11 @@ public class DictDataController extends BaseController {
     public AjaxResult addSave(SysData sysData) {
         sysData.setDelFlag(BaseConstant.DEL_FLAG_NOT);
         return toAjax(dictDataService.insert(sysData));
+    }
+
+
+    @Autowired
+    public void setDictDataService(SysDictDataService dictDataService) {
+        this.dictDataService = dictDataService;
     }
 }
