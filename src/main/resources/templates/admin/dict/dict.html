@@ -20,7 +20,7 @@
     <a class="layui-btn layui-btn-xs" lay-event="edit">
         <i class="layui-icon">&#xe642;</i>修改
     </a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="move">
         <i class="layui-icon">&#xe640;</i>删除
     </a>
 </script>
@@ -82,18 +82,17 @@
                 var editUrl = prefix + '/edit/' + id;
                 var moveUrl = prefix + "/move/" + id;
                 var detailUrl = '/admin/dictData/' + data.typeNo;
-                if (layEvent === 'del') {
+                if (layEvent === 'move') {
                     $.open.openAsk("是否删除 " + data.typeName + "及其相关数据", {
                         yes: function () {
                             move(moveUrl);
                         }
                     })
                 } else if (layEvent === 'edit') {
-                    var options = {
+                    $.open.openIframe({
                         title: '修改字典',
                         content: editUrl
-                    };
-                    $.open.openIframe(options);
+                    });
                 } else if (layEvent === 'detail') {
                     location.href = detailUrl;
                 }
