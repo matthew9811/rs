@@ -439,7 +439,19 @@
                     layer.confirm(options.msg, {
                         btn: options.btn //按钮
                     }, options.yes, options.no);
-                }
+                },
+
+                //prompt层(输入层)
+                prompt: function (options) {
+                    layer.prompt(
+                        {title: options.title, formType: 1},
+                        function(text, index){
+                        layer.close(index);
+                        layer.msg(text);
+                    });
+                },
+
+
             }
 
         })
