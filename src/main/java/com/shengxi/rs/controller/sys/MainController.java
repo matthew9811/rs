@@ -48,6 +48,12 @@ public class MainController extends BaseController {
         return "main";
     }
 
+    /**
+     * 进入index页面
+     * 加载对应的菜单
+     * @param map
+     * @return
+     */
     @RequestMapping("/index")
     public String index(ModelMap map) {
         map.put("menu", menuService.selectByList());

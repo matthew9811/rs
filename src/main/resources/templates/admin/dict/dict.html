@@ -52,6 +52,7 @@
                 url: prefix + '/list',
                 cols: [
                     [
+                        {field:'status', title:'字典状态',align: 'center', templet: '#switchTpl', unresize: true},
                         {field: 'id', width: 0, align: 'center', title: 'id', hide: true},
                         {field: 'typeNo', align: 'center', title: '字典编号'},
                         {field: 'typeName', align: 'center', title: '字典名称'},
@@ -60,7 +61,7 @@
                         //         return $.table.selectDictLabel(statusDict, d.status);
                         //     }
                         // },
-                        {field:'status', title:'字典状态', templet: '#switchTpl', unresize: true},
+
                         {field: 'remark', align: 'renter', title: '备注'},
                         {templet: '#tableManage', width: 350, align: 'center', title: '操作'}
                     ]
