@@ -9,7 +9,7 @@ server:
     max-connections: 5000
 spring:
   profiles:
-    active: dev
+    active: local
   security:
     base:
       enabled: false

@@ -36,8 +36,8 @@ public class SysDictDataServiceImpl implements SysDictDataService {
     }
 
     @Override
-    public Integer deleteById(String id) {
-        return dataMapper.deleteById(id);
+    public Integer deleteByTypeNo(String typeNo) {
+        return dataMapper.deleteByTypeNo(typeNo);
     }
 
     @Autowired

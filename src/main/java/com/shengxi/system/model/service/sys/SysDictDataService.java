@@ -1,6 +1,7 @@
 package com.shengxi.system.model.service.sys;
 
 import com.shengxi.system.entity.sys.SysData;
+
 import java.util.List;
 
 /**
@@ -30,8 +31,8 @@ public interface SysDictDataService {
     Integer insert(SysData sysData);
 
     /**
-     * @param id
-     * @return
+     * @param typeNo typeNo
+     * @return typeNo
      */
-    Integer deleteById(String id);
+    Integer deleteByTypeNo(String typeNo);
 }

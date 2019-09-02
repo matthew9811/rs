@@ -74,13 +74,13 @@ public class DictController extends BaseController {
     
     @DeleteMapping("/move/{id}")
     @ResponseBody
-    public AjaxResult remove(@PathVariable String id){
+    public AjaxResult move(@PathVariable String id){
         return toAjax(sysDictService.deleteSysDictById(id));
     }
     
     @DeleteMapping("/moveList")
     @ResponseBody
-    public AjaxResult removeList(String ids){
+    public AjaxResult moveList(String ids){
         return toAjax(sysDictService.deleteSysDictByIds(ids));
     }
 

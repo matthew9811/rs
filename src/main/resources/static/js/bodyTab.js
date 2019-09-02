@@ -198,7 +198,7 @@ layui.define(["element","jquery"],function(exports){
         var that = this;
         var title = '';
         var tabFilter = that.tabConfig.tabFilter;
-        title = '<i class="layui-icon">' + options.icon + '</i><cite>' + options.title + '</cite><i class="layui-icon layui-unselect layui-tab-close" data-id="">&#x1006;</i>';
+        title = '<cite>' + options.title + '</cite><i class="layui-icon layui-unselect layui-tab-close" data-id="">&#x1006;</i>';
         layui.use('element', function() {
             var $ = layui.jquery
                 , elementParent = parent.layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
@@ -207,7 +207,7 @@ layui.define(["element","jquery"],function(exports){
                 content : options.url,
                 id : options.id
             });
-            elementParent.tabChange(tabFilter, '新窗口');
+            elementParent.tabChange(tabFilter, options.id);
         });
         var curmenu = {
             "icon" : options.icon,

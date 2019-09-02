@@ -86,8 +86,8 @@ public interface SysDataMapper {
     /**
      * 根据id删除数据
      *
-     * @param id id
+     * @param typeNo typeNo
      * @return status
      */
-    Integer deleteById(String id);
+    Integer deleteByTypeNo(String typeNo);
 }

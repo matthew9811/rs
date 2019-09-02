@@ -58,10 +58,10 @@ public class DictDataController extends BaseController {
     }
 
 
-    @DeleteMapping("/move/{id}")
+    @DeleteMapping("/move/{typeNo}")
     @ResponseBody
-    public AjaxResult move(String id){
-        return toAjax(dictDataService.deleteById(id));
+    public AjaxResult move(@PathVariable String typeNo) {
+        return toAjax(dictDataService.deleteByTypeNo(typeNo));
     }
 
 

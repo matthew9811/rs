@@ -77,10 +77,12 @@
                     var data = obj.data;
                     var layEvent = obj.event;
                     id = data.id;
-                    var editUrl = prefix + '/edit/' + id;
-                    var moveUrl = prefix + "/move/" + id;
+                    var typeCode = data.typeCode;
+                    var editUrl = prefix + '/edit/' + typeCode;
+                    var moveUrl = prefix + "/move/" + typeNo;
                     if (layEvent === 'move') {
-                        $.open.openAsk('是否删除 ' + data.menuName, {
+                        $.open.openAsk( {
+                            msg: '是否删除 ' + data.typeCode,
                             yes: function () {
                                 move(moveUrl);
                             }

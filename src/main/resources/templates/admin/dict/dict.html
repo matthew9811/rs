@@ -92,7 +92,7 @@
                         content: editUrl
                     });
                 } else if (layEvent === 'detail') {
-                    location.href = detailUrl;
+                    createTab({url: detailUrl, title: '字典详情', id: data.typeNo})
                 }
             });
         }

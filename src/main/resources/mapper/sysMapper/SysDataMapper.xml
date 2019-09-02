@@ -14,11 +14,10 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
-        <result column="del_flag" jdbcType="CHAR" property="delFlag"/>
         <result column="type_css" jdbcType="VARCHAR" property="typeCss"/>
     </resultMap>
     <sql id="Base_Column_List">
-               a.`type_label`,
+        a.`type_label`,
                a.`type_value`,
                a.type_no,
                a.remark,
@@ -32,20 +31,14 @@
                a.is_default,
                a.type_code
     </sql>
-    <sql id="del_flag">
-               '1'
-    </sql>
-
     <select id="selectDictDataListByDictId" parameterType="com.shengxi.system.entity.sys.SysData"
             resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from sys_data a
         <where>
-            a.del_flag =
-            <include refid="del_flag"/>
             <if test="id != null and id != '' ">
-                and a.id = #{id}
+                a.id = #{id}
             </if>
             <if test="typeLabel != null and typeLabel != '' ">
                 and a.type_label = #{typeLabel,jdbcType=VARCHAR}
@@ -66,14 +59,12 @@
         <include refid="Base_Column_List"/>
         from sys_data as a
         <where>
-            a.del_flag =
-            <include refid="del_flag"/>
-            and a.type_no = #{typeNo}
+            a.type_no = #{typeNo}
         </where>
     </select>
     <select id="getNum" resultType="java.lang.String">
-        select count(1) from sys_data where del_flag =
-        <include refid="del_flag"/>
+        select count(1)
+        from sys_data
     </select>
 
     <insert id="insert" parameterType="com.shengxi.system.entity.sys.SysData">
@@ -87,8 +78,7 @@
                               type_css,
                               remark,
                               create_by,
-                              create_time,
-                              del_flag)
+                              create_time)
         values (#{typeLabel,jdbcType=VARCHAR},
                 #{typeValue,jdbcType=VARCHAR},
                 #{typeNo,jdbcType=VARCHAR},
@@ -99,8 +89,7 @@
                 #{typeCss,jdbcType=VARCHAR},
                 #{remark,jdbcType=VARCHAR},
                 #{createBy,jdbcType=VARCHAR},
-                now(),
-                #{delFlag,jdbcType=CHAR})
+                now())
     </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id"
             parameterType="com.shengxi.system.entity.sys.SysData" useGeneratedKeys="true">
@@ -142,9 +131,7 @@
             <if test="createTime != null">
                 create_time,
             </if>
-            <if test="delFlag != null">
-                del_flag,
-            </if>
+
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null and id != ''">
@@ -182,9 +169,6 @@
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="delFlag != null">
-                #{delFlag,jdbcType=CHAR}
             </if>
         </trim>
     </insert>
@@ -242,19 +226,18 @@
             type_code = #{typeCode,jdbcType=VARCHAR}
         </where>
     </update>
-    <update id="deleteByTypeCode" parameterType="java.lang.String">
-        update sys_data
-        set del_flag    = '0',
-            update_by   = #{updateBy},
-            update_time = now()
-        where type_code = #{typeCode,jdbcType=VARCHAR}
-    </update>
+    <delete id="deleteByTypeCode" parameterType="java.lang.String">
+        delete from dict_data
+        <where>
+            type_code = #{typeCode,jdbcType=VARCHAR}
+        </where>
+    </delete>
 
 
-    <delete id="deleteById" parameterType="java.lang.String">
+    <delete id="deleteByTypeNo" parameterType="java.lang.String">
         delete from sys_data
         <where>
-            id = #{id}
+            type_no = #{id}
         </where>
     </delete>
 </mapper>
