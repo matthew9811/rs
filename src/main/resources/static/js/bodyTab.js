@@ -121,8 +121,8 @@ layui.define(["element","jquery"],function(exports){
  //右侧内容tab操作
 	var tabIdIndex = 0;
 	Tab.prototype.tabAdd = function(_this){
-		if(window.sessionStorage.getItem("menu")){
-			menu = JSON.parse(window.sessionStorage.getItem("menu"));
+		if(window.localStorage.getItem("menu")){
+			menu = JSON.parse(window.localStorage.getItem("menu"));
 		}
 		var that = this;
 		var openTabNum = that.tabConfig.openTabNum;
@@ -161,9 +161,8 @@ layui.define(["element","jquery"],function(exports){
 					"layId" : new Date().getTime()
 				};
 				menu.push(curmenu);
-                console.log(menu);
-				window.sessionStorage.setItem("menu",JSON.stringify(menu)); //打开的窗口
-				window.sessionStorage.setItem("curmenu",JSON.stringify(curmenu));  //当前的窗口
+				window.localStorage.setItem("menu",JSON.stringify(menu)); //打开的窗口
+				window.localStorage.setItem("curmenu",JSON.stringify(curmenu));  //当前的窗口
 				element.tabChange(tabFilter, that.getLayId(_this.find("cite").text()));
 				that.tabMove(); //顶部窗口是否可滚动
 			}
@@ -192,31 +191,33 @@ layui.define(["element","jquery"],function(exports){
      * @type {number}
      */
 	//非菜单的新窗口
-    var tabId = 0;
-    Tab.prototype.tabNewAdd = function(){
-        if(window.sessionStorage.getItem("menu")){
-            menu = JSON.parse(window.sessionStorage.getItem("menu"));
+    Tab.prototype.tabNewAdd = function(options){
+        if(window.parent.sessionStorage.getItem("menu")){
+            menu = JSON.parse(window.parent.sessionStorage.getItem("menu"));
         }
         var that = this;
         var title = '';
         var tabFilter = that.tabConfig.tabFilter;
-        title = '<i class="layui-icon">新窗口</i><cite>新窗口</cite><i class="layui-icon layui-unselect layui-tab-close" data-id="">&#x1006;</i>';
-        element.tabAdd(tabFilter, {
-            title : title,
-            content :"<iframe src='/admin/menu' data-id=''></frame>",
-            id : new Date().getTime()
+        title = '<i class="layui-icon">' + options.icon + '</i><cite>' + options.title + '</cite><i class="layui-icon layui-unselect layui-tab-close" data-id="">&#x1006;</i>';
+        layui.use('element', function() {
+            var $ = layui.jquery
+                , elementParent = parent.layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
+            elementParent.tabAdd(tabFilter, {
+                title : title,
+                content : options.url,
+                id : options.id
+            });
+            elementParent.tabChange(tabFilter, '新窗口');
         });
         var curmenu = {
-            "icon" : '新窗口',
-            "title" : '新窗口',
-            "href" : '/admin/menu',
-            "layId" : new Date().getTime()
+            "icon" : options.icon,
+            "title" : options.title,
+            "href" : options.url,
+            "layId" : options.id
         };
         menu.push(curmenu);
-        console.log(menu);
-        window.sessionStorage.setItem("menu",JSON.stringify(menu)); //打开的窗口
-        window.sessionStorage.setItem("curmenu",JSON.stringify(curmenu));  //当前的窗口
-        element.tabChange(tabFilter, that.getLayId('新窗口'));
+        window.parent.sessionStorage.setItem("menu",JSON.stringify(menu)); //打开的窗口
+        window.parent.sessionStorage.setItem("curmenu",JSON.stringify(curmenu));  //当前的窗口
         that.tabMove(); //顶部窗口是否可滚动
     };
 

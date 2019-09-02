@@ -86,12 +86,6 @@ $(function () {
             $(this).parent("li").siblings().removeClass("layui-nav-itemed");
         });
 
-        //添加非菜单的新窗口
-        $("#new-add").on("click",function () {
-            tabNew();
-
-        });
-
         //清除缓存
         $(".clearCache").click(function(){
             window.sessionStorage.clear();

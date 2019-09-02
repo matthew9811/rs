@@ -2,7 +2,6 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <meta charset="utf-8">
 <head th:include="include :: header">
-
 </head>
 <body class="childrenBody">
 <div>
@@ -25,7 +24,6 @@
     </a>
 </script>
 <div th:include="include :: footer"></div>
-<script th:src="@{/js/index.js}"></script>
 <script th:inline="javascript">
     var prefix = ctx + 'admin/dict';
     var id;
@@ -39,17 +37,37 @@
                 table = layui.table;
             // 渲染表格
             tableInit();
-            tableTool();
         });
     })
 
     //新增菜单
-    // $("#add").on("click", function () {
-    //     var url = prefix + '/add';
+    // $("#new-add").on("click", function () {
+    //     console.log("=======")
+    //     layui.use('element', function() {
+    //         var $ = layui.jquery
+    //             , element = parent.layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
+    //         element.tabAdd('bodyTab', {
+    //             title : 'xinchuangkou',
+    //             content :"aaaaa",
+    //             id : new Date().getTime()
+    //         });
     //
-    //     addTheTab($(this));
+    //     });
     //
     // });
+
+
+    //添加非菜单的新窗口
+    $("#new-add").on("click",function () {
+        var options = {
+            id: '新窗口',
+            url: 'aaaa',
+            icon: 'ooooo',
+            title: 'ppppp'
+        };
+        createTab(options);
+    });
+
 
     callback = function (index, layero) {
         var iframeWin = layero.find('iframe')[0];
@@ -73,47 +91,6 @@
         $.table.init(options);
     }
 
-    function tableTool() {
-        //监听工具条
-        table.on('tool(treeTable)', function (obj) {
-            var data = obj.data;
-            var layEvent = obj.event;
-            id = data.id;
-            var url;
-            if (layEvent === 'del') {
-                //询问框
-                layer.confirm('是否删除？' + data.menuName, {
-                    btn: ['确认', '取消'] //按钮
-                }, function () {
-                    var config = {
-                        url: prefix + "/move",
-                        method: "post",
-                        async: true,
-                        data: id,
-                        dataType: "json"
-                    };
-                    $.submit.editSubmit(config);
-                    $.pop.success();
-                    layer.closeAll();
-                }, function () {
-                    layer.closeAll();
-                });
-            } else if (layEvent === 'edit') {
-                url = prefix + '/edit';
-                layer.open({
-                    type: 2,
-                    title: '修改',
-                    content: url + "/" + id,
-                    maxmin: true,
-                    btn: ['确定', '取消'],
-                    area: ['600px', '550px'],
-                    yes: function (index, layero) {
-                        callback(index, layero);
-                    }
-                });
-            }
-        });
-    }
 </script>
 </body>
 </html>
