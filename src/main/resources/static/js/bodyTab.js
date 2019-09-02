@@ -204,7 +204,7 @@ layui.define(["element","jquery"],function(exports){
                 , elementParent = parent.layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
             elementParent.tabAdd(tabFilter, {
                 title : title,
-                content : options.url,
+                content : "<iframe src='"+ options.url +"' data-id='"+tabIdIndex+"'></frame>",
                 id : options.id
             });
             elementParent.tabChange(tabFilter, options.id);

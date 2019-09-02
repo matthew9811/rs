@@ -289,6 +289,7 @@ createTab = function (options) {
     var tab = layui.bodyTab({
         openTabNum : "50"
     });
+
     tab.tabNewAdd(options);
 };
 
