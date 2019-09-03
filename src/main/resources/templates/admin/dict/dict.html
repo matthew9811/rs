@@ -10,15 +10,14 @@
     <table id="layerTable" class="layui-table" lay-filter="layerTable"></table>
 </div>
 <script type="text/html" id="switchTpl">
-    <input type="checkbox" name="status" value="{{d.id}}" lay-skin="switch" lay-text="是|否" lay-filter="statusDemo" {{ d.state == "1" ? "checked" : "" }}>
+    <input type="checkbox" name="status" value="{{d.id}}"
+           lay-skin="switch" lay-text="正常|禁用"
+           lay-filter="status" checked="{{ d.status == '1' ? 'checked' : '' }}"/>
 </script>
 <!-- 操作列 -->
 <script type="text/html" id="tableManage">
     <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">
         <i class="layui-icon">&#xe60f;</i>详情
-    </a>
-    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="status">
-        <i class="layui-icon"></i>状态
     </a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">
         <i class="layui-icon">&#xe642;</i>修改
@@ -30,7 +29,7 @@
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
     // 全局加载模块
-    layui.use(['table','form'], function () {
+    layui.use(['table', 'form'], function () {
         var layer = layui.layer,
             $ = layui.jquery,
             table = layui.table,
@@ -52,16 +51,10 @@
                 url: prefix + '/list',
                 cols: [
                     [
-                        {field:'status', title:'字典状态',align: 'center', templet: '#switchTpl', unresize: true},
+                        {field: 'status', title: '字典状态', align: 'center', templet: '#switchTpl', unresize: true},
                         {field: 'id', width: 0, align: 'center', title: 'id', hide: true},
                         {field: 'typeNo', align: 'center', title: '字典编号'},
                         {field: 'typeName', align: 'center', title: '字典名称'},
-                        // {
-                        //     field: 'status', align: 'center', title: '字典状态', templet: function (d) {
-                        //         return $.table.selectDictLabel(statusDict, d.status);
-                        //     }
-                        // },
-
                         {field: 'remark', align: 'renter', title: '备注'},
                         {templet: '#tableManage', width: 350, align: 'center', title: '操作'}
                     ]
@@ -76,12 +69,13 @@
                 var data = obj.data;
                 var layEvent = obj.event;
                 id = data.id;
+                status = data.status;
                 var editUrl = prefix + '/edit/' + id;
                 var moveUrl = prefix + "/move/" + id;
                 var detailUrl = '/admin/dictData/' + data.typeNo;
                 if (layEvent === 'move') {
                     $.open.openAsk({
-                        msg:"是否删除 " + data.typeName + "及其相关数据",
+                        msg: "是否删除 " + data.typeName + "及其相关数据",
                         yes: function () {
                             move(moveUrl);
                         }
@@ -92,23 +86,36 @@
                         content: editUrl
                     });
                 } else if (layEvent === 'detail') {
-                    createTab({url: detailUrl, title: '字典详情', id: data.typeNo})
+                    createTab({url: detailUrl, title: data.typeName + '详情', id: data.typeNo})
                 }
             });
         }
 
         //监听状态操作
-        form.on('switch(statusDemo)', function(obj){
-            console.log(this.value + ' ' + this.name + '：'+ obj.elem.checked);
+        form.on('switch(status)', function (obj) {
+            var data = {
+                id: obj.value,
+                status: obj.checked == true ? '1' : '0'
+            }
+            var updateUrl = prefix + "/update";
+            var option = {
+                type: 'put',
+                data: data,
+                url: updateUrl,
+                success: function (data) {
+                    $.pop.success({msg: data.msg})
+                }
+            };
+
+            $.submit.editSubmit(option);
         });
 
         //新增菜单
         $("#add").on("click", function () {
-            var options = {
+            $.open.openIframe({
                 title: '添加',
                 content: addUrl
-            };
-            $.open.openIframe(options);
+            });
         });
 
         function move(moveUrl) {

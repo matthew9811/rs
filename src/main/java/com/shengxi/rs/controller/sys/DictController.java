@@ -1,5 +1,6 @@
 package com.shengxi.rs.controller.sys;
 
+import com.alibaba.fastjson.JSONObject;
 import com.shengxi.system.entity.config.TableDataInfo;
 import com.shengxi.rs.common.handler.BaseController;
 import com.shengxi.system.common.util.web.AjaxResult;
@@ -14,8 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Map;
 
 /**
  * 字典类控制层
@@ -71,6 +75,19 @@ public class DictController extends BaseController {
     public AjaxResult editSave(SysDict sysDict) {
         return toAjax(sysDictService.updateByIdSelective(sysDict));
     }
+
+    /**
+     *
+     * @param sysDict bean
+     * @return status and msg
+     */
+    @PutMapping("/update")
+    @ResponseBody
+    public AjaxResult autoUpdate(SysDict sysDict){
+
+        return toAjax(sysDictService.updateByIdSelective(sysDict));
+    }
+
     
     @DeleteMapping("/move/{id}")
     @ResponseBody

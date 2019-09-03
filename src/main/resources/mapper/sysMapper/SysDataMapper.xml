@@ -18,18 +18,18 @@
     </resultMap>
     <sql id="Base_Column_List">
         a.`type_label`,
-               a.`type_value`,
-               a.type_no,
-               a.remark,
-               a.create_by,
-               a.create_time,
-               a.update_by,
-               a.update_time,
-               a.type_css,
-               a.status,
-               a.list_css,
-               a.is_default,
-               a.type_code
+        a.`type_value`,
+        a.type_no,
+        a.remark,
+        a.create_by,
+        a.create_time,
+        a.update_by,
+        a.update_time,
+        a.type_css,
+        a.status,
+        a.list_css,
+        a.is_default,
+        a.type_code
     </sql>
     <select id="selectDictDataListByDictId" parameterType="com.shengxi.system.entity.sys.SysData"
             resultMap="BaseResultMap">
@@ -59,7 +59,10 @@
         <include refid="Base_Column_List"/>
         from sys_data as a
         <where>
-            a.type_no = #{typeNo}
+            a.status = '1'
+            <if test="typeNo != null and typeNo != '' ">
+                and a.type_no = #{typeNo}
+            </if>
         </where>
     </select>
     <select id="getNum" resultType="java.lang.String">
@@ -69,27 +72,27 @@
 
     <insert id="insert" parameterType="com.shengxi.system.entity.sys.SysData">
         insert into sys_data (`type_label`,
-                              `type_value`,
-                              type_no,
-                              type_code,
-                              status,
-                              list_css,
-                              is_default,
-                              type_css,
-                              remark,
-                              create_by,
-                              create_time)
+        `type_value`,
+        type_no,
+        type_code,
+        status,
+        list_css,
+        is_default,
+        type_css,
+        remark,
+        create_by,
+        create_time)
         values (#{typeLabel,jdbcType=VARCHAR},
-                #{typeValue,jdbcType=VARCHAR},
-                #{typeNo,jdbcType=VARCHAR},
-                #{typeCode,jdbcType=VARCHAR},
-                #{status,jdbcType=VARCHAR},
-                #{listCss,jdbcType=VARCHAR},
-                #{isDefault,jdbcType=VARCHAR},
-                #{typeCss,jdbcType=VARCHAR},
-                #{remark,jdbcType=VARCHAR},
-                #{createBy,jdbcType=VARCHAR},
-                now())
+        #{typeValue,jdbcType=VARCHAR},
+        #{typeNo,jdbcType=VARCHAR},
+        #{typeCode,jdbcType=VARCHAR},
+        #{status,jdbcType=VARCHAR},
+        #{listCss,jdbcType=VARCHAR},
+        #{isDefault,jdbcType=VARCHAR},
+        #{typeCss,jdbcType=VARCHAR},
+        #{remark,jdbcType=VARCHAR},
+        #{createBy,jdbcType=VARCHAR},
+        now())
     </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id"
             parameterType="com.shengxi.system.entity.sys.SysData" useGeneratedKeys="true">
