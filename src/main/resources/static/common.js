@@ -1,9 +1,8 @@
 (function ($) {
-    layui.config({
-        base: '/layui/lay/modules/'
-    }).extend({
-        treetable: 'treetable-lay/treetable',
-        authtree: 'layui_exts/authtree'
+    layui.extend({
+        treetable: '/layui/lay/modules/treetable-lay/treetable',
+        authtree: '/layui/lay/modules/layui_exts/authtree',
+        bodyTab: "/js/bodyTab"
     });
 
     layui.use(['laydate'], function () {
@@ -77,7 +76,7 @@
         //弹出层
         openPage: {
             hint: function (options) {
-                layui.use('layer',function () {
+                layui.use('layer', function () {
                     layer.open({
                         type: options.type,
                         title: options.title,
@@ -105,7 +104,7 @@
                 return !$.common.isEmpty(value);
             },
             // 空对象转字符串
-            nullToStr: function(value) {
+            nullToStr: function (value) {
                 if ($.common.isEmpty(value)) {
                     return "-";
                 }
@@ -159,17 +158,17 @@
                 return Math.floor((Math.random() * max) + min);
             },
             // 判断字符串是否是以start开头
-            startWith: function(value, start) {
+            startWith: function (value, start) {
                 var reg = new RegExp("^" + start);
                 return reg.test(value)
             },
             // 判断字符串是否是以end结尾
-            endWith: function(value, end) {
+            endWith: function (value, end) {
                 var reg = new RegExp(end + "$");
                 return reg.test(value)
             },
             // 数组去重
-            uniqueFn: function(array) {
+            uniqueFn: function (array) {
                 var result = [];
                 var hashObj = {};
                 for (var i = 0; i < array.length; i++) {
@@ -181,21 +180,34 @@
                 return result;
             },
             // 数组中的所有元素放入一个字符串
-            join: function(array, separator) {
+            join: function (array, separator) {
                 if ($.common.isEmpty(array)) {
                     return null;
                 }
                 return array.join(separator);
             },
             // 获取form下所有的字段并转换为json对象
-            formToJSON: function(formId) {
+            formToJSON: function (formId) {
                 var json = {};
-                $.each($("#" + formId).serializeArray(), function(i, field) {
+                $.each($("#" + formId).serializeArray(), function (i, field) {
                     json[field.name] = field.value;
                 });
                 return json;
             }
+        },
+
+        /**
+         * 创建选项卡
+         */
+        createTheTab : function (options) {
+            layui.use(['bodyTab'], function () {
+                var tab = layui.bodyTab({
+                    openTabNum: "50"
+                });
+                tab.tabNewAdd(options);
+            });
         }
+
 
     })
 
@@ -282,15 +294,5 @@
 //     }
 // }
 
-/**
- * 创建选项卡
- */
-createTab = function (options) {
-    var tab = layui.bodyTab({
-        openTabNum : "50"
-    });
-
-    tab.tabNewAdd(options);
-};
 
 

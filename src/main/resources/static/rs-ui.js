@@ -453,6 +453,15 @@
             },
 
 
+        },
+
+        createTab: function (options) {
+            var defaults = {
+                id: new Date().getTime(),
+                icon: '&#xe647;'
+            };
+            var options = $.extend(defaults, options);
+            $.createTheTab(options);
         }
 
     })

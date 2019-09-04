@@ -181,15 +181,6 @@ layui.define(["element","jquery"],function(exports){
 		}
 	};
 
-    /**
-     * 定义一个函数，调用tab模块
-     * 调用Tab.prototype.set函数可以修改所有的参数
-     * 考虑直接调用Tab.prototype.tabAdd然后仿造Tab.prototype.set中的方案传递参数
-     * 避免对其他页签的影响。
-     * 更合理的方案时直接利用对本函数的理解
-     * 直接传递对应的参数_this进去。
-     * @type {number}
-     */
 	//非菜单的新窗口
     Tab.prototype.tabNewAdd = function(options){
         if(window.parent.sessionStorage.getItem("menu")){
@@ -198,7 +189,7 @@ layui.define(["element","jquery"],function(exports){
         var that = this;
         var title = '';
         var tabFilter = that.tabConfig.tabFilter;
-        title = '<cite>' + options.title + '</cite><i class="layui-icon layui-unselect layui-tab-close" data-id="">&#x1006;</i>';
+        title = '<i class="layui-icon">' + options.icon + '</i><cite>' + options.title + '</cite><i class="layui-icon layui-unselect layui-tab-close" data-id="">&#x1006;</i>';
         layui.use('element', function() {
             var $ = layui.jquery
                 , elementParent = parent.layui.element;//Tab的切换功能，切换事件监听等，需要依赖element模块
@@ -219,6 +210,8 @@ layui.define(["element","jquery"],function(exports){
         window.parent.sessionStorage.setItem("menu",JSON.stringify(menu)); //打开的窗口
         window.parent.sessionStorage.setItem("curmenu",JSON.stringify(curmenu));  //当前的窗口
         that.tabMove(); //顶部窗口是否可滚动
+
+
     };
 
 
