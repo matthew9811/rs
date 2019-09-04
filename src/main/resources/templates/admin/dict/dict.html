@@ -12,7 +12,7 @@
 <script type="text/html" id="switchTpl">
     <input type="checkbox" name="status" value="{{d.id}}"
            lay-skin="switch" lay-text="正常|禁用"
-           lay-filter="status" checked="{{ d.status == '1' ? 'checked' : '' }}"/>
+           lay-filter="status" {{ d.status == '1' ? 'checked' : '' }}/>
 </script>
 <!-- 操作列 -->
 <script type="text/html" id="tableManage">
@@ -95,8 +95,8 @@
         form.on('switch(status)', function (obj) {
             var data = {
                 id: obj.value,
-                status: obj.checked == true ? '1' : '0'
-            }
+                status: obj.elem.checked == true ? '1' : '0'
+            };
             var updateUrl = prefix + "/update";
             var option = {
                 type: 'put',

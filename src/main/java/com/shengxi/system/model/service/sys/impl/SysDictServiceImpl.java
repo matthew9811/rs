@@ -62,6 +62,7 @@ public class SysDictServiceImpl implements SysDictService {
     }
 
     @Override
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
     public Integer updateByIdSelective(SysDict sysDict) {
         sysDict.setUpdateBy(UserUtil.getUserNo());
         return dictMapper.updateByPrimaryKeySelective(sysDict);

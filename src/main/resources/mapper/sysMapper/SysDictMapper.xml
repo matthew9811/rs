@@ -49,21 +49,18 @@
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.shengxi.system.entity.sys.SysDict"
             useGeneratedKeys="true">
         insert into sys_dict
-        (
-        type_name,
-        type_no,
-        create_by,
-        create_time,
-        `status`,
-        remark)
-        values
-        (
-        #{typeName,jdbcType=VARCHAR},
-        #{typeNo,jdbcType=VARCHAR},
-        #{createBy,jdbcType=VARCHAR},
-        now(),
-        #{status,jdbcType=CHAR},
-        #{remark,jdbcType=VARCHAR})
+        (type_name,
+         type_no,
+         create_by,
+         create_time,
+         `status`,
+         remark)
+        values (#{typeName,jdbcType=VARCHAR},
+                #{typeNo,jdbcType=VARCHAR},
+                #{createBy,jdbcType=VARCHAR},
+                now(),
+                #{status,jdbcType=CHAR},
+                #{remark,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id"
             parameterType="com.shengxi.system.entity.sys.SysDict" useGeneratedKeys="true">
@@ -124,6 +121,7 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.shengxi.system.entity.sys.SysDict">
         update sys_dict
         <set>
+            update_time = now(),
             <if test="typeName != null">
                 type_name = #{typeName,jdbcType=VARCHAR},
             </if>
@@ -134,9 +132,7 @@
             <if test="updateBy != null">
                 update_by = #{updateBy,jdbcType=VARCHAR},
             </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
+
             <if test="status != null">
                 `status` = #{status,jdbcType=CHAR},
             </if>
@@ -148,12 +144,12 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.shengxi.system.entity.sys.SysDict">
         update sys_dict
-        set type_name = #{typeName,jdbcType=VARCHAR},
-        type_no = #{typeNo,jdbcType=VARCHAR},
-        update_by = #{updateBy,jdbcType=VARCHAR},
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-        remark = #{remark,jdbcType=VARCHAR},
-        `status` = #{status,jdbcType=CHAR}
+        set type_name   = #{typeName,jdbcType=VARCHAR},
+            type_no     = #{typeNo,jdbcType=VARCHAR},
+            update_by   = #{updateBy,jdbcType=VARCHAR},
+            update_time = now(),
+            remark      = #{remark,jdbcType=VARCHAR},
+            `status`    = #{status,jdbcType=CHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
     <delete id="deleteById">

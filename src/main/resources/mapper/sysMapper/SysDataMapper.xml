@@ -208,9 +208,7 @@
             <if test="updateBy != null">
                 update_by = #{updateBy,jdbcType=VARCHAR},
             </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
+                update_time = now()
         </set>
         where type_code = #{typeCode,jdbcType=VARCHAR}
     </update>
@@ -223,7 +221,7 @@
             type_css = #{typeCss,jdbcType=VARCHAR},
             remark = #{remark,jdbcType=VARCHAR},
             update_by = #{updateBy,jdbcType=VARCHAR},
-            update_time = #{updateTime,jdbcType=TIMESTAMP}
+            update_time = now()
         </set>
         <where>
             type_code = #{typeCode,jdbcType=VARCHAR}
