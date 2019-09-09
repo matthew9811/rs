@@ -23,7 +23,7 @@ public interface SysDictDataService {
 
 
     /**
-     * 插入data
+     * insert data
      *
      * @param sysData bean
      * @return status
@@ -31,8 +31,16 @@ public interface SysDictDataService {
     Integer insert(SysData sysData);
 
     /**
+     * delete in typeNo
      * @param typeNo typeNo
      * @return typeNo
      */
     Integer deleteByTypeNo(String typeNo);
+
+    /**
+     * udpate data
+     * @param sysData bean
+     * @return status
+     */
+    Integer updateByTypeCodeSelective(SysData sysData);
 }

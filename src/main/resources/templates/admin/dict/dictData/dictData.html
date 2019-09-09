@@ -10,6 +10,11 @@
     <table id="layerTable" class="layui-table" lay-filter="layerTable"></table>
 </div>
 <!-- 操作列 -->
+<script type="text/html" id="switchTpl">
+    <input type="checkbox" name="status" value="{{d.typeCode}}"
+           lay-skin="switch" lay-text="正常|禁用"
+           lay-filter="status" {{ d.status== '1' ? 'checked' : '' }}/>
+</script>
 <script type="text/html" id="tableManage">
     <a class="layui-btn layui-btn-xs" lay-event="edit">
         <i class="layui-icon">&#xe642;</i>修改
@@ -23,11 +28,11 @@
     // 全局加载模块
     layui.use(['table'], function () {
             var layer = layui.layer;
-            $ = layui.jquery,
-                table = layui.table;
+            var $ = layui.jquery,
+                table = layui.table,
+                form = layui.form;
             var prefix = ctx + 'admin/dictData';
             var typeNo = [[${typeNo}]];
-            var statusDict = [[${@dict.getValue('sys_dict_status')}]];
             var yseOrNoDict = [[${@dict.getValue('yes_or_no')}]];
             var addUrl = prefix + '/add/' + typeNo;
             var tableUrl = prefix + '/list';
@@ -49,11 +54,7 @@
                         [
                             {type: 'checkbox'},
                             {field: 'typeCode', align: 'center', title: '字典编号', hide: true},
-                            {
-                                field: 'status', align: 'center', title: '状态', templet: function (d) {
-                                    return $.table.selectDictLabel(statusDict, d.status);
-                                }
-                            },
+                            {field: 'status', title: '状态', align: 'center', templet: '#switchTpl', unresize: true},
                             {
                                 field: 'isDefault', align: 'center', title: '系统默认', templet: function (d) {
                                     return $.table.selectDictLabel(yseOrNoDict, d.isDefault)
@@ -81,7 +82,7 @@
                     var editUrl = prefix + '/edit/' + typeCode;
                     var moveUrl = prefix + "/move/" + typeNo;
                     if (layEvent === 'move') {
-                        $.open.openAsk( {
+                        $.open.openAsk({
                             msg: '是否删除 ' + data.typeCode,
                             yes: function () {
                                 move(moveUrl);
@@ -96,6 +97,22 @@
 
                 });
             }
+
+            //监听开关状态
+            form.on('switch(status)', function (obj) {
+                var updateUrl = prefix + "/update";
+                $.submit.editSubmit({
+                    type: 'put',
+                    data: {
+                        typeCode: obj.value,
+                        status: obj.elem.checked == true ? '1' : '0'
+                    },
+                    url: updateUrl,
+                    success: function (data) {
+                        $.pop.success({msg: data.msg})
+                    }
+                });
+            });
 
             //新增菜单
             $("#add").on("click", function () {

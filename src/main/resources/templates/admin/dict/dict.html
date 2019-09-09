@@ -12,7 +12,7 @@
 <script type="text/html" id="switchTpl">
     <input type="checkbox" name="status" value="{{d.id}}"
            lay-skin="switch" lay-text="正常|禁用"
-           lay-filter="status" {{ d.status == '1' ? 'checked' : '' }}/>
+           lay-filter="status" {{ d.status== '1' ? 'checked' : '' }}/>
 </script>
 <!-- 操作列 -->
 <script type="text/html" id="tableManage">
@@ -30,8 +30,8 @@
 <script th:inline="javascript">
     // 全局加载模块
     layui.use(['table', 'form'], function () {
-        var layer = layui.layer,
-            $ = layui.jquery,
+        var layer = layui.layer;
+        var $ = layui.jquery,
             table = layui.table,
             form = layui.form;
         var prefix = ctx + 'admin/dict';
@@ -86,12 +86,12 @@
                         content: editUrl
                     });
                 } else if (layEvent === 'detail') {
-                    createTab({url: detailUrl, title: data.typeName + '详情', id: data.typeNo})
+                    $.createTab({url: detailUrl, title: data.typeName + '详情', id: data.typeNo})
                 }
             });
         }
 
-        //监听状态操作
+        //监听开关状态
         form.on('switch(status)', function (obj) {
             var data = {
                 id: obj.value,

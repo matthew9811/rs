@@ -1,10 +1,8 @@
 package com.shengxi.rs.controller.sys;
 
-import com.alibaba.fastjson.JSONObject;
 import com.shengxi.system.entity.config.TableDataInfo;
 import com.shengxi.rs.common.handler.BaseController;
 import com.shengxi.system.common.util.web.AjaxResult;
-import com.shengxi.system.common.constant.BaseConstant;
 import com.shengxi.system.entity.sys.SysDict;
 import com.shengxi.system.model.service.sys.SysDictService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Map;
 
 /**
  * 字典类控制层
@@ -28,26 +24,21 @@ import java.util.Map;
  * @version 1.0.0
  * @date 2019.06.07
  */
-@RequestMapping("/admin/dict")
 @Controller
+@RequestMapping("/admin/dict")
 public class DictController extends BaseController {
 
-    final private SysDictService sysDictService;
+    private SysDictService sysDictService;
 
     private String prefix = "/admin/dict";
-
-    @Autowired
-    public DictController(SysDictService sysDictService) {
-        this.sysDictService = sysDictService;
-    }
 
     @GetMapping()
     public String dict() {
         return prefix + "/dict";
     }
 
-    @RequestMapping("/list")
     @ResponseBody
+    @RequestMapping("/list")
     public TableDataInfo dict(SysDict sysDict) {
         startPage();
         return getDataTable(sysDictService.selectSysDictList(sysDict));
@@ -58,8 +49,8 @@ public class DictController extends BaseController {
         return prefix + "/add";
     }
 
-    @PostMapping("/add")
     @ResponseBody
+    @PostMapping("/add")
     public AjaxResult addSave(SysDict sysDict) {
         return toAjax(sysDictService.insertSysDict(sysDict));
     }
@@ -70,35 +61,40 @@ public class DictController extends BaseController {
         return prefix + "/edit";
     }
 
-    @PutMapping("/edit")
     @ResponseBody
+    @PutMapping("/edit")
     public AjaxResult editSave(SysDict sysDict) {
         return toAjax(sysDictService.updateByIdSelective(sysDict));
     }
 
     /**
+     * update dict status
      *
      * @param sysDict bean
      * @return status and msg
      */
-    @PutMapping("/update")
     @ResponseBody
-    public AjaxResult autoUpdate(SysDict sysDict){
-
+    @PutMapping("/update")
+    public AjaxResult autoUpdate(SysDict sysDict) {
         return toAjax(sysDictService.updateByIdSelective(sysDict));
     }
 
-    
-    @DeleteMapping("/move/{id}")
+
     @ResponseBody
-    public AjaxResult move(@PathVariable String id){
+    @DeleteMapping("/move/{id}")
+    public AjaxResult move(@PathVariable String id) {
         return toAjax(sysDictService.deleteSysDictById(id));
     }
-    
-    @DeleteMapping("/moveList")
+
+
     @ResponseBody
-    public AjaxResult moveList(String ids){
+    @DeleteMapping("/moveList")
+    public AjaxResult moveList(String ids) {
         return toAjax(sysDictService.deleteSysDictByIds(ids));
     }
 
+    @Autowired
+    public DictController(SysDictService sysDictService) {
+        this.sysDictService = sysDictService;
+    }
 }

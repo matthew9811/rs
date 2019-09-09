@@ -5,9 +5,12 @@ import com.shengxi.system.common.constant.ServiceConstant;
 import com.shengxi.system.entity.sys.SysData;
 import com.shengxi.system.model.mapper.sys.SysDataMapper;
 import com.shengxi.system.model.service.sys.SysDictDataService;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author matthew
@@ -29,15 +32,23 @@ public class SysDictDataServiceImpl implements SysDictDataService {
     public Integer insert(SysData sysData) {
         sysData.setStatus(ServiceConstant.NORMAL);
         sysData.setCreateBy(UserUtil.getUserNo());
-        synchronized (this){
+        synchronized (this) {
             sysData.setTypeCode(this.getNum());
         }
         return dataMapper.insert(sysData);
     }
 
     @Override
+    @Transactional
     public Integer deleteByTypeNo(String typeNo) {
         return dataMapper.deleteByTypeNo(typeNo);
+    }
+
+    @Override
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
+    public Integer updateByTypeCodeSelective(SysData sysData) {
+        sysData.setUpdateBy(UserUtil.getUserNo());
+        return dataMapper.updateByTypeCodeSelective(sysData);
     }
 
     @Autowired
