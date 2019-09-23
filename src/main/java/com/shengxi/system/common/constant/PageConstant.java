@@ -7,6 +7,14 @@ package com.shengxi.system.common.constant;
  */
 public class PageConstant {
     /**
+     * 统一错误页面路径
+     */
+    public static final String ERROR_PATH = "/common";
+    /**
+     * 404路径
+     */
+    public static final String E404 = "/404";
+    /**
      * UTF-8 字符集
      */
     public static final String UTF8 = "UTF-8";
