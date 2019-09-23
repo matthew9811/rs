@@ -3,6 +3,7 @@ package com.shengxi.rs.common.config;
 import com.shengxi.system.common.constant.PageConstant;
 import org.apache.catalina.connector.Response;
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +15,14 @@ import javax.servlet.http.HttpServletRequest;
  * @Version: 1.0.0
  * 统一错误页面处理
  */
+@Controller
 public class RestErrorController implements ErrorController {
 
 
+    /**
+     * 返回错误处理的路径
+     * @return page
+     */
     @Override
     public String getErrorPath() {
         return PageConstant.ERROR_PATH;
