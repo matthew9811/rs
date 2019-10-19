@@ -5,11 +5,12 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     sql-script-encoding: utf-8
-    driverClassName: com.mysql.jdbc.Driver
+    driverClassName: com.mysql.cj.jdbc.Driver
     druid:
       # 主库数据源
+      #zeroDateTimeBehavior=convertToNull&
       master:
-        url: jdbc:mysql://47.106.188.177:3306/rs_new?useUnicode=true&characterEncoding=utf8&useServerPstmts=true&cachePrepStmts=true&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&cacheCallableStmts=true&connectTimeout=1000&maxReconnects=5&zeroDateTimeBehavior=convertToNull&useSSL=true
+        url: jdbc:mysql://47.106.188.177:3306/rs_dev?useUnicode=true&characterEncoding=utf8&useServerPstmts=true&cachePrepStmts=true&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&cacheCallableStmts=true&connectTimeout=1000&maxReconnects=5&useSSL=false&serverTimezone=UTC
         username: root
         password: dm/EBMW25AZuDlvuyJe4HIaEVgiFCVRXvBSxwC9c4TUbPRP0YnuADJZvN6YuzEcmj4STFt6EHnBWH16qRHmPpg==
         publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJIMmD5aAT19WqTrqF5LXWP+dDOy8kuRDWmXBdmJgz+m2AbMSIixrj/t4rnOFl8GM4hYTvX1ATvDp/9M9LtvUXUCAwEAAQ==
@@ -17,8 +18,9 @@ spring:
       # 从库数据源
       slave:
         # 从数据源开关/默认关闭
-
-        url: jdbc:mysql://47.106.188.177:3306/rs_bulid?useUnicode=true&characterEncoding=utf8&useServerPstmts=true&cachePrepStmts=true&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&cacheCallableStmts=true&connectTimeout=1000&maxReconnects=5&zeroDateTimeBehavior=convertToNull&useSSL=true
+        #zeroDateTimeBehavior=convertToNull&
+        enabled: true
+        url: jdbc:mysql://47.106.188.177:3306/rs_dev?useUnicode=true&characterEncoding=utf8&useServerPstmts=true&cachePrepStmts=true&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&cacheCallableStmts=true&connectTimeout=1000&maxReconnects=5&useSSL=false&serverTimezone=UTC
         username: reader
         password: CIQna6BlxJyEHvlHjYsChEymRmWxliXsOtcf3jO67OEfB8qftXhFhf7Li0sLxUMaTt9NRn0yzHBNC4IBzZmb1Q==
         publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMLTrcq555UTKcwpHSqYW/1/ryMQWNKOcipgrTFWyONf3E2dbwrMsEMbP9//Py53GlL0IVYRW1tFinPzTSlBQp8CAwEAAQ==
