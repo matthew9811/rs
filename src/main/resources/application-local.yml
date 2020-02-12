@@ -1,5 +1,7 @@
 server:
   port: 317
+  servlet:
+    context-path: /rs
 
 spring:
   datasource:
@@ -22,7 +24,7 @@ spring:
         enabled: true
         url: jdbc:mysql://47.106.188.177:3306/rs_bulid?useUnicode=true&characterEncoding=utf8&useServerPstmts=true&cachePrepStmts=true&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&cacheCallableStmts=true&connectTimeout=1000&maxReconnects=5&useSSL=false&serverTimezone=UTC
         username: reader
-        password: CIQna6BlxJyEHvlHjYsChEymRmWxliXsOtcf3jO67OEfB8qftXhFhf7Li0sLxUMaTt9NRn0yzHBNC4IBzZmb1Q==
+        password: hOZDqjzkxGWPGS+g/Bv9Wm9dbBLNzjkuRlH6AShyOctznLkFSXqCFsmjSOMlfb4l889oTZvcC8sEQvb8Denb2w==
         publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMLTrcq555UTKcwpHSqYW/1/ryMQWNKOcipgrTFWyONf3E2dbwrMsEMbP9//Py53GlL0IVYRW1tFinPzTSlBQp8CAwEAAQ==
         connection-properties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMLTrcq555UTKcwpHSqYW/1/ryMQWNKOcipgrTFWyONf3E2dbwrMsEMbP9//Py53GlL0IVYRW1tFinPzTSlBQp8CAwEAAQ==
       # 初始连接数
