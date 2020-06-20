@@ -56,3 +56,5 @@ spring:
           statement-logger-name:
 server:
   port: 317
+  servlet:
+    context-path: rs
